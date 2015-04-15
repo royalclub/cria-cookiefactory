@@ -2,13 +2,13 @@
 
 "use strict";
 
-var express = require('express');
-var bodyParser = require('body-parser');
-var sys = require('sys');
-var exec = require('child_process').exec;
-var app = express();
-var child;
-var config = require('../../server/config/config.js')['deployment'];
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    sys = require('sys'),
+    exec = require('child_process').exec,
+    app = express(),
+    child,
+    config = require('../../server/config/config.js')['deployment'];
 
 // Configure body-parser
 app.use(bodyParser.json());
