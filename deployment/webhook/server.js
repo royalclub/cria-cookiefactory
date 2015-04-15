@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));     // Notice because option d
 app.post('/webhook', function (req, res) {
 
     console.log('>>>>>req.body.repository.url', req.body.repository.url);
-    console.log('>>>>>config', config);
+    console.log('>>>>>config', config, "<<<<<");
 
     if (req.body.repository.url === config.repoUrl) {
         console.log('>>>>>req', req.body, '<<<<<<');
