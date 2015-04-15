@@ -16,12 +16,9 @@ app.use(bodyParser.urlencoded({extended: true}));     // Notice because option d
 
 app.post('/webhook', function (req, res) {
 
-    console.log('>>>>>req.body.repository.url', req.body.repository.url);
-    console.log('>>>>>config', config, "<<<<<");
-
     if (req.body.repository.url === config.repoUrl) {
         console.log('>>>>>req', req.body, '<<<<<<');
-        console.log('Now do a git pull');
+        console.log('Now do a git pull for the current branch');
 
         // executes `git pull`
         child = exec("git pull", function (error, stdout, stderr) {
@@ -38,7 +35,7 @@ app.post('/webhook', function (req, res) {
 
 app.all('*', function (req, res) {
     console.log('!!!!!', req, '-----');
-    res.send({msg: 'Nothing here. This is the webhook for github'});
+    res.send(404, {msg: 'Nothing here. This is the webhook for github'});
 });
 
 app.listen(config.port);
