@@ -41,7 +41,7 @@ app.post('/webhook', function (req, res) {
         child = exec("git pull", cb);
 
 
-        child = exec("./pullingAndTesting.sh");
+        child = exec("./pullingAndTesting.sh", cb);
 
 
     }
