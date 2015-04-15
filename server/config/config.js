@@ -1,5 +1,9 @@
 /*jslint node:true*/
 module.exports = {
+    deployment: {
+        port: 3333,
+        repoUrl: "https://github.com/theotheu/cria-seed"
+    },
     development: {
         db: 'mongodb://localhost/books-dev',    // change books with your database
         port: 3000,                             // change with your port number
