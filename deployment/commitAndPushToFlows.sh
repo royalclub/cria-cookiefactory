@@ -98,5 +98,8 @@ git push origin $STAGE2
 # Checking out development branch
 #############################
 git checkout $STAGE0
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> test-static-analyzer-passed
