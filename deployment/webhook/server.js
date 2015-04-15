@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({extended: true}));     // Notice because option d
 app.post('/webhook', function (req, res) {
     console.log('>>>>> req', req, "<<<<<");
 
-    if (req.body.repository.url === 'https://github.com/theotheu/hook-test') {
+    if (req.body.repository.url === 'https://github.com/theotheu/cria-seed') {
         console.log('>>>>>req', req.body, '<<<<<<');
         console.log('Now do a git pull');
 
