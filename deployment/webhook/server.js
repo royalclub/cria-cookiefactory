@@ -40,14 +40,9 @@ app.post('/webhook', function (req, res) {
         // executes `git pull`
         child = exec("git pull", cb);
 
-        for (i = 0; i < stages.length; i += 1) {
-            console.log(">>>>> checking out " + +stages[i].name, "<<<<<");
-           // child = exec("git checkout " + stages[i].name, cb);
-        }
 
+        child = exec("./pullingAndTesting.sh");
 
-        // restore branch
-       // exec("git checkout " + stages[0].name, cb);
     }
     res.send({});
 });
