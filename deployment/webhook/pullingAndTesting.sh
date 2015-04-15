@@ -26,7 +26,7 @@ if [[ ! -d $JSLINT ]]; then
 	exit 1
 fi
 
-rm ./$TESTDIR/static-analyzer/error_log.txt
+rm -fr ./$TESTDIR/static-analyzer/error_log.txt
 cd ./$TESTDIR/static-analyzer
 ./run_lint.sh
 
