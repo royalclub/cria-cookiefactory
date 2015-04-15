@@ -51,6 +51,7 @@ app.post('/webhook', function (req, res) {
             exec("git checkout " + stages[i], cb);
         }
 
+
         // restore branch
         exec("git checkout " + stages[0], cb);
     }
