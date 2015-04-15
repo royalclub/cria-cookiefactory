@@ -38,17 +38,12 @@ app.post('/webhook', function (req, res) {
         console.log('>>>>>req', req.body, '<<<<<<');
         console.log('Now do a git pull for the current branch');
 
-
-
-
-
         // executes `git pull`
         child = exec("git pull", cb);
 
-
         for(i=0; i<stages.length; i+=1) {
             console.log(">>>>> checking out " + + stages[i].name, "<<<<<");
-            exec("git checkout " + stages[i].name, cb);
+            child = exec("git checkout " + stages[i].name, cb);
         }
 
         // restore branch
@@ -64,5 +59,4 @@ app.all('*', function (req, res) {
 });
 
 app.listen(config.port);
-
 
