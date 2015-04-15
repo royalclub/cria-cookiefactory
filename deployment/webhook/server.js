@@ -47,13 +47,13 @@ app.post('/webhook', function (req, res) {
 
 
         for(i=0; i<stages.length; i+=1) {
-            console.log(">>>>> checking out " + + stages[i], "<<<<<");
-            exec("git checkout " + stages[i], cb);
+            console.log(">>>>> checking out " + + stages[i].name, "<<<<<");
+            exec("git checkout " + stages[i].name, cb);
         }
 
 
         // restore branch
-        exec("git checkout " + stages[0], cb);
+        exec("git checkout " + stages[0].name, cb);
     }
     res.send({});
 });
