@@ -8,7 +8,7 @@ var sys = require('sys');
 var exec = require('child_process').exec;
 var app = express();
 var child;
-var config = require('../server/config/config.js')['deployment'];
+var config = require('../../server/config/config.js')['deployment'];
 
 // Configure body-parser
 app.use(bodyParser.json());
