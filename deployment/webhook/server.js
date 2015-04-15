@@ -8,15 +8,15 @@ var sys = require('sys');
 var exec = require('child_process').exec;
 var app = express();
 var child;
+var config = require('../server/config/config.js')['deployment'];
 
 // Configure body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));     // Notice because option default will flip in next major; http://goo.gl/bXjyyz
 
 app.post('/webhook', function (req, res) {
-    console.log('>>>>> req', req, "<<<<<");
 
-    if (req.body.repository.url === 'https://github.com/theotheu/cria-seed') {
+    if (req.body.repository.url === config.url) {
         console.log('>>>>>req', req.body, '<<<<<<');
         console.log('Now do a git pull');
 
@@ -38,6 +38,6 @@ app.all('*', function (req, res) {
     res.send({msg: 'Nothing here. This is the webhook for github'});
 });
 
-app.listen(3333);
+app.listen(config.port);
 
 
