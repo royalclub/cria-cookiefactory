@@ -1,0 +1,73 @@
+LintRoller v2.3.5
+
+    Output for Wed Apr 15 2015 13:57:19 GMT+0200 (CEST)
+
+    Total files found   : 9
+    All errors reported : 11
+
+
+    645 lines checked via JSLINT
+    645 lines checked via JSHINT
+    645 lines checked via ESPRIMA
+
+=============== Running JSLINT [ Total errors: 11 ] ===============
+
+../../client/javascripts/services.js
+    Line #: 9
+    Char #: 17
+    Reason: Expected 'var' at column 13, not column 17.
+
+../../client/javascripts/services.js
+    Line #: 10
+    Char #: 25
+    Reason: Expected 'get' at column 21, not column 25.
+
+../../client/javascripts/services.js
+    Line #: 11
+    Char #: 25
+    Reason: Expected 'save' at column 21, not column 25.
+
+../../client/javascripts/services.js
+    Line #: 12
+    Char #: 25
+    Reason: Expected 'query' at column 21, not column 25.
+
+../../client/javascripts/services.js
+    Line #: 13
+    Char #: 25
+    Reason: Expected 'update' at column 21, not column 25.
+
+../../client/javascripts/services.js
+    Line #: 14
+    Char #: 25
+    Reason: Expected 'delete' at column 21, not column 25.
+
+../../client/javascripts/services.js
+    Line #: 15
+    Char #: 21
+    Reason: Expected '}' at column 17, not column 21.
+
+../../client/javascripts/services.js
+    Line #: 16
+    Char #: 21
+    Reason: Expected 'db' at column 17, not column 21.
+
+../../client/javascripts/services.js
+    Line #: 18
+    Char #: 17
+    Reason: Expected 'db' at column 13, not column 17.
+
+../../client/javascripts/services.js
+    Line #: 19
+    Char #: 17
+    Reason: Expected 'return' at column 13, not column 17.
+
+../../client/javascripts/services.js
+    Line #: 20
+    Char #: 13
+    Reason: Expected '}' at column 9, not column 13.
+
+=============== Running JSHINT [ Total errors: 0 ] ===============
+
+=============== Running ESPRIMA [ Total errors: 0 ] ===============
+
