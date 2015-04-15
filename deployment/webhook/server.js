@@ -33,7 +33,6 @@ app.post('/webhook', function (req, res) {
     };
 
 
-
     if (req.body.repository.url === config.repoUrl) {
         console.log('>>>>>req', req.body, '<<<<<<');
         console.log('Now do a git pull for the current branch');
@@ -41,13 +40,13 @@ app.post('/webhook', function (req, res) {
         // executes `git pull`
         child = exec("git pull", cb);
 
-        for(i=0; i<stages.length; i+=1) {
-            console.log(">>>>> checking out " + + stages[i].name, "<<<<<");
-            child = exec("git checkout " + stages[i].name, cb);
+        for (i = 0; i < stages.length; i += 1) {
+            console.log(">>>>> checking out " + +stages[i].name, "<<<<<");
+           // child = exec("git checkout " + stages[i].name, cb);
         }
 
         // restore branch
-        exec("git checkout " + stages[0].name, cb);
+       // exec("git checkout " + stages[0].name, cb);
     }
     res.send({});
 });
