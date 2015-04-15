@@ -47,6 +47,7 @@ app.post('/webhook', function (req, res) {
 
 
         for(i=0; i<stages.length; i+=1) {
+            console.log(">>>>> checking out " + + stages[i], "<<<<<");
             exec("git checkout " + stages[i], cb);
         }
 
