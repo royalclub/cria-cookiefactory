@@ -16,18 +16,37 @@ app.use(bodyParser.urlencoded({extended: true}));     // Notice because option d
 
 app.post('/webhook', function (req, res) {
 
+    var i, stages = [
+        {name: "development"},
+        {name: "test-static-analyzer-passed"},
+        {name: "test-unit-tests-passed"},
+        {name: "acceptance"},
+        {name: "production"}
+    ];
+
+    var cb = function (error, stdout, stderr) {
+        sys.print('stdout: ' + stdout);
+        sys.print('stderr: ' + stderr);
+        if (error !== null) {
+            console.log('exec error: ' + error);
+        }
+    };
+
+
+
     if (req.body.repository.url === config.repoUrl) {
         console.log('>>>>>req', req.body, '<<<<<<');
         console.log('Now do a git pull for the current branch');
 
+
+        for(i=0; i<stages.length; i+=1) {
+            exec("git checkout " + stages[i], cb);
+
+        }
+
+
         // executes `git pull`
-        child = exec("git pull", function (error, stdout, stderr) {
-            sys.print('stdout: ' + stdout);
-            sys.print('stderr: ' + stderr);
-            if (error !== null) {
-                console.log('exec error: ' + error);
-            }
-        });
+        child = exec("git pull", cb);
     }
     res.send({});
 });
