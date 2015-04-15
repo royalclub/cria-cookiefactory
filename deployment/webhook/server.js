@@ -43,7 +43,6 @@ app.post('/webhook', function (req, res) {
 
         child = exec("./pullingAndTesting.sh", cb);
 
-
     }
     res.send({});
 });
