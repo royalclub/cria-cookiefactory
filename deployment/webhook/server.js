@@ -14,6 +14,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));     // Notice because option default will flip in next major; http://goo.gl/bXjyyz
 
 app.post('/webhook', function (req, res) {
+    console.log('>>>>> req', req, "<<<<<");
+
     if (req.body.repository.url === 'https://github.com/theotheu/hook-test') {
         console.log('>>>>>req', req.body, '<<<<<<');
         console.log('Now do a git pull');
