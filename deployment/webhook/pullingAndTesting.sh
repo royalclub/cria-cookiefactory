@@ -70,7 +70,7 @@ export NODE_ENV=test
 node bin/www.js &
 export my_child_PID=$!
 sleep 4
-echo "`date` *********** nodemon started with process id = $my_child_PID" | tee -a log.log
+echo "`date` node started with process id = $my_child_PID" | tee -a log.log
 
 git checkout $STAGE2 | tee -a "$DIR/log.log"
 
@@ -85,11 +85,11 @@ npm test
 kill -9 $my_child_PID
 
 # count fail occurences
-UNIT_TEST_ERRORS=`grep -ci 'fail' unit-tests-results.log`
+export UNIT_TEST_ERRORS=`grep -ci 'fail' unit-tests-results.log`
 
 if [ -z "$UNIT_TEST_ERRORS" ]; then
     echo echo "`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
-	echo "`date`   Could not execute the tests" | tee -a "$DIR/log.log"
+	echo "`date`   Could not execute the tests. Variable UNIT_TEST_ERRORS=$UNIT_TEST_ERRORS" | tee -a "$DIR/log.log"
     exit 1
 fi
 
