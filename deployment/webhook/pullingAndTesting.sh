@@ -69,7 +69,7 @@ echo "#########################################" | tee -a "$DIR/log.log"
 #any_command args &
 #my_child_PID=$!
 
-cd "$TESTDIR/../../"
+cd "$TESTDIR/../../server"
 export NODE_ENV=test
 nodemon
 export my_child_PID=$!
