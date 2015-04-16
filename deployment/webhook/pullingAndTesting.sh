@@ -15,11 +15,11 @@ export PARENT_COMMAND=$(ps $PPID | tail -n 1 | awk "{print \$5}")
 echo "`date` Executed by $PARENT_COMMAND" | tee -a "$PWD/log.log"
 
 echo
-echo "`date` #########################################"
-echo "`date` # Preflight checks"
-echo "`date` #########################################"
+echo "`date` #########################################" | tee -a "$DIR/log.log"
+echo "`date` # Preflight checks" | tee -a "$DIR/log.log"
+echo "`date` #########################################" | tee -a "$DIR/log.log"
 echo
-# make sure jslint is installed
+echo "`date` make sure jslint is installed" | tee -a "$DIR/log.log"
 if [[ ! -d $JSLINT ]]; then
 	#install jslint locally
 	echo "`date` Please install jslint first." | tee -a "$DIR/log.log"
