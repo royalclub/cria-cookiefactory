@@ -66,9 +66,6 @@ echo "# STAGE2, unit-tests" | tee -a "$DIR/log.log"
 echo "#########################################" | tee -a "$DIR/log.log"
 
 
-#any_command args &
-#my_child_PID=$!
-
 cd "$TESTDIR/../server"
 export NODE_ENV=test
 node bin/www.js &
