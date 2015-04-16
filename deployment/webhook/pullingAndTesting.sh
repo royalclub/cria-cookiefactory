@@ -11,6 +11,7 @@ export JSLINT=./$TESTDIR/static-analyzer/node_modules/jslint
 export DIR=`pwd`
 
 echo "`date` : " > "$PWD/log.log"
+echo "`date` : Logging to $PWD/log.log" | tee -a "$PWD/log.log"
 
 echo
 echo "#########################################"
