@@ -77,7 +77,11 @@ git checkout $STAGE2 | tee -a "$DIR/log.log"
 # Change directory to unit-tests
 cd "$TESTDIR/unit-tests"
 
+<<<<<<< HEAD
 rm -fr unit-tests-results.log
+=======
+rm -fr unit-tests-results.log | tee -a "$DIR/log.log"
+>>>>>>> development
 
 # Run the unit test
 mocha > unit-tests-results.log
@@ -116,4 +120,7 @@ git push origin $STAGE2 | tee -a "$DIR/log.log"
 echo "`date` Checking out $STAGE0" | tee -a "$DIR/log.log"
 git checkout $STAGE0 | tee -a "$DIR/log.log"
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
