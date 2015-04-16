@@ -14,31 +14,31 @@ echo "`date` : " > "$PWD/log.log"
 echo "`date` : Logging to $PWD/log.log" | tee -a "$PWD/log.log"
 
 echo
-echo "#########################################"
-echo "# Preflight checks"
-echo "#########################################"
+echo "`date` #########################################"
+echo "`date` # Preflight checks"
+echo "`date` #########################################"
 echo
 # make sure jslint is installed
 if [[ ! -d $JSLINT ]]; then
 	#install jslint locally
-	echo "Please install jslint first." | tee -a "$DIR/log.log"
-	echo "  jslint is expected to be installed in $TESTDIR/static-analyzer/." | tee -a "$DIR/log.log"
+	echo "`date` Please install jslint first." | tee -a "$DIR/log.log"
+	echo "`date`   jslint is expected to be installed in $TESTDIR/static-analyzer/." | tee -a "$DIR/log.log"
 	exit 1
 fi
 
 echo | tee -a "$DIR/log.log"
-echo "#########################################" | tee -a "$DIR/log.log"
-echo "# STAGE0, development" | tee -a "$DIR/log.log"
-echo "#########################################" | tee -a "$DIR/log.log"
+echo "`date` #########################################" | tee -a "$DIR/log.log"
+echo "`date` # STAGE0, development" | tee -a "$DIR/log.log"
+echo "`date` #########################################" | tee -a "$DIR/log.log"
 echo | tee -a "$DIR/log.log"
 
 git checkout $STAGE0 | tee -a "$DIR/log.log"
 git pull | tee -a "$DIR/log.log"
 
 echo | tee -a "$DIR/log.log"
-echo "#########################################" | tee -a "$DIR/log.log"
-echo "# STAGE1, static-analyzer" | tee -a "$DIR/log.log"
-echo "#########################################" | tee -a "$DIR/log.log"
+echo "`date` #########################################" | tee -a "$DIR/log.log"
+echo "`date` # STAGE1, static-analyzer" | tee -a "$DIR/log.log"
+echo "`date` #########################################" | tee -a "$DIR/log.log"
 echo | tee -a "$DIR/log.log"
 
 git checkout $STAGE1 | tee -a "$DIR/log.log"
@@ -50,8 +50,8 @@ cd $TESTDIR/static-analyzer
 ./run_lint.sh > static-analyzer-results.log
 
 if [ -f $TESTDIR/static-analyzer/error_log.txt ]; then
-	echo "=~=~=~=~= ERRORS: No commit for branch 'test' was performed. =~=~=~=~=" | tee -a "$DIR/log.log"
-	echo "=~=~=~=~= Resolve the conflicts before continuing.           =~=~=~=~=" | tee -a "$DIR/log.log"
+	echo "`date` =~=~=~=~= ERRORS: No commit for branch 'test' was performed. =~=~=~=~=" | tee -a "$DIR/log.log"
+	echo "`date` =~=~=~=~= Resolve the conflicts before continuing.           =~=~=~=~=" | tee -a "$DIR/log.log"
 	git checkout $STAGE0 | tee -a "$DIR/log.log"
 	exit 1
 fi
@@ -61,53 +61,42 @@ git commit -am "TEST: `date`" | tee -a "$DIR/log.log"
 
 git push origin $STAGE1 | tee -a "$DIR/log.log"
 
-echo "#########################################" | tee -a "$DIR/log.log"
-echo "# STAGE2, unit-tests" | tee -a "$DIR/log.log"
-echo "#########################################" | tee -a "$DIR/log.log"
-
+echo "`date` #########################################" | tee -a "$DIR/log.log"
+echo "`date` # STAGE2, unit-tests" | tee -a "$DIR/log.log"
+echo "`date` #########################################" | tee -a "$DIR/log.log"
 
 cd "$TESTDIR/../server"
 export NODE_ENV=test
 node bin/www.js &
 export my_child_PID=$!
 sleep 4
-echo "`date`: *********** nodemon started with process id = $my_child_PID" | tee -a log.log
+echo "`date` node started with process id = $my_child_PID" | tee -a log.log
 
 git checkout $STAGE2 | tee -a "$DIR/log.log"
 
+# Change directory to unit-tests
 cd "$TESTDIR/unit-tests"
 
-rm -fr test-results.log | tee -a "$DIR/log.log"
+rm -fr unit-tests-results.log
 
 # Run the unit test
-npm test
+mocha > unit-tests-results.log
 
 # kill nodemon
 kill -9 $my_child_PID
 
-
-
-
-
-
-if [ -e test-results.log ]; then
-    echo "`date`: File test-results.log." | tee -a "$DIR/log.log"
-    cat test-results.log >> "$DIR/log.log"
-else
-    echo "`date`: File test-results.log could not be found" | tee -a "$DIR/log.log"
-fi
-
-UNIT_TEST_ERRORS=`grep -c "*fail*" test-results.log`
+# count fail occurences
+export UNIT_TEST_ERRORS=`grep -ci 'fail' unit-tests-results.log`
 
 if [ -z "$UNIT_TEST_ERRORS" ]; then
-    echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
-	echo "  Could not execute the tests" | tee -a "$DIR/log.log"
+    echo "`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
+	echo "`date`   Could not execute the tests. Variable UNIT_TEST_ERRORS=$UNIT_TEST_ERRORS" | tee -a "$DIR/log.log"
     exit 1
 fi
 
 if [ $UNIT_TEST_ERRORS -ne 0 ]; then
-    echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
-	echo "  Did not pass the unit-tests" | tee -a "$DIR/log.log"
+    echo"`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
+	echo "`date`   Did not pass the unit-tests" | tee -a "$DIR/log.log"
 	exit 1
 fi
 
@@ -124,8 +113,7 @@ git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a "$DIR/log.log"
 git push origin $STAGE2 | tee -a "$DIR/log.log"
 
 # Reset
-echo "`date`: Checking out $STAGE0" | tee -a "$DIR/log.log"
+echo "`date` Checking out $STAGE0" | tee -a "$DIR/log.log"
 git checkout $STAGE0 | tee -a "$DIR/log.log"
-
 
 
