@@ -94,7 +94,7 @@ if [ -z "$UNIT_TEST_ERRORS" ]; then
 fi
 
 if [ $UNIT_TEST_ERRORS -ne 0 ]; then
-    echo echo "`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
+    echo"`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "`date`   Did not pass the unit-tests" | tee -a "$DIR/log.log"
 	exit 1
 fi
