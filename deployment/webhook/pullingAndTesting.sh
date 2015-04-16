@@ -70,6 +70,7 @@ cd "$TESTDIR/../server"
 export NODE_ENV=test
 node bin/www.js &
 export my_child_PID=$!
+sleep 4
 echo "`date`: *********** nodemon started with process id = $my_child_PID" | tee -a log.log
 
 git checkout $STAGE2 | tee -a "$DIR/log.log"
