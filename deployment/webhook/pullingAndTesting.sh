@@ -88,30 +88,11 @@ kill -9 $my_child_PID
 # count fail occurences
 export UNIT_TEST_ERRORS=`grep -ci 'fail' unit-tests-results.log`
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-echo ">>>>> $UNIT_TEST_ERRORS <<<<<"
-
-=======
-if [ -z $UNIT_TEST_ERRORS ]; then
-=======
 if [ -z "$UNIT_TEST_ERRORS" ]; then
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> development
-    echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
-	echo "  Could not execute the tests" | tee -a "$DIR/log.log"
-=======
-    echo echo "`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
-	echo "`date`   Could not execute the tests" | tee -a "$DIR/log.log"
->>>>>>> development
-=======
     echo "`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "`date`   Could not execute the tests. Variable UNIT_TEST_ERRORS=$UNIT_TEST_ERRORS" | tee -a "$DIR/log.log"
->>>>>>> development
     exit 1
 fi
->>>>>>> development
 
 if [ $UNIT_TEST_ERRORS -ne 0 ]; then
     echo"`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
