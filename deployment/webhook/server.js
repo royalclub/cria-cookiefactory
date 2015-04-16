@@ -91,7 +91,7 @@ app.post('/webhook', function (req, res) {
 
 
 app.all('*', function (req, res) {
-    console.log('!!!!!', req, '-----');
+    console.log('>>>>> 404 error\n', req, '\n 404 error <<<<<');
     res.send(404, {msg: 'Nothing here. This is the webhook for github'});
 });
 
