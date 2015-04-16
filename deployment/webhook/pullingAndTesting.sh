@@ -91,12 +91,14 @@ export UNIT_TEST_ERRORS=`grep -ci 'fail' unit-tests-results.log`
 if [ -z "$UNIT_TEST_ERRORS" ]; then
     echo "`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "`date`   Could not execute the tests. Variable UNIT_TEST_ERRORS=$UNIT_TEST_ERRORS" | tee -a "$DIR/log.log"
+	git checkout $STAGE0 | tee -a "$DIR/log.log"
     exit 1
 fi
 
 if [ $UNIT_TEST_ERRORS -ne 0 ]; then
     echo"`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "`date`   Did not pass the unit-tests" | tee -a "$DIR/log.log"
+	git checkout $STAGE0 | tee -a "$DIR/log.log"
 	exit 1
 fi
 
