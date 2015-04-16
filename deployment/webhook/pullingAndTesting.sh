@@ -67,7 +67,7 @@ echo "`date` #########################################" | tee -a "$DIR/log.log"
 
 cd "$TESTDIR/../server"
 export NODE_ENV=test
-node bin/www.js &
+node bin/www.js >/dev/null 2>&1 &
 export my_child_PID=$!
 sleep 4
 echo "`date` node started with process id = $my_child_PID" | tee -a log.log
