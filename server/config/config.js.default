@@ -3,7 +3,7 @@ module.exports = {
     deployment: {
         port: 3333,
         repoUrl: "https://github.com/theotheu/cria-seed",
-        from: "theo.theunissen+cria@gmail.com",
+        from: "theo.theunissen0@gmail.com",
         to: "theo.theunissen@gmail.com",
         fromName: "CRIA-testert",
         password: "topSecret!"
