@@ -11,20 +11,11 @@ var express = require('express'),
     child,
     config = require('../../server/config/config.js')['deployment'];
 
-
 // Configure body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));     // Notice because option default will flip in next major; http://goo.gl/bXjyyz
 
 app.post('/webhook', function (req, res) {
-
-    var i, stages = [
-        {name: "development"},
-        {name: "test-static-analyzer-passed"},
-        {name: "test-unit-tests-passed"},
-        {name: "acceptance"},
-        {name: "production"}
-    ];
 
     var cb = function (error, stdout, stderr) {
         sys.print('stdout: ' + stdout);
@@ -32,7 +23,6 @@ app.post('/webhook', function (req, res) {
         if (error !== null) {
             console.log('exec error: ' + error);
         }
-
 
         var nodemailer = require('nodemailer');
 
@@ -69,6 +59,10 @@ app.post('/webhook', function (req, res) {
                 {
                     filename: "log.log",
                     path: "log.log"
+                },
+                {
+                    filename: "static-analyzer-results.log",
+                    path: "../../tests/static-analyzer/static-analyzer-results.log"
                 }
             ]
         };
@@ -101,7 +95,7 @@ app.post('/webhook', function (req, res) {
 
 
 app.all('*', function (req, res) {
-    console.log('!!!!!', req, '-----');
+    console.log('>>>>> 404 error\n', req, '\n 404 error <<<<<');
     res.send(404, {msg: 'Nothing here. This is the webhook for github'});
 });
 

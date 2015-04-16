@@ -46,6 +46,9 @@ git checkout $STAGE1 | tee -a "$DIR/log.log"
 git merge --no-edit $STAGE0 | tee -a "$DIR/log.log"
 git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a "$DIR/log.log"
 
+cd $TESTDIR/static-analyzer
+./run_lint.sh > static-analyzer-results.log
+
 if [ -f $TESTDIR/static-analyzer/error_log.txt ]; then
 	echo "=~=~=~=~= ERRORS: No commit for branch 'test' was performed. =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "=~=~=~=~= Resolve the conflicts before continuing.           =~=~=~=~=" | tee -a "$DIR/log.log"
@@ -66,10 +69,10 @@ echo "#########################################" | tee -a "$DIR/log.log"
 #any_command args &
 #my_child_PID=$!
 
-cd "$TESTDIR/../../"
+cd "$TESTDIR/../server"
 export NODE_ENV=test
 nodemon
-my_child_PID=$!
+export my_child_PID=$!
 echo "`date`: nodemon started with process id = $my_child_PID" | tee -a log.log
 
 git checkout $STAGE2 | tee -a "$DIR/log.log"
@@ -83,6 +86,9 @@ npm test
 
 # kill nodemon
 kill -9 $my_child_PID
+
+
+
 
 
 
