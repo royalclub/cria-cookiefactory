@@ -69,7 +69,7 @@ echo "#########################################" | tee -a "$DIR/log.log"
 #any_command args &
 #my_child_PID=$!
 
-cd "$TESTDIR/../../server"
+cd "$TESTDIR/../server"
 export NODE_ENV=test
 nodemon
 export my_child_PID=$!
@@ -137,3 +137,4 @@ git push origin $STAGE2 | tee -a "$DIR/log.log"
 # Reset
 echo "`date`: Checking out $STAGE0" | tee -a "$DIR/log.log"
 git checkout $STAGE0 | tee -a "$DIR/log.log"
+
