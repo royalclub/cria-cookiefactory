@@ -5,11 +5,8 @@ var env = process.env.NODE_ENV || 'development',
     localConfig = require('../../config-test.json')
     ;
 
-
-
 var should = require('should'),
     supertest = require('supertest');
-
 
 describe('API Routing for CRUD operations on books', function () {
 
@@ -189,4 +186,3 @@ describe('API Routing for CRUD operations on books', function () {
     });
 
 });
-

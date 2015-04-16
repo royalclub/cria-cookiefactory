@@ -1,42 +1,34 @@
 #!/bin/bash
 
-
-# Take commit message from command line, if given. Default commit message is the date.
-export COMMIT_MESSAGE="DEVELOPMENT: `date`"
+export COMMIT_MESSAGE="Automatic Deployment: `date`"
 export STAGE0=development
 export STAGE1=test-static-analyzer-passed
 export STAGE2=test-unit-tests-passed
 export STAGE3=acceptance
 export STAGE4=production
-export TEST_DIR=../tests
+export TESTDIR=../../tests
+export JSLINT=./$TESTDIR/static-analyzer/node_modules/jslint
 
-while getopts ":m:" opt; do
-  case $opt in
-    m)
-      export COMMIT_MESSAGE=$OPTARG
-      ;;
-    \?)
-      echo "Invalid option: -$OPTARG" >&2
-      exit 1
-      ;;
-    :)
-      echo "Option -$OPTARG requires an argument." >&2
-      exit 1
-      ;;
-  esac
-done
+#########################################
+# Preflight checks
+#########################################
+# make sure jslint is installed
+if [[ ! -d $JSLINT ]]; then
+	#install jslint locally
+	echo "Please install jslint first."
+	echo "  jslint is expected to be installed in $TESTDIR/static-analyzer/."
+	exit 1
+fi
 
-
+#########################################
+# STAGE0, development
+#########################################
 git checkout $STAGE0
+git pull
 
-git commit -am "$COMMIT_MESSAGE"
-
-git push origin development
-
-
-#############################
-# STAGE 1 --> static analyzers
-#############################
+#########################################
+# STAGE1, static-analyzer
+#########################################
 git checkout $STAGE1
 
 git merge --no-edit $STAGE0
@@ -55,12 +47,18 @@ git commit -am "TEST: `date`"
 git push origin $STAGE1
 
 
-#############################
-# STAGE 2 --> unit tests
-#############################
-git checkout $STAGE1
+echo #########################################
+echo # STAGE2, unit-tests
+echo #########################################
+
+git checkout $STAGE2
 
 cd ./$TESTDIR/unit-tests
+
+rm -fr test-results.log
+
+# Run the unit test
+npm test
 
 UNIT_TEST_ERRORS=`grep -c 'fail' test-results.log`;
 
@@ -83,26 +81,5 @@ git commit -am "Merging from $STAGE0 to $STAGE1: `date`"
 
 git push origin $STAGE1
 
-#############################
-# STAGE 3
-#############################
-git checkout $STAGE2
 
-git merge --no-edit $STAGE1
-git commit -am "Merging from $STAGE1 to $STAGE2: `date`"
-
-git push origin $STAGE2
-
-
-#############################
-# Checking out development branch
-#############################
 git checkout $STAGE0
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-=======
->>>>>>> test-static-analyzer-passed
-=======
->>>>>>> development
