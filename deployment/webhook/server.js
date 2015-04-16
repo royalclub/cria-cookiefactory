@@ -48,6 +48,8 @@ app.post('/webhook', function (req, res) {
         var subject = "Test results";
         if (error === "" || error === null) {
             subject += " ✔";
+        } else {
+            subject += " ✘";
         }
 
         // NB! No need to recreate the transporter object. You can use
@@ -56,7 +58,7 @@ app.post('/webhook', function (req, res) {
         var mailOptions = {
             from: config.userName + " <" + config.user + ">", // sender address
             to: config.to, // list of receivers
-            subject: 'Test results', // Subject line
+            subject: subject, // Subject line
             text: '<b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br>" + error, // plaintext body 'Hello world ✔'
             html: '<pre></pre><b>stdout</b><br>' + stdout + "<br><br><b>stderr</b><br>" + stderr + "<br><br><span style='color:red'><b>error</b><br></span>" + error + "</pre>"// html body
         };
