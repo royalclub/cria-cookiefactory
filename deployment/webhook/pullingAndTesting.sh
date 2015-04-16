@@ -32,8 +32,8 @@ echo "# STAGE0, development" | tee -a "$DIR/log.log"
 echo "#########################################" | tee -a "$DIR/log.log"
 echo | tee -a "$DIR/log.log"
 
-git checkout $STAGE0
-git pull
+git checkout $STAGE0 | tee -a "$DIR/log.log"
+git pull | tee -a "$DIR/log.log"
 
 echo | tee -a "$DIR/log.log"
 echo "#########################################" | tee -a "$DIR/log.log"
