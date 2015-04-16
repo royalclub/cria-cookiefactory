@@ -125,6 +125,10 @@ echo "`date` Checking out $STAGE0" | tee -a "$DIR/log.log"
 git checkout $STAGE0 | tee -a "$DIR/log.log"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> development
+=======
+
+>>>>>>> 1d002c9a1d0c6f7bd40772464de932c15b0a3d9b
