@@ -47,9 +47,9 @@ git commit -am "TEST: `date`"
 git push origin $STAGE1
 
 
-echo #########################################
-echo # STAGE2, unit-tests
-echo #########################################
+echo "#########################################"
+echo "# STAGE2, unit-tests"
+echo "#########################################"
 
 git checkout $STAGE2
 
