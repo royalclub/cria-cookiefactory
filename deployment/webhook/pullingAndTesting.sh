@@ -52,6 +52,8 @@ cd ./$TESTDIR/unit-tests
 
 UNIT_TEST_ERRORS=`grep -c 'fail' test-results.log`;
 
+echo ">>>>> $UNIT_TEST_ERRORS <<<<<"
+
 
 if [ $UNIT_TEST_ERRORS -ne 0 ]; then
     echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~="
