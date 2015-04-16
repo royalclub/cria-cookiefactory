@@ -11,7 +11,6 @@ var express = require('express'),
     child,
     config = require('../../server/config/config.js')['deployment'];
 
-
 // Configure body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));     // Notice because option default will flip in next major; http://goo.gl/bXjyyz
