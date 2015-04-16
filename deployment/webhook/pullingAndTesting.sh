@@ -67,23 +67,23 @@ git checkout $STAGE2 | tee -a "$DIR/log.log"
 echo "Working should be $TESTDIR/unit-tests" | tee -a "$DIR/log.log"
 
 cd "$TESTDIR/unit-tests"
+<<<<<<< HEAD
 #cd /home/theotheu/workspaces/cria-seed/tests/unit-tests
+=======
+>>>>>>> development
 
 echo "Working directory is `pwd`" | tee -a "$DIR/log.log"
 
 rm -fr test-results.log | tee -a "$DIR/log.log"
 
 # Run the unit test
-npm test | tee -a "$DIR/log.log"
+npm test
 
 UNIT_TEST_ERRORS=`grep -c 'fail' test-results.log`
 
 if [ -z "$UNIT_TEST_ERRORS" ]; then
     echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "  Could not execute the tests" | tee -a "$DIR/log.log"
-	echo " " | tee -a "$DIR/log.log"
-	echo " " | tee -a "$DIR/log.log"
-	echo "--------"  >> "$DIR/log.log"
 	echo "########## `pwd` <<<<<<<<<<"  | tee -a "$DIR/log.log"
 	cat test-results.log >> "$DIR/log.log"
     exit 1
