@@ -79,8 +79,8 @@ echo ">>>>> $UNIT_TEST_ERRORS <<<<<"
 if [ -z $UNIT_TEST_ERRORS ]; then
     echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "  Could not execute the tests" | tee -a "$DIR/log.log"
-	echo "" >> "$DIR/log.log"
-	echo "" >> "$DIR/log.log"
+	echo " " >> "$DIR/log.log"
+	echo " " >> "$DIR/log.log"
 	echo "--------" >> "$DIR/log.log"
 	cat log.log >> "$DIR/log.log"
     exit 1
