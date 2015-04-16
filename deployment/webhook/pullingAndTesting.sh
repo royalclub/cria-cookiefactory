@@ -95,4 +95,5 @@ git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee log.log
 git push origin $STAGE1 | tee log.log
 
 
+# Reset
 git checkout $STAGE0 | tee log.log
