@@ -78,9 +78,13 @@ git checkout $STAGE2 | tee -a "$DIR/log.log"
 cd "$TESTDIR/unit-tests"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 rm -fr unit-tests-results.log
 =======
 rm -fr unit-tests-results.log | tee -a "$DIR/log.log"
+>>>>>>> development
+=======
+rm -fr unit-tests-results.log
 >>>>>>> development
 
 # Run the unit test
