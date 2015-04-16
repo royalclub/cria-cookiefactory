@@ -84,6 +84,7 @@ if [ -z $UNIT_TEST_ERRORS ]; then
     exit 1
 fi
 
+
 if [ $UNIT_TEST_ERRORS -ne 0 ]; then
     echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "  Did not pass the unit-tests" | tee -a "$DIR/log.log"
