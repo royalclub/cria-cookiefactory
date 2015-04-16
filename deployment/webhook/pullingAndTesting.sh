@@ -46,7 +46,12 @@ git commit -am "TEST: `date`"
 
 git push origin $STAGE1
 
-git checkout $STAGE1
+
+echo #########################################
+echo # STAGE2, unit-tests
+echo #########################################
+
+git checkout $STAGE2
 
 cd ./$TESTDIR/unit-tests
 
