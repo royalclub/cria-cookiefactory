@@ -95,3 +95,4 @@ git push origin $STAGE2 | tee -a log.log
 
 # Reset
 git checkout $STAGE0 | tee -a log.log
+
