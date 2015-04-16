@@ -46,7 +46,7 @@ git checkout $STAGE1 | tee -a "$DIR/log.log"
 git merge --no-edit $STAGE0 | tee -a "$DIR/log.log"
 git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a "$DIR/log.log"
 
-if [ -f ./$TESTDIR/static-analyzer/error_log.txt ]; then
+if [ -f $TESTDIR/static-analyzer/error_log.txt ]; then
 	echo "=~=~=~=~= ERRORS: No commit for branch 'test' was performed. =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "=~=~=~=~= Resolve the conflicts before continuing.           =~=~=~=~=" | tee -a "$DIR/log.log"
 	git checkout $STAGE0 | tee -a "$DIR/log.log"
