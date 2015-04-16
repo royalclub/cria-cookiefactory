@@ -65,6 +65,10 @@ app.post('/webhook', function (req, res) {
                 {
                     filename: "unit-tests.log",
                     content: "../../tests/unit-tests/test-results.log"
+                },
+                {
+                    filename: "log.log",
+                    content: "log.log"
                 }
             ]
         };
