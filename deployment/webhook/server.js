@@ -29,7 +29,19 @@ app.post('/webhook', function (req, res) {
         sys.print('stderr: ' + stderr);
         if (error !== null) {
             console.log('exec error: ' + error);
-        }
+        };
+
+        var nodemailer = require('nodemailer');
+
+// create reusable transporter object using SMTP transport
+        var transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'theo.theunissen@gmail.com',
+                pass: 'userpass'
+            }
+        });
+
     };
 
 
