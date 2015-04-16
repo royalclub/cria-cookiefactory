@@ -42,7 +42,6 @@ app.post('/webhook', function (req, res) {
             }
         });
 
-
         // NB! No need to recreate the transporter object. You can use
         // the same transporter object for all e-mails
         // setup e-mail data with unicode symbols
