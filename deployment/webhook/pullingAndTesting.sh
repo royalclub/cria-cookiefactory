@@ -90,7 +90,7 @@ fi
 git merge --no-edit $STAGE0 | tee -a log.log
 git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a log.log
 
-git push origin $STAGE1 | tee -a log.log
+git push origin $STAGE2 | tee -a log.log
 
 
 # Reset
