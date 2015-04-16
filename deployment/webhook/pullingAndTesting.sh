@@ -93,7 +93,7 @@ else
     echo "`date`: File test-results.log could not be found" | tee -a "$DIR/log.log"
 fi
 
-UNIT_TEST_ERRORS=`grep -c 'fail' test-results.log`
+UNIT_TEST_ERRORS=`grep -c '*fail*' test-results.log`
 
 <<<<<<< HEAD
 <<<<<<< HEAD
