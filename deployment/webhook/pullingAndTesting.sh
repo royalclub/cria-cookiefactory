@@ -6,8 +6,8 @@ export STAGE1=test-static-analyzer-passed
 export STAGE2=test-unit-tests-passed
 export STAGE3=acceptance
 export STAGE4=production
-export TESTDIR=../../tests
-export JSLINT=./$TESTDIR/static-analyzer/node_modules/jslint
+export TESTDIR="`pwd`/../../tests"
+export JSLINT=$TESTDIR/static-analyzer/node_modules/jslint
 export DIR=`pwd`
 
 echo "`date` : " > "$PWD/log.log"
