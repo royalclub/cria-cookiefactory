@@ -64,6 +64,8 @@ echo "#########################################" | tee -a "$DIR/log.log"
 
 git checkout $STAGE2 | tee -a "$DIR/log.log"
 
+echo "Working should be $TESTDIR/unit-tests" | tee -a "$DIR/log.log"
+
 cd $TESTDIR/unit-tests | tee -a "$DIR/log.log"
 
 echo "Working directory is `pwd`" | tee -a "$DIR/log.log"
