@@ -83,6 +83,7 @@ rm -fr test-results.log | tee -a "$DIR/log.log"
 # Run the unit test
 npm test
 
+# kill nodemon
 kill -9 $my_child_PID
 
 if [ -e test-results.log ]; then
