@@ -59,3 +59,4 @@ myApp.controller('myCtrl', function ($scope) {
     // TODO: bind settings with whoami
     $scope.whomai = "tada!";
 });
+
