@@ -74,12 +74,13 @@ echo "`date` node started with process id = $my_child_PID" | tee -a log.log
 
 git checkout $STAGE2 | tee -a "$DIR/log.log"
 
+# Change directory to unit-tests
 cd "$TESTDIR/unit-tests"
 
-rm -fr unit-tests-results.log | tee -a "$DIR/log.log"
+rm -fr unit-tests-results.log
 
 # Run the unit test
-npm test
+mocha > unit-tests-results.log
 
 # kill nodemon
 kill -9 $my_child_PID
