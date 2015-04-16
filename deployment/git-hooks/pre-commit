@@ -1,0 +1,81 @@
+#!/bin/sh
+
+# vars we need
+export NODE=/usr/local/bin/node
+export TESTDIR=tests
+export JSLINT=./$TESTDIR/static-analyzer/node_modules/jslint
+export BRANCH=`git branch | awk '/\*/ { print $2; }'`
+export STAGE0=development
+export STAGE1=test-static-analyzer-passed
+export STAGE2=test-unit-tests-passed
+export STAGE3=acceptance
+export STAGE4=production
+export PATH=$PATH:/usr/local/bin
+export TERM=xterm
+
+# if it cannot find a node installation
+if [[ -z $NODE ]]; then
+	#NodeJS is not installed
+	echo "Please install NodeJS first."
+	exit 1
+fi
+
+# make sure jslint is installed
+if [[ ! -d $JSLINT ]]; then
+	#install jslint locally
+	echo "Please install jslint first."
+	echo "  jslint is expected to be installed in $TESTDIR/static-analyzer/."
+	exit 1
+fi
+
+# Commit and push always to development
+# Only commit to test, if static analysis is passed
+#
+
+if [ $BRANCH = $STAGE0 ]; then
+	echo "\n\n\nCurrent branch is $BRANCH. This will be committed.\n\n\n"
+	exit 0
+
+### static-analyzers
+elif [ $BRANCH = $STAGE1 ]; then
+	echo "\n\n\nCurrent branch is $STAGE1. This will be tested with the static-analyzers.\n\n\n"
+
+	rm ./$TESTDIR/static-analyzer/error_log.txt
+
+	cd ./$TESTDIR/static-analyzer
+	./run_lint.sh
+	cd -
+
+	if [ -f ./$TESTDIR/static-analyzer/error_log.txt ]; then
+		echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~="
+		echo "  Did not pass the static analyse"
+		exit 1
+	fi
+
+### Unit-tests
+elif [ $BRANCH = $STAGE2 ]; then
+
+	echo "\n\n\nCurrent branch is $STAGE2. This will be tested with the unit-tests.\n\n\n"
+
+	cd ./$TESTDIR/unit-tests
+	npm test
+
+	# Count errors
+	UNIT_TEST_ERRORS=`grep -c 'fail' test-results.log`;
+
+	cd -
+	if [ $UNIT_TEST_ERRORS -ne 0 ]; then
+	    echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~="
+		echo "  Did not pass the unit-tests"
+		exit 1
+	fi
+
+else
+    echo "ERROR: Brach $BRANCH does not have a test specified."
+fi
+
+
+echo "\n\n\nEverything seems OK.\n\n\n"
+
+# Everything is ok
+exit 0
