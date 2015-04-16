@@ -66,6 +66,8 @@ git checkout $STAGE2 | tee -a "$DIR/log.log"
 
 cd ./$TESTDIR/unit-tests | tee -a "$DIR/log.log"
 
+echo "Working directory is `pwd`" | tee -a "$DIR/log.log"
+
 rm -fr test-results.log | tee -a "$DIR/log.log"
 
 # Run the unit test
