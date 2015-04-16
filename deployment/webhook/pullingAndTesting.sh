@@ -10,7 +10,7 @@ export TESTDIR=../../tests
 export JSLINT=./$TESTDIR/static-analyzer/node_modules/jslint
 export DIR=`pwd`
 
-echo "`date` : " > log.log
+echo "`date` : " > "$PWD/log.log"
 
 echo
 echo "#########################################"
