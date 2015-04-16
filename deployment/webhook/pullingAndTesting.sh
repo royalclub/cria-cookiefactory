@@ -114,7 +114,6 @@ git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a "$DIR/log.log"
 
 git push origin $STAGE2 | tee -a "$DIR/log.log"
 
-
 # Reset
 echo "`date`: Checking out $STAGE0" | tee -a "$DIR/log.log"
 git checkout $STAGE0 | tee -a "$DIR/log.log"
