@@ -10,8 +10,9 @@ export TESTDIR="`pwd`/../../tests"
 export JSLINT=$TESTDIR/static-analyzer/node_modules/jslint
 export DIR=`pwd`
 
-echo "`date` : " > "$PWD/log.log"
-echo "`date` : Logging to $PWD/log.log" | tee -a "$PWD/log.log"
+echo "`date` ********************************* New log" > "$PWD/log.log"
+export PARENT_COMMAND=$(ps $PPID | tail -n 1 | awk "{print \$5}")
+echo "`date` Executed by $PARENT_COMMAND" | tee -a "$PWD/log.log"
 
 echo
 echo "`date` #########################################"
@@ -113,6 +114,9 @@ git merge --no-edit $STAGE0 | tee -a "$DIR/log.log"
 git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a "$DIR/log.log"
 
 git push origin $STAGE2 | tee -a "$DIR/log.log"
+
+
+
 
 # Reset
 echo "`date` Checking out $STAGE0" | tee -a "$DIR/log.log"
