@@ -73,7 +73,7 @@ npm test
 
 if [ -e test-results.log ]; then
     cat test-results.log >> "$DIR/log.log"
-elif
+else
     echo "File test-results.log could not be found" | tee -a "$DIR/log.log"
 fi
 
