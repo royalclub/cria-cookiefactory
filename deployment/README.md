@@ -1,10 +1,4 @@
 
-Change directory to the root of your project.
-
-`ln -s deployment/hooks/pre-commit .git/hooks/pre-commit`
-
-`chmod +x .git/hooks/pre-commit`
-
 ##Flows
 The following branches are used in this example:
 * development
