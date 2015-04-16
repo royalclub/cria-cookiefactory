@@ -127,5 +127,6 @@ crashlytics-build.properties
 
 ### My settings ###
 
-
+# vim swap files
+*.swp
 
