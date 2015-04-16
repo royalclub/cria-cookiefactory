@@ -2,7 +2,8 @@
 module.exports = {
     deployment: {
         port: 3333,
-        repoUrl: "https://github.com/theotheu/cria-seed"
+        repoUrl: "https://github.com/theotheu/cria-seed",
+        email: "theo.theunissen+cria@gmail.com"
     },
     development: {
         db: 'mongodb://localhost/books-dev',    // change books with your database
