@@ -21,11 +21,11 @@ function BookListCtrl($scope, booksService) {
  * @param booksService
  * @constructor
  */
-function BookDetailCtrl($scope, $routeParams, $location, booksService) {
+function BookDetailCtrl($scope, $routeParams, booksService) {
     "use strict";
     // GET 1 book
 
-    if ($routeParams._id !== '0') {
+    if ($routeParams._id !== 'new') {
         $scope.books = booksService.books.get({_id: $routeParams._id}, function () {
             console.log('$scope.requests ', $scope.requests);
         });
