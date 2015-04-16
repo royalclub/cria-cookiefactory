@@ -71,7 +71,7 @@ echo "#########################################" | tee -a "$DIR/log.log"
 
 cd "$TESTDIR/../server"
 export NODE_ENV=test
-nodemon &
+node bin/www.js &
 export my_child_PID=$!
 echo "`date`: *********** nodemon started with process id = $my_child_PID" | tee -a log.log
 
