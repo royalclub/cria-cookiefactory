@@ -50,6 +50,11 @@ git checkout $STAGE1
 
 cd ./$TESTDIR/unit-tests
 
+rm -fr test-results.log
+
+# Run the unit test
+npm test
+
 UNIT_TEST_ERRORS=`grep -c 'fail' test-results.log`;
 
 
