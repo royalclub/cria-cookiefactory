@@ -138,3 +138,4 @@ git push origin $STAGE2 | tee -a "$DIR/log.log"
 echo "`date`: Checking out $STAGE0" | tee -a "$DIR/log.log"
 git checkout $STAGE0 | tee -a "$DIR/log.log"
 
+
