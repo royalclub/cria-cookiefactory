@@ -18,21 +18,12 @@ app.use(bodyParser.urlencoded({extended: true}));     // Notice because option d
 
 app.post('/webhook', function (req, res) {
 
-    var i, stages = [
-        {name: "development"},
-        {name: "test-static-analyzer-passed"},
-        {name: "test-unit-tests-passed"},
-        {name: "acceptance"},
-        {name: "production"}
-    ];
-
     var cb = function (error, stdout, stderr) {
         sys.print('stdout: ' + stdout);
         sys.print('stderr: ' + stderr);
         if (error !== null) {
             console.log('exec error: ' + error);
         }
-
 
         var nodemailer = require('nodemailer');
 
