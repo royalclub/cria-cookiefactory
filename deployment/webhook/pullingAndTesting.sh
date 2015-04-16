@@ -64,23 +64,18 @@ echo "#########################################" | tee -a "$DIR/log.log"
 
 git checkout $STAGE2 | tee -a "$DIR/log.log"
 
-echo "Working should be $TESTDIR/unit-tests" | tee -a "$DIR/log.log"
-
 cd "$TESTDIR/unit-tests"
-<<<<<<< HEAD
-#cd /home/theotheu/workspaces/cria-seed/tests/unit-tests
-=======
->>>>>>> development
-
-echo "Working directory is `pwd`" | tee -a "$DIR/log.log"
 
 rm -fr test-results.log | tee -a "$DIR/log.log"
 
 # Run the unit test
 npm test
 
-echo "########## `pwd` <<<<<<<<<<"  | tee -a "$DIR/log.log"
-cat test-results.log >> "$DIR/log.log"
+if [ -e test-results.log ]; then
+    cat test-results.log >> "$DIR/log.log"
+else
+    echo "File test-results.log could not be found" | tee -a "$DIR/log.log"
+fi
 
 UNIT_TEST_ERRORS=`grep -c 'fail' test-results.log`
 
