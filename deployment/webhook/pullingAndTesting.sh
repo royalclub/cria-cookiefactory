@@ -62,15 +62,28 @@ echo "#########################################" | tee -a "$DIR/log.log"
 echo "# STAGE2, unit-tests" | tee -a "$DIR/log.log"
 echo "#########################################" | tee -a "$DIR/log.log"
 
+
+#any_command args &
+#my_child_PID=$!
+
+cd ../../
+export NODE_ENV=development
+nodemon
+
+my_child_PID=$!
+
+
 git checkout $STAGE2 | tee -a "$DIR/log.log"
 
 cd "$TESTDIR/unit-tests"
 
-
 rm -fr test-results.log | tee -a "$DIR/log.log"
+
 
 # Run the unit test
 npm test
+
+kill -9 $my_child_PID
 
 if [ -e test-results.log ]; then
     echo "`date`: File test-results.log." | tee -a "$DIR/log.log"
