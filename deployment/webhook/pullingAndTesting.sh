@@ -72,9 +72,10 @@ rm -fr test-results.log | tee -a "$DIR/log.log"
 npm test
 
 if [ -e test-results.log ]; then
+    echo "`date`: File test-results.log." | tee -a "$DIR/log.log"
     cat test-results.log >> "$DIR/log.log"
 else
-    echo "File test-results.log could not be found" | tee -a "$DIR/log.log"
+    echo "`date`: File test-results.log could not be found" | tee -a "$DIR/log.log"
 fi
 
 UNIT_TEST_ERRORS=`grep -c 'fail' test-results.log`
