@@ -61,6 +61,12 @@ app.post('/webhook', function (req, res) {
             subject: subject, // Subject line
             text: '<b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br>" + error, // plaintext body 'Hello world ✔'
             html: '<pre><b>stdout</b><br>' + stdout + "<br><br><b>stderr</b><br>" + stderr + "<br><br><span style='color:red'><b>error</b><br></span>" + error + "</pre>"// html body
+            attachments:[
+                {
+                    filename: "unit-tests.log",
+                    content: "../../tests/unit-tests/test-results.log"
+                }
+            ]
         };
 
         // send mail with defined transport object
