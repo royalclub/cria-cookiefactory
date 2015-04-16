@@ -94,4 +94,3 @@ app.all('*', function (req, res) {
 });
 
 app.listen(config.port);
-
