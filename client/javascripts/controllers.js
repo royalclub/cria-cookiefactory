@@ -21,7 +21,7 @@ function BookListCtrl($scope, booksService) {
  * @param booksService
  * @constructor
  */
-function BookDetailCtrl($scope, $routeParams, booksService) {
+function BookDetailCtrl($scope, $routeParams, $location, booksService) {
     "use strict";
     // GET 1 book
 
