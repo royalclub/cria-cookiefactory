@@ -69,8 +69,8 @@ echo "#########################################" | tee -a "$DIR/log.log"
 cd ../../
 export NODE_ENV=development
 nodemon
-
 my_child_PID=$!
+echo "`date`: nodemon started with process id = $my_child_PID" | tee -a log.log
 
 
 git checkout $STAGE2 | tee -a "$DIR/log.log"
@@ -84,6 +84,8 @@ npm test
 
 # kill nodemon
 kill -9 $my_child_PID
+
+
 
 if [ -e test-results.log ]; then
     echo "`date`: File test-results.log." | tee -a "$DIR/log.log"
