@@ -77,7 +77,7 @@ npm test | tee -a "$DIR/log.log"
 
 UNIT_TEST_ERRORS=`grep -c 'fail' test-results.log`
 
-if [ -z $UNIT_TEST_ERRORS ]; then
+if [ -z "$UNIT_TEST_ERRORS" ]; then
     echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "  Could not execute the tests" | tee -a "$DIR/log.log"
 	echo " " | tee -a "$DIR/log.log"
