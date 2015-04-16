@@ -44,15 +44,21 @@ app.post('/webhook', function (req, res) {
             }
         });
 
+
+        var subject = "Test results";
+        if (error==="") {
+            subject += " ✔";
+        }
+
         // NB! No need to recreate the transporter object. You can use
         // the same transporter object for all e-mails
         // setup e-mail data with unicode symbols
         var mailOptions = {
             from: config.from, // sender address
             to: config.to, // list of receivers
-            subject: 'Hello ✔', // Subject line
-            text: 'Hello world ✔', // plaintext body
-            html: '<b>Hello world ✔</b>' // html body
+            subject: 'Test results', // Subject line
+            text: '<b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br>" +  error, // plaintext body 'Hello world ✔'
+            html: '<b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br>" +  error// html body
         };
 
         // send mail with defined transport object
