@@ -37,7 +37,7 @@ app.post('/webhook', function (req, res) {
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-                user: 'theo.theunissen@gmail.com',
+                user: config.email,
                 pass: config.password
             }
         });
