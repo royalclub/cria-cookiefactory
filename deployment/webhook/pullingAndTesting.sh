@@ -94,7 +94,6 @@ if [ -z "$UNIT_TEST_ERRORS" ]; then
 fi
 >>>>>>> development
 
-
 if [ $UNIT_TEST_ERRORS -ne 0 ]; then
     echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "  Did not pass the unit-tests" | tee -a "$DIR/log.log"
