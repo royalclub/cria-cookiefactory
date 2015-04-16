@@ -71,3 +71,5 @@ git commit -am "Merging from $STAGE0 to $STAGE1: `date`"
 
 git push origin $STAGE1
 
+
+git checkout $STAGE0
