@@ -75,6 +75,9 @@ rm -fr test-results.log | tee -a "$DIR/log.log"
 # Run the unit test
 npm test
 
+	echo "########## `pwd` <<<<<<<<<<"  | tee -a "$DIR/log.log"
+	cat test-results.log >> "$DIR/log.log"
+
 UNIT_TEST_ERRORS=`grep -c 'fail' test-results.log`
 
 <<<<<<< HEAD
@@ -88,8 +91,6 @@ if [ -z "$UNIT_TEST_ERRORS" ]; then
 >>>>>>> development
     echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "  Could not execute the tests" | tee -a "$DIR/log.log"
-	echo "########## `pwd` <<<<<<<<<<"  | tee -a "$DIR/log.log"
-	cat test-results.log >> "$DIR/log.log"
     exit 1
 fi
 >>>>>>> development
