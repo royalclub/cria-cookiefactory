@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 export COMMIT_MESSAGE="Automatic Deployment: `date`"
@@ -11,12 +10,8 @@ export TESTDIR=../../tests
 export JSLINT=./$TESTDIR/static-analyzer/node_modules/jslint
 export DIR=`pwd`
 
-<<<<<<< HEAD
-echo "`date` : " > "$DIR/log.log"
-echo "`date` : Logging to $DIR/log.log" >> "$DIR/log.log"
-=======
 echo "`date` : " > "$PWD/log.log"
->>>>>>> development
+echo "`date` : Logging to $PWD/log.log" | tee -a "$PWD/log.log"
 
 echo
 echo "#########################################"
