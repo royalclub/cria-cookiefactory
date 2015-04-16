@@ -45,7 +45,6 @@ app.post('/webhook', function (req, res) {
             }
         });
 
-
         var subject = "Test results";
         if (error === "" || error === null) {
             subject += " ✔";
