@@ -72,7 +72,7 @@ echo "#########################################" | tee -a "$DIR/log.log"
 cd "$TESTDIR/../../"
 export NODE_ENV=test
 nodemon
-my_child_PID=$!
+export my_child_PID=$!
 echo "`date`: nodemon started with process id = $my_child_PID" | tee -a log.log
 
 git checkout $STAGE2 | tee -a "$DIR/log.log"
