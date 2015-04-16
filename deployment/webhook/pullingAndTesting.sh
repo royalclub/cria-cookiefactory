@@ -83,6 +83,7 @@ if [ -z $UNIT_TEST_ERRORS ]; then
 	echo " " | tee -a "$DIR/log.log"
 	echo " " | tee -a "$DIR/log.log"
 	echo "--------"  >> "$DIR/log.log"
+	echo "########## `pwd` <<<<<<<<<<"  | tee -a "$DIR/log.log"
 	cat test-results.log >> "$DIR/log.log"
     exit 1
 fi
