@@ -9,9 +9,11 @@ export STAGE4=production
 export TESTDIR=../../tests
 export JSLINT=./$TESTDIR/static-analyzer/node_modules/jslint
 
+echo
 echo "#########################################"
 echo "# Preflight checks"
 echo "#########################################"
+echo
 # make sure jslint is installed
 if [[ ! -d $JSLINT ]]; then
 	#install jslint locally
@@ -20,15 +22,21 @@ if [[ ! -d $JSLINT ]]; then
 	exit 1
 fi
 
+echo
 echo "\n#########################################"
 echo "# STAGE0, development"
 echo "#########################################\n"
+echo
+
 git checkout $STAGE0
 git pull
 
+echo
 echo "\n#########################################"
 echo "# STAGE1, static-analyzer"
 echo "#########################################\n"
+echo
+
 git checkout $STAGE1
 
 git merge --no-edit $STAGE0
