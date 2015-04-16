@@ -4,11 +4,13 @@
 
 var express = require('express'),
     bodyParser = require('body-parser'),
+    bodyParser = require('body-parser'),
     sys = require('sys'),
     exec = require('child_process').exec,
     app = express(),
     child,
     config = require('../../server/config/config.js')['deployment'];
+
 
 // Configure body-parser
 app.use(bodyParser.json());
@@ -47,7 +49,7 @@ app.post('/webhook', function (req, res) {
         // setup e-mail data with unicode symbols
         var mailOptions = {
             from: config.from, // sender address
-            to: config.email, // list of receivers
+            to: config.to, // list of receivers
             subject: 'Hello ✔', // Subject line
             text: 'Hello world ✔', // plaintext body
             html: '<b>Hello world ✔</b>' // html body
