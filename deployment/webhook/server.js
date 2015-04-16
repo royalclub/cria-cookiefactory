@@ -64,11 +64,11 @@ app.post('/webhook', function (req, res) {
             attachments:[
                 {
                     filename: "unit-tests.log",
-                    content: "../../tests/unit-tests/test-results.log"
+                    path: "../../tests/unit-tests/test-results.log"
                 },
                 {
                     filename: "log.log",
-                    content: "log.log"
+                    path: "log.log"
                 }
             ]
         };
