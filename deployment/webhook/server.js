@@ -33,7 +33,7 @@ app.post('/webhook', function (req, res) {
 
         var nodemailer = require('nodemailer');
 
-// create reusable transporter object using SMTP transport
+        // create reusable transporter object using SMTP transport
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
