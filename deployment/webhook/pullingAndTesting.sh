@@ -88,7 +88,7 @@ kill -9 $my_child_PID
 export UNIT_TEST_ERRORS=`grep -ci 'fail' unit-tests-results.log`
 
 if [ -z "$UNIT_TEST_ERRORS" ]; then
-    echo echo "`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
+    echo "`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "`date`   Could not execute the tests. Variable UNIT_TEST_ERRORS=$UNIT_TEST_ERRORS" | tee -a "$DIR/log.log"
     exit 1
 fi
