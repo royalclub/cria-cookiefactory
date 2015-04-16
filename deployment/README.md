@@ -1,10 +1,4 @@
 
-Change directory to the root of your project.
-
-`ln -s deployment/hooks/pre-commit .git/hooks/pre-commit`
-
-`chmod +x .git/hooks/pre-commit`
-
 ##Flows
 The following branches are used in this example:
 * development
@@ -24,5 +18,4 @@ If you use the git commands from your IDE, then you have to commit, merge and pu
 
 
 ![Github web configuration](https://raw.githubusercontent.com/theotheu/hook-test/master/assets/github-webhooks.png)
-
 
