@@ -128,3 +128,4 @@ echo "`date`: Checking out $STAGE0" | tee -a "$DIR/log.log"
 git checkout $STAGE0 | tee -a "$DIR/log.log"
 
 
+
