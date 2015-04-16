@@ -38,10 +38,9 @@ app.post('/webhook', function (req, res) {
             service: 'Gmail',
             auth: {
                 user: 'theo.theunissen@gmail.com',
-                pass: 'userpass'
+                pass: config.password
             }
         });
-
     };
 
 
