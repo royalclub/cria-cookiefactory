@@ -66,8 +66,8 @@ echo "#########################################" | tee -a "$DIR/log.log"
 #any_command args &
 #my_child_PID=$!
 
-cd ../../
-export NODE_ENV=development
+cd "$TESTDIR/../../"
+export NODE_ENV=test
 nodemon
 my_child_PID=$!
 echo "`date`: nodemon started with process id = $my_child_PID" | tee -a log.log
