@@ -66,8 +66,8 @@ git checkout $STAGE2 | tee -a "$DIR/log.log"
 
 echo "Working should be $TESTDIR/unit-tests" | tee -a "$DIR/log.log"
 
-cd "$TESTDIR/unit-tests" | tee -a "$DIR/log.log"
-cd /home/theotheu/workspaces/cria-seed/tests/unit-tests
+cd "$TESTDIR/unit-tests"
+#cd /home/theotheu/workspaces/cria-seed/tests/unit-tests
 
 echo "Working directory is `pwd`" | tee -a "$DIR/log.log"
 
