@@ -32,7 +32,7 @@ app.post('/webhook', function (req, res) {
         if (error !== null) {
             console.log('exec error: ' + error);
         }
-        ;
+
 
         var nodemailer = require('nodemailer');
 
@@ -60,8 +60,20 @@ app.post('/webhook', function (req, res) {
             to: config.to, // list of receivers
             subject: subject, // Subject line
             text: '<b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br>" + error, // plaintext body 'Hello world ✔'
-            html: '<pre><b>stdout</b><br>' + stdout + "<br><br><b>stderr</b><br>" + stderr + "<br><br><span style='color:red'><b>error</b><br></span>" + error + "</pre>"// html body
+            html: '<pre><b>stdout</b><br>' + stdout + "<br><br><b>stderr</b><br>" + stderr + "<br><br><span style='color:red'><b>error</b><br></span>" + error + "</pre>",// html body
+            attachments:[
+                {
+                    filename: "unit-tests.log",
+                    path: "../../tests/unit-tests/test-results.log"
+                },
+                {
+                    filename: "log.log",
+                    path: "log.log"
+                }
+            ]
         };
+
+
 
         // send mail with defined transport object
         transporter.sendMail(mailOptions, function (error, info) {
