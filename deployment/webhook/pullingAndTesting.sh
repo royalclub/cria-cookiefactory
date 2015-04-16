@@ -79,7 +79,6 @@ cd "$TESTDIR/unit-tests"
 
 rm -fr test-results.log | tee -a "$DIR/log.log"
 
-
 # Run the unit test
 npm test
 
