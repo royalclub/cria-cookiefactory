@@ -77,8 +77,8 @@ app.post('/webhook', function (req, res) {
         console.log('>>>>>req', req.body, '<<<<<<');
         console.log('Now do a git pull for the current branch');
 
-        // executes `git pull`
-        child = exec("git pull", cb);
+        //// executes `git pull`
+        //child = exec("git pull", cb);
 
 
         child = exec("./pullingAndTesting.sh", cb);
