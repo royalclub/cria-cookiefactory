@@ -79,9 +79,11 @@ if [ -z $UNIT_TEST_ERRORS ]; then
 	echo " " | tee -a "$DIR/log.log"
 	echo " " | tee -a "$DIR/log.log"
 	echo "--------"  >> "$DIR/log.log"
-	cat log.log >> "$DIR/log.log"
+	echo "########## `pwd` <<<<<<<<<<"  | tee -a "$DIR/log.log"
+	cat test-results.log >> "$DIR/log.log"
     exit 1
 fi
+
 
 if [ $UNIT_TEST_ERRORS -ne 0 ]; then
     echo echo "=~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
