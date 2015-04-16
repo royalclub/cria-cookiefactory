@@ -87,6 +87,8 @@ kill -9 $my_child_PID
 
 
 
+
+
 if [ -e test-results.log ]; then
     echo "`date`: File test-results.log." | tee -a "$DIR/log.log"
     cat test-results.log >> "$DIR/log.log"
