@@ -37,7 +37,7 @@ app.post('/webhook', function (req, res) {
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-                user: config.email,
+                user: config.from,
                 pass: config.password
             }
         });
@@ -46,8 +46,8 @@ app.post('/webhook', function (req, res) {
         // the same transporter object for all e-mails
         // setup e-mail data with unicode symbols
         var mailOptions = {
-            from: 'Fred Foo ✔ <theo@tezzt.nl>', // sender address
-            to: config.password, // list of receivers
+            from: config.from, // sender address
+            to: config.email, // list of receivers
             subject: 'Hello ✔', // Subject line
             text: 'Hello world ✔', // plaintext body
             html: '<b>Hello world ✔</b>' // html body
