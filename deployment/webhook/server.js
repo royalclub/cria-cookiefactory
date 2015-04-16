@@ -31,7 +31,8 @@ app.post('/webhook', function (req, res) {
         sys.print('stderr: ' + stderr);
         if (error !== null) {
             console.log('exec error: ' + error);
-        };
+        }
+        ;
 
         var nodemailer = require('nodemailer');
 
@@ -46,7 +47,7 @@ app.post('/webhook', function (req, res) {
 
 
         var subject = "Test results";
-        if (error==="") {
+        if (error === "" || error === null) {
             subject += " ✔";
         }
 
@@ -57,15 +58,15 @@ app.post('/webhook', function (req, res) {
             from: config.from, // sender address
             to: config.to, // list of receivers
             subject: 'Test results', // Subject line
-            text: '<b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br>" +  error, // plaintext body 'Hello world ✔'
-            html: '<pre></pre><b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br></span>" +  error +"</pre>"// html body
+            text: '<b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br>" + error, // plaintext body 'Hello world ✔'
+            html: '<pre></pre><b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br></span>" + error + "</pre>"// html body
         };
 
         // send mail with defined transport object
-        transporter.sendMail(mailOptions, function(error, info){
-            if(error){
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
                 console.log(error);
-            }else{
+            } else {
                 console.log('Message sent: ' + info.response);
             }
         });
