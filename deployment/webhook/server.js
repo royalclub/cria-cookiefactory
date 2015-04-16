@@ -32,7 +32,7 @@ app.post('/webhook', function (req, res) {
         if (error !== null) {
             console.log('exec error: ' + error);
         }
-        ;
+
 
         var nodemailer = require('nodemailer');
 
