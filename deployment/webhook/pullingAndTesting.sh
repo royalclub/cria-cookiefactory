@@ -123,6 +123,10 @@ echo | tee -a "$DIR/log.log"
 
 git checkout $STAGE3 | tee -a "$DIR/log.log"
 
+git merge --no-edit $STAGE2 | tee -a "$DIR/log.log"
+git commit -am "Merging from $STAGE2 to $STAGE3: `date`" | tee -a "$DIR/log.log"
+
+
 # start up node
 cd "$TESTDIR/../server"
 export NODE_ENV=acceptance
