@@ -71,7 +71,6 @@ app.post('/webhook', function (req, res) {
             ]
         };
 
-
         // send mail with defined transport object
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
