@@ -65,8 +65,10 @@ echo "`date` -------------------------------------------------------------------
 
 git checkout $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
 
-cd "$TESTDIR/../server"
+# Set environment for stage
 export NODE_ENV=test
+
+cd "$TESTDIR/../server"
 node bin/www.js >/dev/null 2>&1 &
 export node_PID=$!
 sleep 4
@@ -121,9 +123,11 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
 
+# Set environment for stage
+export NODE_ENV=acceptance
+
 # start up node
 cd "$TESTDIR/../server"
-export NODE_ENV=acceptance
 node bin/www.js >/dev/null 2>&1 &
 export node_PID=$!
 sleep 4
