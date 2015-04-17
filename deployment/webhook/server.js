@@ -63,6 +63,10 @@ app.post('/webhook', function (req, res) {
                 {
                     filename: "static-analyzer-results.log",
                     path: "../../tests/static-analyzer/static-analyzer-results.log"
+                },
+                {
+                    filename: "end-to-end-results.log",
+                    path: "../../tests/e2e/end-to-end-results.log"
                 }
             ]
         };
