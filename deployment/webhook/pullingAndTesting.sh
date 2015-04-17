@@ -136,7 +136,7 @@ echo "`date` node started with process id = $node_PID" | tee -a $CUR_SCRIPT
 # start up selenium-stand-alone
 selenium-standalone start --version=2.43.1 >/dev/null 2>&1 &
 echo "`date` Sleep a while to perform all tests." | tee -a $CUR_SCRIPT
-sleep 120
+
 export selenium_PID=$!
 
 # run e2e tests
@@ -144,6 +144,7 @@ cd "$TESTDIR/e2e"
 echo "`date` Current directory = `pwd`. It should be e2e" | tee -a $CUR_SCRIPT
 protractor conf.js > end-to-end-results.log
 
+sleep 120
 kill -9 $node_PID
 kill -9 $selenium_PID
 
