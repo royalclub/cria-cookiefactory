@@ -69,9 +69,9 @@ echo "`date` #########################################" | tee -a "$DIR/log.log"
 cd "$TESTDIR/../server"
 export NODE_ENV=test
 node bin/www.js >/dev/null 2>&1 &
-export my_child_PID=$!
+export node_PID=$!
 sleep 4
-echo "`date` node started with process id = $my_child_PID" | tee -a log.log
+echo "`date` node started with process id = $node_PID" | tee -a log.log
 
 git checkout $STAGE2 | tee -a "$DIR/log.log"
 
@@ -84,19 +84,19 @@ rm -fr unit-tests-results.log
 mocha > unit-tests-results.log
 
 # kill nodemon
-kill -9 $my_child_PID
+kill -9 $node_PID
 
 # count fail occurences
-export UNIT_TEST_ERRORS=`grep -ci 'fail' unit-tests-results.log`
+export TEST_FAILURUES=`grep -ci 'fail' unit-tests-results.log`
 
-if [ -z "$UNIT_TEST_ERRORS" ]; then
+if [ -z "$TEST_FAILURUES" ]; then
     echo "`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
-	echo "`date`   Could not execute the tests. Variable UNIT_TEST_ERRORS=$UNIT_TEST_ERRORS" | tee -a "$DIR/log.log"
+	echo "`date`   Could not execute the tests. Variable TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/log.log"
 	git checkout $STAGE0 | tee -a "$DIR/log.log"
     exit 1
 fi
 
-if [ $UNIT_TEST_ERRORS -ne 0 ]; then
+if [ $TEST_FAILURUES -ne 0 ]; then
     echo"`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
 	echo "`date`   Did not pass the unit-tests" | tee -a "$DIR/log.log"
 	git checkout $STAGE0 | tee -a "$DIR/log.log"
@@ -110,10 +110,58 @@ if [ -f ./test/static-analyzer/error_log.txt ]; then
 	exit 1
 fi
 
-git merge --no-edit $STAGE0 | tee -a "$DIR/log.log"
-git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a "$DIR/log.log"
+git merge --no-edit $STAGE1 | tee -a "$DIR/log.log"
+git commit -am "Merging from $STAGE2 to $STAGE2: `date`" | tee -a "$DIR/log.log"
 
 git push origin $STAGE2 | tee -a "$DIR/log.log"
+
+echo | tee -a "$DIR/log.log"
+echo "`date` #########################################" | tee -a "$DIR/log.log"
+echo "`date` # STAGE3, end to end" | tee -a "$DIR/log.log"
+echo "`date` #########################################" | tee -a "$DIR/log.log"
+echo | tee -a "$DIR/log.log"
+
+git checkout $STAGE3 | tee -a "$DIR/log.log"
+
+# start up node
+cd "$TESTDIR/../server"
+export NODE_ENV=acceptance
+node bin/www.js >/dev/null 2>&1 &
+export node_PID=$!
+sleep 4
+echo "`date` node started with process id = $node_PID" | tee -a log.log
+
+# start up selenium-stand-alone
+selenium-standalone start --version=2.43.1
+sleep 4
+export selecnium_PID=$!
+
+# run e2e tests
+cd "$TESTDIR/e2e"
+protractor conf.js > end-to-end-results.log
+
+# count fail occurences
+export TEST_FAILURUES=`grep -ci 'fail' end-to-end-results.log`
+
+if [ -z "$TEST_FAILURUES" ]; then
+    echo "`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
+	echo "`date`   Could not execute the tests. Variable TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/log.log"
+	git checkout $STAGE0 | tee -a "$DIR/log.log"
+    exit 1
+fi
+
+if [ $TEST_FAILURUES -ne 0 ]; then
+    echo"`date` =~=~=~=~= ERRORS ERRORS ERRORS =~=~=~=~=" | tee -a "$DIR/log.log"
+	echo "`date`   Did not pass the end-to-end tests." | tee -a "$DIR/log.log"
+	git checkout $STAGE0 | tee -a "$DIR/log.log"
+	exit 1
+fi
+
+
+git merge --no-edit $STAGE1 | tee -a "$DIR/log.log"
+git commit -am "Merging from $STAGE2 to $STAGE3: `date`" | tee -a "$DIR/log.log"
+
+git push origin $STAGE3 | tee -a "$DIR/log.log"
 
 
 
