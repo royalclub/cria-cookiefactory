@@ -135,7 +135,7 @@ echo "`date` node started with process id = $node_PID" | tee -a $CUR_SCRIPT
 
 # start up selenium-stand-alone
 selenium-standalone start --version=2.43.1 >/dev/null 2>&1 &
-sleep 4
+sleep 60
 export selenium_PID=$!
 
 # run e2e tests
