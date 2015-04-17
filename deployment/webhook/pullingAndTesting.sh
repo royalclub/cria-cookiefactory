@@ -164,8 +164,6 @@ git merge --no-edit $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
 git commit -am "Merging from $STAGE2 to $STAGE3: `date`" | tee -a "$DIR/$CUR_SCRIPT"
 git push origin $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
 
-
-
 echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` - All stages successfull tested." | tee -a "$DIR/$CUR_SCRIPT"
@@ -174,4 +172,5 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 
 echo "`date` Checking out $STAGE0" | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
+
 
