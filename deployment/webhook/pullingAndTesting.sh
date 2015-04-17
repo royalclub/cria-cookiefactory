@@ -78,7 +78,7 @@ echo "`date` node started with process id = $node_PID" | tee -a $CUR_SCRIPT
 # Change directory to unit-tests
 cd "$TESTDIR/unit-tests"
 
-rm -fr unit-tests-results.log
+rm -f unit-tests-results.log
 
 # Run the unit test
 mocha > unit-tests-results.log
