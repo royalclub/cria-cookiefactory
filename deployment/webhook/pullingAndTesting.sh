@@ -83,7 +83,7 @@ rm -fr unit-tests-results.log
 # Run the unit test
 mocha > unit-tests-results.log
 
-# kill nodemon
+# kill node
 kill -9 $node_PID
 
 # count fail occurences
