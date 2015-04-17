@@ -138,6 +138,7 @@ export selenium_PID=$!
 
 # run e2e tests
 cd "$TESTDIR/e2e"
+echo "`date` Current directory = `pwd`. It should be e2e" | tee -a log.log
 protractor conf.js > end-to-end-results.log
 
 kill -9 $node_PID
