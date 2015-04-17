@@ -42,7 +42,7 @@ function BookDetailCtrl($scope, $routeParams, $location, booksService) {
 
         if ($scope.books.doc && $scope.books.doc._id !== undefined) {
             console.log('Entering update');
-            booksService.books.update({_id: $scope.books.doc._id}, $scope.books.doc, function (res) {
+            booksService.books.update({_id: $scope.books.doc._id}, $scope.books, function (res) {
                 console.log(res);
             });
         } else {
