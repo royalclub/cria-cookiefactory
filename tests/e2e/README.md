@@ -56,7 +56,6 @@ phantomjs --webdriver=4445 --webdriver-selenium-grid-hub=http://127.0.0.1:4444
 (Port numbers are default.)
 
 
-
 *Note: You cannot use `should` with `protractor`. See https://github.com/angular/protractor/issues/633*
 
 ---
