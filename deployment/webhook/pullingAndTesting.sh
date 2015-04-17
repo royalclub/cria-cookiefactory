@@ -84,7 +84,7 @@ rm -fr unit-tests-results.log
 mocha > unit-tests-results.log
 
 # kill node
-kill -9 $node_PID
+#kill -9 $node_PID
 
 # count fail occurences
 export TEST_FAILURUES=`grep -ci 'fail' unit-tests-results.log`
