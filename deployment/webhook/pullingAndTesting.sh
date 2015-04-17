@@ -173,3 +173,4 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` Checking out $STAGE0" | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 
+
