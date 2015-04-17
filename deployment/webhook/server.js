@@ -57,8 +57,8 @@ app.post('/webhook', function (req, res) {
                     path: "../../tests/unit-tests/test-results.log"
                 },
                 {
-                    filename: "log.log",
-                    path: "log.log"
+                    filename: "pullingAndTesting.sh.log",
+                    path: "pullingAndTesting.sh.log"
                 },
                 {
                     filename: "static-analyzer-results.log",
