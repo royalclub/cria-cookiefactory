@@ -134,7 +134,7 @@ sleep 4
 echo "`date` node started with process id = $node_PID" | tee -a log.log
 
 # start up selenium-stand-alone
-selenium-standalone start --version=2.43.1
+selenium-standalone start --version=2.43.1 >/dev/null 2>&1 &
 sleep 4
 export selenium_PID=$!
 
