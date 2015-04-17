@@ -154,7 +154,8 @@ fi
 
 if [ $TEST_FAILURUES -ne 0 ]; then
     echo"`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date`   Did not pass the end-to-end tests." | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date`   >>>>> Did not pass the end-to-end tests." | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date`   >>>>> Fix the errors in the end-to-end-results.log" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
 fi
