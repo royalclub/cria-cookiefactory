@@ -35,6 +35,8 @@ echo "`date` -------------------------------------------------------------------
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
+git fetch --all
+git reset --hard
 git pull | tee -a "$DIR/$CUR_SCRIPT"
 
 echo | tee -a "$DIR/$CUR_SCRIPT"
@@ -64,6 +66,9 @@ echo "`date` - STAGE2, unit-tests" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
+git fetch --all
+git reset --hard
+git pull
 
 # Set environment for stage
 export NODE_ENV=test
@@ -121,6 +126,9 @@ echo "`date` - STAGE3, end to end" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
+git fetch --all
+git reset --hard
+git pull
 git checkout $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
 
 # Set environment for stage
