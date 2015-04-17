@@ -57,16 +57,16 @@ app.post('/webhook', function (req, res) {
                     path: "../../tests/unit-tests/test-results.log"
                 },
                 {
-                    filename: "log.log",
-                    path: "log.log"
-                },
-                {
                     filename: "static-analyzer-results.log",
                     path: "../../tests/static-analyzer/static-analyzer-results.log"
                 },
                 {
                     filename: "end-to-end-results.log",
                     path: "../../tests/e2e/end-to-end-results.log"
+                },
+                {
+                    filename: "pullingAndTesting.sh.log",
+                    path: "pullingAndTesting.sh.log"
                 }
             ]
         };
