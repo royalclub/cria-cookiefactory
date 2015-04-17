@@ -132,9 +132,11 @@ describe('CRUD on book', function () {
         browser.get('http://' + localConfig.host + ':' + config.port);
 
         // Find the book
-        element(by.model('query')).sendKeys('All');
+        element(by.model('query')).sendKeys('Anthony Doerr');
 
-        expect(element.all(by.repeater('book in books')).first().getText()).toBe('ALL THE LIGHT WE CANNOT SEE, Anthony Doerr');
+        expect(element.all(by.repeater('book in books'))
+            .first().getText())
+            .toBe('ALL THE LIGHT WE CANNOT SEE, Anthony Doerr');
 
 
         // Click on list item (note the nested selector)
@@ -154,7 +156,7 @@ describe('CRUD on book', function () {
                 element(by.model('books.doc.author')).sendKeys('Ruan Mashander');
 
                 element(by.model('books.doc.description')).clear();
-                element(by.model('books.doc.description')).sendKeys('Lorem ipsum dolor sit amet, consectetuer adipiscing elit.');
+                element(by.model('books.doc.description')).sendKeys('Falling asleep was easy. Staying asleep was easy. Waking up was harder.');
 
                 // Save new values
                 element(by.id('saveBtn')).click();
@@ -165,7 +167,9 @@ describe('CRUD on book', function () {
                 // Find the book
                 element(by.model('query')).sendKeys(_id);
 
-                expect(element.all(by.repeater('book in books')).first().getText()).toBe('The Dreamer of the Snake, Ruan Mashander');
+                expect(element.all(by.repeater('book in books'))
+                    .first().getText())
+                    .toBe('The Dreamer of the Snake, Ruan Mashander');
 
                 // browser.pause();
 
@@ -180,7 +184,9 @@ describe('CRUD on book', function () {
         // Find the book
         element(by.model('query')).sendKeys(_id);
 
-        expect(element.all(by.repeater('book in books')).first().getText()).toBe('The Dreamer of the Snake, Ruan Mashander');
+        expect(element.all(by.repeater('book in books'))
+            .first().getText())
+            .toBe('The Dreamer of the Snake, Ruan Mashander');
 
         // Click on list item (note the nested selector)
         element.all(by.repeater('book in books')).first().$('a').click();

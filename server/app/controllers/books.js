@@ -200,7 +200,7 @@ exports.detail = function (req, res) {
 exports.updateOne = function (req, res) {
 
     var conditions =
-            req.params._id,
+            {_id: req.params._id},
         update = {
             title: req.body.doc.title || '',
             author: req.body.doc.author || '',
@@ -276,6 +276,8 @@ exports.deleteOne = function (req, res) {
         };
         return res.send(retObj);
     };
+
+    console.log(">>>>> book to delete", conditions, "<<<<< TODO: REMOVE THIS LINE");
 
     Book
         .remove(conditions, callback);
