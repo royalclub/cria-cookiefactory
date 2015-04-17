@@ -43,9 +43,11 @@ exports.create = function (req, res) {
     doc.save(function (err) {
 
         var retObj = {
-            meta: {"action": "create",
+            meta: {
+                "action": "create",
                 'timestamp': new Date(),
-                filename: __filename},
+                filename: __filename
+            },
             doc: doc,
             err: err
         };
@@ -103,9 +105,11 @@ exports.list = function (req, res) {
         .exec(function (err, doc) {
 
             var retObj = {
-                meta: {"action": "list",
+                meta: {
+                    "action": "list",
                     'timestamp': new Date(),
-                    filename: __filename},
+                    filename: __filename
+                },
                 doc: doc, // array
                 err: err
             };
@@ -176,6 +180,7 @@ exports.detail = function (req, res) {
  * - Use the 'findOneAndUpdate' method from Mongoose.
  *   - Question: What are the differences between MongoDb and Mongoose?
  *   - Question: What are the differences between MongoDb 'save' and MongoDb 'update'?
+ *   - Question: What are the differences between MongoDb 'findAndModify' and Mongoose 'findOneAndUpdate'?
  * - Return all fields.
  * - Use the model "Book".
  * Question: What changes should be made to update more than one document?
@@ -196,11 +201,12 @@ exports.detail = function (req, res) {
  * @see http://docs.mongodb.org/manual/reference/method/db.collection.update/
  * @see http://docs.mongodb.org/manual/reference/method/db.collection.save/
  * @see http://mongoosejs.com/docs/api.html#model_Model.findOneAndUpdate
+ * @see http://docs.mongodb.org/manual/reference/command/findAndModify/
  */
 exports.updateOne = function (req, res) {
 
     var conditions =
-            {_id: req.params._id},
+        {_id: req.params._id},
         update = {
             title: req.body.doc.title || '',
             author: req.body.doc.author || '',
@@ -209,12 +215,17 @@ exports.updateOne = function (req, res) {
         options = {multi: false},
         callback = function (err, doc) {
             var retObj = {
-                meta: {"action": "update",
+                meta: {
+                    "action": "update",
                     'timestamp': new Date(),
-                    filename: __filename},
-                doc: doc,
+                    filename: __filename,
+                    'doc': doc,
+                    'update': update
+                },
+                doc: update,
                 err: err
             };
+
             return res.send(retObj);
         };
 
@@ -268,16 +279,16 @@ exports.deleteOne = function (req, res) {
     conditions = {_id: req.params._id};
     callback = function (err, doc) {
         retObj = {
-            meta: {"action": "delete",
+            meta: {
+                "action": "delete",
                 'timestamp': new Date(),
-                filename: __filename},
+                filename: __filename
+            },
             doc: doc,
             err: err
         };
         return res.send(retObj);
     };
-
-    console.log(">>>>> book to delete", conditions, "<<<<< TODO: REMOVE THIS LINE");
 
     Book
         .remove(conditions, callback);
