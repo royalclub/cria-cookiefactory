@@ -135,6 +135,7 @@ echo "`date` node started with process id = $node_PID" | tee -a $CUR_SCRIPT
 
 # start up selenium-stand-alone
 selenium-standalone start --version=2.43.1 >/dev/null 2>&1 &
+echo "`date` Sleep a while to perform all tests." | tee -a $CUR_SCRIPT
 sleep 60
 export selenium_PID=$!
 
