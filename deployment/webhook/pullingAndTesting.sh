@@ -65,8 +65,10 @@ echo "`date` -------------------------------------------------------------------
 
 git checkout $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
 
-cd "$TESTDIR/../server"
+# Set environment for stage
 export NODE_ENV=test
+
+cd "$TESTDIR/../server"
 node bin/www.js >/dev/null 2>&1 &
 export node_PID=$!
 sleep 4
@@ -81,22 +83,23 @@ rm -fr unit-tests-results.log
 # Run the unit test
 mocha > unit-tests-results.log
 
-# kill nodemon
-kill -9 $node_PID
+# kill node
+#kill -9 $node_PID
 
 # count fail occurences
 export TEST_FAILURUES=`grep -ci 'fail' unit-tests-results.log`
 
 if [ -z "$TEST_FAILURUES" ]; then
     echo "`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date` >>>>>  Could not execute the tests. Variable TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date` >>>>>  Could not execute the tests. Variable is not set TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
     exit 1
 fi
 
 if [ $TEST_FAILURUES -ne 0 ]; then
     echo"`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date`   Did not pass the unit-tests" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date`>>>>> Did not pass the unit-tests with $TEST_FAILURUES errors" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date`>>>>> Fix the erros in unit-tests-results.log" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
 fi
@@ -120,9 +123,11 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
 
+# Set environment for stage
+export NODE_ENV=acceptance
+
 # start up node
 cd "$TESTDIR/../server"
-export NODE_ENV=acceptance
 node bin/www.js >/dev/null 2>&1 &
 export node_PID=$!
 sleep 4
