@@ -89,14 +89,15 @@ export TEST_FAILURUES=`grep -ci 'fail' unit-tests-results.log`
 
 if [ -z "$TEST_FAILURUES" ]; then
     echo "`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date` >>>>>  Could not execute the tests. Variable TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date` >>>>>  Could not execute the tests. Variable is not set TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
     exit 1
 fi
 
 if [ $TEST_FAILURUES -ne 0 ]; then
     echo"`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date`   Did not pass the unit-tests" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date`>>>>> Did not pass the unit-tests" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date`>>>>> Fix the erros in unit-tests-results.log" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
 fi
