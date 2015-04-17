@@ -9,7 +9,7 @@ export STAGE4=production
 export TESTDIR="`pwd`/../../tests"
 export JSLINT=$TESTDIR/static-analyzer/node_modules/jslint
 export DIR=`pwd`
-export CUR_SCRIPT=`basename $0`
+export CUR_SCRIPT="`basename $0`.log"
 
 echo "`date` ********************************* New log" > "$PWD/$CUR_SCRIPT"
 export PARENT_COMMAND=$(ps $PPID | tail -n 1 | awk "{print \$5}")
@@ -168,3 +168,4 @@ git push origin $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
 # Reset
 echo "`date` Checking out $STAGE0" | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
+
