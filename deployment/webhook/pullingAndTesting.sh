@@ -134,11 +134,15 @@ echo "`date` node started with process id = $node_PID" | tee -a log.log
 # start up selenium-stand-alone
 selenium-standalone start --version=2.43.1
 sleep 4
-export selecnium_PID=$!
+export selenium_PID=$!
 
 # run e2e tests
 cd "$TESTDIR/e2e"
 protractor conf.js > end-to-end-results.log
+
+kill -9 $node_PID
+kill -9 $selenium_PID
+
 
 # count fail occurences
 export TEST_FAILURUES=`grep -ci 'fail' end-to-end-results.log`
@@ -162,7 +166,6 @@ git merge --no-edit $STAGE1 | tee -a "$DIR/log.log"
 git commit -am "Merging from $STAGE2 to $STAGE3: `date`" | tee -a "$DIR/log.log"
 
 git push origin $STAGE3 | tee -a "$DIR/log.log"
-
 
 
 
