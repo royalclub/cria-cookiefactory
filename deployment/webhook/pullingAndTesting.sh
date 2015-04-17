@@ -166,9 +166,8 @@ if [ $TEST_FAILURUES -ne 0 ]; then
 fi
 
 
-git merge --no-edit $STAGE1 | tee -a "$DIR/log.log"
-git commit -am "Merging from $STAGE2 to $STAGE3: `date`" | tee -a "$DIR/log.log"
 
+git commit -am "Merging from $STAGE2 to $STAGE3: `date`" | tee -a "$DIR/log.log"
 git push origin $STAGE3 | tee -a "$DIR/log.log"
 
 
