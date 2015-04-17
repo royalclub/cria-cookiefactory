@@ -66,6 +66,7 @@ echo "`date` - STAGE2, unit-tests" | tee -a "$DIR/log.log"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/log.log"
 
 git checkout $STAGE2 | tee -a "$DIR/log.log"
+git merge --no-edit $STAGE1 | tee -a "$DIR/log.log"
 
 cd "$TESTDIR/../server"
 export NODE_ENV=test
@@ -110,9 +111,7 @@ if [ -f ./test/static-analyzer/error_log.txt ]; then
 	exit 1
 fi
 
-git merge --no-edit $STAGE1 | tee -a "$DIR/log.log"
 git commit -am "Merging from $STAGE2 to $STAGE2: `date`" | tee -a "$DIR/log.log"
-
 git push origin $STAGE2 | tee -a "$DIR/log.log"
 
 echo | tee -a "$DIR/log.log"
