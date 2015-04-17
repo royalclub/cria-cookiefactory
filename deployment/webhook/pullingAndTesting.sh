@@ -141,10 +141,10 @@ echo "`date` - STAGE3, end to end" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
+git checkout $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
 git fetch --all
 git reset --hard
 git pull
-git checkout $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
 
 # Set environment for stage
 export NODE_ENV=acceptance
@@ -212,6 +212,37 @@ echo "`date` -------------------------------------------------------------------
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
 =======
+
+echo | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` - STAGE4, production" | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
+echo | tee -a "$DIR/$CUR_SCRIPT"
+
+git checkout $STAGE4 | tee -a "$DIR/$CUR_SCRIPT"
+git fetch --all
+git reset --hard
+git pull
+
+git merge --no-edit $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
+git commit -am "Merging from $STAGE3 to $STAGE4: `date`" | tee -a "$DIR/$CUR_SCRIPT"
+git push origin $STAGE4 | tee -a "$DIR/$CUR_SCRIPT"
+
+echo | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` - master" | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
+echo | tee -a "$DIR/$CUR_SCRIPT"
+
+git checkout master | tee -a "$DIR/$CUR_SCRIPT"
+git fetch --all
+git reset --hard
+git pull
+
+git merge --no-edit $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
+git commit -am "Merging from $STAGE4 to master: `date`" | tee -a "$DIR/$CUR_SCRIPT"
+git push origin master | tee -a "$DIR/$CUR_SCRIPT"
+
 
 echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
