@@ -35,8 +35,11 @@ echo "`date` -------------------------------------------------------------------
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
+<<<<<<< HEAD
 git fetch --all
 git reset --hard
+=======
+>>>>>>> d8ec5e1a2a884f68c593d44d47ff89da97346c20
 git pull | tee -a "$DIR/$CUR_SCRIPT"
 
 echo | tee -a "$DIR/$CUR_SCRIPT"
@@ -66,9 +69,12 @@ echo "`date` - STAGE2, unit-tests" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
+<<<<<<< HEAD
 git fetch --all
 git reset --hard
 git pull
+=======
+>>>>>>> d8ec5e1a2a884f68c593d44d47ff89da97346c20
 
 # Set environment for stage
 export NODE_ENV=test
@@ -96,15 +102,23 @@ export TEST_FAILURUES=`grep -ci 'fail' unit-tests-results.log`
 
 if [ -z "$TEST_FAILURUES" ]; then
     echo "`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
+<<<<<<< HEAD
 	echo "`date` >>>>>  Could not execute the tests. Variable is not set TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/$CUR_SCRIPT"
+=======
+	echo "`date` >>>>>  Could not execute the tests. Variable TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/$CUR_SCRIPT"
+>>>>>>> d8ec5e1a2a884f68c593d44d47ff89da97346c20
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
     exit 1
 fi
 
 if [ $TEST_FAILURUES -ne 0 ]; then
     echo"`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
+<<<<<<< HEAD
 	echo "`date`>>>>> Did not pass the unit-tests with $TEST_FAILURUES errors" | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date`>>>>> Fix the erros in unit-tests-results.log" | tee -a "$DIR/$CUR_SCRIPT"
+=======
+	echo "`date`   Did not pass the unit-tests" | tee -a "$DIR/$CUR_SCRIPT"
+>>>>>>> d8ec5e1a2a884f68c593d44d47ff89da97346c20
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
 fi
@@ -119,6 +133,7 @@ fi
 git merge --no-edit $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
 git commit -am "Merging from $STAGE2 to $STAGE2: `date`" | tee -a "$DIR/$CUR_SCRIPT"
 git push origin $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
+<<<<<<< HEAD
 
 echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
@@ -133,6 +148,16 @@ git checkout $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
 
 # Set environment for stage
 export NODE_ENV=acceptance
+=======
+
+echo | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` - STAGE3, end to end" | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
+echo | tee -a "$DIR/$CUR_SCRIPT"
+
+git checkout $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
+>>>>>>> d8ec5e1a2a884f68c593d44d47ff89da97346c20
 
 # start up node
 cd "$TESTDIR/../server"
@@ -178,6 +203,7 @@ fi
 git merge --no-edit $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
 git commit -am "Merging from $STAGE2 to $STAGE3: `date`" | tee -a "$DIR/$CUR_SCRIPT"
 git push origin $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
+<<<<<<< HEAD
 
 echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
@@ -185,6 +211,15 @@ echo "`date` - All stages successfull tested." | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
+=======
+
+echo | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` - All stages successfull tested." | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
+echo | tee -a "$DIR/$CUR_SCRIPT"
+
+>>>>>>> d8ec5e1a2a884f68c593d44d47ff89da97346c20
 echo "`date` Checking out $STAGE0" | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 
