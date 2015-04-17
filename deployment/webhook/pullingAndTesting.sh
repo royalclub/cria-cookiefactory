@@ -98,7 +98,7 @@ fi
 
 if [ $TEST_FAILURUES -ne 0 ]; then
     echo"`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date`>>>>> Did not pass the unit-tests" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date`>>>>> Did not pass the unit-tests with $TEST_FAILURUES errors" | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date`>>>>> Fix the erros in unit-tests-results.log" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
