@@ -24,11 +24,10 @@ describe('API Routing for CRUD operations on books', function () {
             request
                 .post('/books')
                 .send({
-
                     "title": "Great book!" + Date.now(),
                     "author": "John Doe",
-                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                })
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                )
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
@@ -46,7 +45,8 @@ describe('API Routing for CRUD operations on books', function () {
                     res.charset.should.be.exactly('utf-8');
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('author').be.exactly('John Doe');
+                        .and.have.property('author')
+                        .be.exactly('John Doe');
 
                     tmpBookId = JSON.parse(res.text).doc._id;
 
@@ -92,10 +92,12 @@ describe('API Routing for CRUD operations on books', function () {
                     }
                     JSON.parse(res.text)
                         .should.have.property('meta')
-                        .and.have.property('action').be.exactly('detail');
+                        .and.have.property('action')
+                        .be.exactly('detail');
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('author').be.exactly('John Doe');
+                        .and.have.property('author')
+                        .be.exactly('John Doe');
                     res.statusCode.should.be.exactly(200);
                     done();
                 });
@@ -120,14 +122,18 @@ describe('API Routing for CRUD operations on books', function () {
                     if (err) {
                         throw err;
                     }
-                    JSON.parse(res.text)
+
+                   JSON.parse(res.text)
                         .should.have.property('meta')
-                        .and.have.property('action').be.exactly('update');
+                        .and.have.property('action')
+                        .be.exactly('update');
                     JSON.parse(res.text)
-                        .should.have.property('err').be.exactly(null);
+                        .should.have.property('err')
+                        .be.exactly(null);
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('author').be.exactly('Ghostwriter');
+                        .and.have.property('author')
+                        .be.exactly('Ghostwriter');
                     res.statusCode.should.be.exactly(200);
                     done();
                 });
