@@ -209,7 +209,7 @@ git fetch --all
 git reset --hard
 git pull
 
-git merge --no-edit $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
+git merge --no-edit $STAGE4 | tee -a "$DIR/$CUR_SCRIPT"
 git commit -am "Merging from $STAGE4 to master: `date`" | tee -a "$DIR/$CUR_SCRIPT"
 git push origin master | tee -a "$DIR/$CUR_SCRIPT"
 
