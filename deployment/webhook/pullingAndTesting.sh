@@ -30,7 +30,7 @@ fi
 
 echo "`date` Resetting data sets." | tee -a "$DIR/$CUR_SCRIPT"
 cd "$TESTDIR/../../data"
-./restorDatabases.sh  | tee -a "$DIR/$CUR_SCRIPT"
+./restoreDatabases.sh  | tee -a "$DIR/$CUR_SCRIPT"
 cd -
 
 
