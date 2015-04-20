@@ -20,13 +20,20 @@ echo "`date` -------------------------------------------------------------------
 echo "`date` - Preflight checks" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo
-echo "`date` make sure jslint is installed" | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` Make sure jslint is installed" | tee -a "$DIR/$CUR_SCRIPT"
 if [[ ! -d $JSLINT ]]; then
 	#install jslint locally
 	echo "`date` Please install jslint first." | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date`   jslint is expected to be installed in $TESTDIR/static-analyzer/." | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
 fi
+
+echo "`date` Resetting data sets.| tee -a "$DIR/$CUR_SCRIPT"
+cd "$TESTDIR/../../data"
+./restorDatabases.sh  | tee -a "$DIR/$CUR_SCRIPT"
+cd -
+
+
 
 echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
