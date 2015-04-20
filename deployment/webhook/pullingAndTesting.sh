@@ -58,8 +58,8 @@ cd $TESTDIR/static-analyzer
 ./run_lint.sh > static-analyzer-results.log
 
 if [ -f $TESTDIR/static-analyzer/error_log.txt ]; then
-	echo "`date` !!!!! ERRORS: No commit for branch 'test' was performed. !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date` >>>>> Resolve the conflicts before continuing." | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date` >>>>> ERRORS: No commit for branch 'test' was performed." | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date` >>>>>   Resolve the conflicts before continuing." | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
 fi
@@ -102,23 +102,23 @@ mocha > unit-tests-results.log
 export TEST_FAILURUES=`grep -ci 'fail' unit-tests-results.log`
 
 if [ -z "$TEST_FAILURUES" ]; then
-    echo "`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date` >>>>>  Could not execute the tests. Variable is not set TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/$CUR_SCRIPT"
+    echo "`date` >>>>> ERRORS ERRORS ERRORS" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date` >>>>>   Could not execute the tests. Variable is not set TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
     exit 1
 fi
 
 if [ $TEST_FAILURUES -ne 0 ]; then
-    echo"`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date`>>>>> Did not pass the unit-tests with $TEST_FAILURUES errors" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date`>>>>> Fix the erros in unit-tests-results.log" | tee -a "$DIR/$CUR_SCRIPT"
+    echo "`date` >>>>> ERRORS ERRORS ERRORS" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date` >>>>>   Did not pass the unit-tests with $TEST_FAILURUES errors" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date` >>>>>   Fix the erros in unit-tests-results.log" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
 fi
 
 if [ -f ./test/static-analyzer/error_log.txt ]; then
-	echo "!!!!! ERRORS: No commit for branch 'test' was performed. !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "!!!!! >>>>> Resolve the conflicts before continuing.           !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
+	echo ">>>>> ERRORS: No commit for branch 'test' was performed." | tee -a "$DIR/$CUR_SCRIPT"
+	echo ">>>>>   Resolve the conflicts before continuing." | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
 fi
@@ -172,16 +172,16 @@ kill -9 $selenium_PID
 export TEST_FAILURUES=`grep -ci ', 0 failures' end-to-end-results.log`
 
 if [ -z "$TEST_FAILURUES" ]; then
-    echo "`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
+    echo "`date` >>>>> ERRORS ERRORS ERRORS" | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date`   Could not execute the tests. Variable TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
     exit 1
 fi
 
 if [ $TEST_FAILURUES -ne 1 ]; then
-    echo"`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date`   >>>>> Did not pass the end-to-end tests." | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date`   >>>>> Fix the errors in the end-to-end-results.log" | tee -a "$DIR/$CUR_SCRIPT"
+    echo "`date` >>>>> ERRORS ERRORS ERRORS" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date` >>>>>   Did not pass the end-to-end tests." | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date` >>>>>   Fix the errors in the end-to-end-results.log" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
 fi
