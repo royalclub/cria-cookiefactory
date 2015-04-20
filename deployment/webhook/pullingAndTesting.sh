@@ -162,7 +162,7 @@ kill -9 $selenium_PID
 
 
 # count fail occurences
-export TEST_FAILURUES=`grep -ci 'fail' end-to-end-results.log`
+export TEST_FAILURUES=`grep -ci ', 0 failures' end-to-end-results.log`
 
 if [ -z "$TEST_FAILURUES" ]; then
     echo "`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
@@ -171,7 +171,7 @@ if [ -z "$TEST_FAILURUES" ]; then
     exit 1
 fi
 
-if [ $TEST_FAILURUES -ne 0 ]; then
+if [ $TEST_FAILURUES -ne 1 ]; then
     echo"`date` !!!!! ERRORS ERRORS ERRORS !!!!!" | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date`   >>>>> Did not pass the end-to-end tests." | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date`   >>>>> Fix the errors in the end-to-end-results.log" | tee -a "$DIR/$CUR_SCRIPT"
