@@ -28,7 +28,7 @@ if [[ ! -d $JSLINT ]]; then
 	exit 1
 fi
 
-echo "`date` Resetting data sets.| tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` Resetting data sets." | tee -a "$DIR/$CUR_SCRIPT"
 cd "$TESTDIR/../../data"
 ./restorDatabases.sh  | tee -a "$DIR/$CUR_SCRIPT"
 cd -
