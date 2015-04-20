@@ -247,7 +247,6 @@ git merge --no-edit $STAGE4 | tee -a "$DIR/$CUR_SCRIPT"
 git commit -am "Merging from $STAGE4 to master: `date`" | tee -a "$DIR/$CUR_SCRIPT"
 git push origin master | tee -a "$DIR/$CUR_SCRIPT"
 
-
 echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` - All stages successfull tested." | tee -a "$DIR/$CUR_SCRIPT"
