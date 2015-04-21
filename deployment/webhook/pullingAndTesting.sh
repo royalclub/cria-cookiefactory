@@ -80,12 +80,18 @@ git pull
 # Set environment for stage
 export NODE_ENV=test
 
+# Check if node is already started
+export node_PID=`lsof|grep 3001|awk {'print $2'}|uniq`
+if [ "$node_PID" != "" ]; then
+    echo "`date` Killing node that was already started with $node_PID" | tee -a $CUR_SCRIPT
+    kill -9 $node_PID
+fi
+
 cd "$TESTDIR/../server"
 node bin/www.js >/dev/null 2>&1 &
 export node_PID=$!
-sleep 4
 echo "`date` node started with process id = $node_PID" | tee -a $CUR_SCRIPT
-
+sleep 4
 
 # Change directory to unit-tests
 cd "$TESTDIR/unit-tests"
