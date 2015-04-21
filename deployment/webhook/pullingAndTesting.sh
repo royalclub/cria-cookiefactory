@@ -26,7 +26,7 @@ if [ -f pid ]; then
     exit 1;
 else
     export OWN_PID=$$
-    echo "`date` Writing process id = $OWN_ID to pid file." | tee -a "$DIR/$CUR_SCRIPT"
+    echo "`date` Writing process id = $OWN_PID to pid file." | tee -a "$DIR/$CUR_SCRIPT"
     echo $OWN_PID > pid
 fi
 
