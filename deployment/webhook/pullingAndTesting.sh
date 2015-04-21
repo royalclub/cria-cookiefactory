@@ -176,12 +176,12 @@ protractor conf.js > end-to-end-results.log
 echo "`date` Finished the e2e tests." | tee -a $CUR_SCRIPT
 
 # kill node process
+echo "`date` Killing node id=$node_PID" | tee -a $CUR_SCRIPT
 kill -9 $node_PID
 
 # kill selenium process
 echo "`date` No need to kill Selenium. It keeps on running on id=$selenium_PID" | tee -a $CUR_SCRIPT
 #kill -9 $selenium_PID
-
 
 # count fail occurences
 export TEST_FAILURUES=`grep -ci ', 0 failures' end-to-end-results.log`
