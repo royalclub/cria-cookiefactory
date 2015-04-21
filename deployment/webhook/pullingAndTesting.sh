@@ -148,10 +148,19 @@ export node_PID=$!
 sleep 4
 echo "`date` node started with process id = $node_PID" | tee -a $CUR_SCRIPT
 
+# Check if selenium is already started
+export selenium_PID=`lsof|grep 4444|awk {'print $2'}|uniq`
+echo "`date` Selenium already running with id = $selenium_PID" | tee -a $CUR_SCRIPT
+if [ "$selenium_PID" != "" ]; then
+    echo "`date` KILL THE BASTARD $selenium_PID" | tee -a $CUR_SCRIPT
+fi
+
+
 # start up selenium-stand-alone
 selenium-standalone start --version=2.43.1 >/dev/null 2>&1 &
-
 export selenium_PID=$!
+
+
 
 echo "`date` Selenium started with process id=$selenium_PID" | tee -a $CUR_SCRIPT
 
@@ -174,7 +183,7 @@ export TEST_FAILURUES=`grep -ci ', 0 failures' end-to-end-results.log`
 
 if [ -z "$TEST_FAILURUES" ]; then
     echo "`date` >>>>> ERRORS ERRORS ERRORS" | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date`   Could not execute the tests. Variable TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date`   Could not execute the tests. Variable TEST_FAILURUES=$TEST_FAILURUES (is not set)" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
     exit 1
 fi
