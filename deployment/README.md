@@ -10,7 +10,6 @@ The following branches are used in this example:
 * master
   * This branch is used for production code.
 
-
 ##Usage
 **Do not use the `git` commands from your IDE.**
 
