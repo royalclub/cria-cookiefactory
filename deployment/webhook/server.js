@@ -42,7 +42,7 @@ app.post('/webhook', function (req, res) {
             subject += " ✘";
         }
 
-        if(error.match(/Other process is running/)) {
+        if(stdout.match(/Other process is running/)) {
             subject += " †";
         }
 
