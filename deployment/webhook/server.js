@@ -43,7 +43,7 @@ app.post('/webhook', function (req, res) {
         }
 
         if(error.match(/Other process is running/)) {
-            return;
+            subject += " †";
         }
 
         // NB! No need to recreate the transporter object. You can use
