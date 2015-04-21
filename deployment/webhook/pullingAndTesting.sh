@@ -20,6 +20,17 @@ echo "`date` -------------------------------------------------------------------
 echo "`date` - Preflight checks" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo
+echo "`date` Verify that no ther process is running by checking the pid file" | tee -a "$DIR/$CUR_SCRIPT"
+if [ -f pid ]; then
+    echo "`date` Other process is running. Aborting now. Wait till the current process is finished (or remove the pid file)." | tee -a "$DIR/$CUR_SCRIPT"
+    exit 1;
+else
+    export OWN_PID=$$
+    echo "`date` Writing process id = $OWN_ID to pid file." | tee -a "$DIR/$CUR_SCRIPT"
+    echo $OWN_ID > pid
+fi
+
+
 echo "`date` Make sure jslint is installed" | tee -a "$DIR/$CUR_SCRIPT"
 if [[ ! -d $JSLINT ]]; then
 	#install jslint locally
@@ -251,5 +262,5 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` Checking out $STAGE0" | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 
-
-sleep 60
+echo "`date` Removing pid file" | tee -a "$DIR/$CUR_SCRIPT"
+rm -f pid
