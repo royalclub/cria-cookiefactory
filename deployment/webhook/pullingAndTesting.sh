@@ -263,4 +263,4 @@ echo "`date` Checking out $STAGE0" | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 
 echo "`date` Removing pid file" | tee -a "$DIR/$CUR_SCRIPT"
-rm -f pid
+rm -f "$DIR/pid"

@@ -132,3 +132,5 @@ crashlytics-build.properties
 
 # Skip config.js because of passwords
 config.js
+
+pid
