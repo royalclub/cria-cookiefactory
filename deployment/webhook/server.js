@@ -38,13 +38,12 @@ app.post('/webhook', function (req, res) {
         var subject = "Test results";
         if (error === "" || error === null) {
             subject += " ✔";
+        } else if (stdout.match(/Other process is running/)) {
+            subject += " †";
         } else {
             subject += " ✘";
         }
 
-        if(stdout.match(/Other process is running/)) {
-            subject += " †";
-        }
 
         // NB! No need to recreate the transporter object. You can use
         // the same transporter object for all e-mails
@@ -55,7 +54,7 @@ app.post('/webhook', function (req, res) {
             subject: subject, // Subject line
             text: '<b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br>" + error, // plaintext body 'Hello world ✔'
             html: '<pre><b>stdout</b><br>' + stdout + "<br><br><b>stderr</b><br>" + stderr + "<br><br><span style='color:red'><b>error</b><br></span>" + error + "</pre>",// html body
-            attachments:[
+            attachments: [
                 {
                     filename: "unit-tests.log",
                     path: "../../tests/unit-tests/test-results.log"
