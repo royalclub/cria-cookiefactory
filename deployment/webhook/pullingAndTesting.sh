@@ -151,18 +151,13 @@ echo "`date` node started with process id = $node_PID" | tee -a $CUR_SCRIPT
 # Check if selenium is already started
 export selenium_PID=`lsof|grep 4444|awk {'print $2'}|uniq`
 echo "`date` Selenium already running with id = $selenium_PID" | tee -a $CUR_SCRIPT
-if [ "$selenium_PID" != "" ]; then
-    echo "`date` KILL THE BASTARD $selenium_PID" | tee -a $CUR_SCRIPT
+
+if [ "$selenium_PID" = "" ]; then
+    # start up selenium-stand-alone
+    selenium-standalone start --version=2.43.1 >/dev/null 2>&1 &
+    export selenium_PID=$!
+    echo "`date` Selenium started with process id=$selenium_PID" | tee -a $CUR_SCRIPT
 fi
-
-
-# start up selenium-stand-alone
-selenium-standalone start --version=2.43.1 >/dev/null 2>&1 &
-export selenium_PID=$!
-
-
-
-echo "`date` Selenium started with process id=$selenium_PID" | tee -a $CUR_SCRIPT
 
 # run e2e tests
 cd "$TESTDIR/e2e"
