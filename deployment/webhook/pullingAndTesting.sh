@@ -153,13 +153,14 @@ selenium-standalone start --version=2.43.1 >/dev/null 2>&1 &
 
 export selenium_PID=$!
 
+echo "`date` Selenium started with process id=$selenium_PID" | tee -a $CUR_SCRIPT
+
 # run e2e tests
 cd "$TESTDIR/e2e"
-echo "`date` Current directory = `pwd`. It should be e2e" | tee -a $CUR_SCRIPT
+echo "`date` Current directory = `pwd`. It should end with e2e." | tee -a $CUR_SCRIPT
+echo "`date` Running the e2e tests." | tee -a $CUR_SCRIPT
 protractor conf.js > end-to-end-results.log
-
-echo "`date` Sleep a while to perform all tests." | tee -a $CUR_SCRIPT
-sleep 4
+echo "`date` Finished the e2e tests." | tee -a $CUR_SCRIPT
 
 # kill node process
 kill -9 $node_PID
