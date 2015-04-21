@@ -96,7 +96,7 @@ rm -f unit-tests-results.log
 mocha > unit-tests-results.log
 
 # kill node
-#kill -9 $node_PID
+kill -9 $node_PID
 
 # count fail occurences
 export TEST_FAILURUES=`grep -ci 'fail' unit-tests-results.log`
@@ -146,7 +146,7 @@ export NODE_ENV=acceptance
 export node_PID=`lsof|grep 3002|awk {'print $2'}|uniq`
 if [ "$node_PID" != "" ]; then
     echo "`date` Killing node that was already started with $node_PID" | tee -a $CUR_SCRIPT
-    kill -9 $nodePID
+    kill -9 $node_PID
 fi
 
 # start up node
