@@ -20,6 +20,9 @@ if [ -f pid ]; then
     if [ $PROCESS_IS_RUNNING != 0 ]; then
         echo "`date` Other process is running. Aborting now. Wait till the current process is finished (or remove the pid file)."
         exit 1;
+    else
+        echo "`date` No process is running but pid file exist. Let's remove the pid file."
+        rm -f pid
     fi
 
 fi
