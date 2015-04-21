@@ -96,6 +96,7 @@ rm -f unit-tests-results.log
 mocha > unit-tests-results.log
 
 # kill node
+echo "`date` Killing node started with process id = $node_PID" | tee -a $CUR_SCRIPT
 kill -9 $node_PID
 
 # count fail occurences
