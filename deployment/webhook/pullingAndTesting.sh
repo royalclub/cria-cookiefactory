@@ -141,6 +141,14 @@ git pull
 # Set environment for stage
 export NODE_ENV=acceptance
 
+
+# Check if node is already started
+export node_PID=`lsof|grep 3002|awk {'print $2'}|uniq`
+if [ "$node_PID" != "" ]; then
+    echo "`date` Killing node that was already started with $node_PID" | tee -a $CUR_SCRIPT
+    kill -9 $nodePID
+fi
+
 # start up node
 cd "$TESTDIR/../server"
 node bin/www.js >/dev/null 2>&1 &
@@ -171,6 +179,7 @@ echo "`date` Finished the e2e tests." | tee -a $CUR_SCRIPT
 kill -9 $node_PID
 
 # kill selenium process
+echo "`date` No need to kill Selenium. It keeps on running on id=$selenium_PID" | tee -a $CUR_SCRIPT
 #kill -9 $selenium_PID
 
 
