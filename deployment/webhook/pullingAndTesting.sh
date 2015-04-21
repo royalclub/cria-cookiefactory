@@ -13,8 +13,15 @@ export CUR_SCRIPT="`basename $0`.log"
 
 echo "`date` Verify that no ther process is running by checking the pid file"
 if [ -f pid ]; then
-    echo "`date` Other process is running. Aborting now. Wait till the current process is finished (or remove the pid file)."
-    exit 1;
+    echo "`date` A pid file exists. Let's check if the process is still running."
+    export PID=`cat pid`
+    export PROCESS_IS_RUNNING=`ps -aef|grep $PID|grep -v grep|wc|awk {'print $1'}`
+
+    if [ $PROCESS_IS_RUNNING != 0 ]; then
+        echo "`date` Other process is running. Aborting now. Wait till the current process is finished (or remove the pid file)."
+        exit 1;
+    fi
+
 fi
 
 echo "`date` ******************************** New log" > "$PWD/$CUR_SCRIPT"
