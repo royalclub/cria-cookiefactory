@@ -38,7 +38,7 @@ app.post('/webhook', function (req, res) {
         var subject = "Test results";
         if (error === "" || error === null) {
             subject += " ✔";
-        } else if (stdout.match(/Other process is running/)) {
+        } else if (stdout.match(/Other process is running. Aborting now/i) !== null) {
             subject += " †";
         } else {
             subject += " ✘";

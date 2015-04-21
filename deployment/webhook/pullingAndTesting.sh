@@ -11,7 +11,7 @@ export JSLINT=$TESTDIR/static-analyzer/node_modules/jslint
 export DIR=`pwd`
 export CUR_SCRIPT="`basename $0`.log"
 
-echo "`date` Verify that no ther process is running by checking the pid file"
+echo "`date` Verify that no other process is running by checking the pid file"
 if [ -f pid ]; then
     echo "`date` A pid file exists. Let's check if the process is still running."
     export PID=`cat pid`
