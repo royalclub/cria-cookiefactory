@@ -102,6 +102,7 @@ git pull
 export NODE_ENV=test
 
 # Check if node is already started
+echo "`date` Check if Node.js is already started on port 3001 (TODO: Solve the magic number)" | tee -a $CUR_SCRIPT
 export node_PID=`lsof|grep 3001|awk {'print $2'}|uniq`
 if [ "$node_PID" != "" ]; then
     echo "`date` Killing node that was already started with $node_PID" | tee -a $CUR_SCRIPT
@@ -171,6 +172,8 @@ export NODE_ENV=acceptance
 
 
 # Check if node is already started
+
+echo "`date` Check if Node.js is already started on port 3002 (TODO: Solve the magic number)" | tee -a $CUR_SCRIPT
 export node_PID=`lsof|grep 3002|awk {'print $2'}|uniq`
 if [ "$node_PID" != "" ]; then
     echo "`date` Killing node that was already started with $node_PID" | tee -a $CUR_SCRIPT
