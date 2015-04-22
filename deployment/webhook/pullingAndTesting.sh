@@ -276,13 +276,14 @@ git reset --hard
 git pull
 
 cd "$DIR/server"
+echo "`date` Current directory `pwd`" | tee -a "$DIR/$CUR_SCRIPT"
 
 export NODE_ENV=production
 
-echo "`date` - Stop running Node.js." | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` Stop running Node.js." | tee -a "$DIR/$CUR_SCRIPT"
 forever stop bin/www.js
 
-echo "`date` - Start running Node.js." | tee -a "$DIR/$CUR_SCRIPT"
+echo "`date` Start running Node.js." | tee -a "$DIR/$CUR_SCRIPT"
 forever start bin/www.js
 
 echo "`date` Removing pid file" | tee -a "$DIR/$CUR_SCRIPT"
