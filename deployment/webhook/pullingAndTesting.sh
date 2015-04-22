@@ -275,7 +275,7 @@ git fetch --all
 git reset --hard
 git pull
 
-cd "$DIR/server"
+cd "$DIR/../../server"
 echo "`date` Current directory `pwd`" | tee -a "$DIR/$CUR_SCRIPT"
 
 export NODE_ENV=production
