@@ -6,7 +6,7 @@ module.exports = {
         user: "theo.theunissen0@gmail.com",
         to: "theo.theunissen@gmail.com",
         userName: "CRIA-testert",
-        password: "topSecret!"
+        password: "<topSecret!>"
     },
     development: {
         db: 'mongodb://localhost/books-dev',    // change books with your database
