@@ -271,17 +271,14 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 
 echo "`date` Checking out $STAGE0" | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
-git fetch --all
-git reset --hard
-git pull
 
 cd "$DIR/../../server"
 echo "`date` Current directory `pwd`" | tee -a "$DIR/$CUR_SCRIPT"
 
 export NODE_ENV=production
 
-echo "`date` Stop running Node.js." | tee -a "$DIR/$CUR_SCRIPT"
-forever stop bin/www.js
+echo "`date` Stop running Node.js (don't show errors if Node.js is not running)." | tee -a "$DIR/$CUR_SCRIPT"
+forever stop bin/www.js >/dev/null 2>&1
 
 echo "`date` Start running Node.js." | tee -a "$DIR/$CUR_SCRIPT"
 forever start bin/www.js
