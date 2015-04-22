@@ -271,6 +271,19 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 
 echo "`date` Checking out $STAGE0" | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
+git fetch --all
+git reset --hard
+git pull
+
+cd "$DIR/server"
+
+export NODE_ENV=production
+
+echo "`date` - Stop running Node.js." | tee -a "$DIR/$CUR_SCRIPT"
+forever stop bin/www.js
+
+echo "`date` - Start running Node.js." | tee -a "$DIR/$CUR_SCRIPT"
+forever start bin/www.js
 
 echo "`date` Removing pid file" | tee -a "$DIR/$CUR_SCRIPT"
 rm -f "$DIR/pid"
