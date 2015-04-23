@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# books-prd keeps its data
 for db in books-dev books-tst books-acc
 do
     echo "Dropping $db"
