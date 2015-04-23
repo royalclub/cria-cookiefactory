@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for db in books-dev books-tst books-acc books-prd
+for db in books-dev books-tst books-acc
 do
     echo "Dropping $db"
     mongo $db --eval "db.dropDatabase()"
