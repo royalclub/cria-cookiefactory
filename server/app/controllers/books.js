@@ -280,7 +280,7 @@ exports.deleteOne = function (req, res) {
     callback = function (err, doc) {
         retObj = {
             meta: {
-                "action": "delete"
+                "action": "delete",
                 'timestamp': new Date(),
                 filename: __filename
             },
