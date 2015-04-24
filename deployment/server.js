@@ -87,7 +87,7 @@ app.post('/webhook', function (req, res) {
 
     if (req.body.repository.url === config.repoUrl) {
         console.log('>>>>>req', req.body, '<<<<<<');
-        reqBody = req.body;
+        reqBody = JSON.stringify(req.body);
         console.log('Now do a git pull for the current branch');
         child = exec("./pullingAndTesting.sh -t 3001 -a 3002", cb);
 
