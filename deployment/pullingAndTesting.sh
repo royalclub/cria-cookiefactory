@@ -127,7 +127,7 @@ echo "`date` Check if Node.js is already started on port $TEST_PORT (TODO: Solve
 export node_PID=`lsof|grep $TEST_PORT|awk {'print $2'}|uniq`
 if [ "$node_PID" != "" ]; then
     echo "`date` Killing node that was already started with $node_PID" | tee -a $CUR_SCRIPT
-    kill -9 $node_PID
+    kill -9 $node_PID 2>&1 &
 fi
 
 cd "$TESTDIR/../server"
@@ -146,7 +146,7 @@ mocha > unit-tests-results.log
 
 # kill node
 echo "`date` Killing node started with process id = $node_PID" | tee -a $CUR_SCRIPT
-kill -9 $node_PID
+kill -9 $node_PID 2>&1 &
 
 # count fail occurences
 export TEST_FAILURUES=`grep -ci 'fail' unit-tests-results.log`
@@ -198,7 +198,7 @@ echo "`date` Check if Node.js is already started on port $ACCEPTANCE_PORT (TODO:
 export node_PID=`lsof|grep $ACCEPTANCE_PORT|awk {'print $2'}|uniq`
 if [ "$node_PID" != "" ]; then
     echo "`date` Killing node that was already started with $node_PID" | tee -a $CUR_SCRIPT
-    kill -9 $node_PID
+    kill -9 $node_PID  2>&1 &
 fi
 
 # start up node
@@ -229,7 +229,7 @@ echo "`date` Finished the e2e tests." | tee -a $CUR_SCRIPT
 
 # kill node process
 echo "`date` Killing node id=$node_PID" | tee -a $CUR_SCRIPT
-kill -9 $node_PID
+kill -9 $node_PID 2>&1 &
 
 # kill selenium process
 echo "`date` No need to kill Selenium. It keeps on running on id=$selenium_PID" | tee -a $CUR_SCRIPT
