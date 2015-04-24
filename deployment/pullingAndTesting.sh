@@ -6,10 +6,31 @@ export STAGE1=test-static-analyzer-passed
 export STAGE2=test-unit-tests-passed
 export STAGE3=acceptance
 export STAGE4=production
-export TESTDIR="`pwd`/../../tests"
+export TESTDIR="`pwd`/../tests"
 export JSLINT=$TESTDIR/static-analyzer/node_modules/jslint
 export DIR=`pwd`
 export CUR_SCRIPT="`basename $0`.log"
+TEST_PORT=3001
+ACCEPTANCE_PORT=3002
+
+while getopts ":a:t:" opt; do
+  case $opt in
+    t)
+      TEST_PORT=$OPTARG
+      ;;
+    a)
+      ACCEPTANCE_PORT=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
 
 echo "`date` Verify that no other process is running by checking the pid file"
 if [ -f pid ]; then
@@ -50,7 +71,7 @@ if [[ ! -d $JSLINT ]]; then
 fi
 
 echo "`date` Resetting data sets." | tee -a "$DIR/$CUR_SCRIPT"
-cd ../../data
+cd ../data
 ./restoreDatabases.sh  | tee -a "$DIR/$CUR_SCRIPT"
 cd -
 
@@ -102,8 +123,8 @@ git pull
 export NODE_ENV=test
 
 # Check if node is already started
-echo "`date` Check if Node.js is already started on port 3001 (TODO: Solve the magic number)" | tee -a $CUR_SCRIPT
-export node_PID=`lsof|grep 3001|awk {'print $2'}|uniq`
+echo "`date` Check if Node.js is already started on port $TEST_PORT (TODO: Solve the magic number)" | tee -a $CUR_SCRIPT
+export node_PID=`lsof|grep $TEST_PORT|awk {'print $2'}|uniq`
 if [ "$node_PID" != "" ]; then
     echo "`date` Killing node that was already started with $node_PID" | tee -a $CUR_SCRIPT
     kill -9 $node_PID
@@ -173,8 +194,8 @@ export NODE_ENV=acceptance
 
 # Check if node is already started
 
-echo "`date` Check if Node.js is already started on port 3002 (TODO: Solve the magic number)" | tee -a $CUR_SCRIPT
-export node_PID=`lsof|grep 3002|awk {'print $2'}|uniq`
+echo "`date` Check if Node.js is already started on port $ACCEPTANCE_PORT (TODO: Solve the magic number)" | tee -a $CUR_SCRIPT
+export node_PID=`lsof|grep $ACCEPTANCE_PORT|awk {'print $2'}|uniq`
 if [ "$node_PID" != "" ]; then
     echo "`date` Killing node that was already started with $node_PID" | tee -a $CUR_SCRIPT
     kill -9 $node_PID
@@ -275,7 +296,7 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` Checking out $STAGE0" | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 
-cd "$DIR/../../server"
+cd "$DIR/../server"
 echo "`date` Current directory `pwd`" | tee -a "$DIR/$CUR_SCRIPT"
 
 export NODE_ENV=production

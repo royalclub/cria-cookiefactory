@@ -9,7 +9,7 @@ var express = require('express'),
     exec = require('child_process').exec,
     app = express(),
     child,
-    config = require('../../server/config/config.js')['deployment'];
+    config = require('../server/config/config.js')['deployment'];
 
 // Configure body-parser
 app.use(bodyParser.json());
@@ -57,15 +57,15 @@ app.post('/webhook', function (req, res) {
             attachments: [
                 {
                     filename: "unit-tests.log",
-                    path: "../../tests/unit-tests/test-results.log"
+                    path: "../tests/unit-tests/test-results.log"
                 },
                 {
                     filename: "static-analyzer-results.log",
-                    path: "../../tests/static-analyzer/static-analyzer-results.log"
+                    path: "../tests/static-analyzer/static-analyzer-results.log"
                 },
                 {
                     filename: "end-to-end-results.log",
-                    path: "../../tests/e2e/end-to-end-results.log"
+                    path: "../tests/e2e/end-to-end-results.log"
                 },
                 {
                     filename: "pullingAndTesting.sh.log",
@@ -87,7 +87,7 @@ app.post('/webhook', function (req, res) {
     if (req.body.repository.url === config.repoUrl) {
         console.log('>>>>>req', req.body, '<<<<<<');
         console.log('Now do a git pull for the current branch');
-        child = exec("./pullingAndTesting.sh", cb);
+        child = exec("./pullingAndTesting.sh -t 3001 -a 3002", cb);
 
         console.log(child);
 
