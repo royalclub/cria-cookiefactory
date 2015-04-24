@@ -9,7 +9,10 @@ var express = require('express'),
     exec = require('child_process').exec,
     app = express(),
     child,
-    config = require('../server/config/config.js')['deployment'];
+    config = require('../server/config/config.js')['deployment'],
+    testConfig = require('../server/config/config.js')['deployment'],
+    acceptanceConfig = require('../server/config/config.js')['deployment']
+    ;
 
 // Configure body-parser
 app.use(bodyParser.json());
@@ -89,8 +92,7 @@ app.post('/webhook', function (req, res) {
         console.log('>>>>>req', req.body, '<<<<<<');
         reqBody = JSON.stringify(req.body);
         console.log('Now do a git pull for the current branch');
-        //child = exec("./pullingAndTesting.sh -t 3001 -a 3002", cb);
-        child = exec("pwd", cb);
+        child = exec("./pullingAndTesting.sh -t " + configTest.port + " -a " + acceptanceConfig.port, cb);
 
         console.log(child);
 
