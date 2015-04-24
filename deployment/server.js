@@ -54,7 +54,7 @@ app.post('/webhook', function (req, res) {
             to: config.to, // list of receivers
             subject: subject, // Subject line
             text: '<b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br>" + error, // plaintext body 'Hello world ✔'
-            html: '<pre><b>stdout</b><br>' + stdout + "<br><br><b>stderr</b><br>" + stderr + "<br><br><span style='color:red'><b>error</b><br></span>" + error + "<br><br><b>reqBody</b><br>" + reqBody + "</pre>",// html body
+            html: '<pre><b>stdout</b><br>' + stdout + "<br><br><b>stderr</b><br>" + stderr + "<br><br><span style='color:red'><b>error</b><br></span>" + error + "<br><br><b>server log: req.body</b><br>" + reqBody + "</pre>",// html body
             attachments: [
                 {
                     filename: "unit-tests.log",
@@ -89,7 +89,8 @@ app.post('/webhook', function (req, res) {
         console.log('>>>>>req', req.body, '<<<<<<');
         reqBody = JSON.stringify(req.body);
         console.log('Now do a git pull for the current branch');
-        child = exec("./pullingAndTesting.sh -t 3001 -a 3002", cb);
+        //child = exec("./pullingAndTesting.sh -t 3001 -a 3002", cb);
+        child = exec("pwd", cb);
 
         console.log(child);
 
