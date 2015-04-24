@@ -126,14 +126,14 @@ export NODE_ENV=test
 echo "`date` Check if Node.js is already started on port $TEST_PORT" | tee -a $CUR_SCRIPT
 export node_PID=`lsof|grep $TEST_PORT|awk {'print $2'}|uniq`
 if [ "$node_PID" != "" ]; then
-    echo "`date` Killing node that was already started with $node_PID" | tee -a $CUR_SCRIPT
+    echo "`date` Killing Node.js that was already started with $node_PID" | tee -a $CUR_SCRIPT
     kill -9 $node_PID 2>&1 &
 fi
 
 cd "$TESTDIR/../server"
 node bin/www.js >/dev/null 2>&1 &
 export node_PID=$!
-echo "`date` node started with process id = $node_PID" | tee -a $CUR_SCRIPT
+echo "`date` Node.js started with process id = $node_PID" | tee -a $CUR_SCRIPT
 sleep 4
 
 # Change directory to unit-tests
@@ -145,7 +145,7 @@ rm -f unit-tests-results.log
 mocha > unit-tests-results.log
 
 # kill node
-echo "`date` Killing node started with process id = $node_PID" | tee -a $CUR_SCRIPT
+echo "`date` Killing Node.js started with process id = $node_PID" | tee -a $CUR_SCRIPT
 kill -9 $node_PID 2>&1 &
 
 # count fail occurences
@@ -197,7 +197,7 @@ export NODE_ENV=acceptance
 echo "`date` Check if Node.js is already started on port $ACCEPTANCE_PORT" | tee -a $CUR_SCRIPT
 export node_PID=`lsof|grep $ACCEPTANCE_PORT|awk {'print $2'}|uniq`
 if [ "$node_PID" != "" ]; then
-    echo "`date` Killing node that was already started with $node_PID" | tee -a $CUR_SCRIPT
+    echo "`date` Killing Node.js that was already started with $node_PID" | tee -a $CUR_SCRIPT
     kill -9 $node_PID  2>&1 &
 fi
 
@@ -206,7 +206,7 @@ cd "$TESTDIR/../server"
 node bin/www.js >/dev/null 2>&1 &
 export node_PID=$!
 sleep 4
-echo "`date` node started with process id = $node_PID" | tee -a $CUR_SCRIPT
+echo "`date` Node.js started with process id = $node_PID" | tee -a $CUR_SCRIPT
 
 # Check if selenium is already started
 export selenium_PID=`lsof|grep 4444|awk {'print $2'}|uniq`
@@ -228,7 +228,7 @@ protractor conf.js > end-to-end-results.log
 echo "`date` Finished the e2e tests." | tee -a $CUR_SCRIPT
 
 # kill node process
-echo "`date` Killing node id=$node_PID" | tee -a $CUR_SCRIPT
+echo "`date` Killing Node.js id=$node_PID" | tee -a $CUR_SCRIPT
 kill -9 $node_PID 2>&1 &
 
 # kill selenium process
