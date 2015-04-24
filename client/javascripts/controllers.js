@@ -57,6 +57,6 @@ function BookDetailCtrl($scope, $routeParams, $location, booksService) {
 myApp.controller('myCtrl', function ($scope) {
     "use strict";
     // TODO: bind settings with whoami
-    $scope.whomai = "tada!";
+    $scope.whomai = "theotheu";
 });
 
