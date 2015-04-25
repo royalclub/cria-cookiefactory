@@ -10,9 +10,9 @@ var express = require('express'),
     exec = require('child_process').exec,
     app = express(),
     child,
-    config = require('../server/config/config.js')['deployment'],
-    testConfig = require('../server/config/config.js')['test'],
-    acceptanceConfig = require('../server/config/config.js')['acceptance']
+    config = require('../../server/config/config.js')['deployment'],
+    testConfig = require('../../server/config/config.js')['test'],
+    acceptanceConfig = require('../../server/config/config.js')['acceptance']
     ;
 
 // Configure body-parser
