@@ -232,7 +232,7 @@ echo "`date` Killing Node.js id=$node_PID" | tee -a $CUR_SCRIPT
 kill -9 $node_PID 2>&1 &
 
 # kill selenium process
-echo "`date` No need to kill Selenium. It keeps on running on id=$selenium_PID" | tee -a $CUR_SCRIPT
+echo "`date` No need to kill Selenium. It keeps on running with id=$selenium_PID" | tee -a $CUR_SCRIPT
 #kill -9 $selenium_PID
 
 # count fail occurences
