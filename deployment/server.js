@@ -60,7 +60,7 @@ app.post('/webhook', function (req, res) {
             html: '<pre><b>stdout</b><br>' + stdout + "<br><br><b>stderr</b><br>" + stderr + "<br><br><span style='color:red'><b>error</b><br></span>" + error + "<br><br><b>server log: req.body</b><br>" + reqBody + "</pre>",// html body
             attachments: [
                 {
-                    filename: "unit-tests.log",
+                    filename: "unit-tests-results.log",
                     path: "../tests/unit-tests/unit-tests-results.log"
                 },
                 {
