@@ -149,7 +149,8 @@ echo "`date` Killing Node.js started with process id = $node_PID" | tee -a $CUR_
 kill -9 $node_PID 2>&1 &
 
 # count fail occurences
-export TEST_FAILURUES=`grep -ci 'fail' unit-tests-results.log`
+#export TEST_FAILURUES=`grep -ci 'fail' unit-tests-results.log`
+export TEST_FAILURUES=`grep -ci '"failures": 0' unit-tests-results.log`
 
 if [ -z "$TEST_FAILURUES" ]; then
     echo "`date` >>>>> ERRORS ERRORS ERRORS" | tee -a "$DIR/$CUR_SCRIPT"
@@ -158,7 +159,7 @@ if [ -z "$TEST_FAILURUES" ]; then
     exit 1
 fi
 
-if [ $TEST_FAILURUES -ne 0 ]; then
+if [ $TEST_FAILURUES -ne 1 ]; then
     echo "`date` >>>>> ERRORS ERRORS ERRORS" | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date` >>>>>   Did not pass the unit-tests with $TEST_FAILURUES errors" | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date` >>>>>   Fix the erros in unit-tests-results.log" | tee -a "$DIR/$CUR_SCRIPT"
