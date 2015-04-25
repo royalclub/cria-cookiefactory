@@ -61,7 +61,7 @@ app.post('/webhook', function (req, res) {
             attachments: [
                 {
                     filename: "unit-tests.log",
-                    path: "../tests/unit-tests/test-results.log"
+                    path: "../tests/unit-tests/unit-tests-results.log"
                 },
                 {
                     filename: "static-analyzer-results.log",
