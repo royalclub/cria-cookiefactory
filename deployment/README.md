@@ -37,3 +37,4 @@ The `server.js` is configured fot github. It does work out of the box for github
 
 ![Github web configuration](https://raw.githubusercontent.com/theotheu/hook-test/master/assets/github-webhooks.png)
 
+
