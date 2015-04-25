@@ -5,6 +5,7 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
     bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
     sys = require('sys'),
     exec = require('child_process').exec,
     app = express(),
