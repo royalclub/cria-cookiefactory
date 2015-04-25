@@ -23,5 +23,9 @@ module.exports = {
         port: 3002,                             // change with your port number
         debug: true                             // set debug to true|false
     },
-    production: {}
+    production: {
+        db: 'mongodb://localhost/books-prd',    // change books with your database
+        port: 1337,                             // change with your port number
+        debug: false                            // set debug to true|false
+    }
 };
