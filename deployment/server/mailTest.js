@@ -9,7 +9,7 @@ var express = require('express'),
     exec = require('child_process').exec,
     app = express(),
     child,
-    config = require('../server/config/config.js')['deployment'];
+    config = require('../../server/config/config.js')['deployment'];
 
 
 var nodemailer = require('nodemailer');
