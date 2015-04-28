@@ -6,12 +6,14 @@ export STAGE1=test-static-analyzer-passed
 export STAGE2=test-unit-tests-passed
 export STAGE3=acceptance
 export STAGE4=production
-export TESTDIR="`pwd`/../../tests"
-export JSLINT=$TESTDIR/static-analyzer/node_modules/jslint
+export BASEDIR="`pwd`/../../"
+export JSLINT=$BASEDIR/tests/static-analyzer/node_modules/jslint
 export DIR=`pwd`
 export CUR_SCRIPT="`basename $0`.log"
-TEST_PORT=3001
-ACCEPTANCE_PORT=3002
+# Default port number for test
+export TEST_PORT=3001
+# Default port number for acceptance
+export ACCEPTANCE_PORT=3002
 
 while getopts ":a:t:" opt; do
   case $opt in
@@ -66,12 +68,12 @@ echo "`date` Make sure jslint is installed" | tee -a "$DIR/$CUR_SCRIPT"
 if [[ ! -d $JSLINT ]]; then
 	#install jslint locally
 	echo "`date` Please install jslint first." | tee -a "$DIR/$CUR_SCRIPT"
-	echo "`date`   jslint is expected to be installed in $TESTDIR/static-analyzer/." | tee -a "$DIR/$CUR_SCRIPT"
+	echo "`date`   jslint is expected to be installed in $BASEDIR/tests/static-analyzer/." | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
 fi
 
 echo "`date` Resetting data sets." | tee -a "$DIR/$CUR_SCRIPT"
-cd ../../data
+cd $BASEDIR/data
 ./restoreDatabases.sh  | tee -a "$DIR/$CUR_SCRIPT"
 cd -
 
@@ -96,10 +98,10 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
 
-cd $TESTDIR/static-analyzer
+cd $BASEDIR/tests/static-analyzer
 ./run_lint.sh > static-analyzer-results.log
 
-if [ -f $TESTDIR/static-analyzer/error_log.txt ]; then
+if [ -f $BASEDIR/tests/static-analyzer/error_log.txt ]; then
 	echo "`date` >>>>> ERRORS: No commit for branch 'test' was performed." | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date` >>>>>   Resolve the conflicts before continuing." | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
@@ -130,14 +132,14 @@ if [ "$node_PID" != "" ]; then
     kill -9 $node_PID 2>&1 &
 fi
 
-cd "$TESTDIR/../server"
+cd "$BASEDIR/server"
 node bin/www.js >/dev/null 2>&1 &
 export node_PID=$!
 echo "`date` Node.js started with process id = $node_PID" | tee -a $CUR_SCRIPT
 sleep 4
 
 # Change directory to unit-tests
-cd "$TESTDIR/unit-tests"
+cd "$BASEDIR/tests/unit-tests"
 
 rm -f unit-tests-results.log
 
@@ -203,7 +205,7 @@ if [ "$node_PID" != "" ]; then
 fi
 
 # start up node
-cd "$TESTDIR/../server"
+cd "$BASEDIR/server"
 node bin/www.js >/dev/null 2>&1 &
 export node_PID=$!
 sleep 4
@@ -222,7 +224,7 @@ else
 fi
 
 # run e2e tests
-cd "$TESTDIR/e2e"
+cd "$BASEDIR/tests/e2e"
 echo "`date` Current directory = `pwd`. It should end with e2e." | tee -a $CUR_SCRIPT
 echo "`date` Running the e2e tests." | tee -a $CUR_SCRIPT
 protractor conf.js > end-to-end-results.log
@@ -297,7 +299,7 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` Checking out $STAGE0" | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 
-cd "$DIR/../server"
+cd "$BASEDIR/server"
 echo "`date` Current directory `pwd`" | tee -a "$DIR/$CUR_SCRIPT"
 
 export NODE_ENV=production
