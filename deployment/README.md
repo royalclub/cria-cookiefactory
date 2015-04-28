@@ -24,7 +24,8 @@ The following branches are used in this example:
 * master
   * This branch is used for production code.
 
-## Usage
+# Installation and configuration
+## config.js
 Configure `config.js` to met your settings
 
 Remember that port numbers must be unique. Use the designated port numbers for your project.
@@ -32,11 +33,9 @@ Remember that port numbers must be unique. Use the designated port numbers for y
 Start the deployment server with `forever start server.js`
 
 ## Configure github or bitbucket
-The `server.js` is configured fot github. It does work out of the box for github. It does _not_ work for bitbucket. Although the same principle, bitbucket sends a JSON-like string that is not a JSON. You have to figure that out (should be easy).
-
+The `server.js` is configured fot github. It does work out of the box for github. It does _not_ work for bitbucket out of the box. Although the same principle, bitbucket sends a JSON-like string that is not a JSON. You have to figure that out (should be easy).
 
 ![Github web configuration](https://raw.githubusercontent.com/theotheu/hook-test/master/assets/github-webhooks.png)
-
 
 
 
