@@ -62,15 +62,15 @@ app.post('/webhook', function (req, res) {
             attachments: [
                 {
                     filename: "unit-tests-results.log",
-                    path: "../tests/unit-tests/unit-tests-results.log"
+                    path: "../../tests/unit-tests/unit-tests-results.log"
                 },
                 {
                     filename: "static-analyzer-results.log",
-                    path: "../tests/static-analyzer/static-analyzer-results.log"
+                    path: "../../tests/static-analyzer/static-analyzer-results.log"
                 },
                 {
                     filename: "end-to-end-results.log",
-                    path: "../tests/e2e/end-to-end-results.log"
+                    path: "../../tests/e2e/end-to-end-results.log"
                 },
                 {
                     filename: "pullingAndTesting.sh.log",
