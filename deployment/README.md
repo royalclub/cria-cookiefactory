@@ -46,5 +46,3 @@ The `server.js` is configured fot github. It does work out of the box for github
 
 
 
-
-
