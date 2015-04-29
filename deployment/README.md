@@ -25,6 +25,14 @@ The following branches are used in this example:
   * This branch is used for production code.
 
 # Installation and configuration
+## Install dependencies
+See the directories in `/server`, `/tests/static-analyzer` and `/tests/unit-testsz.
+
+Configure the database names in `/data/restoreDatabases.sh`. Rename `books-dev`, `books-tst`, `books-acc` to meet your database names.
+
+
+
+
 ## config.js
 Configure `config.js` to meet your settings.
 
