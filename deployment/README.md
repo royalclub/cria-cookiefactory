@@ -31,8 +31,6 @@ See the directories in `/server`, `/tests/static-analyzer` and `/tests/unit-test
 Configure the database names in `/data/restoreDatabases.sh`. Rename `books-dev`, `books-tst`, `books-acc` to meet your database names.
 
 
-
-
 ## config.js
 Configure `config.js` to meet your settings.
 
@@ -44,6 +42,7 @@ Start the deployment server with `forever start server.js`
 The `server.js` is configured fot github. It does work out of the box for github. It does _not_ work for bitbucket out of the box. Although the same principle, bitbucket sends a JSON-like string that is not a JSON. You have to figure that out (should be easy).
 
 ![Github web configuration](https://raw.githubusercontent.com/theotheu/hook-test/master/assets/github-webhooks.png)
+
 
 
 
