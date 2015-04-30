@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# books-prd keeps its data
-for db in books-dev books-tst books-acc
+# cookiefactory_prd keeps its data
+for db in cookiefactory_dev cookiefactory_test cookiefactory_acc
 do
     echo "Dropping $db"
     mongo $db --eval "db.dropDatabase()"
