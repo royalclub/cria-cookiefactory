@@ -11,9 +11,9 @@ export JSLINT=$BASEDIR/tests/static-analyzer/node_modules/jslint
 export DIR=`pwd`
 export CUR_SCRIPT="`basename $0`.log"
 # Default port number for test
-export TEST_PORT=3001
+export TEST_PORT=6082
 # Default port number for acceptance
-export ACCEPTANCE_PORT=3002
+export ACCEPTANCE_PORT=6083
 
 while getopts ":a:t:" opt; do
   case $opt in
