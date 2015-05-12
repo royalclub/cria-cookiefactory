@@ -11,11 +11,12 @@
         modelName;
 
     schemaName = new Schema({
-        layerName: {type: String, required: true}
+        layerName: {type: String, required: true},
+        layerIngredients: {type: String, required: true}
     }, {collection: "layers"});
 
 
     modelName = 'Layer';
-    module.exports = mongoose.model(modelName, schemaName);
+    mongoose.model(modelName, schemaName);
 
 }());

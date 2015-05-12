@@ -11,11 +11,13 @@
         modelName;
 
     schemaName = new Schema({
-        ingredientName: {type: String, required: true}
-    }, {collection: "ingredienten"});
+        ingredientName: {type: String, required: true},
+        ingredientPrice: {type: Number},
+        protean: {type: Boolean}
+    }, {collection: "ingredients"});
 
 
     modelName = 'Ingredient';
-    module.exports = mongoose.model(modelName, schemaName);
+    mongoose.model(modelName, schemaName);
 
 }());

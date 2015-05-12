@@ -12,11 +12,11 @@
 
     schemaName = new Schema({
         cookieName: {type: String, required: true},
-        cookieLayers: [Schema.layerName]
+        cookieLayers: {type: String, required: true}
     }, {collection: "cookies"});
 
 
     modelName = 'Cookie';
-    module.exports = mongoose.model(modelName, schemaName);
+    mongoose.model(modelName, schemaName);
 
 }());
