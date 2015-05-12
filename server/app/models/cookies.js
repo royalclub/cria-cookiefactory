@@ -12,7 +12,8 @@
 
     schemaName = new Schema({
         cookieName: {type: String, required: true},
-        cookieLayers: {type: String, required: true}
+        cookieLayers: {type: String},
+        modificationDate: {type: Date, "default": Date.now}
     }, {collection: "cookies"});
 
 
