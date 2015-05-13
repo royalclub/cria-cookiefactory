@@ -11,7 +11,7 @@ export JSLINT=$BASEDIR/tests/static-analyzer/node_modules/jslint
 export DIR=`pwd`
 export CUR_SCRIPT="`basename $0`.log"
 # Default port number for test
-export TEST_PORT=6082
+export TEST_PORT=6081
 # Default port number for acceptance
 export ACCEPTANCE_PORT=6083
 
@@ -99,6 +99,9 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
 
 cd $BASEDIR/tests/static-analyzer
+
+rm -f *log
+
 ./run_lint.sh > static-analyzer-results.log
 
 if [ -f $BASEDIR/tests/static-analyzer/error_log.txt ]; then
