@@ -7,12 +7,13 @@
      */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
+        ingredientSchema = require('Ingredient'),
         schemaName,
         modelName;
 
     schemaName = new Schema({
         layerName: {type: String, required: true},
-        layerIngredients: {type: String, required: true}
+        layerIngredients: [ingredientSchema.schema]
     }, {collection: "layers"});
 
 
