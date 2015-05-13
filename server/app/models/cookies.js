@@ -13,6 +13,7 @@
         cookieName: { type: String, required: true },
         cookieLayers: { type: String },
         modificationDate: { type: Date, "default": Date.now }
-    }, {collection: "cookies"});
+    }, 
+    {collection: "cookies"});
     module.exports = mongoose.model('Cookie', schemaName);
 }());
