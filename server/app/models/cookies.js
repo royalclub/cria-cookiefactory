@@ -7,17 +7,14 @@
      */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        schemaName,
-        modelName;
+        schemaName;
 
     schemaName = new Schema({
         cookieName: {type: String, required: true},
         cookieLayers: {type: String},
         modificationDate: {type: Date, "default": Date.now}
     }, {collection: "cookies"});
-
-
-    modelName = 'Cookie';
-    mongoose.model(modelName, schemaName);
+    
+    module.exports = mongoose.model('Cookie', schemaName);
 
 }());

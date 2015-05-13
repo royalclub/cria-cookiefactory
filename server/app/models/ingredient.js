@@ -7,8 +7,7 @@
      */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        schemaName,
-        modelName;
+        schemaName;
 
     schemaName = new Schema({
         ingredientName: {type: String, required: true},
@@ -16,8 +15,6 @@
         protean: {type: Boolean}
     }, {collection: "ingredients"});
 
-
-    modelName = 'Ingredient';
-    mongoose.model(modelName, schemaName);
+    module.exports = mongoose.model('Ingredient', schemaName);
 
 }());
