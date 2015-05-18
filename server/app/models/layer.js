@@ -8,7 +8,6 @@
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         ingredientSchema = mongoose.model('Ingredient'),
-        shapeSchema = mongoose.model('Shape'),
         schemaName;
 
     schemaName = new Schema({
