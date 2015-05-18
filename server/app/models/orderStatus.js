@@ -11,14 +11,13 @@
         modelName;
 
     schemaName = new Schema({
-        shapeName: {type: String, required: true},
-        shapeImageSrc: {type: String, required: true},
-        shapeCreationDate: {type: Date, "default": Date.now},
-        shapeModificationDate: {type: Date, "default": Date.now}
-    }, {collection: "shapes"});
+        statusName: {type: String, required: true},
+		statusDescription: {type: String, required: true},
+        statusCreationDate: {type: Date, "default": Date.now},
+        statusModificationDate: {type: Date, "default": Date.now}
+    }, {collection: "orderStatus"});
 
-    modelName = 'Shape';
+    modelName = 'OrderStatus';
     module.exports = mongoose.model(modelName, schemaName);
-
 
 }());

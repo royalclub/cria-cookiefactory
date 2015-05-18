@@ -11,13 +11,12 @@
         modelName;
 
     schemaName = new Schema({
-        ingredientName: {type: String, required: true, unique: true},
-        ingredientDescription: {type: String},
-        ingredientModificationDate: {type: Date, "default": Date.now}
-    },
-        {collection: 'ingredients'});
+        orderRoleCookie: {type: Schema.ObjectId, ref: "Cookie"},
+		orderRuleNumberOf: {type: Number, required: true},
+        orderRulePackage: {type: Schema.ObjectId, ref: "Package"}
+    }, {collection: "orderRules"});
 
-    modelName = 'Ingredient';
+    modelName = 'OrderRule';
     module.exports = mongoose.model(modelName, schemaName);
 
 }());
