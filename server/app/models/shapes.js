@@ -20,5 +20,4 @@
     modelName = 'Shape';
     module.exports = mongoose.model(modelName, schemaName);
 
-
 }());

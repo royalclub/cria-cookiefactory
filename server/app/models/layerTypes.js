@@ -12,6 +12,8 @@
 
     schemaName = new Schema({
         layerTypeName: {type: String, required: true},
+        layerTypeCreationDate: {type: Date, "default": Date.now},
+        layerTypeModificationDate: {type: Date, "default": Date.now}
     }, {collection: "layerTypes"});
 
     modelName = 'LayerType';
