@@ -15,7 +15,7 @@
         cookieName: {type: String, required: true},
         cookieShape: {type: shapeSchema.schema},
         cookieLayers: {type: String},
-        cookieCrearor: {type: String, required: true},
+        cookieCreator: {type: String, required: true},
         creationDate: {type: Date, "default": Date.now},
         modificationDate: {type: Date, "default": Date.now}
     }, {collection: "cookies"});
@@ -24,4 +24,6 @@
     modelName = 'Cookie';
     mongoose.model(modelName, schemaName);
 
+
+    module.exports = mongoose.model('Cookie', schemaName);
 }());
