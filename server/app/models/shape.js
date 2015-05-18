@@ -10,9 +10,10 @@
         schemaName;
 
     schemaName = new Schema({
-        ingredientName: {type: String, required: true}
-    }, {collection: "ingredients"});
+        shapeName: {type: String, required: true},
+        shapePrice: {type: Number, requiered: true}
+    }, {collection: "shapes"});
 
-    module.exports = mongoose.model('Ingredient', schemaName);
+    module.exports = mongoose.model('Shape', schemaName);
 
 }());
