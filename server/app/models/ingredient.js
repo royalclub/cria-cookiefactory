@@ -16,8 +16,8 @@
         modificationDate: {type: Date, "default": Date.now}
     },
         {collection: 'ingredients'});
-    
+
     modelName = 'Ingredient';
-    mongoose.model(modelName, schemaName);
-    
+    module.exports = mongoose.model(modelName, schemaName);
+
 }());

@@ -12,10 +12,11 @@
 
     schemaName = new Schema({
         shapeName: {type: String, required: true},
-        shapeImageSrc: {type: String, requiered: true},
+        shapeImageSrc: {type: String, required: true}
     }, {collection: "shapes"});
 
     modelName = 'Shape';
-    mongoose.model(modelName, schemaName);
+    module.exports = mongoose.model(modelName, schemaName);
+
 
 }());

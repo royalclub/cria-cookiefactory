@@ -7,13 +7,13 @@
      */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        shapeSchema = require('Shape'),
+       // shapeSchema = require('Shape'),
         schemaName,
         modelName;
 
     schemaName = new Schema({
         cookieName: {type: String, required: true},
-        cookieShape: {type: shapeSchema.schema},
+        cookieShape: [{ type: Schema.Types.ObjectId, ref: 'Shape' }],
         cookieLayers: {type: String},
         cookieCreator: {type: String, required: true},
         creationDate: {type: Date, "default": Date.now},
@@ -22,8 +22,6 @@
 
 
     modelName = 'Cookie';
-    mongoose.model(modelName, schemaName);
+    module.exports = mongoose.model(modelName, schemaName);
 
-
-    module.exports = mongoose.model('Cookie', schemaName);
 }());
