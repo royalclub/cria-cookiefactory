@@ -11,7 +11,6 @@
 
     schemaName = new Schema({
         ingredientName: {type: String, required: true},
-        ingredientPrice: {type: Number},
         protean: {type: Boolean}
     }, {collection: "ingredients"});
 
