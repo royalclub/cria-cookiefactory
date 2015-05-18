@@ -99,6 +99,9 @@ echo | tee -a "$DIR/$CUR_SCRIPT"
 git checkout $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
 
 cd $BASEDIR/tests/static-analyzer
+
+rm -f *log
+
 ./run_lint.sh > static-analyzer-results.log
 
 if [ -f $BASEDIR/tests/static-analyzer/error_log.txt ]; then
