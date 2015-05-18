@@ -8,12 +8,13 @@
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         ingredientSchema = require('Ingredient'),
+        layerTypeSchema = require('LayerType'),
         schemaName,
         modelName;
 
     schemaName = new Schema({
         layerName: {type: String, required: true},
-        layerType: {type: String, required: true},
+        layerType: layerTypeSchema.schema,
         layerIngredients: [ingredientSchema.schema],
         layerOrder: {type: Number, required: true},
         layerDescription: {type: String},
