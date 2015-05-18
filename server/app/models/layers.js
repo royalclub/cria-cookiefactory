@@ -23,6 +23,6 @@
     }, {collection: "layers"});
 
     modelName = 'Layer';
-    mongoose.model(modelName, schemaName);
+    module.exports = mongoose.model(modelName, schemaName);
 
 }());
