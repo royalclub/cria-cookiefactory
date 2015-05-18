@@ -17,7 +17,8 @@
         layerIngredients: [ingredientSchema.schema],
         layerOrder: {type: Number, required: true},
         layerDescription: {type: String},
-        layerPrice: {type: Number, required: true}
+        layerPrice: {type: Number, required: true},
+        layerImageSrc: {type: String, required: true}
     }, {collection: "layers"});
 
     modelName = 'Layer';
