@@ -7,11 +7,13 @@
      */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
+        shapeSchema = require('Shape'),
         schemaName,
         modelName;
 
     schemaName = new Schema({
         cookieName: {type: String, required: true},
+        cookieShape: {type: shapeSchema.schema},
         cookieLayers: {type: String},
         modificationDate: {type: Date, "default": Date.now}
     }, {collection: "cookies"});

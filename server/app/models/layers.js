@@ -13,9 +13,12 @@
 
     schemaName = new Schema({
         layerName: {type: String, required: true},
-        layerIngredients: [ingredientSchema.schema]
+        layerType: {type: String, required: true},
+        layerIngredients: [ingredientSchema.schema],
+        layerOrder: {type: Number, required: true},
+        layerDescription: {type: String},
+        layerPrice: {type: Number, required: true}
     }, {collection: "layers"});
-
 
     modelName = 'Layer';
     mongoose.model(modelName, schemaName);
