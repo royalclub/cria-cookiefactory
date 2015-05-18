@@ -7,12 +7,12 @@
      */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        ingredientSchema = mongoose.model('Ingredient'),
+        //ingredientSchema = mongoose.model('Ingredient'),
         schemaName;
 
     schemaName = new Schema({
         layerName: {type: String, required: true},
-        layerIngredients: [ingredientSchema.schema],
+        layerIngredients: [{ type: Schema.Types.ObjectId, ref: 'Ingredient' }],
         layerOrder: {type: Number, requiered: true},
         layerDescription: {type: String},
         layerPrice: {type: Number, requiered: true}

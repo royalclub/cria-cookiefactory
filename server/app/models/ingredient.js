@@ -10,7 +10,8 @@
         schemaName;
 
     schemaName = new Schema({
-        ingredientName: {type: String, required: true}
+        ingredientName: {type: String, required: true},
+        modificationDate: {type: Date, "default": Date.now}
     }, {collection: "ingredients"});
 
     module.exports = mongoose.model('Ingredient', schemaName);
