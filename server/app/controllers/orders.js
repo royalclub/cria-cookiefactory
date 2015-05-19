@@ -1,4 +1,5 @@
 /*jslint node: true */
+/*global __filename */
 "use strict";
 
 var mongoose = require('mongoose'),

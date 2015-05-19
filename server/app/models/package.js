@@ -6,11 +6,9 @@
      * Module dependencies.
      */
     var mongoose = require('mongoose'),
-        Schema = mongoose.Schema,
-        schemaName,
-        modelName;
+        schema;
 
-    schemaName = new Schema({
+    schema = new mongoose.Schema({
         packageName: {type: String, required: true},
         packageDescription: {type: String, required: true},
         packageCapacity: {type: Number, required: true},
@@ -19,7 +17,5 @@
         packageModificationDate: {type: Date, "default": Date.now}
     }, {collection: "packages"});
 
-    modelName = 'Package';
-    module.exports = mongoose.model(modelName, schemaName);
-
+    module.exports = mongoose.model('Package', schema);
 }());
