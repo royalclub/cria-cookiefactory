@@ -7,7 +7,7 @@
     */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        cookie = mongoose.model('Cookie'),
+        cookie = require('cookie.js'),
         pkg = mongoose.model('Package'),
         schemaName;
 
