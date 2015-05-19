@@ -96,7 +96,7 @@ exports.list = function (req, res) {
 
     conditions = {};
     fields = {};
-    sort = {'layerName': 1};
+    sort = {'shapeName': 1};
 
     Shape
         .find(conditions, fields)

@@ -97,7 +97,7 @@ exports.list = function (req, res) {
 
     conditions = {};
     fields = {};
-    sort = {'ingredientModificationDate': -1};
+    sort = {'ingredientName': -1};
 
     Ingredient
         .find(conditions, fields)
