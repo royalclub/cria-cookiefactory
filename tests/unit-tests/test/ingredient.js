@@ -8,15 +8,53 @@ var env = process.env.NODE_ENV || 'development',
 var should = require('should'),
     supertest = require('supertest');
 
-describe('API Routing for CRUD operations on books', function () {
+describe('API Routing for CRUD operations on ingredients', function () {
 
     var request = supertest(localConfig.host + ":" + config.port + "/" + localConfig.api_path);
+
+    var tmpIngredientId = null;
+    //var tmpIngredientResponse;
 
     var tmpBookId = null;
     var tmpBookResponse;
 
     before(function (done) {
         done();
+    });
+
+    describe('CREATE ingredient', function () {
+        it('Should POST /ingredients', function (done) {
+            request
+                .post('/ingredients')
+                .send({
+                    "ingredientName": "Great ingredient!" + Date.now(),
+                    "ingredientDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+            )
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('create');
+                    JSON.parse(res.text)
+                        .should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    res.type.should.be.exactly('application/json');
+                    res.charset.should.be.exactly('utf-8');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('ingredientDescription')
+                        .be.exactly('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+
+                    tmpIngredientId = JSON.parse(res.text)._id;
+
+                    done();
+                });
+        });
     });
 
     describe('CREATE book', function () {
@@ -27,7 +65,7 @@ describe('API Routing for CRUD operations on books', function () {
                     "title": "Great book!" + Date.now(),
                     "author": "John Doe",
                     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                )
+            )
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
@@ -123,7 +161,7 @@ describe('API Routing for CRUD operations on books', function () {
                         throw err;
                     }
 
-                   JSON.parse(res.text)
+                    JSON.parse(res.text)
                         .should.have.property('meta')
                         .and.have.property('action')
                         .be.exactly('update');
