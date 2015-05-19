@@ -5,7 +5,7 @@
     /**
     * Module dependencies.
     */
-    var Cookie = require('cookie');
+    var Cookie = require('cookies');
     
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
@@ -14,7 +14,7 @@
         schemaName;
 
     schemaName = new Schema({
-        //orderRuleCookie: { type: Cookie, required: true },
+        orderRuleCookie: {Cookie},
         orderRuleNumberOf: { type: Number, required: true }
         //orderRulePackage: { type: pkg, required: true }
     }, { collection: "orderRules" });
