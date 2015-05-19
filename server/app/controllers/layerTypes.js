@@ -96,7 +96,7 @@ exports.list = function (req, res) {
 
     conditions = {};
     fields = {};
-    sort = {'layerName': 1};
+    sort = {'layerTypeName': 1};
 
     LayerType
         .find(conditions, fields)
