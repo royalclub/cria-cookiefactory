@@ -2,7 +2,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Ingredient = mongoose.model('Ingredient');
+    LayerType = mongoose.model('LayerType');
 
 /**
  * CREATE a book
@@ -38,7 +38,7 @@ var mongoose = require('mongoose'),
 
 exports.create = function (req, res) {
 
-    var doc = new layerType(req.body);
+    var doc = new LayerType(req.body);
 
     doc.save(function (err) {
 
@@ -98,7 +98,7 @@ exports.list = function (req, res) {
     fields = {};
     sort = {'layerName': 1};
 
-    Ingredient
+    layerType
         .find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
@@ -157,7 +157,7 @@ exports.detail = function (req, res) {
     conditions = {_id: req.params._id};
     fields = {};
 
-    Ingredient
+    LayerType
         .findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
@@ -207,8 +207,8 @@ exports.updateOne = function (req, res) {
     var conditions =
         {_id: req.params._id},
         update = {
-            ingredientName: req.body.doc.ingredientName || '',
-            ingredientDescription: req.body.doc.ingredientDescription || ''
+            layerTypeName: req.body.layerTypeName || '',
+            layerTypeModificationDate: Date.now
         },
         options = {multi: false},
         callback = function (err, doc) {
@@ -227,7 +227,7 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    Ingredient
+    LayerType
         .findOneAndUpdate(conditions, update, options, callback);
 };
 
@@ -288,6 +288,6 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    Ingredient
+    LayerType
         .remove(conditions, callback);
 };
