@@ -5,6 +5,8 @@
     /**
     * Module dependencies.
     */
+    var Cookie = require('cookie');
+    
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         //cookie = mongoose.model('Cookie'),
@@ -12,11 +14,10 @@
         schemaName;
 
     schemaName = new Schema({
-        //orderRuleCookie: { type: cookie, required: true },
+        orderRuleCookie: { type: Cookie, required: true },
         orderRuleNumberOf: { type: Number, required: true }
         //orderRulePackage: { type: pkg, required: true }
     }, { collection: "orderRules" });
 
     module.exports = mongoose.model('OrderRule', schemaName);
-
 }());
