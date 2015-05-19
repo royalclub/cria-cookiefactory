@@ -1,28 +1,32 @@
 /*jslint node:true */
 
-/**
- * Model for Orders.
- */
 (function () {
     "use strict";
+    /**
+     * Module dependencies.
+     */
     var mongoose = require('mongoose'),
-        addressModel = mongoose.model('Address'),
-        orderStatusModel = mongoose.model('OrderStatus'),
-        orderRuleModel = mongoose.model('OrderRule'),
-        schema;
+        Schema = mongoose.Schema,
+        //address = mongoose.model('Address'),
+        //orderStatus = mongoose.model('orderStatus'),
+        //orderRule = mongoose.model('orderRule'),
+        schemaName,
+        modelName;
 
-    schema = new mongoose.Schema({
+    schemaName = new Schema({
         orderNumber: {type: String, required: true},
-        orderStatus: {type: orderStatusModel},
+       // orderStatus: {type: orderStatus},
         orderUsername: {type: String},
-        orderRules: [{type: orderRuleModel}],
-        orderInvoiceAddress: {type: addressModel, required: true},
-        orderShipmentAddress: {type: addressModel, required: true},
+        //orderRules: [{type: orderRule}],
+        //orderInvoiceAddress: {type: address, required: true},
+        //orderShipmentAddress: {type: address, required: true},
         orderVat: {type: Number, required: true},
         orderTotal: {type: Number, required: true},
         orderCreationDate: {type: Date, "default": Date.now},
         orderModificationDate: {type: Date, "default": Date.now}
     }, {collection: "orders"});
 
-    module.exports = mongoose.model('Order', schema);
+    modelName = 'Order';
+    module.exports = mongoose.model(modelName, schemaName);
+
 }());

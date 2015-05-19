@@ -209,7 +209,7 @@ exports.updateOne = function (req, res) {
         update = {
             packageName: req.body.packageName || '',
             packageDescription: req.body.packageDescription || '',
-            packageCapicity: req.body.packageCapicity || '',
+            packageCapacity: req.body.packageCapacity || '',
             packageImageSrc: req.body.packageImageSrc || '',
             packageModificationDate: new Date()
         },
