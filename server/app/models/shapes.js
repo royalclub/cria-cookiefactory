@@ -7,8 +7,7 @@
      */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        schemaName,
-        modelName;
+        schemaName;
 
     schemaName = new Schema({
         shapeName: {type: String, required: true},
@@ -17,7 +16,6 @@
         shapeModificationDate: {type: Date, "default": Date.now}
     }, {collection: "shapes"});
 
-    modelName = 'Shape';
-    module.exports = mongoose.model(modelName, schemaName);
+    module.exports = mongoose.model('Shape', schemaName);
 
 }());
