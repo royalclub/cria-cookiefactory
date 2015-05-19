@@ -12,8 +12,6 @@
         Cookie = mongoose.model('Cookie'),
         Box = mongoose.model('Box'),
         schemaName;
-        
-    //var Cookie = require('Cookie');
     
     schemaName = new Schema({
         orderRuleCookie: [{type: Cookie, required: true}],
