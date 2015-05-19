@@ -12,24 +12,24 @@ var router = express.Router();
  We map the URL to a method in the created variable "controller".
  In this example is a mapping for every CRUD action.
  */
-var controller = require('../app/controllers/package.js');
+var controller = require('../app/controllers/box.js');
 
 /** CREATE route for books */
 router
-    .post('/package', controller.create);
+    .post('/box', controller.create);
 
 // RETRIEVE
 router
-    .get('/package', controller.list)
-    .get('/package/:_id', controller.detail);
+    .get('/box', controller.list)
+    .get('/box/:_id', controller.detail);
 
 // UPDATE
 router
-    .put('/package/:_id', controller.updateOne);
+    .put('/box/:_id', controller.updateOne);
 
 // DELETE
 router
-    .delete('/package/:_id', controller.deleteOne);
+    .delete('/box/:_id', controller.deleteOne);
 
 
 module.exports = router;

@@ -2,7 +2,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Package = mongoose.model('Package');
+    box = mongoose.model('Box');
 
 /**
  * CREATE a book
@@ -38,7 +38,7 @@ var mongoose = require('mongoose'),
 
 exports.create = function (req, res) {
 
-    var doc = new Package(req.body);
+    var doc = new Box(req.body);
 
     doc.save(function (err) {
 
@@ -98,7 +98,7 @@ exports.list = function (req, res) {
     fields = {};
     sort = {'packageName': 1};
 
-    Package
+    Box
         .find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
@@ -157,7 +157,7 @@ exports.detail = function (req, res) {
     conditions = {_id: req.params._id};
     fields = {};
 
-    Package
+    Box
         .findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
@@ -230,7 +230,7 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    Package
+    Box
         .findOneAndUpdate(conditions, update, options, callback);
 };
 
@@ -291,6 +291,6 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    Package
+    Box
         .remove(conditions, callback);
 };
