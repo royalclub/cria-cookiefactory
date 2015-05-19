@@ -200,6 +200,9 @@ describe('API Routing for CRUD operations on ingredients', function () {
     var tmpIngredientId = null;
     //var tmpIngredientResponse;
 
+    var tmpBookId = null;
+    var tmpBookResponse;
+
     before(function (done) {
         done();
     });
@@ -232,6 +235,42 @@ describe('API Routing for CRUD operations on ingredients', function () {
                         .be.exactly('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
 
                     tmpIngredientId = JSON.parse(res.text)._id;
+
+                    done();
+                });
+        });
+    });
+
+    describe('CREATE book', function () {
+        it('Should POST /books', function (done) {
+            request
+                .post('/books')
+                .send({
+                    "title": "Great book!" + Date.now(),
+                    "author": "John Doe",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+            )
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('create');
+                    JSON.parse(res.text)
+                        .should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    res.type.should.be.exactly('application/json');
+                    res.charset.should.be.exactly('utf-8');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('author')
+                        .be.exactly('John Doe');
+
+                    tmpBookId = JSON.parse(res.text).doc._id;
 
                     done();
                 });
