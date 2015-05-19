@@ -5,13 +5,14 @@
     /**
     * Module dependencies.
     */
+    var Cookie = require('cookie');
+    
     var mongoose = require('mongoose'),
-        cookie = mongoose.model('Cookie'),
         pkg = mongoose.model('Package'),
         schema;
 
     schema = new mongoose.Schema({
-        orderRuleCookie: { type: cookie.schema, required: true },
+        orderRuleCookie: { type: Cookie.schema, required: true },
         orderRuleNumberOf: { type: Number, required: true },
         orderRulePackage: { type: pkg, required: true }
     });
