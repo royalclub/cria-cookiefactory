@@ -2,7 +2,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Shape = mongoose.model('Shape');
+    OrderRules = mongoose.model('OrderRules');
 
 /**
  * CREATE a book
@@ -38,7 +38,7 @@ var mongoose = require('mongoose'),
 
 exports.create = function (req, res) {
 
-    var doc = new Shape(req.body);
+    var doc = new OrderRules(req.body);
 
     doc.save(function (err) {
 
@@ -96,9 +96,9 @@ exports.list = function (req, res) {
 
     conditions = {};
     fields = {};
-    sort = {'layerName': 1};
+    sort = {'orderRuleCookie' : 1};
 
-    Shape
+    OrderRules
         .find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
@@ -157,7 +157,7 @@ exports.detail = function (req, res) {
     conditions = {_id: req.params._id};
     fields = {};
 
-    Shape
+    OrderRules
         .findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
@@ -207,9 +207,9 @@ exports.updateOne = function (req, res) {
     var conditions =
         {_id: req.params._id},
         update = {
-            shapeName: req.body.shapeName || '',
-            shapeImageSrc: req.body.shapeImageSrc || '',
-            shapeModificationDate: new Date()
+            orderRuleCookie: req.body.orderRuleCookie || '',
+            orderRuleNumberOf: req.body.orderRuleNumberOf || '',
+            orderRulePackage: req.body.orderRulePackage || ''
         },
         options = {multi: false},
         callback = function (err, doc) {
@@ -228,7 +228,7 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    Shape
+    OrderRules
         .findOneAndUpdate(conditions, update, options, callback);
 };
 
@@ -289,6 +289,6 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    Shape
+    OrderRules
         .remove(conditions, callback);
 };
