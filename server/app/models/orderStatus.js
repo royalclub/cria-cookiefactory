@@ -7,17 +7,15 @@
      */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        schemaName,
-        modelName;
+        schemaName;
 
     schemaName = new Schema({
         statusName: {type: String, required: true},
-		statusDescription: {type: String, required: true},
+        statusDescription: {type: String, required: true},
         statusCreationDate: {type: Date, "default": Date.now},
         statusModificationDate: {type: Date, "default": Date.now}
     }, {collection: "orderStatus"});
 
-    modelName = 'OrderStatus';
-    module.exports = mongoose.model(modelName, schemaName);
+    module.exports = mongoose.model('OrderStatus', schemaName);
 
 }());
