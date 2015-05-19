@@ -13,7 +13,7 @@
     schemaName = new Schema({
         packageName: {type: String, required: true},
         packageDescription: {type: String, required: true},
-        packageCapicity: {type: Number, required: true},
+        packageCapacity: {type: Number, required: true},
         packageImageSrc: {type: String, required: true},
         packageCreationDate: {type: Date, "default": Date.now},
         packageModificationDate: {type: Date, "default": Date.now}

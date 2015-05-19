@@ -2,7 +2,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Shape = mongoose.model('Shape');
+    OrderRule = mongoose.model('OrderRule');
 
 /**
  * CREATE a book
@@ -38,7 +38,7 @@ var mongoose = require('mongoose'),
 
 exports.create = function (req, res) {
 
-    var doc = new Shape(req.body);
+    var doc = new OrderRule(req.body);
 
     doc.save(function (err) {
 
@@ -98,7 +98,7 @@ exports.list = function (req, res) {
     fields = {};
     sort = {'layerName': 1};
 
-    Shape
+    OrderRule
         .find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
@@ -157,7 +157,7 @@ exports.detail = function (req, res) {
     conditions = {_id: req.params._id};
     fields = {};
 
-    Shape
+    OrderRule
         .findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
@@ -228,7 +228,7 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    Shape
+    OrderRule
         .findOneAndUpdate(conditions, update, options, callback);
 };
 
@@ -289,6 +289,6 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    Shape
+    OrderRule
         .remove(conditions, callback);
 };
