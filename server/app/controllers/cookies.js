@@ -2,7 +2,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Book = mongoose.model('Cookie');
+    Cookie = mongoose.model('Cookie');
 
 /**
  * CREATE a book
@@ -38,7 +38,7 @@ var mongoose = require('mongoose'),
 
 exports.create = function (req, res) {
 
-    var doc = new Book(req.body);
+    var doc = new Cookie(req.body);
 
     doc.save(function (err) {
 
@@ -99,7 +99,7 @@ exports.list = function (req, res) {
     fields = {};
     sort = {'modificationDate': -1};
 
-    Book
+    Cookie
         .find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
@@ -158,7 +158,7 @@ exports.detail = function (req, res) {
     conditions = {_id: req.params._id};
     fields = {};
 
-    Book
+    Cookie
         .findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
@@ -208,9 +208,10 @@ exports.updateOne = function (req, res) {
     var conditions =
         {_id: req.params._id},
         update = {
-            title: req.body.doc.title || '',
-            author: req.body.doc.author || '',
-            description: req.body.doc.description || ''
+            cookieName: req.body.cookieName || '',
+            cookieShape: req.body.cookieShape || '',
+            cookieLayers: req.body.cookieLayers || '',
+            cookieCreator: req.body.cookieCreator || ''
         },
         options = {multi: false},
         callback = function (err, doc) {
@@ -229,7 +230,7 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    Book
+    Cookie
         .findOneAndUpdate(conditions, update, options, callback);
 };
 
@@ -290,6 +291,6 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    Book
+    Cookie
         .remove(conditions, callback);
 };
