@@ -1,121 +1,30 @@
-Description
-===========
-This demo is an exercise of MEAN with books.
+# Introduction
+This is the repository for the CRIA-CookieFactory assignment of the course CRIA (S2-2015) at the HAN.
 
-Video available at http://goo.gl/9aXbXa
+# Deployment Server
+There is a server which automatically fetches the latest commits from the repository and updates the production environment. The server is located on "server3.tezzt.nl".
 
-Presentation available at http://goo.gl/tnmOeD
+## How to connect
+You can connect to the server using the PuTTY client. Make sure you use port 22 for SSH. Username and password have been shared previously within the group!
+You can place the username in the hostname so that the client automatically detects it and you do not have to type in the username all the time. This can be done by appending the username
+to the hostname, followed by an "@", followed by the actual hostname "server3.tezzt.nl".
 
-**Your assignment: Fix the TODO's**
+## Webhook
+In order for the server to detect changes to the repository, there's an custom webhook server which was developed by Theo Theunissen. This server is located in the folder `deployment/server/`.
+The webhook runs on the port configured in the `server/config/config.js`, 'deployment' variable.
 
-
-Setup
-=====
-Installation for development
-----------------------------
-
-Create a directory `workspaces` in your home directory.
+### Manual triggering
+You can trigger the webhook by sending the following POST request (Postman or DHC) to `http://server3.tezzt.nl:7061/webhook`:
 ```
-mkdir ~/workspaces
-```
-
-Clone the repository with
-```
-git clone https://github.com/theotheu/books.git ~/workspaces/books
+    {"repository": { "url": "https://github.com/HB-2012/cria-cookiefactory" } }
 ```
 
-Go to the working directory
-```
-cd ~/workspaces/books
-```
-
-See the README in ~/workspaces/books/data how to import the initial seed
+Make sure you set Content-Type to application/json.
+Example: http://www.neozftw.nl/files/img/Screen-19-05-2015_121018.png
 
 
-Configuration
-----------
-Copy ```config.js.default``` to ```config.js```.
-```sh
-cp ~/workspaces/books/server/config/config.js.default ~/workspaces/books/server/config/config.js
-```
+### What does the webhook do?
+The webhook starts the pullingAndRunning.sh batch script, in which all tests are ran. The pullingAndRunning.sh batch file can be found in `deployment/server/` also.
 
-Change the database, port and emailaddress.
-
-Example
-```javascript
-module.exports = {
-    development: {
-        db: 'mongodb://localhost/books-dev',
-        port: 3000,
-        debug: true
-    }
-    , test: {
-        db: 'mongodb://localhost/books-tst',
-        port: 3000,
-        debug: false
-    }
-    , production: {
-    }
-}
-```
-
-Install node modules
-----------
-The archive is without the node modules.
-
-Install with
-```sh
-cd ~/workspaces/books/server
-npm install
-```
-
-Export variable to set environment
-----------------------------------
-Node.js starts default with the development environment.
-
-To set explicitly the environment, use an environment variable. With this, you do not have to change a single line of code for switching environments.
-
-Valid values are defined in the config/config.js file (development, test, production).
-
-```export NODE_ENV=development```
-
-
-supervisor
-----------
-Make sure you have `nodemon` installed - with the global option
-
-```sh
-npm install -g nodemon
-```
-
-Use it with
-```
-nodemon
-```
-
-Tests
-----------
-See the README in `~/workspaces/books/tests` how to perform tests
-
-
-
-Instructions to prepare a deployment
-===================================
-
-- Verify that you have a explanatory README.md
-  - Installation instructions
-  - Configuration instructions
-  - Import data instructions
-  - Run instructions
-  - Test instructions
-- Export data
-  - Make sure that the output directory exist ```mkdir ~/workspaces/books/data```
-  - Make an export of your data with mongodump ```mongodump -d books -o ~/workspaces/books/data```
-  - Create in ~/workspaces/books/data a README.md with import instructions.
-  - Import instructions
-- Tests
-  - static-analyzer with 0 errors
-  - Unit tests with 0 errors
-  - End-to-end tests with 0 errors
-- Push the repository
-
+### Where are logs written to?
+Detailed log files for unit tests, e2e tests and the static analyzer can be found in their own folders. The general log file (which is also emailed), is called pullingAndRunning.sh.log, and is found in the same folder as the original batch file.
