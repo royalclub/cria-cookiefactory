@@ -18,4 +18,5 @@
     }, { collection: "orderRules" });
 
     module.exports = mongoose.model('OrderRule', schemaName);
+    
 }());
