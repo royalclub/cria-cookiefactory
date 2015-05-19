@@ -6,16 +6,15 @@
     * Module dependencies.
     */
     var mongoose = require('mongoose'),
-        Schema = mongoose.Schema,
         cookie = mongoose.model('Cookie'),
         pkg = mongoose.model('Package'),
-        schemaName;
+        schema;
 
-    schemaName = new Schema({
-        orderRuleCookie: { type: cookie, required: true },
+    schema = new mongoose.Schema({
+        orderRuleCookie: { type: cookie.schema, required: true },
         orderRuleNumberOf: { type: Number, required: true },
         orderRulePackage: { type: pkg, required: true }
-    }, { collection: "orderRules" });
+    });
 
-    module.exports = mongoose.model('OrderRule', schemaName);
+    module.exports = mongoose.model('OrderRule', schema);
 }());
