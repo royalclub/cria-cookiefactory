@@ -209,7 +209,8 @@ exports.updateOne = function (req, res) {
         {_id: req.params._id},
         update = {
             ingredientName: req.body.ingredientName || '',
-            ingredientDescription: req.body.ingredientDescription || ''
+            ingredientDescription: req.body.ingredientDescription || '',
+            ingredientModificationDate: new Date()
         },
         options = {multi: false},
         callback = function (err, doc) {
