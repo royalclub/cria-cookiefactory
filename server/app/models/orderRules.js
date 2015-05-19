@@ -14,7 +14,7 @@
         schemaName;
 
     schemaName = new Schema({
-        orderRuleCookie: { type: Cookie, required: true },
+        //orderRuleCookie: { type: Cookie, required: true },
         orderRuleNumberOf: { type: Number, required: true }
         //orderRulePackage: { type: pkg, required: true }
     }, { collection: "orderRules" });
