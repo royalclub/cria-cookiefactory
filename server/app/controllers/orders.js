@@ -216,7 +216,7 @@ exports.updateOne = function (req, res) {
             orderShipmentAddress: req.body.orderShipmentAddress || '',
             orderVat: req.body.orderVat || '',
             orderTotal: req.body.orderTotal || '',
-            orderModificationDate: new Date ()
+            orderModificationDate: new Date()
         },
         options = {multi: false},
         callback = function (err, doc) {

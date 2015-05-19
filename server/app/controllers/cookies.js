@@ -212,7 +212,7 @@ exports.updateOne = function (req, res) {
             cookieShape: req.body.cookieShape || '',
             cookieLayers: req.body.cookieLayers || '',
             cookieCreator: req.body.cookieCreator || '',
-            cookieModificationDate: new Date ()
+            cookieModificationDate: new Date()
         },
         options = {multi: false},
         callback = function (err, doc) {
