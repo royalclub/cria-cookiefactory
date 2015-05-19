@@ -192,3 +192,186 @@ describe('API Routing for CRUD operations on books', function () {
     });
 
 });
+
+describe('API Routing for CRUD operations on ingredients', function () {
+
+    var request = supertest(localConfig.host + ":" + config.port + "/" + localConfig.api_path);
+
+    var tmpIngredientId = null;
+    //var tmpIngredientResponse;
+
+    before(function (done) {
+        done();
+    });
+
+    describe('CREATE ingredient', function () {
+        it('Should POST /ingredients', function (done) {
+            request
+                .post('/ingredients')
+                .send({
+                    "ingredientName": "Great ingredient!" + Date.now(),
+                    "ingredientDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+            )
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('create');
+                    JSON.parse(res.text)
+                        .should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    res.type.should.be.exactly('application/json');
+                    res.charset.should.be.exactly('utf-8');
+                    JSON.parse(res.text)
+                        .should.have.property('ingredientDescription')
+                        .be.exactly('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+
+                    tmpIngredientId = JSON.parse(res.text)._id;
+
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE all books', function () {
+
+        it('Should GET /books', function (done) {
+            request
+                .get('/books')
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('list');
+                    res.statusCode.should.be.exactly(200);
+
+                    tmpBookResponse = res.text;
+
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE 1 book', function () {
+        it('Should GET /books/{id}', function (done) {
+            request
+                .get('/books/' + tmpBookId)
+                .expect('Content-Type', /application.json/)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action')
+                        .be.exactly('detail');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('author')
+                        .be.exactly('John Doe');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('UPDATE 1 book', function () {
+        it('Should PUT /books/{id}', function (done) {
+            request
+                .put('/books/' + tmpBookId)
+                .send({
+                    "doc": {
+                        "title": "Good book " + Date.now(),
+                        "author": "Ghostwriter",
+                        "description": "Book is updated."
+                    }
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action')
+                        .be.exactly('update');
+                    JSON.parse(res.text)
+                        .should.have.property('err')
+                        .be.exactly(null);
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('author')
+                        .be.exactly('Ghostwriter');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('DELETE 1 book', function () {
+        it('Should DELETE /books/{id}', function (done) {
+            request
+                .del('/books/' + tmpBookId)
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('delete');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('ok')
+                        .be.exactly(1);
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('n')
+                        .be.exactly(1);
+                    JSON.parse(res.text).should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE all books to verify that the original collection is restored.', function () {
+        it('Should GET /books', function (done) {
+            request
+                .get('/books')
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('list');
+                    res.statusCode.should.be.exactly(200);
+
+                    done();
+                });
+        });
+    });
+
+});
