@@ -208,8 +208,8 @@ exports.updateOne = function (req, res) {
     var conditions =
         {_id: req.params._id},
         update = {
-            ingredientName: req.body.doc.ingredientName || '',
-            ingredientDescription: req.body.doc.ingredientDescription || ''
+            ingredientName: req.body.ingredientName || '',
+            ingredientDescription: req.body.ingredientDescription || ''
         },
         options = {multi: false},
         callback = function (err, doc) {
