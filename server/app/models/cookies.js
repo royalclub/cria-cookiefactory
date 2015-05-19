@@ -19,7 +19,6 @@
         cookieModificationDate: {type: Date, "default": Date.now}
     }, {collection: "cookies"});
 
-
     modelName = 'Cookie';
     module.exports = mongoose.model(modelName, schemaName);
 

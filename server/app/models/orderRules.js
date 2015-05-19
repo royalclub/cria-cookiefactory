@@ -11,7 +11,7 @@
         modelName;
 
     schemaName = new Schema({
-        orderRoleCookie: {type: Schema.ObjectId, ref: "Cookie"},
+        orderRuleCookie: {type: Schema.ObjectId, ref: "Cookie"},
 		orderRuleNumberOf: {type: Number, required: true},
         orderRulePackage: {type: Schema.ObjectId, ref: "Package"}
     }, {collection: "orderRules"});
