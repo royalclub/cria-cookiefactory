@@ -208,7 +208,7 @@ exports.updateOne = function (req, res) {
         {_id: req.params._id},
         update = {
             layerTypeName: req.body.layerTypeName || '',
-            layerTypeModificationDate: Date.now
+            layerTypeModificationDate: new Date()
         },
         options = {multi: false},
         callback = function (err, doc) {
