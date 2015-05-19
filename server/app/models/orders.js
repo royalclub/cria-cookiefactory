@@ -7,16 +7,19 @@
      */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
+        address = mongoose.model('Address'),
+        orderStatus = mongoose.model('orderStatus'),
+        orderRule = mongoose.model('orderRule'),
         schemaName,
         modelName;
 
     schemaName = new Schema({
         orderNumber: {type: String, required: true},
-        orderStatus: {type: Schema.ObjectId, ref: "OrderStatus"},
+        orderStatus: {type: orderStatus},
         orderUsername: {type: String},
-        orderRules: [{type: Schema.ObjectId, ref: "OrderRule"}],
-        orderInvoiceAddress: {type: Schema.ObjectId, ref: "Address"},
-        orderShipmentAddress: {type: Schema.ObjectId, ref: "Address"},
+        orderRules: [{type: orderRule}],
+        orderInvoiceAddress: {type: address, required: true},
+        orderShipmentAddress: {type: address, required: true},
         orderVat: {type: Number, required: true},
         orderTotal: {type: Number, required: true},
         orderCreationDate: {type: Date, "default": Date.now},
