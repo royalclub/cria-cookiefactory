@@ -230,9 +230,6 @@ describe('API Routing for CRUD operations on ingredients', function () {
                     res.statusCode.should.be.exactly(200);
                     res.type.should.be.exactly('application/json');
                     res.charset.should.be.exactly('utf-8');
-                    JSON.parse(res.text)
-                        .should.have.property('ingredientDescription')
-                        .be.exactly('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
 
                     tmpIngredientId = JSON.parse(res.text)._id;
 
