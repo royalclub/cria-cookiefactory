@@ -7,16 +7,16 @@
     */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        cookie = mongoose.model('Cookie'),
-        pkg = mongoose.model('Package'),
+        //cookie = mongoose.model('Cookie'),
+        //pkg = mongoose.model('Package'),
         schemaName;
 
     schemaName = new Schema({
-        orderRuleCookie: { type: cookie, required: true },
-        orderRuleNumberOf: { type: Number, required: true },
-        orderRulePackage: { type: pkg, required: true }
+        //orderRuleCookie: { type: cookie, required: true },
+        orderRuleNumberOf: { type: Number, required: true }
+        //orderRulePackage: { type: pkg, required: true }
     }, { collection: "orderRules" });
 
     module.exports = mongoose.model('OrderRule', schemaName);
-    
+
 }());
