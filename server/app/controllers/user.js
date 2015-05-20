@@ -3,7 +3,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    box = mongoose.model('Box');
+    user = mongoose.model('User');
 
 /**
  * CREATE a book
@@ -39,7 +39,7 @@ var mongoose = require('mongoose'),
 
 exports.create = function (req, res) {
 
-    var doc = new box(req.body);
+    var doc = new user(req.body);
 
     doc.save(function (err) {
 
@@ -97,9 +97,9 @@ exports.list = function (req, res) {
 
     conditions = {};
     fields = {};
-    sort = {'packageName': 1};
+    sort = {'username': 1};
 
-    box
+    user
         .find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
@@ -127,10 +127,10 @@ exports.list = function (req, res) {
 exports.detail = function (req, res) {
     var conditions, fields;
 
-    conditions = {_id: req.params._id};
+    conditions = {username: req.params._id};
     fields = {};
 
-    box
+    user
         .findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
@@ -175,37 +175,7 @@ exports.detail = function (req, res) {
  * @see http://mongoosejs.com/docs/api.html#model_Model.findOneAndUpdate
  * @see http://docs.mongodb.org/manual/reference/command/findAndModify/
  */
-exports.updateOne = function (req, res) {
 
-    var conditions =
-        {_id: req.params._id},
-        update = {
-            packageName: req.body.packageName || '',
-            packageDescription: req.body.packageDescription || '',
-            packageCapacity: req.body.packageCapacity || '',
-            packageImageSrc: req.body.packageImageSrc || '',
-            packageModificationDate: new Date()
-        },
-        options = {multi: false},
-        callback = function (err, doc) {
-            var retObj = {
-                meta: {
-                    "action": "update",
-                    'timestamp': new Date(),
-                    filename: __filename,
-                    'doc': doc,
-                    'update': update
-                },
-                doc: update,
-                err: err
-            };
-
-            return res.send(retObj);
-        };
-
-    box
-        .findOneAndUpdate(conditions, update, options, callback);
-};
 
 /**
  * DELETE
@@ -250,7 +220,7 @@ exports.updateOne = function (req, res) {
 exports.deleteOne = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {_id: req.params._id};
+    conditions = {username: req.params._id};
     callback = function (err, doc) {
         retObj = {
             meta: {
@@ -264,6 +234,7 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    box
+    user
         .remove(conditions, callback);
 };
+
