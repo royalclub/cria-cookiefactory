@@ -7,13 +7,13 @@
         boxSchema;
 
     boxSchema = new mongoose.Schema({
-        boxName: {type: String, required: true},
-        boxDescription: {type: String, required: true },
-        boxCapacity: {type: Number, required: true},
-        boxImageSrc: {type: String, required: true},
-        boxCreationDate: {type: Date, "default": Date.now},
-        boxModificationDate: {type: Date, "default": Date.now}
-    }, {collection: "boxes"});
+        name: {type: String, required: true},
+        description: {type: String, required: true },
+        capacity: {type: Number, required: true},
+        imageSrc: {type: String, required: true},
+        creationDate: {type: Date, "default": Date.now},
+        modificationDate: {type: Date, "default": Date.now}
+    });
 
     module.exports = mongoose.model('Box', boxSchema);
 }());

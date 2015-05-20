@@ -4,16 +4,15 @@
     "use strict";
 
     var mongoose = require('mongoose'),
-        Schema = mongoose.Schema,
+        layerModel = require('./layers.js'),
         cookieSchema;
 
     cookieSchema = new mongoose.Schema({
-        cookieName: {type: String, required: true},
-        cookieShape: {type: Schema.ObjectId, ref: 'Shape' },
-        cookieLayers: [{type: Schema.ObjectId, ref: 'Layer'}],
-        cookieCreator: {type: String, required: true},
-        cookieCreationDate: {type: Date, "default": Date.now},
-        cookieModificationDate: {type: Date, "default": Date.now}
+        name: {type: String, required: true},
+        creator: {type: String, required: true},
+        layers: [{type: layerModel, required: true}],
+        creationDate: {type: Date, "default": Date.now},
+        modificationDate: {type: Date, "default": Date.now}
     }, {collection: "cookies"});
 
     module.exports = mongoose.model('Cookie', cookieSchema);

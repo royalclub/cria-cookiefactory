@@ -172,37 +172,9 @@ exports.detail = function (req, res) {
 };
 
 /**
- * UPDATE book
- * --------------------
- * Controller to update _one_ books.
- *
- * Instructions, hints and questions
- * - Read about the 'find' method from Mongoose.
- * - Use the 'findOneAndUpdate' method from Mongoose.
- *   - Question: What are the differences between MongoDb and Mongoose?
- *   - Question: What are the differences between MongoDb 'save' and MongoDb 'update'?
- *   - Question: What are the differences between MongoDb 'findAndModify' and Mongoose 'findOneAndUpdate'?
- * - Return all fields.
- * - Use the model "Book".
- * Question: What changes should be made to update more than one document?
- *
- * The return object has three properties:
- *
- * - meta: These are all optional and free to extend
- *   - method name: The name of the method
- *   - timestamp
- *   - filename: The name of the file. Use '__filename' for this.
- *   - duration: Duration of execution, time spend on server or other meaningful metric
- * - doc: The result object is either an object or null.
- * - err: If no errors, it has the value 'null'
- *
- * @module books/update
+ * Fetch _one_ record based on an id.
  * @param req
  * @param res
- * @see http://docs.mongodb.org/manual/reference/method/db.collection.update/
- * @see http://docs.mongodb.org/manual/reference/method/db.collection.save/
- * @see http://mongoosejs.com/docs/api.html#model_Model.findOneAndUpdate
- * @see http://docs.mongodb.org/manual/reference/command/findAndModify/
  */
 exports.updateOne = function (req, res) {
 

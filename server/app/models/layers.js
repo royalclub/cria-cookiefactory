@@ -2,27 +2,18 @@
 
 (function () {
     "use strict";
-    /**
-     * Module dependencies.
-     */
+
     var mongoose = require('mongoose'),
-        Schema = mongoose.Schema,
-        schemaName,
-        modelName;
+        layerOptionModel = require('./layerOptions.js'),
+        layerSchema;
 
-    schemaName = new Schema({
-        layerName: {type: String, required: true},
-        layerType: {type: Schema.ObjectId, ref: 'LayerType'},
-        layerIngredients: [{type: Schema.ObjectId, ref: 'Ingredient' }],
-        layerOrder: {type: Number, required: true},
-        layerDescription: {type: String},
-        layerPrice: {type: Number, required: true},
-        layerImageSrc: {type: String, required: true},
-        layerCreationDate: {type: Date, "default": Date.now},
-        layerModificationDate: {type: Date, "default": Date.now}
-    }, {collection: "layers"});
+    layerSchema = new mongoose.Schema({
+        name: {type: String, required: true},
+        required: {type: Boolean, required: true},
+        options: [{type: layerOptionModel, required: true}],
+        creationDate: {type: Date, "default": Date.now, required: true},
+        modificationDate: {type: Date, "default": Date.now, required: true}
+    }, {collection: 'layers'});
 
-    modelName = 'Layer';
-    module.exports = mongoose.model(modelName, schemaName);
-
+    module.exports = mongoose.model('Layer', layerSchema);
 }());

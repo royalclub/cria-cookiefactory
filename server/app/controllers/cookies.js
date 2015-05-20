@@ -121,37 +121,9 @@ exports.list = function (req, res) {
 };
 
 /**
- * RETRIEVE _one_ book
- * --------------------
- * Controller to retrieve _one_ books.
- *
- * Instructions, hints and questions
- * - Read about the 'findOne' method from Mongoose.
- * - Use the 'findOne' method from Mongoose.
- *   - Question: What is de result object from findOne?
- *   - Question: What are the differences between MongoDb and Mongoose?
- * - The 'query' parameter is an empty object.
- *   - Question: Why is it empty?
- * - Skip the options.
- * - Return all fields.
- * - Use the model "Book".
- * Question: Define route parameters and body parameter. What are the differences?
- *
- * The return object has three properties:
- *
- * - meta: These are all optional and free to extend
- *   - method name: The name of the method
- *   - timestamp
- *   - filename: The name of the file. Use '__filename' for this.
- *   - duration: Duration of execution, time spend on server or other meaningful metric
- * - doc: The result object is either an object or null.
- * - err: If no errors, it has the value 'null'
- *
- * @module books/detail
+ * Fetch _one_ record based on an id.
  * @param req
  * @param res
- * @see http://docs.mongodb.org/manual/reference/method/db.collection.findOne/
- * @see http://mongoosejs.com/docs/api.html#model_Model.findOne
  */
 exports.detail = function (req, res) {
     var conditions, fields;

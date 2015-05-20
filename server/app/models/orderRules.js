@@ -4,15 +4,15 @@
     "use strict";
 
     var mongoose = require('mongoose'),
-        Cookie = mongoose.model('Cookie'),
-        Box = mongoose.model('Box'),
-        schema;
+        cookieModel = require('./cookies.js'),
+        boxModel = require('./box.js'),
+        orderRuleSchema;
 
-    schema = new mongoose.Schema({
-        orderRuleCookie: [{type: Cookie, required: true}],
-        orderRuleNumberOf: { type: Number, required: true },
-        orderRuleBox: [{ type: Box, required: true}]
-    }, { collection: "orderRules" });
+    orderRuleSchema = new mongoose.Schema({
+        cookie: [{type: cookieModel, required: true}],
+        box: [{ type: boxModel, required: true}],
+        amountOfBoxes: { type: Number, required: true }
+    });
 
-    module.exports = mongoose.model('OrderRule', schema);
+    module.exports = mongoose.model('OrderRule', orderRuleSchema);
 }());
