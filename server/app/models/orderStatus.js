@@ -9,10 +9,10 @@
         orderStatusSchema;
 
     orderStatusSchema = new mongoose.Schema({
-        name: {type: String, required: true},
-        description: {type: String, required: true},
-        creationDate: {type: Date, "default": Date.now},
-        modificationDate: {type: Date, "default": Date.now}
+        name: {type: String, required: true, minlength: 3, maxlength: 20},
+        description: {type: String, maxlength: 512},
+        creationDate: {type: Date, "default": Date.now, required: true},
+        modificationDate: {type: Date, "default": Date.now, required: true}
     });
 
     module.exports = mongoose.model('OrderStatus', orderStatusSchema);
