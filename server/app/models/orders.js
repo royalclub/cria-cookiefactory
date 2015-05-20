@@ -2,16 +2,13 @@
 
 (function () {
     "use strict";
-    /**
-     * Module dependencies.
-     */
+
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         Address = mongoose.model('Address'),
         //OrderStatus = mongoose.model('OrderStatus'),
         OrderRule = mongoose.model('OrderRule'),
-        orderSchema,
-        modelName;
+        orderSchema;
 
     orderSchema = new Schema({
         orderNumber: {type: String, required: true},
@@ -26,7 +23,5 @@
         orderModificationDate: {type: Date, "default": Date.now}
     }, {collection: "orders"});
 
-    modelName = 'Order';
-    module.exports = mongoose.model("Order", orderSchema);
-
+    module.exports = mongoose.model('Order', orderSchema);
 }());

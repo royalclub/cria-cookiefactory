@@ -2,15 +2,11 @@
 
 (function () {
     "use strict";
-    /**
-     * Module dependencies.
-     */
-    var mongoose = require('mongoose'),
-        Schema = mongoose.Schema,
-        packageSchema,
-        modelName;
 
-    packageSchema = new mongoose.Schema({
+    var mongoose = require('mongoose'),
+        boxSchema;
+
+    boxSchema = new mongoose.Schema({
         boxName: {type: String, required: true},
         boxDescription: {type: String, required: true },
         boxCapacity: {type: Number, required: true},
@@ -19,7 +15,5 @@
         boxModificationDate: {type: Date, "default": Date.now}
     }, {collection: "boxes"});
 
-    modelName = 'Box';
-    module.exports = mongoose.model( 'Box', packageSchema );
-    
+    module.exports = mongoose.model('Box', boxSchema);
 }());

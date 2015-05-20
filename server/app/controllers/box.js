@@ -1,8 +1,9 @@
 /*jslint node: true */
+/*global __filename */
 "use strict";
 
 var mongoose = require('mongoose'),
-    box = mongoose.model('Box');
+    Box = mongoose.model('Box');
 
 /**
  * CREATE a book

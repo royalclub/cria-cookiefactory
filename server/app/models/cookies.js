@@ -2,13 +2,10 @@
 
 (function () {
     "use strict";
-    /**
-     * Module dependencies.
-     */
+
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        cookieSchema,
-        modelName;
+        cookieSchema;
 
     cookieSchema = new mongoose.Schema({
         cookieName: {type: String, required: true},
@@ -19,7 +16,5 @@
         cookieModificationDate: {type: Date, "default": Date.now}
     }, {collection: "cookies"});
 
-    modelName = 'Cookie';
-    module.exports = mongoose.model( 'Cookie', cookieSchema );
-
+    module.exports = mongoose.model('Cookie', cookieSchema);
 }());
