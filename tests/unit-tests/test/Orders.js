@@ -9,37 +9,25 @@ var env = process.env.NODE_ENV || 'development',
 var should = require('should'),
     supertest = require('supertest');
 
-describe('API Routing for CRUD operations on orders', function () {
+describe('API Routing for CRUD operations on books', function () {
 
     var request = supertest(localConfig.host + ":" + config.port + "/" + localConfig.api_path);
 
-    var tmpOrderId = null;
-    var tmpOrderResponse;
+    var tmpBookId = null;
+    var tmpBookResponse;
 
     before(function (done) {
         done();
     });
 
-    describe('CREATE order', function () {
-        it('Should POST /orders', function (done) {
+    describe('CREATE book', function () {
+        it('Should POST /books', function (done) {
             request
-                .post('/orders')
+                .post('/books')
                 .send({
-                    "number": "b624",
-                    status: {
-                                name: "in de oven",
-                                description: "Het koekje zit in de over.",
-                                creationDate: "2012-04-23T18:25:43.511Z",
-                                modificationDate: "2012-04-23T18:25:43.511Z",
-                                },
-                    user: "John Doe",
-                    rules: "John Doe",
-                    invoiceAddress: "John Doe",
-                    shipmentAddress: "John Doe",
-                    vatPercentage: "John Doe",
-                    creationDate: "2012-04-23T18:25:43.511Z",
-                    modificationDate: "Johen Doe"
-                    }
+                    "title": "Great book!" + Date.now(),
+                    "author": "John Doe",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
                 )
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
@@ -61,18 +49,18 @@ describe('API Routing for CRUD operations on orders', function () {
                         .and.have.property('author')
                         .be.exactly('John Doe');
 
-                    tmpOrderId = JSON.parse(res.text).doc._id;
+                    tmpBookId = JSON.parse(res.text).doc._id;
 
                     done();
                 });
         });
     });
 
-    describe('RETRIEVE all orders', function () {
+    describe('RETRIEVE all books', function () {
 
-        it('Should GET /orders', function (done) {
+        it('Should GET /books', function (done) {
             request
-                .get('/orders')
+                .get('/books')
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
@@ -86,17 +74,17 @@ describe('API Routing for CRUD operations on orders', function () {
                         .and.have.property('action').be.exactly('list');
                     res.statusCode.should.be.exactly(200);
 
-                    tmpOrderResponse = res.text;
+                    tmpBookResponse = res.text;
 
                     done();
                 });
         });
     });
 
-    describe('RETRIEVE 1 order', function () {
-        it('Should GET /orders/{id}', function (done) {
+    describe('RETRIEVE 1 book', function () {
+        it('Should GET /books/{id}', function (done) {
             request
-                .get('/orders/' + tmpOrderId)
+                .get('/books/' + tmpBookId)
                 .expect('Content-Type', /application.json/)
                 .expect(200)
                 .end(function (err, res) {
@@ -117,15 +105,15 @@ describe('API Routing for CRUD operations on orders', function () {
         });
     });
 
-    describe('UPDATE 1 order', function () {
-        it('Should PUT /orders/{id}', function (done) {
+    describe('UPDATE 1 book', function () {
+        it('Should PUT /books/{id}', function (done) {
             request
-                .put('/orders/' + tmpOrderId)
+                .put('/books/' + tmpBookId)
                 .send({
                     "doc": {
-                        "title": "Good order " + Date.now(),
+                        "title": "Good book " + Date.now(),
                         "author": "Ghostwriter",
-                        "description": "order is updated."
+                        "description": "Book is updated."
                     }
                 })
                 .expect(200)                                                // supertest
@@ -153,10 +141,10 @@ describe('API Routing for CRUD operations on orders', function () {
         });
     });
 
-    describe('DELETE 1 order', function () {
-        it('Should DELETE /orders/{id}', function (done) {
+    describe('DELETE 1 book', function () {
+        it('Should DELETE /books/{id}', function (done) {
             request
-                .del('/orders/' + tmpOrderId)
+                .del('/books/' + tmpBookId)
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
@@ -182,10 +170,10 @@ describe('API Routing for CRUD operations on orders', function () {
         });
     });
 
-    describe('RETRIEVE all orders to verify that the original collection is restored.', function () {
-        it('Should GET /orders', function (done) {
+    describe('RETRIEVE all books to verify that the original collection is restored.', function () {
+        it('Should GET /books', function (done) {
             request
-                .get('/orders')
+                .get('/books')
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
