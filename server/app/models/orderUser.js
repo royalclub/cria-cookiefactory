@@ -8,9 +8,9 @@
 
     orderUserSchema = new mongoose.Schema({
         username: {type: String, required: true},
-		firstname: {type: String, required: true},
-		tussenvoegsels: {type: String},
-		lastname: {type: String, required: true}
+		firstName: {type: String, required: true},
+        inserts: {type: String},
+		lastName: {type: String, required: true}
     });
 
     module.exports = mongoose.model('OrderUser', orderUserSchema);
