@@ -16,7 +16,7 @@
         lastName: {type: String, required: true, minlength: 2, maxlength: 50},
         dateOfBirth: {type: Date},
         emailAddress: {type: String, required: true},
-        addresses: [{type: addressModel, required: true}],
+        addresses: [{type: addressModel, required: false}],
         creationDate: {type: Date, "default": Date.now, required: true},
         modificationDate: {type: Date, "default": Date.now, required: true}
     }, {collection: "users"});
