@@ -148,3 +148,91 @@ exports.deleteOne = function (req, res) {
     Layer
         .remove(conditions, callback);
 };
+
+/**
+ * Retrieve a list of LayerOptions belonging to a Layer.
+ */
+exports.listOptions = function (req, res) {
+    var conditions, fields;
+
+    conditions = {};
+    fields = {};
+
+    Layer
+        .find(conditions, fields)
+        .exec(function (err, doc) {
+
+            var retObj = {
+                meta: {
+                    "action": "listOptions",
+                    'timestamp': new Date(),
+                    filename: __filename
+                },
+                doc: doc.options, // array
+                err: err
+            };
+
+            return res.send(retObj);
+        });
+};
+
+/**
+ * Create an LayerOption inside an Layer.
+ */
+exports.createOption = function (req, res) {
+    var layerOption, conditions, fields;
+
+    layerOption = new LayerOption(req.body);
+    conditions = {_id: req.params._id};
+    fields = {};
+    Layer
+        .findOne(conditions, fields)
+        .exec(function (err, doc) {
+            doc.options.push(layerOption);
+            doc.save(function (err) {
+
+                var retObj = {
+                    meta: {
+                        "action": "createOption",
+                        'timestamp': new Date(),
+                        filename: __filename
+                    },
+                    doc: doc.options,
+                    err: err
+                };
+                return res.send(retObj);
+            });
+        });
+
+    Layer
+        .findOneAndUpdate();
+};
+
+/**
+ * Delete an LayerOption inside an Layer.
+ */
+exports.deleteOption = function (req, res) {
+    var conditions, fields;
+    conditions = {_id: req.params._id};
+    fields = {};
+    Layer
+        .findOne(conditions, fields)
+        .exec(function (err, doc) {
+            var optionConditions = {name: req.params.name};
+            doc.options.remove(optionConditions, function (err, doc) {
+                var retObj = {
+                    meta: {
+                        "action": "deleteOption",
+                        'timestamp': new Date(),
+                        filename: __filename
+                    },
+                    doc: doc.options,
+                    err: err
+                };
+                return res.send(retObj);
+            });
+        });
+
+    Layer
+        .findOneAndUpdate();
+};

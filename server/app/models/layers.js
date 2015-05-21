@@ -15,7 +15,7 @@
         creationDate: {type: Date, "default": Date.now, required: true},
         modificationDate: {type: Date, "default": Date.now, required: true}
     }, {collection: 'layers'});
-    
+
     module.exports = {
         schema: layerSchema,
         model: mongoose.model('Layer', layerSchema)

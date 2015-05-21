@@ -11,7 +11,7 @@
         orderSchema;
 
     orderSchema = new mongoose.Schema({
-        "number": {type: String, required: true},
+        "number": {type: String, required: true, unique: true},
         status: [orderStatus.schema],
         user: [orderUser.schema],
         rules: [orderRule.schema],
