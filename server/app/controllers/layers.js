@@ -3,25 +3,16 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-<<<<<<< HEAD
-    Cookie = mongoose.model('Cookie');
-=======
-    Cookie = mongoose.model('Cookie'),
     Layer = mongoose.model('Layer'),
     LayerOption = mongoose.model('LayerOption');
->>>>>>> production
 
 /**
- * Create a new Cookie.
+ * Create a new Layer.
  * @param req   The request information.
  * @param res   The result object.
  */
 exports.create = function (req, res) {
-<<<<<<< HEAD
-
-=======
->>>>>>> production
-    var doc = new Cookie(req.body);
+    var doc = new Layer(req.body);
 
     doc.save(function (err) {
 
@@ -41,7 +32,7 @@ exports.create = function (req, res) {
 
 
 /**
- * Retrieve a list of _all_ Cookies.
+ * Retrieve a list of _all_ Layers.
  * @param req   The request information.
  * @param res   The result object.
  */
@@ -50,9 +41,9 @@ exports.list = function (req, res) {
 
     conditions = {};
     fields = {};
-    sort = {'name': 1};
+    sort = {'sequence': 1};
 
-    Cookie
+    Layer
         .find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
@@ -72,7 +63,7 @@ exports.list = function (req, res) {
 };
 
 /**
- * Retrieve details of a _single_ Cookie.
+ * Retrieve details of a _single_ Layer.
  * @param req   The request information.
  * @param res   The result object.
  */
@@ -82,7 +73,7 @@ exports.detail = function (req, res) {
     conditions = {_id: req.params._id};
     fields = {};
 
-    Cookie
+    Layer
         .findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
@@ -95,7 +86,7 @@ exports.detail = function (req, res) {
 };
 
 /**
- * Update a single Cookie.
+ * Update a single Layer.
  * @param req   The request information.
  * @param res   The result object.
  */
@@ -104,10 +95,11 @@ exports.updateOne = function (req, res) {
     var conditions =
         {_id: req.params._id},
         update = {
-            name: req.body.name || '',
-            creator: req.body.creator || '',
-            layers: req.body.layers,
-            ModificationDate: new Date()
+            name: req.body.name,
+            required: req.body.required || true,
+            sequence: req.body.sequence || 0,
+            options: req.body.options,
+            modificationDate: new Date()
         },
         options = {multi: false},
         callback = function (err, doc) {
@@ -127,12 +119,12 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    Cookie
+    Layer
         .findOneAndUpdate(conditions, update, options, callback);
 };
 
 /**
- * Delete a single Cookie.
+ * Delete a single Layer.
  * @param req   The request information.
  * @param res   The result object.
  */
@@ -153,6 +145,94 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    Cookie
+    Layer
         .remove(conditions, callback);
+};
+
+/**
+ * Retrieve a list of LayerOptions belonging to a Layer.
+ */
+exports.listOptions = function (req, res) {
+    var conditions, fields;
+
+    conditions = {};
+    fields = {};
+
+    Layer
+        .find(conditions, fields)
+        .exec(function (err, doc) {
+
+            var retObj = {
+                meta: {
+                    "action": "listOptions",
+                    'timestamp': new Date(),
+                    filename: __filename
+                },
+                doc: doc.options, // array
+                err: err
+            };
+
+            return res.send(retObj);
+        });
+};
+
+/**
+ * Create an LayerOption inside an Layer.
+ */
+exports.createOption = function (req, res) {
+    var layerOption, conditions, fields;
+
+    layerOption = new LayerOption(req.body);
+    conditions = {_id: req.params._id};
+    fields = {};
+    Layer
+        .findOne(conditions, fields)
+        .exec(function (err, doc) {
+            doc.options.push(layerOption);
+            doc.save(function (err) {
+
+                var retObj = {
+                    meta: {
+                        "action": "createOption",
+                        'timestamp': new Date(),
+                        filename: __filename
+                    },
+                    doc: doc.options,
+                    err: err
+                };
+                return res.send(retObj);
+            });
+        });
+
+    Layer
+        .findOneAndUpdate();
+};
+
+/**
+ * Delete an LayerOption inside an Layer.
+ */
+exports.deleteOption = function (req, res) {
+    var conditions, fields;
+    conditions = {_id: req.params._id};
+    fields = {};
+    Layer
+        .findOne(conditions, fields)
+        .exec(function (err, doc) {
+            var optionConditions = {name: req.params.name};
+            doc.options.remove(optionConditions, function (err, doc) {
+                var retObj = {
+                    meta: {
+                        "action": "deleteOption",
+                        'timestamp': new Date(),
+                        filename: __filename
+                    },
+                    doc: doc.options,
+                    err: err
+                };
+                return res.send(retObj);
+            });
+        });
+
+    Layer
+        .findOneAndUpdate();
 };

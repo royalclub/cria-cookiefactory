@@ -1,8 +1,9 @@
 /*jslint node: true */
+/*global __filename */
 "use strict";
 
 var mongoose = require('mongoose'),
-    Book = mongoose.model('Book');
+    User = mongoose.model('User');
 
 /**
  * CREATE a book
@@ -38,7 +39,7 @@ var mongoose = require('mongoose'),
 
 exports.create = function (req, res) {
 
-    var doc = new Book(req.body);
+    var doc = new User(req.body);
 
     doc.save(function (err) {
 
@@ -55,7 +56,6 @@ exports.create = function (req, res) {
         return res.send(retObj);
 
     });
-
 };
 
 /**
@@ -97,9 +97,9 @@ exports.list = function (req, res) {
 
     conditions = {};
     fields = {};
-    sort = {'modificationDate': -1};
+    sort = {'username': 1};
 
-    Book
+    User
         .find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
@@ -120,45 +120,17 @@ exports.list = function (req, res) {
 };
 
 /**
- * RETRIEVE _one_ book
- * --------------------
- * Controller to retrieve _one_ books.
- *
- * Instructions, hints and questions
- * - Read about the 'findOne' method from Mongoose.
- * - Use the 'findOne' method from Mongoose.
- *   - Question: What is de result object from findOne?
- *   - Question: What are the differences between MongoDb and Mongoose?
- * - The 'query' parameter is an empty object.
- *   - Question: Why is it empty?
- * - Skip the options.
- * - Return all fields.
- * - Use the model "Book".
- * Question: Define route parameters and body parameter. What are the differences?
- *
- * The return object has three properties:
- *
- * - meta: These are all optional and free to extend
- *   - method name: The name of the method
- *   - timestamp
- *   - filename: The name of the file. Use '__filename' for this.
- *   - duration: Duration of execution, time spend on server or other meaningful metric
- * - doc: The result object is either an object or null.
- * - err: If no errors, it has the value 'null'
- *
- * @module books/detail
+ * Fetch _one_ record based on an id.
  * @param req
  * @param res
- * @see http://docs.mongodb.org/manual/reference/method/db.collection.findOne/
- * @see http://mongoosejs.com/docs/api.html#model_Model.findOne
  */
 exports.detail = function (req, res) {
     var conditions, fields;
 
-    conditions = {_id: req.params._id};
+    conditions = {username: req.params.username};
     fields = {};
 
-    Book
+    User
         .findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
@@ -203,14 +175,23 @@ exports.detail = function (req, res) {
  * @see http://mongoosejs.com/docs/api.html#model_Model.findOneAndUpdate
  * @see http://docs.mongodb.org/manual/reference/command/findAndModify/
  */
+
 exports.updateOne = function (req, res) {
 
     var conditions =
-        {_id: req.params._id},
+        {username: req.params.username},
         update = {
-            title: req.body.doc.title || '',
-            author: req.body.doc.author || '',
-            description: req.body.doc.description || ''
+            username: req.body.username || '',
+            salt: req.body.salt || '',
+            password: req.body.password || '',
+            firstName: req.body.firstName || '',
+            inserts: req.body.inserts || '',
+            lastName: req.body.lastName || '',
+            dateOfBirth: req.body.dateOfBirth || '',
+            emailAddress: req.body.emailAddress || '',
+            addresses: req.body.addresses,
+            modificationDate: new Date()
+
         },
         options = {multi: false},
         callback = function (err, doc) {
@@ -229,9 +210,10 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    Book
+    User
         .findOneAndUpdate(conditions, update, options, callback);
 };
+
 
 /**
  * DELETE
@@ -276,7 +258,7 @@ exports.updateOne = function (req, res) {
 exports.deleteOne = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {_id: req.params._id};
+    conditions = {username: req.params.username};
     callback = function (err, doc) {
         retObj = {
             meta: {
@@ -290,6 +272,7 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    Book
+    User
         .remove(conditions, callback);
 };
+

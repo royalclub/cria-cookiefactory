@@ -11,7 +11,7 @@ export JSLINT=$BASEDIR/tests/static-analyzer/node_modules/jslint
 export DIR=`pwd`
 export CUR_SCRIPT="`basename $0`.log"
 # Default port number for test
-export TEST_PORT=6081
+export TEST_PORT=6082
 # Default port number for acceptance
 export ACCEPTANCE_PORT=6083
 
@@ -97,6 +97,9 @@ echo "`date` -------------------------------------------------------------------
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
+git merge --no-edit $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
+git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a "$DIR/$CUR_SCRIPT"
+git push origin $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
 
 cd $BASEDIR/tests/static-analyzer
 
@@ -111,9 +114,6 @@ if [ -f $BASEDIR/tests/static-analyzer/error_log.txt ]; then
 	exit 1
 fi
 
-git merge --no-edit $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
-git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a "$DIR/$CUR_SCRIPT"
-git push origin $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
 
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` - STAGE2, unit-tests" | tee -a "$DIR/$CUR_SCRIPT"

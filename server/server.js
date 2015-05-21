@@ -36,7 +36,7 @@
     /**
      * Debugging
      */
-    console.log(config.debug);
+    console.log("Debug: " + config.debug);
 
     mongoose.connection.on('error', function (err) {
         console.error('MongoDB error: %s', err);
