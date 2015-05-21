@@ -181,11 +181,10 @@ exports.updateOne = function (req, res) {
     var conditions =
         {_id: req.params._id},
         update = {
-            cookieName: req.body.cookieName || '',
-            cookieShape: req.body.cookieShape || '',
-            cookieLayers: req.body.cookieLayers || '',
-            cookieCreator: req.body.cookieCreator || '',
-            cookieModificationDate: new Date()
+            name: req.body.name || '',
+            creator: req.body.creator || '',
+            layers: req.body.layers,
+            ModificationDate: new Date()
         },
         options = {multi: false},
         callback = function (err, doc) {
