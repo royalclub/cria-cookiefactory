@@ -127,7 +127,7 @@ exports.list = function (req, res) {
 exports.detail = function (req, res) {
     var conditions, fields;
 
-    conditions = {username: req.params._id};
+    conditions = {username: req.params.username};
     fields = {};
 
     user
@@ -176,6 +176,46 @@ exports.detail = function (req, res) {
  * @see http://docs.mongodb.org/manual/reference/command/findAndModify/
  */
 
+exports.updateOne = function (req, res) {
+
+    console.log(req);
+    console.log(res);
+    var conditions =
+        {username: req.params.username},
+        update = {
+            username: req.body.username || '',
+            salt: req.body.salt || '',
+            password: req.body.password || '',
+            firstName: req.body.firstName || '',
+            inserts: req.body.inserts || '',
+            lastName: req.body.lastName || '',
+            dateOfBirth: req.body.dateOfBirth || '',
+            emailAddress: req.body.emailAddress || '',
+            addresses: [req.body.addresses] || '',
+            modificationDate: new Date()
+
+        },
+        options = {multi: false},
+        callback = function (err, doc) {
+            var retObj = {
+                meta: {
+                    "action": "update",
+                    'timestamp': new Date(),
+                    filename: __filename,
+                    'doc': doc,
+                    'update': update
+                },
+                doc: update,
+                err: err
+            };
+
+            return res.send(retObj);
+        };
+
+    user
+        .findOneAndUpdate(conditions, update, options, callback);
+};
+
 
 /**
  * DELETE
@@ -220,7 +260,7 @@ exports.detail = function (req, res) {
 exports.deleteOne = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {username: req.params._id};
+    conditions = {username: req.params.username};
     callback = function (err, doc) {
         retObj = {
             meta: {

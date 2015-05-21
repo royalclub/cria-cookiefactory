@@ -21,14 +21,15 @@ router
 // RETRIEVE
 router
     .get('/user', controller.list)
-    .get('/user/:_id', controller.detail);
+    .get('/user/:username', controller.detail);
 
 // UPDATE
-
+router
+    .get('/user/:username', controller.updateOne);
 
 // DELETE
 router
-    .delete('/user/:_id', controller.deleteOne);
+    .delete('/user/:username', controller.deleteOne);
 
 
 module.exports = router;

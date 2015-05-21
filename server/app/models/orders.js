@@ -15,8 +15,8 @@
         status: [{type: orderStatusModel}],
         user: [{type: orderUserModel}],
         rules: [{type: orderRuleModel}],
-        invoiceAddress: [{type: addressModel, required: true}],
-        shipmentAddress: [{type: addressModel, required: true}],
+        invoiceAddress: [addressModel],
+        shipmentAddress: [addressModel],
         vatPercentage: {type: Number, required: true, min: 0, max: 100},
         creationDate: {type: Date, "default": Date.now, required: true},
         modificationDate: {type: Date, "default": Date.now, required: true}
