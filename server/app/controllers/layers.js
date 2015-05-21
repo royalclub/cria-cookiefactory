@@ -3,8 +3,8 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Layer = mongoose.model('Layer'),
-    LayerOption = mongoose.model('LayerOption');
+    Layer = mongoose.model('Layer').model,
+    LayerOption = mongoose.model('LayerOption').model;
 
 /**
  * Create a new Layer.
