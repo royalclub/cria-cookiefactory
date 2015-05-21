@@ -41,7 +41,7 @@ exports.list = function (req, res) {
 
     conditions = {};
     fields = {};
-    sort = {'name': -1};
+    sort = {'name': 1};
 
     Layer
         .find(conditions, fields)
