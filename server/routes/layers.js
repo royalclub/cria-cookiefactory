@@ -14,15 +14,15 @@ router
 // RETRIEVE
 router
     .get('/layers', controller.list)
-    .get('/layers/:_name', controller.detail);
+    .get('/layers/:_id', controller.detail);
 
 // UPDATE
 router
-    .put('/layers/:_name', controller.updateOne);
+    .put('/layers/:_id', controller.updateOne);
 
 // DELETE
 router
-    .delete('/layers/:_name', controller.deleteOne);
+    .delete('/layers/:_id', controller.deleteOne);
 
 
 module.exports = router;
