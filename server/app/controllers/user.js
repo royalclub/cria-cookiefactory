@@ -3,7 +3,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    user = mongoose.model('User');
+    user = mongoose.model('User').model;
 
 /**
  * CREATE a book

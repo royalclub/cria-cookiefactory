@@ -3,7 +3,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Order = mongoose.model('Order');
+    Order = mongoose.model('Order').model;
 
 /**
  * CREATE a book
