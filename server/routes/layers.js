@@ -7,22 +7,22 @@ var express = require('express'),
     controller = require('../app/controllers/layers.js'),
     router = express.Router();
 
-/** CREATE */
+// CREATE
 router
-    .post('/layer', controller.create);
+    .post('/layers', controller.create);
 
 // RETRIEVE
 router
-    .get('/layer', controller.list)
-    .get('/layer/:name', controller.detail);
+    .get('/layers', controller.list)
+    .get('/layers/:_name', controller.detail);
 
 // UPDATE
 router
-    .put('/layer/:name', controller.updateOne);
+    .put('/layers/:_name', controller.updateOne);
 
 // DELETE
 router
-    .delete('/layer/:name', controller.deleteOne);
+    .delete('/layers/:_name', controller.deleteOne);
 
 
 module.exports = router;

@@ -15,5 +15,8 @@
         modificationDate: {type: Date, "default": Date.now}
     });
 
-    module.exports = mongoose.model('Box', boxSchema);
+    module.exports = {
+        schema: boxSchema,
+        model: mongoose.model('Box', boxSchema)
+    };
 }());
