@@ -164,10 +164,6 @@ describe('API Routing for CRUD operations on layers', function () {
                     .should.have.property('doc')
                     .and.have.property('name')
                     .be.exactly("vormen");
-                JSON.parse(res.text)
-                    .should.have.property('doc')
-                    .and.have.property('options')
-                    .with.lengthOf(2);
                 res.statusCode.should.be.exactly(200);
                 done();
             });
