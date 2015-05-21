@@ -3,8 +3,7 @@
 
 var env = process.env.NODE_ENV || 'development',
     config = require('../../../server/config/config.js')[env],
-    localConfig = require('../../config-test.json')
-    ;
+    localConfig = require('../../config-test.json');
 
 var should = require('should'),
     supertest = require('supertest');
