@@ -41,7 +41,7 @@ exports.list = function (req, res) {
 
     conditions = {};
     fields = {};
-    sort = {'name': 1};
+    sort = {'sequence': 1};
 
     Layer
         .find(conditions, fields)
@@ -70,7 +70,7 @@ exports.list = function (req, res) {
 exports.detail = function (req, res) {
     var conditions, fields;
 
-    conditions = {name: req.params.name};
+    conditions = {_id: req.params._id};
     fields = {};
 
     Layer
@@ -93,10 +93,11 @@ exports.detail = function (req, res) {
 exports.updateOne = function (req, res) {
 
     var conditions =
-        {name: req.params.name},
+        {_id: req.params._id},
         update = {
             name: req.body.name,
             required: req.body.required || true,
+            sequence: req.body.sequence || 0,
             options: req.body.options,
             modificationDate: new Date()
         },
@@ -130,7 +131,7 @@ exports.updateOne = function (req, res) {
 exports.deleteOne = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {name: req.params.name};
+    conditions = {_id: req.params._id};
     callback = function (err, doc) {
         retObj = {
             meta: {

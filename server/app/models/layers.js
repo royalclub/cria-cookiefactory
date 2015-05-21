@@ -8,8 +8,9 @@
         layerSchema;
 
     layerSchema = new mongoose.Schema({
-        name: {type: String, required: true},
+        name: {type: String, required: true, unique: true},
         required: {type: Boolean, required: true},
+        sequence: {type: Number, required: true},
         options: [layerOption.schema],
         creationDate: {type: Date, "default": Date.now, required: true},
         modificationDate: {type: Date, "default": Date.now, required: true}
