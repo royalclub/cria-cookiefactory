@@ -3,10 +3,9 @@
 
 /** @module Routes for books */
 /** @class */
-var 
-    express = require('express'),
-    router = express.Router(),
-    controller = require('../app/controllers/layers.js');
+var express = require('express'),
+    controller = require('../app/controllers/layers.js'),
+    router = express.Router();
 
 /** CREATE */
 router

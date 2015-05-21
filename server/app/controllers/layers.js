@@ -102,7 +102,7 @@ exports.updateOne = function (req, res) {
         },
         options = {multi: false},
         callback = function (err, doc) {
-            
+
             var retObj = {
                 meta: {
                     "action": "update",
