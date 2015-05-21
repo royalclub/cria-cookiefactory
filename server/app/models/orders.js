@@ -2,28 +2,28 @@
 
 (function () {
     "use strict";
-    /**
-     * Module dependencies.
-     */
-    var mongoose = require('mongoose'),
-        Schema = mongoose.Schema,
-        schemaName,
-        modelName;
 
-    schemaName = new Schema({
-        orderNumber: {type: String, required: true},
-        orderStatus: {type: Schema.ObjectId, ref: "OrderStatus"},
-        orderUsername: {type: String},
-        orderRules: [{type: Schema.ObjectId, ref: "OrderRule"}],
-        orderInvoiceAddress: {type: Schema.ObjectId, ref: "Address"},
-        orderShipmentAddress: {type: Schema.ObjectId, ref: "Address"},
-        orderVat: {type: Number, required: true},
-        orderTotal: {type: Number, required: true},
-        orderCreationDate: {type: Date, "default": Date.now},
-        orderModificationDate: {type: Date, "default": Date.now}
+    var mongoose = require('mongoose'),
+        address = require('./address.js'),
+        orderStatus = require('./orderStatus.js'),
+        orderRule = require('./orderRules.js'),
+        orderUser = require('./orderUser.js'),
+        orderSchema;
+
+    orderSchema = new mongoose.Schema({
+        "number": {type: String, required: true, unique: true},
+        status: [orderStatus.schema],
+        user: [orderUser.schema],
+        rules: [orderRule.schema],
+        invoiceAddress: [address.schema],
+        shipmentAddress: [address.schema],
+        vatPercentage: {type: Number, required: true, min: 0, max: 100},
+        creationDate: {type: Date, "default": Date.now, required: true},
+        modificationDate: {type: Date, "default": Date.now, required: true}
     }, {collection: "orders"});
 
-    modelName = 'Order';
-    module.exports = mongoose.model(modelName, schemaName);
-
+    module.exports = {
+        schema: orderSchema,
+        model: mongoose.model('Order', orderSchema)
+    };
 }());

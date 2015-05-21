@@ -3,17 +3,19 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Cookie = mongoose.model('Cookie'),
-    Layer = mongoose.model('Layer'),
-    LayerOption = mongoose.model('LayerOption');
+    Order = mongoose.model('Order'),
+    OrderRule = mongoose.model('OrderRule'),
+    OrderStatus = mongoose.model('OrderStatus'),
+    OrderUser = mongoose.model('OrderUser'),
+    Address = mongoose.model('Address');
 
 /**
- * Create a new Cookie.
+ * Create a new Layer.
  * @param req   The request information.
  * @param res   The result object.
  */
 exports.create = function (req, res) {
-    var doc = new Cookie(req.body);
+    var doc = new Order(req.body);
 
     doc.save(function (err) {
 
@@ -33,7 +35,7 @@ exports.create = function (req, res) {
 
 
 /**
- * Retrieve a list of _all_ Cookies.
+ * Retrieve a list of _all_ Orders.
  * @param req   The request information.
  * @param res   The result object.
  */
@@ -42,9 +44,9 @@ exports.list = function (req, res) {
 
     conditions = {};
     fields = {};
-    sort = {'name': 1};
+    sort = {'creationDate': 1};
 
-    Cookie
+    Order
         .find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
@@ -64,7 +66,7 @@ exports.list = function (req, res) {
 };
 
 /**
- * Retrieve details of a _single_ Cookie.
+ * Retrieve details of a _single_ Order.
  * @param req   The request information.
  * @param res   The result object.
  */
@@ -74,7 +76,7 @@ exports.detail = function (req, res) {
     conditions = {_id: req.params._id};
     fields = {};
 
-    Cookie
+    Order
         .findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
@@ -87,7 +89,7 @@ exports.detail = function (req, res) {
 };
 
 /**
- * Update a single Cookie.
+ * Update a single Order.
  * @param req   The request information.
  * @param res   The result object.
  */
@@ -96,10 +98,14 @@ exports.updateOne = function (req, res) {
     var conditions =
         {_id: req.params._id},
         update = {
-            name: req.body.name || '',
-            creator: req.body.creator || '',
-            layers: req.body.layers,
-            ModificationDate: new Date()
+            "number": req.body.number,
+            status: req.body.status,
+            user: req.body.user,
+            rules: req.body.rules,
+            invoiceAddress: req.body.invoiceAddress,
+            shipmentAddress: req.body.shipmentAddress,
+            vatPercentage: req.body.vatPercentage,
+            modificationDate: new Date()
         },
         options = {multi: false},
         callback = function (err, doc) {
@@ -119,12 +125,12 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    Cookie
+    Order
         .findOneAndUpdate(conditions, update, options, callback);
 };
 
 /**
- * Delete a single Cookie.
+ * Delete a single Order.
  * @param req   The request information.
  * @param res   The result object.
  */
@@ -145,6 +151,6 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    Cookie
+    Order
         .remove(conditions, callback);
 };

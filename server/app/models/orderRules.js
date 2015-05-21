@@ -2,21 +2,20 @@
 
 (function () {
     "use strict";
-    /**
-     * Module dependencies.
-     */
+
     var mongoose = require('mongoose'),
-        Schema = mongoose.Schema,
-        schemaName,
-        modelName;
+        cookie = require('./cookies.js'),
+        box = require('./box.js'),
+        orderRuleSchema;
 
-    schemaName = new Schema({
-        orderRoleCookie: {type: Schema.ObjectId, ref: "Cookie"},
-		orderRuleNumberOf: {type: Number, required: true},
-        orderRulePackage: {type: Schema.ObjectId, ref: "Package"}
-    }, {collection: "orderRules"});
+    orderRuleSchema = new mongoose.Schema({
+        cookie: [cookie.schema],
+        box: [box.schema],
+        amountOfBoxes: { type: Number, required: true }
+    });
 
-    modelName = 'OrderRule';
-    module.exports = mongoose.model(modelName, schemaName);
-
+    module.exports = {
+        schema: orderRuleSchema,
+        model: mongoose.model('OrderRule', orderRuleSchema)
+    };
 }());
