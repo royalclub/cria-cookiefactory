@@ -8,7 +8,7 @@
 
     layerOptionSchema = new mongoose.Schema({
         name: {type: String, required: true},
-        order: {type: Number, required: true},
+        sequence: {type: Number, required: true},
         description: {type: String},
         price: {type: Number, required: true},
         imageSrc: {type: String, required: true},
