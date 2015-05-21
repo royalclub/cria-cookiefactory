@@ -25,7 +25,7 @@ router
 
 // UPDATE
 router
-    .get('/user/:username', controller.updateOne);
+    .put('/user/:username', controller.updateOne);
 
 // DELETE
 router

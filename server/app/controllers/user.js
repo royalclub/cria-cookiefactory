@@ -3,7 +3,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    user = mongoose.model('User');
+    User = mongoose.model('User');
 
 /**
  * CREATE a book
@@ -39,7 +39,7 @@ var mongoose = require('mongoose'),
 
 exports.create = function (req, res) {
 
-    var doc = new user(req.body);
+    var doc = new User(req.body);
 
     doc.save(function (err) {
 
@@ -99,7 +99,7 @@ exports.list = function (req, res) {
     fields = {};
     sort = {'username': 1};
 
-    user
+    User
         .find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
@@ -130,7 +130,7 @@ exports.detail = function (req, res) {
     conditions = {username: req.params.username};
     fields = {};
 
-    user
+    User
         .findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
@@ -178,8 +178,6 @@ exports.detail = function (req, res) {
 
 exports.updateOne = function (req, res) {
 
-    console.log(req);
-    console.log(res);
     var conditions =
         {username: req.params.username},
         update = {
@@ -191,7 +189,7 @@ exports.updateOne = function (req, res) {
             lastName: req.body.lastName || '',
             dateOfBirth: req.body.dateOfBirth || '',
             emailAddress: req.body.emailAddress || '',
-            addresses: [req.body.addresses] || '',
+            addresses: req.body.addresses,
             modificationDate: new Date()
 
         },
@@ -212,7 +210,7 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    user
+    User
         .findOneAndUpdate(conditions, update, options, callback);
 };
 
@@ -274,7 +272,7 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    user
+    User
         .remove(conditions, callback);
 };
 
