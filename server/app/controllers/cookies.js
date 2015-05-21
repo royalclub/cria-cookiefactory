@@ -3,7 +3,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Cookie = mongoose.model('Cookie').model;
+    Cookie = mongoose.model('Cookie');
 
 /**
  * CREATE a book
