@@ -16,5 +16,8 @@
         modificationDate: {type: Date, "default": Date.now, required: true}
     });
 
-    module.exports = mongoose.model('LayerOption', layerOptionSchema);
+    module.exports = {
+        schema: layerOptionSchema,
+        model: mongoose.model('LayerOption', layerOptionSchema)
+    };
 }());

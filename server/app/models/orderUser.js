@@ -14,5 +14,8 @@
         lastName: {type: String, required: true, minlength: 2, maxlength: 50}
     });
 
-    module.exports = mongoose.model('OrderUser', orderUserSchema);
+    module.exports = {
+        schema: orderUserSchema,
+        model: mongoose.model('OrderUser', orderUserSchema)
+    };
 }());

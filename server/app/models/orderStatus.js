@@ -15,7 +15,8 @@
         modificationDate: {type: Date, "default": Date.now, required: true}
     });
 
-    module.exports = mongoose.model('OrderStatus', orderStatusSchema);
-
-
+    module.exports = {
+        schema: orderStatusSchema,
+        model: mongoose.model('OrderStatus', orderStatusSchema)
+    };
 }());

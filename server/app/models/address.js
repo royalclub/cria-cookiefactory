@@ -17,5 +17,8 @@
         city: { type: String, required: true }
     });
 
-    module.exports = mongoose.model('Address', addressSchema);
+    module.exports = {
+        schema: addressSchema,
+        model: mongoose.model('Address', addressSchema)
+    };
 }());
