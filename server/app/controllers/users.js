@@ -3,19 +3,17 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Order = mongoose.model('Order'),
-    OrderRule = mongoose.model('OrderRule'),
-    OrderStatus = mongoose.model('OrderStatus'),
-    OrderUser = mongoose.model('OrderUser'),
-    Address = mongoose.model('Address');
+    User = mongoose.model('User');
 
 /**
- * Create a new Order.
+ * Create a new User.
  * @param req   The request information.
  * @param res   The result object.
  */
+
 exports.create = function (req, res) {
-    var doc = new Order(req.body);
+
+    var doc = new User(req.body);
 
     doc.save(function (err) {
 
@@ -30,12 +28,12 @@ exports.create = function (req, res) {
         };
 
         return res.send(retObj);
+
     });
 };
 
-
 /**
- * Retrieve a list of _all_ Orders.
+ * Retrieve a list of _all_ Users.
  * @param req   The request information.
  * @param res   The result object.
  */
@@ -44,9 +42,9 @@ exports.list = function (req, res) {
 
     conditions = {};
     fields = {};
-    sort = {'creationDate': 1};
+    sort = {'username': 1};
 
-    Order
+    User
         .find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
@@ -62,26 +60,27 @@ exports.list = function (req, res) {
             };
 
             return res.send(retObj);
+
         });
 };
 
 /**
- * Retrieve details of a _single_ Order.
- * @param req   The request information.
- * @param res   The result object.
+ * Fetch _one_ User record based on an username.
+ * @param req
+ * @param res
  */
 exports.detail = function (req, res) {
     var conditions, fields;
 
-    conditions = {_id: req.params._id};
+    conditions = {username: req.params.username};
     fields = {};
 
-    Order
+    User
         .findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
                 meta: {"action": "detail", 'timestamp': new Date(), filename: __filename},
-                doc: doc,
+                doc: doc, // only the first document, not an array when using "findOne"
                 err: err
             };
             return res.send(retObj);
@@ -89,27 +88,30 @@ exports.detail = function (req, res) {
 };
 
 /**
- * Update a single Order.
+ * Update a single User.
  * @param req   The request information.
  * @param res   The result object.
  */
+
 exports.updateOne = function (req, res) {
 
     var conditions =
-        {_id: req.params._id},
+        {username: req.params.username},
         update = {
-            "number": req.body.number,
-            status: req.body.status,
-            user: req.body.user,
-            rules: req.body.rules,
-            invoiceAddress: req.body.invoiceAddress,
-            shipmentAddress: req.body.shipmentAddress,
-            vatPercentage: req.body.vatPercentage,
+            username: req.body.username || '',
+            salt: req.body.salt || '',
+            password: req.body.password || '',
+            firstName: req.body.firstName || '',
+            inserts: req.body.inserts || '',
+            lastName: req.body.lastName || '',
+            dateOfBirth: req.body.dateOfBirth || '',
+            emailAddress: req.body.emailAddress || '',
+            addresses: req.body.addresses,
             modificationDate: new Date()
+
         },
         options = {multi: false},
         callback = function (err, doc) {
-
             var retObj = {
                 meta: {
                     "action": "update",
@@ -125,19 +127,20 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    Order
+    User
         .findOneAndUpdate(conditions, update, options, callback);
 };
 
+
 /**
- * Delete a single Order.
+ * Delete a single User.
  * @param req   The request information.
  * @param res   The result object.
  */
 exports.deleteOne = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {_id: req.params._id};
+    conditions = {username: req.params.username};
     callback = function (err, doc) {
         retObj = {
             meta: {
@@ -151,6 +154,7 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    Order
+    User
         .remove(conditions, callback);
 };
+
