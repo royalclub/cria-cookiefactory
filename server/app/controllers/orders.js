@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
     Address = mongoose.model('Address');
 
 /**
- * Create a new Layer.
+ * Create a new Order.
  * @param req   The request information.
  * @param res   The result object.
  */
