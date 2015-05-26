@@ -72,7 +72,7 @@ exports.list = function (req, res) {
 exports.detail = function (req, res) {
     var conditions, fields;
 
-    conditions = {username: req.params.username};
+    conditions = {_id: req.params._id};
     fields = {};
 
     User
