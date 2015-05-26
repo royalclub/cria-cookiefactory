@@ -1,0 +1,20 @@
+<h2>Cookie</h2>
+
+
+<form name="cookieForm">
+
+    <p>Id: <input type="text" data-ng-model="cookies.doc._id" readonly></p>
+
+    <p>Name: <input type="text" data-ng-model="cookies.doc.name"></p>
+
+    <p>Creator: <input type="text" data-ng-model="cookies.doc.creator"></p>
+
+    <p>Layers: <input type="text" data-ng-model="cookies.doc.layers[0].name"></p>
+
+    <button type="button" data-ng-click="delete()" id="deleteBtn">Delete</button>
+
+    <button type="button" data-ng-click="save()" id="saveBtn">Save
+    </button>
+
+
+</form>
