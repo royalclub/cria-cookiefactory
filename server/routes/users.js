@@ -14,7 +14,7 @@ var router = express.Router();
  */
 var controller = require('../app/controllers/users.js');
 
-/** CREATE route for books */
+/** CREATE route for users */
 router
     .post('/users', controller.create);
 
