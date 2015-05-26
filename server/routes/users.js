@@ -12,7 +12,7 @@ var router = express.Router();
  We map the URL to a method in the created variable "controller".
  In this example is a mapping for every CRUD action.
  */
-var controller = require('../app/controllers/user.js');
+var controller = require('../app/controllers/users.js');
 
 /** CREATE route for books */
 router
