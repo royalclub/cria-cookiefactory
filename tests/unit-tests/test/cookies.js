@@ -85,7 +85,11 @@ describe('API Routing for CRUD operations on cookies', function () {
                 JSON.parse(res.text)
                     .should.have.property('doc')
                     .and.have.property('layers')
-                    .with.lengthOf(2);
+                    .and.have.property('0')
+                    .and.have.property('options')
+                    .and.have.property('1')
+                    .and.have.property('name')
+                    .be.exactly('Cakebeslag');
                     
                 tmpCookieId = JSON.parse(res.text).doc._id;
 
@@ -106,7 +110,6 @@ describe('API Routing for CRUD operations on cookies', function () {
                 if (err) {
                     throw err;
                 }
-
                 JSON.parse(res.text)
                     .should.have.property('meta')
                     .and.have.property('action').be.exactly('list');
@@ -140,7 +143,11 @@ describe('API Routing for CRUD operations on cookies', function () {
                 JSON.parse(res.text)
                     .should.have.property('doc')
                     .and.have.property('layers')
-                    .with.lengthOf(2);
+                    .and.have.property('0')
+                    .and.have.property('options')
+                    .and.have.property('1')
+                    .and.have.property('name')
+                    .be.exactly('Cakebeslag');
                 res.statusCode.should.be.exactly(200);
                 done();
             });
@@ -198,7 +205,6 @@ describe('API Routing for CRUD operations on cookies', function () {
                 if (err) {
                     throw err;
                 }
-
                 JSON.parse(res.text)
                     .should.have.property('meta')
                     .and.have.property('action')
@@ -213,7 +219,11 @@ describe('API Routing for CRUD operations on cookies', function () {
                 JSON.parse(res.text)
                     .should.have.property('doc')
                     .and.have.property('layers')
-                    .with.lengthOf(2);
+                    .and.have.property('0')
+                    .and.have.property('options')
+                    .and.have.property('1')
+                    .and.have.property('name')
+                    .be.exactly('Cakebeslag');
                 res.statusCode.should.be.exactly(200);
                 done();
             });
@@ -260,7 +270,6 @@ describe('API Routing for CRUD operations on cookies', function () {
                 if (err) {
                     throw err;
                 }
-
                 JSON.parse(res.text)
                     .should.have.property('meta')
                     .and.have.property('action').be.exactly('list');
