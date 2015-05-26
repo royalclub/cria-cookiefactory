@@ -7,7 +7,7 @@
         address = require('./address.js'),
         orderStatus = require('./orderStatus.js'),
         orderRule = require('./orderRules.js'),
-        orderUser = require('./orderUser.js'),
+        orderUser = require('./orderUsers.js'),
         orderSchema;
 
     orderSchema = new mongoose.Schema({
