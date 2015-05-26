@@ -1,0 +1,6 @@
+Rood: #ed6655
+Groen: #cfca4c
+Geel: #fcf5bf
+Blauw: #9fe5c2
+Donkerder Blauw: #5eb299
+Bruin: #745a33
