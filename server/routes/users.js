@@ -1,35 +1,35 @@
 /*jslint node:true */
 
 
-/** @module Routes for books */
+/** @module Routes for users */
 /** @class */
 var express = require('express');
 var router = express.Router();
 
-/**  book routes
+/**  user routes
  ---------------
  We create a variable "user" that holds the controller object.
  We map the URL to a method in the created variable "controller".
  In this example is a mapping for every CRUD action.
  */
-var controller = require('../app/controllers/user.js');
+var controller = require('../app/controllers/users.js');
 
-/** CREATE route for books */
+/** CREATE route for users */
 router
-    .post('/user', controller.create);
+    .post('/users', controller.create);
 
 // RETRIEVE
 router
-    .get('/user', controller.list)
-    .get('/user/:username', controller.detail);
+    .get('/users', controller.list)
+    .get('/users/:username', controller.detail);
 
 // UPDATE
 router
-    .put('/user/:username', controller.updateOne);
+    .put('/users/:username', controller.updateOne);
 
 // DELETE
 router
-    .delete('/user/:username', controller.deleteOne);
+    .delete('/users/:username', controller.deleteOne);
 
 
 module.exports = router;
