@@ -96,7 +96,7 @@ exports.detail = function (req, res) {
 exports.updateOne = function (req, res) {
 
     var conditions =
-        {username: req.params.username},
+        {_id: req.params._id},
         update = {
             username: req.body.username || '',
             salt: req.body.salt || '',
@@ -140,7 +140,7 @@ exports.updateOne = function (req, res) {
 exports.deleteOne = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {username: req.params.username};
+    conditions = {_id: req.params._id};
     callback = function (err, doc) {
         retObj = {
             meta: {
