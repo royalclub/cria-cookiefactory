@@ -8,7 +8,7 @@
  * @see https://github.com/angular/angular.js/wiki/Writing-AngularJS-Documentation
  * @see http://docs.angularjs.org/guide/concepts
  */
-var myApp = angular.module('myApp', ['myApp.services', 'ngRoute'])
+var myApp = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 

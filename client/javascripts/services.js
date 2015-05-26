@@ -3,7 +3,7 @@
 (function () {
     "use strict";
 
-    angular.module('myApp.services', ['ngResource']).factory('booksService', ['$resource', '$http',
+    angular.module('cookieFactory.services', ['ngResource']).factory('booksService', ['$resource', '$http',
 
         function ($resource) {
             var actions = {
