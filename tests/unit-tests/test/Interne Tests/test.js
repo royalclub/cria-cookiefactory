@@ -8,10 +8,10 @@ var fs = require('fs')
 
 // Load configuration
 var env = process.env.NODE_ENV || 'development'
-    , config = require('../../../server/config/config.js')[env];
+    , config = require('../../../../server/config/config.js')[env];
 
 // Bootstrap db connection
-var mongoose = require('../../../server/node_modules/mongoose')
+var mongoose = require('../../../../server/node_modules/mongoose')
 mongoose.connect(config.db);
 
 /*
@@ -23,7 +23,7 @@ mongoose.set('debug', config.debug);
 */
 
 // Bootstrap models
-var models_path = __dirname + '/../../../server/app/models'
+var models_path = __dirname + '/../../../../server/app/models'
     , model_files = fs.readdirSync(models_path);
 model_files.forEach(function (file) {
     require(models_path + '/' + file);
