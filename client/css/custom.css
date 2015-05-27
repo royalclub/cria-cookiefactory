@@ -2,7 +2,6 @@
 -------------------------------------------------- */
 body {
     padding-top: 70px;
-    padding-bottom: 170px; /* Sticky footer */
     font-family: 'Open Sans', sans-serif;
 }
 .navbar {
@@ -17,18 +16,28 @@ body {
     overflow: hidden;
     color: white;
 }
-
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 150px;
+    background-color: #fcf5bf;
+    color: #745a33;
+}
+.footer hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: #745a33;
+}
+.footer .form-group {
+    width: 100%;
+}
+.footer .input-group {
+    width: 100%;
+}
+.nav-custom {
+    float: left;
+    margin: 0;
+}
+.nav-custom>li {
+    float: left;
+}
+.navbar-custom-header {
+    float: left;
 }
