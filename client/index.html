@@ -15,18 +15,9 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="/#/">CookieFactory</a>
         </div>
-        <ul class="nav navbar-nav">
-          <li class="active">
-            <a href="/#/">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li>
-            <a href="/#/about">Over Ons</a>
-          </li>
-          <li>
-            <a href="/#/cookie/design">Ontwerp Koekje</a>
-          </li>
-          <li>
-            <a href="/#/contact">Contact</a>
+        <ul class="nav navbar-nav" data-ng-controller="menuController">
+          <li ng-repeat="item in items" class="{{item.active}}">
+            <a href="{{item.url}}" class="navbar-link">{{item.name}}</a>
           </li>
         </ul>
 
@@ -97,18 +88,9 @@
           </div>
           <div class="col-xs-12 col-sm-6 col-md-4">
             <span class="navbar-text">
-              <ul class="navbar">
-                <li>
-                  <a href="/#/" class="navbar-link">Home</a>
-                </li>
-                <li>
-                  <a href="/#/about" class="navbar-link">Over Ons</a>
-                </li>
-                <li>
-                  <a href="/#/cookie/design" class="navbar-link">Ontwerp koekje</a>
-                </li>
-                <li>
-                  <a href="/#/contact" class="navbar-link">Contact</a>
+              <ul class="navbar" data-ng-controller="menuController">
+                <li ng-repeat="item in items">
+                  <a href="{{item.url}}" class="navbar-link">{{item.name}}</a>
                 </li>
               </ul>
             </span>
