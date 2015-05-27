@@ -1,4 +1,4 @@
-/*global angular, CookieListCtrl, CookieDetailCtrl, UserListCtrl, LayerListCtrl, OrderListCtrl */
+/*global angular, CookieListCtrl, CookieDetailCtrl, UserListCtrl, LayerListCtrl, OrderListCtrl, UserDetailCtrl */
 
 
 /**
@@ -33,6 +33,12 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $routeProvider.when('/users/list', {
             templateUrl: 'partials/user-list.html',
             controller: UserListCtrl
+        });
+
+        // Get 1 cookie
+        $routeProvider.when('/users/list/:_id', {
+            templateUrl: 'partials/user-detail.html',
+            controller: UserDetailCtrl
         });
 
         // Get 1 cookie
