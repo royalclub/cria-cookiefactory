@@ -25,18 +25,6 @@ var myApp = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute'
             controller: CookieDetailCtrl
         });
 
-        // Get all cookies
-        $routeProvider.when('/users', {
-            templateUrl: 'partials/user-list.html',
-            controller: UserListCtrl
-        });
-
-        // Get 1 cookie
-        $routeProvider.when('/users/:username', {
-            templateUrl: 'partials/-detail.html',
-            controller: UserDetailCtrl
-        });
-
         //When no valid route is provided
         $routeProvider.otherwise({
             redirectTo: "/cookies"
