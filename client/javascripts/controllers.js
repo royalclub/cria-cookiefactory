@@ -15,6 +15,13 @@ function CookieListCtrl($scope, cookiesService) {
     $scope.cookies = cookiesService.cookies.get();
 }
 
+function UserListCtrl($scope, usersService) {
+    "use strict";
+    // GET all cookies
+    $scope.cookies = usersService.users.get();
+}
+
+
 /**
  *
  * @param $scope
