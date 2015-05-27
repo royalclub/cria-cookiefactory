@@ -1,4 +1,4 @@
-/*global angular, CookieListCtrl, CookieDetailCtrl */
+/*global angular, CookieListCtrl, CookieDetailCtrl, UserListCtrl */
 
 
 /**

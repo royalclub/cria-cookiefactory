@@ -16,8 +16,7 @@
                 // REST url to server
                 db.cookies = $resource('/api/cookies/:_id', {}, actions);
                 return db;
-            }
-        ])
+            }])
         .factory('usersService', ['$resource', '$http',
             function ($resource) {
                 var actions = {
@@ -48,6 +47,7 @@
                 return db;
             }
         ]);
+            }]);
 
 
 }());
