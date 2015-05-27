@@ -69,10 +69,10 @@
               </a>
             </li>
             <li>
-              <a href="/#/cart">
+              <a href="/#/cart" ng-controller="cartController">
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 <span class="sr-only">Winkelwagen</span>
-                <span class="badge">4</span>
+                <span class="badge">{{itemCount}}</span>
               </a>
             </li>
           </ul>
@@ -155,7 +155,7 @@
               </div>
             </form>
             <p>&nbsp;</p>
-            <p id="myCtrl" data-ng-controller="myCtrl as settings">Copyright &copy; 2015 - {{whoami}} - All rights reserved.</p>
+            <p>Copyright &copy; 2015 - The Cookie Factory - All rights reserved.</p>
           </div>
         </div>
       </div>
