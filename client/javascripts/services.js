@@ -2,9 +2,7 @@
 
 (function () {
     "use strict";
-
-    angular.module('cookieFactory.services', ['ngResource']).factory('booksService', ['$resource', '$http',
-
+    angular.module('cookieFactory.services', ['ngResource']).factory('cookiesService', ['$resource', '$http',
         function ($resource) {
             var actions = {
                     'get': {method: 'GET'},
@@ -15,7 +13,9 @@
                 },
                 db = {};
             // REST url to server
-            db.books = $resource('/api/books/:_id', {}, actions);
+            db.cookies = $resource('/api/cookies/:_id', {}, actions);
             return db;
         }]);
+
 }());
+

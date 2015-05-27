@@ -1,4 +1,4 @@
-/*global angular, BookListCtrl, BookDetailCtrl */
+/*global angular, CookieListCtrl, CookieDetailCtrl */
 
 
 /**
@@ -12,21 +12,34 @@ var myApp = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute'
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
-        // Get all books
-        $routeProvider.when('/books', {
-            templateUrl: 'partials/book-list.html',
-            controller: BookListCtrl
+
+        // Get all cookies
+        $routeProvider.when('/cookies', {
+            templateUrl: 'partials/cookie-list.html',
+            controller: CookieListCtrl
         });
 
-        // Get 1 book
-        $routeProvider.when('/books/:_id', {
-            templateUrl: 'partials/book-detail.html',
-            controller: BookDetailCtrl
+        // Get 1 cookie
+        $routeProvider.when('/cookies/:_id', {
+            templateUrl: 'partials/cookie-detail.html',
+            controller: CookieDetailCtrl
         });
 
-        // When no valid route is provided
+        // Get all cookies
+        $routeProvider.when('/users', {
+            templateUrl: 'partials/user-list.html',
+            controller: UserListCtrl
+        });
+
+        // Get 1 cookie
+        $routeProvider.when('/users/:username', {
+            templateUrl: 'partials/-detail.html',
+            controller: UserDetailCtrl
+        });
+
+        //When no valid route is provided
         $routeProvider.otherwise({
-            redirectTo: "/books"
+            redirectTo: "/cookies"
         });
 
     }]);
