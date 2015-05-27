@@ -12,6 +12,10 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
+        // Get all cookies
+        $routeProvider.when('/', {
+            templateUrl: 'partials/home.html'
+        });
 
         // Get all cookies
         $routeProvider.when('/cookies/list', {
@@ -27,7 +31,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
 
         //When no valid route is provided
         $routeProvider.otherwise({
-            redirectTo: "/cookies"
+            redirectTo: "/"
         });
 
     }]);
