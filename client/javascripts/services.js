@@ -18,4 +18,6 @@
             db.cookies = $resource('/api/cookies/:_id', {}, actions);
             return db;
         }]);
+
 }());
+
