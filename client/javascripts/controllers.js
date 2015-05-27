@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*globals myApp */
+/*globals cookieFactory */
 
 
 /**
