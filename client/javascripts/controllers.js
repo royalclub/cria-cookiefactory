@@ -1,7 +1,6 @@
 /*jslint node: true */
 /*globals cookieFactory */
 
-
 /**
  *
  * @param $scope
@@ -18,7 +17,7 @@ function CookieListCtrl($scope, cookiesService) {
 function UserListCtrl($scope, usersService) {
     "use strict";
     // GET all cookies
-    $scope.cookies = usersService.users.get();
+    $scope.users = usersService.users.get();
 }
 
 
