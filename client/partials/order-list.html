@@ -1,0 +1,6 @@
+<h2>Orders</h2>
+<input ng-model="query" placeholder="Type to start searching...">
+
+<ul id="orderList">
+    <li data-ng-repeat="order in orders.doc | filter:query"><a href="/#/orders/{{order._id}}">{{order.number}}</a></li>
+</ul>
