@@ -1,0 +1,20 @@
+<h2>User</h2>
+
+
+<form name="userForm">
+
+    <p>Id: <input type="text" data-ng-model="users.doc._id" readonly></p>
+
+    <p>Salt: <input type="text" data-ng-model="users.doc.salt"></p>
+
+    <p>Password: <input type="text" data-ng-model="users.doc.password"></p>
+
+    <p>FirstName: <input type="text" data-ng-model="users.doc.firstName"></p>
+
+    <button type="button" data-ng-click="delete()" id="deleteBtn">Delete</button>
+
+    <button type="button" data-ng-click="save()" id="saveBtn">Save
+    </button>
+
+
+</form>

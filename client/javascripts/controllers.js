@@ -3,7 +3,7 @@
 
 
 /**
- * TODO: create controller for book list
+ *
  * @param $scope
  * @param cookiesService
  * @constructor
@@ -11,12 +11,12 @@
 
 function CookieListCtrl($scope, cookiesService) {
     "use strict";
-    // GET all books
+    // GET all cookies
     $scope.cookies = cookiesService.cookies.get();
 }
 
 /**
- * TODO: create controller for retrieving 1 book, create and delete
+ *
  * @param $scope
  * @param $routeParams
  * @param cookiesService
@@ -25,7 +25,7 @@ function CookieListCtrl($scope, cookiesService) {
 
 function CookieDetailCtrl($scope, $routeParams, $location, cookiesService) {
     "use strict";
-    // GET 1 book
+    // GET 1 cookie
 
     if ($routeParams._id !== 'new') {
         $scope.cookies = cookiesService.cookies.get({_id: $routeParams._id}, function () {
@@ -33,13 +33,13 @@ function CookieDetailCtrl($scope, $routeParams, $location, cookiesService) {
         });
     }
 
-    // DELETE book
+    // DELETE cookie
     $scope.delete = function () {
         cookiesService.cookies.delete({_id: $routeParams._id});
         $location.path("/cookies");
     };
 
-    // CREATE, UPDATE book
+    // CREATE, UPDATE cookie
     $scope.save = function () {
 
         if ($scope.cookies.doc && $scope.cookies.doc._id !== undefined) {
@@ -56,6 +56,7 @@ function CookieDetailCtrl($scope, $routeParams, $location, cookiesService) {
     };
 
 }
+
 
 myApp.controller('myCtrl', function ($scope) {
     "use strict";
