@@ -1,6 +1,0 @@
-<h2>Users</h2>
-<input ng-model="query" placeholder="Type to start searching...">
-
-<ul id="userList">
-    <li data-ng-repeat="user in users.doc | filter:query"><a href="/#/users/{{user._id}}">{{user.username}}</a></li>
-</ul>

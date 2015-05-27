@@ -12,46 +12,87 @@
   <body role="document">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/#/">CookieFactory</a>
+        <div class="hidden-md hidden-lg">
+          <div class="navbar-header navbar-custom-header">
+            <a class="navbar-brand" href="/#/">CookieFactory</a>
+          </div>
+          
+          <ul class="nav nav-custom navbar-nav">
+            <li class="dropdown">
+              <a href="/#/account" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <span class="glyphicon glyphicon-user"></span>
+                <span class="sr-only">Account</span>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="accountDropdown">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/#/account/login">Inloggen</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/#/account/register">Registreren</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="/#/cart">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <span class="sr-only">Winkelwagen</span>
+                <span class="badge">4</span>
+              </a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="accountDropdown" data-ng-controller="menuController">
+                <li role="presentation" ng-repeat="item in items" class="{{item.active}}">
+                  <a role="menuitem" tabindex="-1" href="{{item.url}}" class="navbar-link">{{item.name}}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
-        <ul class="nav navbar-nav" data-ng-controller="menuController">
-          <li ng-repeat="item in items" class="{{item.active}}">
-            <a href="{{item.url}}" class="navbar-link">{{item.name}}</a>
-          </li>
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="/#/cart">
-              <span class="glyphicon glyphicon-shopping-cart"></span>
-              <span class="sr-only">Winkelwagen</span>
-              <span class="badge">4</span>
-            </a>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="/#/cart">
-              <span class="glyphicon glyphicon-user"></span>
-              <span class="sr-only">Account</span>
-            </a>
-          </li>
-        </ul>
-        <div class="navbar-right hidden-xs">
-           <form class="navbar-form" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" name="txtUsername" id="txtUsername" placeholder="Gebruikersnaam">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="txtPassword" id="txtPassword" placeholder="Wachtwoord">
-            </div>
-            <input type="submit" class="btn btn-primary" value="Login">
-          </form>
+        
+        <div class="hidden-xs hidden-sm">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/#/">CookieFactory</a>
+          </div>
+          
+          <ul class="nav navbar-nav" data-ng-controller="menuController">
+            <li ng-repeat="item in items" class="{{item.active}}">
+              <a href="{{item.url}}" class="navbar-link">{{item.name}}</a>
+            </li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/#/account">
+                <span class="glyphicon glyphicon-user"></span>
+                <span class="sr-only">Account</span>
+              </a>
+            </li>
+            <li>
+              <a href="/#/cart" ng-controller="cartController">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <span class="sr-only">Winkelwagen</span>
+                <span class="badge">{{itemCount}}</span>
+              </a>
+            </li>
+          </ul>
+          
+          <div class="navbar-right">
+            <form class="navbar-form" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" name="txtUsername" id="txtUsername" placeholder="Gebruikersnaam">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="txtPassword" id="txtPassword" placeholder="Wachtwoord">
+              </div>
+              <input type="submit" class="btn btn-primary" value="Login">
+            </form>
+          </div>
         </div>
-
       </div>
     </nav>
+    
+    
     <!-- Banner -->
     <div class="container" role="main">
       <div class="jumbotron">
@@ -64,53 +105,57 @@
         </div>
       </div>
       <!-- Breadcrumb -->
-      <ol class="breadcrumb">
-        <li class="active">Home</li>
+      <ol class="breadcrumb" ng-controller="menuController">
+        <li ng-repeat="item in breadcrumb" class="{{item.active}}"><a href="{{item.url}}">{{item.name}}</a></li>
       </ol>
 
       <div data-ng-view=""></div>
 
     </div>
-    <footer class="footer navbar navbar-inverse">
+    <footer class="footer">
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-4">
-            <span class="navbar-text">
+            <span>
+              <h4>Contactinformatie</h4>
+              <hr />
               <address>
                 <strong>The Cookie Factory</strong>
                 <br />Ruitenberglaan 26
                 <br />6826 CC Arnhem</address>
-              <p>
-                <span class="glyphicon glyphicon-phone"></span>026 369 1555</p>
-              <p>
-                <span class="glyphicon glyphicon-envelope"></span>info@cookiefactory.nl</p>
+              <p><span class="glyphicon glyphicon-phone"></span> 026 369 1555</p>
+              <p><span class="glyphicon glyphicon-envelope"></span> info@cookiefactory.nl</p>
             </span>
           </div>
           <div class="col-xs-12 col-sm-6 col-md-4">
-            <span class="navbar-text">
-              <ul class="navbar" data-ng-controller="menuController">
+            <span>
+              <h4>Menu</h4>
+              <hr />
+              <ul data-ng-controller="menuController">
                 <li ng-repeat="item in items">
-                  <a href="{{item.url}}" class="navbar-link">{{item.name}}</a>
+                  <a href="{{item.url}}">{{item.name}}</a>
                 </li>
               </ul>
             </span>
           </div>
           <div class="col-xs-12 col-sm-6 col-md-4">
-            <div class="navbar-form">
-              <form class="form-inline">
-                <div class="form-group">
-                  <label for="txtSearch" class="sr-only">Zoeken</label>
-                  <div class="input-group">
-                    <input type="text" name="txtSearch" id="txtSearch" placeholder="Voer zoekterm in..." class="form-control">
-                    <div class="input-group-addon">
-                      <span class="glyphicon glyphicon-search"></span>
-                    </div>
+            <p>
+              <h4>Zoeken</h4>
+              <hr />
+            </p>
+            <form class="form-inline">
+              <div class="form-group">
+                <label for="txtSearch" class="sr-only">Zoeken</label>
+                <div class="input-group">
+                  <input type="text" name="txtSearch" id="txtSearch" placeholder="Voer zoekterm in..." class="form-control">
+                  <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
                   </div>
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
             <p>&nbsp;</p>
-            <p class="text-muted" id="myCtrl" data-ng-controller="myCtrl as settings">Copyright &copy; 2015 - {{whoami}} - All rights reserved.</p>
+            <p>Copyright &copy; 2015 - The Cookie Factory - All rights reserved.</p>
           </div>
         </div>
       </div>
