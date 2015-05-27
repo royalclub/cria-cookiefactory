@@ -30,6 +30,20 @@
                 // REST url to server
                 db.users = $resource('/api/users/:_id', {}, actions);
                 return db;
+            }])
+        .factory('layersService', ['$resource', '$http',
+            function ($resource) {
+                var actions = {
+                        'get': {method: 'GET'},
+                        'save': {method: 'POST'},
+                        'query': {method: 'GET', isArray: true},
+                        'update': {method: 'PUT'},
+                        'delete': {method: 'DELETE'}
+                    },
+                    db = {};
+                // REST url to server
+                db.users = $resource('/api/layers/:_id', {}, actions);
+                return db;
             }]);
 
 
