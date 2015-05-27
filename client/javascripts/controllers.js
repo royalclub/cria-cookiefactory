@@ -58,9 +58,9 @@ function CookieDetailCtrl($scope, $routeParams, $location, cookiesService) {
 }
 
 
-myApp.controller('myCtrl', function ($scope) {
+cookieFactory.controller('myCtrl', function ($scope) {
     "use strict";
     // TODO: bind settings with whoami
-    $scope.whomai = "CookieFactory";
+    $scope.whoami = "The Cookie Factory";
 });
 
