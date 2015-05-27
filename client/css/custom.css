@@ -1,0 +1,34 @@
+/* Custom CSS
+-------------------------------------------------- */
+body {
+    padding-top: 70px;
+    padding-bottom: 170px; /* Sticky footer */
+    font-family: 'Open Sans', sans-serif;
+}
+.navbar {
+    margin-bottom: 0;
+}
+.jumbotron {
+    position: relative;
+    background: #000 url("../images/bannerkoekje2.png") center center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+    color: white;
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 150px;
+}
