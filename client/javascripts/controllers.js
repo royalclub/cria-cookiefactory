@@ -15,6 +15,13 @@ function CookieListCtrl($scope, cookiesService) {
     $scope.cookies = cookiesService.cookies.get();
 }
 
+function UserListCtrl($scope, usersService) {
+    "use strict";
+    // GET all cookies
+    $scope.cookies = usersService.users.get();
+}
+
+
 /**
  *
  * @param $scope
@@ -64,3 +71,13 @@ cookieFactory.controller('myCtrl', function ($scope) {
     $scope.whoami = "The Cookie Factory";
 });
 
+cookieFactory.controller('menuController', function ($scope) {
+    "use strict";
+
+    $scope.items = [
+        {name: "Home", url: "/#/", active: "active"},
+        {name: "Over ons", url: "/#/about", active: ""},
+        {name: "Ontwerp koekje", url: "/#/cookies/design", active: ""},
+        {name: "Contact", url: "/#/contact", active: ""}
+    ];
+});
