@@ -8,38 +8,52 @@ var env = process.env.NODE_ENV || 'development',
 var should = require('should'),
     supertest = require('supertest');
 
-describe('API Routing for CRUD operations on layers', function () {
+describe('API Routing for CRUD operations on orders', function () {
 
     var request = supertest(localConfig.host + ":" + config.port + "/" + localConfig.api_path);
 
-    var tmpLayerId = null;
-    var tmpLayerResponse;
+    var tmpOrderId = null;
+    var tmpOrderResponse;
 
     before(function (done) {
         done();
     });
 
-    describe('CREATE layer', function () {
-        it('Should POST /layers', function (done) {
+    describe('CREATE order', function () {
+        it('Should POST /orders', function (done) {
             request
-                .post('/layers')
+                .post('/orders')
                 .send({
-                        name: "deeg",
-                        required: true,
-                        sequence: 1,
-                        options: [{
-                                    name: "Zanddeeg",
-                                    sequence: 1,
-                                    description: "Zanddeeg heeft een kruimelige structuur en breekt makkelijk.",
-                                    price: 2.3,
-                                    imageSrc: "path to image"
-                                }, {
-                                    name: "Cakebeslag",
-                                    sequence: 2,
-                                    description: "Cakebeslag is een semi-vloeibaar deeg voornamelijk gebruikt voor het bakken van cakes. Het geeft een zacht en luchtig gebak.",
-                                    price: 2.5,
-                                    imageSrc: "path to image"
-                                }]
+                        "number": "kk200",
+                        status: [{
+                                    name: "bakken",
+                                    description: "de koekjes zitten nu in de oven"
+                                }],
+                        user: [{
+                                    username: "henkdesteen",
+                                    emailAddress: "henk@desteen.nl",
+                                    firstName: "henk",
+                                    inserts: "de",
+                                    lastName: "Steen"
+                                }],
+                        rules: [{
+                                    cookie: null,
+                                    box: null,
+                                    amountOfBoxes: 4
+                                }],
+                        invoiceAddress: [{
+                                                street: "Rietdekkersveld",
+                                                streetNumber: 40,
+                                                zipCode: "7031DL",
+                                                city: "Wehl"
+                                            }],
+                        shipmentAddress: [{
+                                            street: "Weversveld",
+                                            streetNumber: 23,
+                                            zipCode: "5862GL",
+                                            city: "Doetinchem"
+                                        }],
+                        vatPercentage: 21
                     }
                 )
                 .expect(200)                                                // supertest
@@ -59,37 +73,25 @@ describe('API Routing for CRUD operations on layers', function () {
                 res.charset.should.be.exactly('utf-8');
                 JSON.parse(res.text)
                     .should.have.property('doc')
-                    .and.have.property('name')
-                    .be.exactly('deeg');
+                    .and.have.property('number')
+                    .be.exactly('kk200');
                 JSON.parse(res.text)
                     .should.have.property('doc')
-                    .and.have.property('options')
-                    .with.lengthOf(2);
-                JSON.parse(res.text)
-                    .should.have.property('doc')
-                    .and.have.property('options')
-                    .and.have.property('0')
-                    .and.have.property('name')
-                    .be.exactly('Zanddeeg');
-                JSON.parse(res.text)
-                    .should.have.property('doc')
-                    .and.have.property('options')
-                    .and.have.property('1')
-                    .and.have.property('name')
-                    .be.exactly('Cakebeslag');
-
-                tmpLayerId = JSON.parse(res.text).doc._id;
+                    .and.have.property('status')
+                    .with.lengthOf(1);
+                    
+                tmpOrderId = JSON.parse(res.text).doc._id;
 
                 done();
             });
         });
     });
 
-    describe('RETRIEVE all layers', function () {
+    describe('RETRIEVE all orders', function () {
 
-        it('Should GET /layers', function (done) {
+        it('Should GET /orders', function (done) {
             request
-                .get('/layers')
+                .get('/orders')
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
@@ -103,17 +105,17 @@ describe('API Routing for CRUD operations on layers', function () {
                     .and.have.property('action').be.exactly('list');
                 res.statusCode.should.be.exactly(200);
 
-                tmpLayerResponse = res.text;
+                tmpOrderResponse = res.text;
 
                 done();
             });
         });
     });
 
-    describe('RETRIEVE 1 layer', function () {
-        it('Should GET /layers/{_id}', function (done) {
+    describe('RETRIEVE 1 order', function () {
+        it('Should GET /orders/{_id}', function (done) {
             request
-                .get('/layers/' + tmpLayerId)
+                .get('/orders/' + tmpOrderId)
                 .expect('Content-Type', /application.json/)
                 .expect(200)
                 .end(function (err, res) {
@@ -126,51 +128,53 @@ describe('API Routing for CRUD operations on layers', function () {
                     .be.exactly('detail');
                 JSON.parse(res.text)
                     .should.have.property('doc')
-                    .and.have.property('name')
-                    .be.exactly('deeg');
+                    .and.have.property('number')
+                    .be.exactly('kk200');
                 JSON.parse(res.text)
                     .should.have.property('doc')
-                    .and.have.property('options')
-                    .with.lengthOf(2);
-                JSON.parse(res.text)
-                    .should.have.property('doc')
-                    .and.have.property('options')
-                    .and.have.property('0')
-                    .and.have.property('name')
-                    .be.exactly('Zanddeeg');
-                JSON.parse(res.text)
-                    .should.have.property('doc')
-                    .and.have.property('options')
-                    .and.have.property('1')
-                    .and.have.property('name')
-                    .be.exactly('Cakebeslag');
+                    .and.have.property('status')
+                    .with.lengthOf(1);
                 res.statusCode.should.be.exactly(200);
                 done();
             });
         });
     });
 
-    describe('UPDATE 1 layer', function () {
-        it('Should PUT /layers/{_id}', function (done) {
+    describe('UPDATE 1 order', function () {
+        it('Should PUT /orders/{_id}', function (done) {
             request
-                .put('/layers/' + tmpLayerId)
+                .put('/orders/' + tmpOrderId)
                 .send({
-                        name: "vormen",
-                        required: true,
-                        sequence: 1,
-                        options: [{
-                                    name: "Rond",
-                                    sequence: 1,
-                                    description: null,
-                                    price: 2.3,
-                                    imageSrc: "path to image"
-                                }, {
-                                    name: "vierkant",
-                                    sequence: 2,
-                                    description: null,
-                                    price: 2.5,
-                                    imageSrc: "path to image"
-                                }]
+                        "number": "kk200",
+                        status: [{
+                                    name: "bakken",
+                                    description: "de koekjes zitten nu in de oven"
+                                }],
+                        user: [{
+                                    username: "henkdesteen",
+                                    emailAddress: "henk@desteen.nl",
+                                    firstName: "henk",
+                                    inserts: "de",
+                                    lastName: "Steen"
+                                }],
+                        rules: [{
+                                    cookie: null,
+                                    box: null,
+                                    amountOfBoxes: 4
+                                }],
+                        invoiceAddress: [{
+                                                street: "Rietdekkersveld",
+                                                streetNumber: 40,
+                                                zipCode: "7031DL",
+                                                city: "Wehl"
+                                            }],
+                        shipmentAddress: [{
+                                            street: "Weversveld",
+                                            streetNumber: 23,
+                                            zipCode: "5862GL",
+                                            city: "Doetinchem"
+                                        }],
+                        vatPercentage: 21
                     }
             )
                 .expect(200)                                                // supertest
@@ -180,7 +184,6 @@ describe('API Routing for CRUD operations on layers', function () {
                 if (err) {
                     throw err;
                 }
-
                 JSON.parse(res.text)
                     .should.have.property('meta')
                     .and.have.property('action')
@@ -190,35 +193,22 @@ describe('API Routing for CRUD operations on layers', function () {
                     .be.exactly(null);
                 JSON.parse(res.text)
                     .should.have.property('doc')
-                    .and.have.property('name')
-                    .be.exactly('vormen');
+                    .and.have.property('number')
+                    .be.exactly('kk200');
                 JSON.parse(res.text)
                     .should.have.property('doc')
-                    .and.have.property('options')
-                    .with.lengthOf(2);
-                JSON.parse(res.text)
-                    .should.have.property('doc')
-                    .and.have.property('options')
-                    .and.have.property('0')
-                    .and.have.property('name')
-                    .be.exactly('Rond');
-                JSON.parse(res.text)
-                    .should.have.property('doc')
-                    .and.have.property('options')
-                    .and.have.property('1')
-                    .and.have.property('name')
-                    .be.exactly('vierkant');
-                    
+                    .and.have.property('status')
+                    .with.lengthOf(1);
                 res.statusCode.should.be.exactly(200);
                 done();
             });
         });
     });
 
-    describe('DELETE 1 layer', function () {
-        it('Should DELETE /layers/{_id}', function (done) {
+    describe('DELETE 1 order', function () {
+        it('Should DELETE /orders/{_id}', function (done) {
             request
-                .del('/layers/' + tmpLayerId)
+                .del('/orders/' + tmpOrderId)
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
@@ -244,10 +234,10 @@ describe('API Routing for CRUD operations on layers', function () {
         });
     });
 
-    describe('RETRIEVE all layers to verify that the original collection is restored.', function () {
-        it('Should GET /layers', function (done) {
+    describe('RETRIEVE all orders to verify that the original collection is restored.', function () {
+        it('Should GET /orders', function (done) {
             request
-                .get('/layers')
+                .get('/orders')
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
