@@ -1,145 +1,178 @@
 <!DOCTYPE html>
 <html data-ng-app="cookieFactory">
-
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CookieFactory</title>
-  <link href="./css/bootstrap.min.css" rel="stylesheet" />
-  <link href="./css/bootstrap-theme.min.css" rel="stylesheet" />
-  <link href="./css/custom.css" rel="stylesheet" />
-</head>
-
-<body role="document">
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/#/">CookieFactory</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active">
-          <a href="/#/">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li>
-          <a href="/#/about">Over Ons</a>
-        </li>
-        <li>
-          <a href="/#/cookie/design">Ontwerp Koekje</a>
-        </li>
-        <li>
-          <a href="/#/contact">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Banner -->
-  <div class="container" role="main">
-    <div class="jumbotron">
-      <div class="container">
-        <h1>The CookieFactory</h1>
-        <p>Ontwerp je eigen koekje.</p>
-        <p>
-          <a class="btn btn-primary btn-lg" href="/#/cookie/design" role="button">Klik hier</a>
-        </p>
-      </div>
-    </div>
-    
-    <!-- Breadcrumb -->
-    <ol class="breadcrumb">
-      <li class="active">Home</li>
-    </ol>
-    
-    <!-- Thumbnails -->
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-xs-offset-0 col-lg-offset-0 col-lg-4">
-        <div class="thumbnail">
-          <img src="./images/cookies.jpg" alt="Cookies">
-          <div class="caption">
-            <h3>Ontwerp je eigen koekje</h3>
-            <p>Kies je eigen vorm, deeg, vulling en topping om je eigen koekje te ontwerpen.</p>
-            <p><a href="/#/cookie/design" class="btn btn-primary" role="button">Ontwerpen</a></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-xs-offset-0 col-lg-offset-0 col-lg-4">
-        <div class="thumbnail">
-          <img src="./images/cookies.jpg" alt="Cookies">
-          <div class="caption">
-            <h3>Bekijk bestaande koekjes</h3>
-            <p>Werp een blik op de koekjes die zijn ontworpen door onze overige bezoekers. Om idee&euml;n op te doen, of gewoon omdat je dat leuk vindt.</p>
-            <p><a href="/#/cookie/list" class="btn btn-primary" role="button">Bekijken</a></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-xs-offset-0 col-lg-offset-0 col-lg-4">
-        <div class="thumbnail">
-          <img src="./images/cookies.jpg" alt="Cookies">
-          <div class="caption">
-            <h3>Wie zijn wij?</h3>
-            <p>Neem een kijkje in onze keuken: wie zijn we, waarom doen we dit en hoe doen we dit?</p>
-            <p><a href="/#/about" class="btn btn-primary" role="button">Wie zijn wij</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer class="footer navbar navbar-inverse">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <span class="navbar-text">
-            <address>
-              <strong>The Cookie Factory</strong>
-              Ruitenberglaan 26<br />
-              6826 CC Arnhem
-            </address>
   
-            <p><span class="glyphicon glyphicon-phone"></span> 026 369 1555</p>
-            <p><span class="glyphicon glyphicon-envelope"></span> info@cookiefactory.nl</p>
-          </span>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CookieFactory</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="./css/custom.css" rel="stylesheet" />
+  </head>
+  
+  <body role="document">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/#/">CookieFactory</a>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <span class="navbar-text">
-            <ul class="navbar">
-              <li><a href="/#/" class="navbar-link">Home</a></li>
-              <li><a href="/#/about" class="navbar-link">Over Ons</a></li>
-              <li><a href="/#/cookie/design" class="navbar-link">Ontwerp koekje</a></li>
-              <li><a href="/#/contact" class="navbar-link">Contact</a></li>
-            </ul>
-          </span>
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="/#/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li>
+            <a href="/#/about">Over Ons</a>
+          </li>
+          <li>
+            <a href="/#/cookie/design">Ontwerp Koekje</a>
+          </li>
+          <li>
+            <a href="/#/contact">Contact</a>
+          </li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/#/cart">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <span class="sr-only">Winkelwagen</span>
+                <span class="badge">4</span>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/#/cart">
+                <span class="glyphicon glyphicon-user"></span>
+                <span class="sr-only">Account</span>
+              </a>
+            </li>
+          </ul>
+        <div class="navbar-right">
+           <form class="navbar-form" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" name="txtUsername" id="txtUsername" placeholder="Gebruikersnaam">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="txtPassword" id="txtPassword" placeholder="Wachtwoord">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Login">
+          </form>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="navbar-form">
-            <form class="form-inline">
-              <div class="form-group">
+        
+      </div>
+    </nav>
+    <!-- Banner -->
+    <div class="container" role="main">
+      <div class="jumbotron">
+        <div class="container">
+          <h1>The CookieFactory</h1>
+          <p>Ontwerp je eigen koekje.</p>
+          <p>
+            <a class="btn btn-primary btn-lg" href="/#/cookie/design" role="button">Klik hier</a>
+          </p>
+        </div>
+      </div>
+      <!-- Breadcrumb -->
+      <ol class="breadcrumb">
+        <li class="active">Home</li>
+      </ol>
+      <!-- Thumbnails -->
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-xs-offset-0 col-lg-offset-0 col-lg-4">
+          <div class="thumbnail">
+            <img src="./images/cookies.jpg" alt="Cookies">
+            <div class="caption">
+              <h3>Ontwerp je eigen koekje</h3>
+              <p>Kies je eigen vorm, deeg, vulling en topping om je eigen koekje te ontwerpen.</p>
+              <p>
+                <a href="/#/cookie/design" class="btn btn-primary" role="button">Ontwerpen</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-xs-offset-0 col-lg-offset-0 col-lg-4">
+          <div class="thumbnail">
+            <img src="./images/cookies.jpg" alt="Cookies">
+            <div class="caption">
+              <h3>Bekijk bestaande koekjes</h3>
+              <p>Werp een blik op de koekjes die zijn ontworpen door onze overige bezoekers. Om idee&euml;n op te doen, of gewoon omdat je
+                dat leuk vindt.</p>
+              <p>
+                <a href="/#/cookie/list" class="btn btn-primary" role="button">Bekijken</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-xs-offset-0 col-lg-offset-0 col-lg-4">
+          <div class="thumbnail">
+            <img src="./images/cookies.jpg" alt="Cookies">
+            <div class="caption">
+              <h3>Wie zijn wij?</h3>
+              <p>Neem een kijkje in onze keuken: wie zijn we, waarom doen we dit en hoe doen we dit?</p>
+              <p>
+                <a href="/#/about" class="btn btn-primary" role="button">Wie zijn wij</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer navbar navbar-inverse">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <span class="navbar-text">
+              <address>
+                <strong>The Cookie Factory</strong>Ruitenberglaan 26
+                <br />6826 CC Arnhem</address>
+              <p>
+                <span class="glyphicon glyphicon-phone"></span>026 369 1555</p>
+              <p>
+                <span class="glyphicon glyphicon-envelope"></span>info@cookiefactory.nl</p>
+            </span>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <span class="navbar-text">
+              <ul class="navbar">
+                <li>
+                  <a href="/#/" class="navbar-link">Home</a>
+                </li>
+                <li>
+                  <a href="/#/about" class="navbar-link">Over Ons</a>
+                </li>
+                <li>
+                  <a href="/#/cookie/design" class="navbar-link">Ontwerp koekje</a>
+                </li>
+                <li>
+                  <a href="/#/contact" class="navbar-link">Contact</a>
+                </li>
+              </ul>
+            </span>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="navbar-form">
+              <form class="form-inline">
+                <div class="form-group">
                   <label for="txtSearch" class="sr-only">Zoeken</label>
                   <div class="input-group">
-                      <input type="text" name="txtSearch" id="txtSearch" placeholder="Voer zoekterm in..." class="form-control">
-                      <div class="input-group-addon">
-                        <span class="glyphicon glyphicon-search"></span>
-                      </div>
+                    <input type="text" name="txtSearch" id="txtSearch" placeholder="Voer zoekterm in..." class="form-control">
+                    <div class="input-group-addon">
+                      <span class="glyphicon glyphicon-search"></span>
+                    </div>
                   </div>
                 </div>
-            </form>
+              </form>
+            </div>
+            <p>&nbsp;</p>
+            <p class="text-muted">Copyright &copy; 2015 - The Cookie Factory - All rights reserved.</p>
           </div>
-          
-          <p>&nbsp;</p>
-          <p class="text-muted">Copyright &copy; 2015 - The Cookie Factory - All rights reserved.</p>
         </div>
       </div>
-      
-    </div>
-  </footer>
-
-
+    </footer>
     <!--<div data-ng-view=""></div>
     <hr>
     <div id="myCtrl" data-ng-controller="myCtrl as settings">{{whoami}}</div>-->
-
-    
     <!-- Lib -->
     <script src="./javascripts/lib/angular.min.js"></script>
     <script src="./javascripts/lib/angular-route.min.js"></script>
@@ -151,4 +184,5 @@
     <script src="./javascripts/controllers.js"></script>
     <script src="./javascripts/services.js"></script>
   </body>
+
 </html>
