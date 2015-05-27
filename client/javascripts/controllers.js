@@ -29,6 +29,34 @@ function UserListCtrl($scope, usersService) {
 
 
 /**
+*
+* @param $scope
+* @param layersService
+* @constructor
+*/
+
+function LayerListCtrl($scope, layersService) {
+    "use strict";
+    // GET all cookies
+    $scope.layers = layersService.layers.get();
+}
+
+
+/**
+ *
+ * @param $scope
+ * @param ordersService
+ * @constructor
+ */
+
+function OrderListCtrl($scope, ordersService) {
+    "use strict";
+    // GET all cookies
+    $scope.orders = ordersService.orders.get();
+}
+
+
+/**
  *
  * @param $scope
  * @param $routeParams
