@@ -1,5 +1,4 @@
-/*global angular, CookieListCtrl, CookieDetailCtrl, CookieDetailCtrl, UserListCtrl */
-
+/*global angular, CookieListCtrl, CookieDetailCtrl, UserListCtrl, LayerListCtrl, OrderListCtrl, UserDetailCtrl */
 
 /**
  *
@@ -44,16 +43,39 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             templateUrl: 'partials/cookies/design.html',
             controller: cookieController
         });
-        
+
         // Get 1 cookie
         $routeProvider.when('/users/list', {
             templateUrl: 'partials/users/list.html',
             controller: userController
         });
 
+        // Get 1 cookie
+        $routeProvider.when('/users/list/:_id', {
+            templateUrl: 'partials/user-detail.html',
+            controller: UserDetailCtrl
+        });
+
+        // Get 1 cookie
+        $routeProvider.when('/layers/list', {
+            templateUrl: 'partials/layer-list.html',
+            controller: LayerListCtrl
+        });
+
+        // Get 1 cookie
+        $routeProvider.when('/orders/list', {
+            templateUrl: 'partials/order-list.html',
+            controller: OrderListCtrl
+        });
+
         //When no valid route is provided
         $routeProvider.otherwise({
             redirectTo: "/"
         });
+
+
+
+
+
 
     }]);
