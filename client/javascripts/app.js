@@ -1,4 +1,4 @@
-/*global angular, CookieListCtrl, CookieDetailCtrl */
+/*global angular, CookieListCtrl, CookieDetailCtrl, UserListCtrl */
 
 
 /**
@@ -27,6 +27,12 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $routeProvider.when('/cookies/list/:_id', {
             templateUrl: 'partials/cookie-detail.html',
             controller: CookieDetailCtrl
+        });
+
+        // Get 1 cookie
+        $routeProvider.when('/users/list', {
+            templateUrl: 'partials/user-list.html',
+            controller: UserListCtrl
         });
 
         //When no valid route is provided
