@@ -2,9 +2,7 @@
 
 (function () {
     "use strict";
-
-    angular.module('myApp.services', ['ngResource']).factory('cookiesService', ['$resource', '$http',
-
+    angular.module('cookieFactory.services', ['ngResource']).factory('cookiesService', ['$resource', '$http',
         function ($resource) {
             var actions = {
                     'get': {method: 'GET'},
