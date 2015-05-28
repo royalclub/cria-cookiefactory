@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, testController */
+/*global angular, cookieController, userController, layerController, testController */
 
 /**
  *
@@ -7,6 +7,7 @@
  * @see https://github.com/angular/angular.js/wiki/Writing-AngularJS-Documentation
  * @see http://docs.angularjs.org/guide/concepts
  */
+
 var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
@@ -64,7 +65,13 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         // Get a list of layers
         $routeProvider.when('/layers/list', {
             templateUrl: 'partials/layers/list.html',
-//            controller: LayerListCtrl
+            controller: layerController
+        });
+
+        // Get a list of layers
+        $routeProvider.when('/layers/:_id', {
+            templateUrl: 'partials/layers/detail.html',
+            controller: layerController
         });
 
         // Get a list of orders

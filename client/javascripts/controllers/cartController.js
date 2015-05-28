@@ -1,8 +1,8 @@
-/**
- * Controller for the cart
- * @param $scope
- * @constructor
- */
+/*jslint node: true */
+/*globals angular*/
+
+var cookieFactory = angular.module('cookieFactory', []);
+
 cookieFactory.controller('cartController', function ($scope) {
     "use strict";
     $scope.cartItems = [
