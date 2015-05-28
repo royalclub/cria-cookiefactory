@@ -9,9 +9,10 @@
  * @param cookiesService
  * @constructor
  */
+
 function cookieController($scope, $routeParams, $location, cookiesService) {
     "use strict";
-    
+
     // GET 1 cookie
     if ($routeParams._id !== 'new') {
         $scope.cookies = cookiesService.cookies.get({_id: $routeParams._id}, function () {
