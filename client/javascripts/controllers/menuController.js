@@ -1,11 +1,12 @@
 /*jslint node: true */
+/*globals cookieFactory, angular*/
 
 /**
  * Controller for the menu
  * @param $scope
  * @constructor
  */
-var cookieFactory = angular.module('cookieFactory',[]);
+var cookieFactory = angular.module('cookieFactory', []);
 
 cookieFactory.controller('menuController', function ($scope, $routeParams) {
     "use strict";
@@ -21,8 +22,8 @@ cookieFactory.controller('menuController', function ($scope, $routeParams) {
         {name: "Over ons", url: "/#/about", active: "active"}
     ];
     $scope.activePage = "Home";
-    $scope.SetActivePage = function(menuItemName) {
+    $scope.SetActivePage = function (menuItemName) {
         $scope.activePage = menuItemName;
-        console.log($scope.activePage);
-    }
+        console.log($scope.activePage)
+    };
 });
