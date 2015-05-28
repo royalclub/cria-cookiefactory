@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, UserListCtrl, LayerListCtrl, OrderListCtrl, UserDetailCtrl */
+/*global angular, cookieController, userController, layerController, UserListCtrl, LayerListCtrl, OrderListCtrl, UserDetailCtrl */
 
 /**
  *
@@ -7,7 +7,7 @@
  * @see https://github.com/angular/angular.js/wiki/Writing-AngularJS-Documentation
  * @see http://docs.angularjs.org/guide/concepts
  */
- 
+
 var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
