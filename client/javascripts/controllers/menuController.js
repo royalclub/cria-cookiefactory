@@ -6,6 +6,7 @@
  * @param $scope
  * @constructor
  */
+//var cookieFactory = angular.module('cookieFactory', []);
 
 cookieFactory.controller('menuController', function ($scope, $routeParams) {
     "use strict";
@@ -23,6 +24,6 @@ cookieFactory.controller('menuController', function ($scope, $routeParams) {
     $scope.activePage = "Home";
     $scope.SetActivePage = function (menuItemName) {
         $scope.activePage = menuItemName;
-        console.log($scope.activePage);
-    };
+        console.log($scope.activePage)
+    }
 });
