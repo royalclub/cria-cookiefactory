@@ -1,17 +1,12 @@
 /*jslint node: true */
-/*globals cookieFactory */
 
 /**
- * Controller for Cookies
+ * Controller for the menu
  * @param $scope
- * @param $routeParams
- * @param $location
- * @param cookiesService
  * @constructor
  */
-cookieFactory.controller('menuController', function ($scope, $routeParams) {
+cookieFactory.controller('menuController', function ($scope) {
     "use strict";
-    console.log($routeParams);
     $scope.items = [
         {name: "Home", url: "/#/", active: "active"},
         {name: "Over ons", url: "/#/about", active: ""},
