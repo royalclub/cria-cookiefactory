@@ -79,4 +79,4 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $routeProvider.otherwise({
             redirectTo: "/"
         });
-}]);
+    }]);
