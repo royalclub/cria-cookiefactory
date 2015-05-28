@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, UserListCtrl, LayerListCtrl, OrderListCtrl, UserDetailCtrl */
+/*global angular, cookieController, userController, layerController, UserListCtrl, LayerListCtrl, OrderListCtrl, UserDetailCtrl */
 
 /**
  *
@@ -7,6 +7,7 @@
  * @see https://github.com/angular/angular.js/wiki/Writing-AngularJS-Documentation
  * @see http://docs.angularjs.org/guide/concepts
  */
+
 var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
@@ -44,38 +45,38 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             controller: cookieController
         });
 
-        // Get 1 cookie
+        // Get a list of users
         $routeProvider.when('/users/list', {
             templateUrl: 'partials/users/list.html',
             controller: userController
         });
 
-        // Get 1 cookie
+        // Get 1 user
         $routeProvider.when('/users/list/:_id', {
             templateUrl: 'partials/user-detail.html',
-            controller: UserDetailCtrl
+            controller: userController
         });
 
-        // Get 1 cookie
+        // Get a list of layers
         $routeProvider.when('/layers/list', {
-            templateUrl: 'partials/layer-list.html',
-            controller: LayerListCtrl
+            templateUrl: 'partials/layers/list.html',
+            controller: layerController
         });
 
-        // Get 1 cookie
+        // Get a list of layers
+        $routeProvider.when('/layers/:_id', {
+            templateUrl: 'partials/layers/detail.html',
+            controller: layerController
+        });
+
+        // Get a list of orders
         $routeProvider.when('/orders/list', {
-            templateUrl: 'partials/order-list.html',
-            controller: OrderListCtrl
+            templateUrl: 'partials/orders/list.html',
+//            controller: OrderListCtrl
         });
 
         //When no valid route is provided
         $routeProvider.otherwise({
             redirectTo: "/"
         });
-
-
-
-
-
-
     }]);
