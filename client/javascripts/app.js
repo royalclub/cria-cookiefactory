@@ -53,19 +53,19 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         // Get 1 user
         $routeProvider.when('/users/list/:_id', {
             templateUrl: 'partials/user-detail.html',
-            controller: UserDetailCtrl
+            controller: userController
         });
 
         // Get a list of layers
         $routeProvider.when('/layers/list', {
             templateUrl: 'partials/layers/list.html',
-            controller: LayerListCtrl
+//            controller: LayerListCtrl
         });
 
         // Get a list of orders
         $routeProvider.when('/orders/list', {
             templateUrl: 'partials/orders/list.html',
-            controller: OrderListCtrl
+//            controller: OrderListCtrl
         });
 
         //When no valid route is provided

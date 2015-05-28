@@ -1,3 +1,8 @@
+/**
+ * Controller for the cart
+ * @param $scope
+ * @constructor
+ */
 cookieFactory.controller('cartController', function ($scope) {
     "use strict";
     $scope.cartItems = [
