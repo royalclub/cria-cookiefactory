@@ -42,7 +42,7 @@
                         <span class="glyphicon glyphicon-menu-hamburger"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="accountDropdown" data-ng-controller="menuController">
-                        <li role="presentation" ng-repeat="menuItem in menuItems" class="{{item.active}}">
+                        <li role="presentation" ng-repeat="menuItem in menuItems" class="{{menuItem.active}}">
                             <a role="menuitem" tabindex="-1" href="{{menuItem.url}}" class="navbar-link" ng-click="SetActivePage('{{}}')">{{menuItem.name}}</a>
                         </li>
                     </ul>
@@ -56,8 +56,8 @@
             </div>
 
             <ul class="nav navbar-nav" data-ng-controller="menuController">
-                <li ng-repeat="item in items" class="{{item.active}}">
-                    <a href="{{item.url}}" class="navbar-link">{{item.name}}</a>
+                <li ng-repeat="menuitem in menuItems" class="{{menuitem.active}}">
+                    <a href="{{menuitem.url}}" class="navbar-link{{menuitem.name}}" ng-click="SetActivePage('{{}}')">{{menuitem.name}}</a>
                 </li>
             </ul>
 
@@ -132,8 +132,8 @@
               <h4>Menu</h4>
               <hr />
               <ul data-ng-controller="menuController">
-                  <li ng-repeat="item in items">
-                      <a href="{{item.url}}">{{item.name}}</a>
+                  <li ng-repeat="menuitem in menuItems">
+                      <a href="{{menuitem.url}}">{{menuitem.name}}</a>
                   </li>
               </ul>
             </span>
