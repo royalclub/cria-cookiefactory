@@ -59,7 +59,13 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         // Get a list of layers
         $routeProvider.when('/layers/list', {
             templateUrl: 'partials/layers/list.html',
-//            controller: LayerListCtrl
+            controller: layerController
+        });
+
+        // Get a list of layers
+        $routeProvider.when('/layers/:_id', {
+            templateUrl: 'partials/layers/detail.html',
+            controller: layerController
         });
 
         // Get a list of orders

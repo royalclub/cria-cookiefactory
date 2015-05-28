@@ -9,9 +9,17 @@
 
     <p>Creator: <input type="text" data-ng-model="cookies.doc.creator"></p>
 
-    <p ng-repeat="layer in cookies.doc.layers">Layers: <input type="text" data-ng-model="layer.name"></p>
+    <div ng-repeat="layer in cookies.doc.layers">
 
-<!--    <p ng-repeat="option in layer.options">Option: <input type="text" data-ng-model="option.name"></p> -->
+        <p> Layers: <input type="text" data-ng-model="layer.name"></p>
+
+        <div ng-repeat="option in layer.options">
+
+            <p> Option: <input type="text" data-ng-model="option.name"></p>
+
+        </div>
+
+    </div>
 
     <button type="button" data-ng-click="delete()" id="deleteBtn">Delete</button>
 
