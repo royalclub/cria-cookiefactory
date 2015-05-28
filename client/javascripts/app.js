@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, layerController, UserListCtrl, LayerListCtrl, OrderListCtrl, UserDetailCtrl */
+/*global angular, cookieController, userController, layerController, UserListCtrl, LayerListCtrl, OrderListCtrl, UserDetailCtrl, menuControler */
 
 /**
  *
@@ -43,6 +43,10 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $routeProvider.when('/cookies/design', {
             templateUrl: 'partials/cookies/design.html',
             controller: cookieController
+        });
+
+        $routeProvider.when('/*', {
+            controller: menuController
         });
 
         // Get a list of users

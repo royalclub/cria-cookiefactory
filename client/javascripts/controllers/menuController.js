@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*globals angular, cookieFactory*/
+/*globals cookieFactory, angular*/
 
 /**
  * Controller for the menu
@@ -25,5 +25,5 @@ cookieFactory.controller('menuController', function ($scope, $routeParams) {
     $scope.SetActivePage = function (menuItemName) {
         $scope.activePage = menuItemName;
         console.log($scope.activePage)
-    };
+    }
 });

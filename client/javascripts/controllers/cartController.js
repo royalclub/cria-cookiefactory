@@ -1,7 +1,7 @@
 /*jslint node: true */
 /*globals cookieFactory, angular*/
 
-var cookieFactory = angular.module('cookieFactory', []);
+//var cookieFactory = angular.module('cookieFactory', []);
 
 cookieFactory.controller('cartController', function ($scope) {
     "use strict";
