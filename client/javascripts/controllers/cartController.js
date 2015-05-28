@@ -10,7 +10,7 @@ cookieFactory.controller('cartController', function ($scope) {
         {_id: 451, name: "Pauperkoekje Deluxe 3000", amount: 1, price: 34.99},
     ];
     $scope.itemCount = $scope.cartItems.length;
-    
+
     var subtotal = 0.0;
     for(var i = 0; i < $scope.cartItems.length; i += 1) {
         subtotal += $scope.cartItems[i].price;
