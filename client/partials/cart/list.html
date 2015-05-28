@@ -1,0 +1,49 @@
+<h3>Winkelwagen</h3>
+<hr />
+<table class="table table-striped table-responsive">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Naam koekje</th>
+            <th>Aantal</th>
+            <th>Totaal</th>
+        </tr>
+    </thead>
+    <tbody data-ng-controller="cartController">
+        <tr data-ng-repeat="item in cartItems">
+            <td>{{item._id}}</td>
+            <td>{{item.name}}</td>
+            <td>
+                <input type="number" class="form-control input-sm" value="{{item.amount}}" /> 
+                <a href="#" class="btn btn-danger btn-xs" ng-click="onRemoveClicked">
+                    <span class="glyphicon glyphicon-trash"></span> 
+                    Verwijder
+            </td>
+            <td>{{item.price}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><strong>Subtotaal:</strong></td>
+            <td>&euro; {{subtotal}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><strong>BTW (21%):</strong></td>
+            <td>&euro; {{tax}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><strong>Totaal:</strong></td>
+            <td>&euro; {{total}}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="pull-right">
+    <a href="/#/cart/confirm" class="btn btn-success">
+        <span class="glyphicon glyphicon-shopping-cart"></span> 
+        Afrekenen
+    </a>
+</div>

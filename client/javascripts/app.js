@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, layerController, UserListCtrl, LayerListCtrl, OrderListCtrl, UserDetailCtrl, menuControler */
+/*global angular, cookieController, userController, layerController, testController */
 
 /**
  *
@@ -26,6 +26,11 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $routeProvider.when('/contact', {
             templateUrl: 'partials/contact.html'
         });
+        
+        // Cart
+        $routeProvider.when('/cart', {
+            templateUrl: 'partials/cart/list.html'
+        });
 
         // Get all cookies
         $routeProvider.when('/cookies/list', {
@@ -42,11 +47,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         // Design cookie
         $routeProvider.when('/cookies/design', {
             templateUrl: 'partials/cookies/design.html',
-            controller: cookieController
-        });
-
-        $routeProvider.when('/*', {
-            controller: menuController
+            controller: testController
         });
 
         // Get a list of users
@@ -75,7 +76,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
 
         // Get a list of orders
         $routeProvider.when('/orders/list', {
-            templateUrl: 'partials/orders/list.html'
+            templateUrl: 'partials/orders/list.html',
 //            controller: OrderListCtrl
         });
 
