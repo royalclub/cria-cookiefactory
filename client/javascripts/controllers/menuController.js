@@ -6,7 +6,6 @@
  * @param $scope
  * @constructor
  */
-var cookieFactory = angular.module('cookieFactory', []);
 
 cookieFactory.controller('menuController', function ($scope, $routeParams) {
     "use strict";
