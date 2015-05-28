@@ -101,7 +101,10 @@ exports.updateOne = function (req, res) {
             layers: req.body.layers,
             ModificationDate: new Date()
         },
-        options = {multi: false},
+        options = {
+            multi: false,
+            runValidators: true
+        },
         callback = function (err, doc) {
 
             var retObj = {

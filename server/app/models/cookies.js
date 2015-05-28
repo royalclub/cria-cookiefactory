@@ -11,8 +11,8 @@
         name: {type: String, required: true},
         creator: {type: String, required: true},
         layers: [layer.schema],
-        creationDate: {type: Date, "default": Date.now},
-        modificationDate: {type: Date, "default": Date.now}
+        creationDate: {type: Date, "default": Date.now, required: true},
+        modificationDate: {type: Date, "default": Date.now, required: true}
     }, {collection: "cookies"});
 
     module.exports = {

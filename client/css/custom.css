@@ -17,6 +17,7 @@ body {
     color: white;
 }
 .footer {
+    margin-top: 20px;
     background-color: #fcf5bf;
     color: #745a33;
 }
@@ -40,4 +41,9 @@ body {
 }
 .navbar-custom-header {
     float: left;
+}
+.designCookie h1 {
+    margin: 0;
+    padding: 0;
+    margin-bottom: -5px;
 }
