@@ -107,10 +107,10 @@ exports.updateOne = function (req, res) {
             vatPercentage: req.body.vatPercentage,
             modificationDate: new Date()
         },
-        options = { 
+        options = {
             multi: false,
             runValidators: true
-            },
+        },
         callback = function (err, doc) {
 
             var retObj = {

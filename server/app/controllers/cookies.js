@@ -104,7 +104,7 @@ exports.updateOne = function (req, res) {
         options = {
             multi: false,
             runValidators: true
-            },
+        },
         callback = function (err, doc) {
 
             var retObj = {
