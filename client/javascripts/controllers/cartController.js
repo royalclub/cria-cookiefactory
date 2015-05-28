@@ -1,3 +1,6 @@
+/*jslint node: true */
+/*globals cookieFactory */
+
 var cookieFactory = angular.module('cookieFactory',[]);
 
 cookieFactory.controller('cartController', function ($scope) {

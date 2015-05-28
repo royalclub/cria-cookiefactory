@@ -1,9 +1,12 @@
+/*jslint node: true */
+/*globals cookieFactory */
+
 /**
- * Controller for User
+ * Controller for layer
  * @param $scope
  * @param $routeParams
  * @param $location
- * @param usersService
+ * @param layersService
  * @constructor
  */
 function layerController($scope, $routeParams, $location, layersService) {
