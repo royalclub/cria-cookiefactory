@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, UserListCtrl, LayerListCtrl, OrderListCtrl, UserDetailCtrl */
+/*global angular, cookieController, userController, testController */
 
 /**
  *
@@ -25,6 +25,11 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $routeProvider.when('/contact', {
             templateUrl: 'partials/contact.html'
         });
+        
+        // Cart
+        $routeProvider.when('/cart', {
+            templateUrl: 'partials/cart/list.html'
+        });
 
         // Get all cookies
         $routeProvider.when('/cookies/list', {
@@ -41,7 +46,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         // Design cookie
         $routeProvider.when('/cookies/design', {
             templateUrl: 'partials/cookies/design.html',
-            controller: cookieController
+            controller: testController
         });
 
         // Get a list of users
