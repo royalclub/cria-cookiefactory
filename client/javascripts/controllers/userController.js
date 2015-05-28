@@ -1,3 +1,6 @@
+/*jslint node: true */
+/*globals cookieFactory */
+
 /**
  * Controller for User
  * @param $scope
