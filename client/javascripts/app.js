@@ -7,6 +7,7 @@
  * @see https://github.com/angular/angular.js/wiki/Writing-AngularJS-Documentation
  * @see http://docs.angularjs.org/guide/concepts
  */
+ 
 var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
@@ -78,4 +79,4 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $routeProvider.otherwise({
             redirectTo: "/"
         });
-    }]);
+}]);
