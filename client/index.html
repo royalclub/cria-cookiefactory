@@ -42,8 +42,8 @@
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="accountDropdown" data-ng-controller="menuController">
-                <li role="presentation" ng-repeat="item in items" class="{{item.active}}">
-                  <a role="menuitem" tabindex="-1" href="{{item.url}}" class="navbar-link">{{item.name}}</a>
+                <li role="presentation" ng-repeat="menuItem in menuItems" class="{{item.active}}">
+                  <a role="menuitem" tabindex="-1" href="{{menuItem.url}}" class="navbar-link" ng-click="SetActivePage('{{}}')">{{menuItem.name}}</a>
                 </li>
               </ul>
             </li>

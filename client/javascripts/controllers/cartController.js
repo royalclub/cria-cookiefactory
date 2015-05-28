@@ -1,3 +1,5 @@
+var cookieFactory = angular.module('cookieFactory',[]);
+
 cookieFactory.controller('cartController', function ($scope) {
     "use strict";
     $scope.cartItems = [

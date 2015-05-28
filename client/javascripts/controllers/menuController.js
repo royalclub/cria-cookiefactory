@@ -9,10 +9,12 @@
  * @param cookiesService
  * @constructor
  */
+var cookieFactory = angular.module('cookieFactory',[]);
+
 cookieFactory.controller('menuController', function ($scope, $routeParams) {
     "use strict";
     console.log($routeParams);
-    $scope.items = [
+    $scope.menuItems = [
         {name: "Home", url: "/#/", active: "active"},
         {name: "Over ons", url: "/#/about", active: ""},
         {name: "Ontwerp koekje", url: "/#/cookies/design", active: ""},
@@ -22,4 +24,9 @@ cookieFactory.controller('menuController', function ($scope, $routeParams) {
         {name: "Cookie Factory", url: "/#/", active: "active"},
         {name: "Over ons", url: "/#/about", active: "active"}
     ];
+    $scope.activePage = "Home";
+    $scope.SetActivePage = function(menuItemName){
+        $scope.activePage = menuItemName;
+        console.log($scope.activePage);
+    }
 });
