@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, layerController, testController */
+/*global angular, cookieController, userController, layerController, testController, accountController */
 
 /**
  *
@@ -26,10 +26,16 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $routeProvider.when('/contact', {
             templateUrl: 'partials/contact.html'
         });
-        
+
         // Cart
         $routeProvider.when('/cart', {
             templateUrl: 'partials/cart/list.html'
+        });
+
+        // Account Details
+        $routeProvider.when('/account', {
+            templateUrl: 'partials/account/details.html',
+            controller: accountController
         });
 
         // Get all cookies

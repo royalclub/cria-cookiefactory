@@ -56,7 +56,7 @@
           </div>
 
           <ul class="nav navbar-nav" data-ng-controller="menuController">
-            <li ng-repeat="item in items" class="{{item.active}}">
+            <li ng-repeat="item in menuItems" class="{{item.active}}">
               <a href="{{item.url}}" class="navbar-link">{{item.name}}</a>
             </li>
           </ul>
@@ -132,7 +132,7 @@
               <h4>Menu</h4>
               <hr />
               <ul data-ng-controller="menuController">
-                <li ng-repeat="item in items">
+                <li ng-repeat="item in menuItems">
                   <a href="{{item.url}}">{{item.name}}</a>
                 </li>
               </ul>
@@ -179,6 +179,7 @@
     <script src="./javascripts/controllers/cartController.js"></script>
     <script src="./javascripts/controllers/userController.js"></script>
     <script src="./javascripts/controllers/testController.js"></script>
+    <script src="./javascripts/controllers/accountController.js"></script>
     <!--Services-->
     <script src="./javascripts/services.js"></script>
   </body>

@@ -28,7 +28,6 @@ function cookieController($scope, $routeParams, $location, cookiesService) {
 
     // CREATE, UPDATE cookie
     $scope.save = function () {
-
         if ($scope.cookies.doc && $scope.cookies.doc._id !== undefined) {
             console.log('Entering update');
             cookiesService.cookies.update({_id: $routeParams._id}, $scope.cookies.doc, function (res) {
@@ -41,5 +40,8 @@ function cookieController($scope, $routeParams, $location, cookiesService) {
             });
         }
     };
-
 }
+//
+//function cookieDesignController($scope, $routeParams, $location, cookiesService) {
+//    "use strict";
+//}
