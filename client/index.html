@@ -16,7 +16,7 @@
           <div class="navbar-header navbar-custom-header">
             <a class="navbar-brand" href="/#/">CookieFactory</a>
           </div>
-          
+
           <ul class="nav nav-custom navbar-nav">
             <li class="dropdown">
               <a href="/#/account" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -31,9 +31,9 @@
             </li>
             <li>
               <a href="/#/cart">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <span class="glyphicon glyphicon-shopping-cart" data-ng-controller="cartController"></span>
                 <span class="sr-only">Winkelwagen</span>
-                <span class="badge">4</span>
+                <span class="badge">{{itemCount}}</span>
               </a>
             </li>
             <li class="dropdown">
@@ -42,25 +42,25 @@
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="accountDropdown" data-ng-controller="menuController">
-                <li role="presentation" ng-repeat="item in items" class="{{item.active}}">
-                  <a role="menuitem" tabindex="-1" href="{{item.url}}" class="navbar-link">{{item.name}}</a>
+                <li role="presentation" ng-repeat="menuItem in menuItems" class="{{item.active}}">
+                  <a role="menuitem" tabindex="-1" href="{{menuItem.url}}" class="navbar-link" ng-click="SetActivePage('{{}}')">{{menuItem.name}}</a>
                 </li>
               </ul>
             </li>
           </ul>
         </div>
-        
+
         <div class="hidden-xs hidden-sm">
           <div class="navbar-header">
             <a class="navbar-brand" href="/#/">CookieFactory</a>
           </div>
-          
+
           <ul class="nav navbar-nav" data-ng-controller="menuController">
             <li ng-repeat="item in items" class="{{item.active}}">
               <a href="{{item.url}}" class="navbar-link">{{item.name}}</a>
             </li>
           </ul>
-          
+
           <ul class="nav navbar-nav navbar-right">
             <li>
               <a href="/#/account">
@@ -69,14 +69,14 @@
               </a>
             </li>
             <li>
-              <a href="/#/cart" ng-controller="cartController">
+              <a href="/#/cart" data-ng-controller="cartController">
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 <span class="sr-only">Winkelwagen</span>
                 <span class="badge">{{itemCount}}</span>
               </a>
             </li>
           </ul>
-          
+
           <div class="navbar-right">
             <form class="navbar-form" role="search">
               <div class="form-group">
@@ -91,8 +91,8 @@
         </div>
       </div>
     </nav>
-    
-    
+
+
     <!-- Banner -->
     <div class="container" role="main">
       <div class="jumbotron">
@@ -171,7 +171,15 @@
     <script src="./javascripts/lib/bootstrap.min.js"></script>
     <!-- App -->
     <script src="./javascripts/app.js"></script>
-    <script src="./javascripts/controllers.js"></script>
+
+    <!--Controllers-->
+    <script src="./javascripts/controllers/menuController.js"></script>
+    <script src="./javascripts/controllers/cookieController.js"></script>
+    <script src="./javascripts/controllers/layerController.js"></script>
+    <script src="./javascripts/controllers/cartController.js"></script>
+    <script src="./javascripts/controllers/userController.js"></script>
+
+    <!--Services-->
     <script src="./javascripts/services.js"></script>
   </body>
 </html>
