@@ -110,7 +110,10 @@ exports.updateOne = function (req, res) {
             modificationDate: new Date()
 
         },
-        options = {multi: false},
+        options = {
+            multi: false,
+            runValidators: true
+        },
         callback = function (err, doc) {
             var retObj = {
                 meta: {

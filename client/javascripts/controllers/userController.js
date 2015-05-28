@@ -11,8 +11,8 @@
  */
 function userController($scope, $routeParams, $location, usersService) {
     "use strict";
-    // GET 1 cookie
 
+    // GET 1 cookie
     if ($routeParams._id !== 'new') {
         $scope.users = usersService.users.get({_id: $routeParams._id}, function () {
             console.log('$scope.requests ', $scope.requests);

@@ -1,4 +1,50 @@
-<h2>Koekje ontwerpen <span class="small">Maak je eigen koekje!</span></h2>
-<hr />
-
-<p>Tekst.</p>
+<div class="designCookie">
+    <div class="row">
+        <form class="inline-form">
+            <div class="form-group">
+                <input type="text" class="form-control" name="txtCookieName" id="txtCookieName" value="{{cookieName}}" placeholder="Geef je koekje een naam..." />
+            </div>
+        </form>
+        <hr />
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="row">
+                <div class="text-center">
+                    <h1>{{currentLayer.name}}</h1>
+                </div>
+                <hr />
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-6" data-ng-repeat="option in currentLayer.options">
+                    <a href="#" class="thumbnail">
+                      <img src="{{option.imageSrc}}" alt="{{option.description}}" data-id="{{option.name}}" ng-click="onLayerOptionClicked(option.name, $event)">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xs-8">
+            <div class="row">
+                <a href="#" class="btn btn-default" data-ng-repeat="layer in layers" ng-click="onLayerClicked(layer._id, $event)">
+                  {{layer.name}}
+                </a>
+                <hr />
+            </div>
+            
+            <div class="row text-center">
+                <div class="text-center thumbnail">
+                    <img src="images/cookies.jpg" alt="Cookie" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pull-right">
+        <p>Totaalbedrag: &euro; {{total}}</p>
+        <a ng-click="onProceedClicked($event)" class="btn btn-primary">
+            <span class="glyphicon glyphicon-ok"></span> 
+            Volgende stap
+        </a>
+    </div>
+</div>
