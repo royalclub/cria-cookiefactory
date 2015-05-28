@@ -104,7 +104,7 @@ cookieFactory.controller('menuController', function ($scope, $routeParams) {
 
 cookieFactory.controller('cartController', function ($scope) {
     "use strict";
-    $scope.items = [
+    $scope.cartItems = [
         {name: "Koekie Speciale", amount: 1, price: 8.99},
         {name: "Pauperkoekje Deluxe 3000", amount: 1, price: 34.99},
     ];
