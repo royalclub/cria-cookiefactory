@@ -135,7 +135,7 @@ describe('API Routing for CRUD operations on users', function () {
                 .put('/users/' + tmpUserId)
                 .send({
                         username: "kareldegrote",
-                        salt: "DitIsEenSaltWachtwoo",
+                        salt: "DitIsEenSalt",
                         password: "RipWAchtwoord",
                         firstName: "Karel",
                         inserts: "de",
