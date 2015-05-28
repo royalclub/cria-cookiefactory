@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*globals angular*/
+/*globals cookieFactory, angular*/
 
 var cookieFactory = angular.module('cookieFactory', []);
 

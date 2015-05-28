@@ -71,7 +71,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
 
         // Get a list of orders
         $routeProvider.when('/orders/list', {
-            templateUrl: 'partials/orders/list.html',
+            templateUrl: 'partials/orders/list.html'
 //            controller: OrderListCtrl
         });
 
