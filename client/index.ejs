@@ -111,7 +111,7 @@
     <ol class="breadcrumb" ng-controller="menuController">
         <li ng-repeat="item in breadcrumb" class="{{item.active}}"><a href="{{item.url}}">{{item.name}}</a></li>
     </ol>
-    
+
     <% if (message.error) { %>
     <div class="alert alert-danger" role="alert"><p><%= message.error %></p></div>
     <% } else if (message.warning) { %>
