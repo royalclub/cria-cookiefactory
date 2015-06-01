@@ -59,7 +59,5 @@
                 db.orders = $resource('/api/orders/:_id', {}, actions);
                 return db;
             }]);
-
-
 }());
 
