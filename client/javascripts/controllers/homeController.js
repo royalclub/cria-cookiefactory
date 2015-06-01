@@ -9,7 +9,7 @@
  * @constructor
  */
 
-function cookieController($scope, $routeParams, $location) {
+function homeController($scope, $routeParams, $location) {
     "use strict";
 
     $location.path("/cookies/design");
