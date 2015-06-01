@@ -15,12 +15,13 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         // Home
         $routeProvider.when('/', {
             templateUrl: 'partials/home.html',
-            controller: homeController,
+            controller: homeController
         });
 
         // About
         $routeProvider.when('/about', {
-            templateUrl: 'partials/about.html'
+            templateUrl: 'partials/about.html',
+            label: 'Over ons'
         });
 
         // Contact
