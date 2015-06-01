@@ -1,0 +1,53 @@
+{
+    "__v" : 0,
+    "_id" : ObjectId("556c21b26b1f2d2013515ee4"),
+    "creationDate" : ISODate("2015-06-01T09:11:14.731Z"),
+    "invoiceAddress" : [ 
+        {
+            "street" : "Rietdekkersveld",
+            "streetNumber" : "40",
+            "zipCode" : "7031DL",
+            "city" : "Wehl",
+            "_id" : ObjectId("556c21b26b1f2d2013515ee6")
+        }
+    ],
+    "modificationDate" : ISODate("2015-06-01T09:11:14.731Z"),
+    "number" : "kk200",
+    "rules" : [ 
+        {
+            "amountOfBoxes" : 4,
+            "_id" : ObjectId("556c21b26b1f2d2013515ee7"),
+            "box" : null,
+            "cookie" : null
+        }
+    ],
+    "shipmentAddress" : [ 
+        {
+            "street" : "Weversveld",
+            "streetNumber" : "23",
+            "zipCode" : "5862GL",
+            "city" : "Doetinchem",
+            "_id" : ObjectId("556c21b26b1f2d2013515ee5")
+        }
+    ],
+    "status" : [ 
+        {
+            "name" : "bakken",
+            "description" : "de koekjes zitten nu in de oven",
+            "_id" : ObjectId("556c21b26b1f2d2013515ee9"),
+            "modificationDate" : ISODate("2015-06-01T09:11:14.734Z"),
+            "creationDate" : ISODate("2015-06-01T09:11:14.734Z")
+        }
+    ],
+    "user" : [ 
+        {
+            "username" : "henkdesteen",
+            "emailAddress" : "henk@desteen.nl",
+            "firstName" : "henk",
+            "inserts" : "de",
+            "lastName" : "Steen",
+            "_id" : ObjectId("556c21b26b1f2d2013515ee8")
+        }
+    ],
+    "vatPercentage" : 21
+}
