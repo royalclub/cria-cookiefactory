@@ -12,26 +12,18 @@
 function accountController($scope, $routeParams, $location, usersService) {
     "use strict";
 
-    $scope.account = {
-        username: "henkdesteen",
-        firstName: "henk",
-        inserts: "de",
-        lastName: "Steen",
-        dateOfBirth: Date.now(),
-        emailAddress: "henk@desteen.nl",
-        addresses: [{
-            _id: 10,
-            street: "Rietdekkersveld",
-            streetNumber: 40,
-            zipCode: "7031DL",
-            city: "Wehl"
-        }, {
-            _id: 20,
-            street: "Weversveld",
-            streetNumber: 23,
-            zipCode: "5862GL",
-            city: "Doetinchem"
-        }]
+    // GET 1 cookie
+    usersService.users.get({_id: '556c2223802620c40b9c97a6'}, function (user) {
+        $scope.account = user.doc;
+    });
+
+    // CREATE, UPDATE cookie
+    $scope.save = function (account) {
+        if (account && account._id !== undefined) {
+            console.log('Entering update');
+            usersService.users.update({_id: '556c2223802620c40b9c97a6'}, account, function (res) {
+                $location.path("/account");
+            });
+        }
     };
 }
-

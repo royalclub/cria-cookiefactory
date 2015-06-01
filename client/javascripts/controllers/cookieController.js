@@ -2,6 +2,18 @@
 /*globals cookieFactory */
 
 /**
+ * TODO: create controller for cookies list
+ * @param $scope
+ * @param cookiesService
+ * @constructor
+ */
+function layerListController($scope, cookiesService) {
+    "use strict";
+    // GET all layers
+    $scope.cookies = cookiesService.cookies.get();
+}
+
+/**
  * Controller for Cookies
  * @param $scope
  * @param $routeParams
