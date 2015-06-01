@@ -29,7 +29,6 @@
     "required" : true,
     "sequence" : 1
 },{
-    "_id" : ObjectId("556c1a7cc75340f6e946916d"),
     "__v" : 0,
     "creationDate" : ISODate("2015-05-02T08:38:24.530Z"),
     "modificationDate" : ISODate("2015-06-01T08:38:24.530Z"),
