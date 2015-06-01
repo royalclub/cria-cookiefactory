@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, layerController, testController, accountController */
+/*global angular, cookieController, userController, layerController, testController, accountController, homeController */
 
 /**
  *
@@ -14,7 +14,8 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
 
         // Home
         $routeProvider.when('/', {
-            templateUrl: 'partials/home.html'
+            templateUrl: 'partials/home.html',
+            controller: homeController,
         });
 
         // About
