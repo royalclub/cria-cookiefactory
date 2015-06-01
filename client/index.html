@@ -105,6 +105,16 @@
         </div>
     </div>
     <!-- Breadcrumb -->
+
+    <ul class="breadcrumb">
+        <li ng-repeat="breadcrumb in breadcrumbs.getAll()">
+            <span class="divider">/</span>
+            <ng-switch on="$last">
+                <span ng-switch-when="true">{{breadcrumb.name}}</span>
+                <span ng-switch-default><a href="{{breadcrumb.path}}">{{breadcrumb.name}}</a></span>
+            </ng-switch>
+        </li>
+    </ul>
     <ol class="breadcrumb" ng-controller="menuController">
         <li ng-repeat="item in breadcrumb" class="{{item.active}}"><a href="{{item.url}}">{{item.name}}</a></li>
     </ol>
