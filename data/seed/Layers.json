@@ -1,0 +1,61 @@
+{
+    "__v" : 0,
+    "_id" : ObjectId("556c1a00b0f2df98059916c6"),
+    "creationDate" : ISODate("2015-06-01T08:38:24.530Z"),
+    "modificationDate" : ISODate("2015-06-01T08:38:24.530Z"),
+    "name" : "deeg soort",
+    "options" : [ 
+        {
+            "name" : "Zanddeeg",
+            "sequence" : 1,
+            "description" : "Zanddeeg heeft een kruimelige structuur en breekt makkelijk.",
+            "price" : 2.2999999999999998,
+            "imageSrc" : "path to image",
+            "_id" : ObjectId("556c1a00b0f2df98059916c8"),
+            "modificationDate" : ISODate("2015-06-01T08:38:24.532Z"),
+            "creationDate" : ISODate("2015-06-01T08:38:24.532Z")
+        }, 
+        {
+            "name" : "Cakebeslag",
+            "sequence" : 2,
+            "description" : "Cakebeslag is een semi-vloeibaar deeg voornamelijk gebruikt voor het bakken van cakes. Het geeft een zacht en luchtig gebak.",
+            "price" : 2.5000000000000000,
+            "imageSrc" : "path to image",
+            "_id" : ObjectId("556c1a00b0f2df98059916c7"),
+            "modificationDate" : ISODate("2015-06-01T08:38:24.531Z"),
+            "creationDate" : ISODate("2015-06-01T08:38:24.531Z")
+        }
+    ],
+    "required" : true,
+    "sequence" : 1
+},{
+    "_id" : ObjectId("556c1a7cc75340f6e946916d"),
+    "__v" : 0,
+    "creationDate" : ISODate("2015-05-02T08:38:24.530Z"),
+    "modificationDate" : ISODate("2015-06-01T08:38:24.530Z"),
+    "name" : "vormen",
+    "options" : [ 
+        {
+            "name" : "Rond",
+            "sequence" : 1,
+            "description" : "Zanddeeg heeft een kruimelige structuur en breekt makkelijk.",
+            "price" : 2.2999999999999998,
+            "imageSrc" : "path to image",
+            "_id" : ObjectId("556c1a00b0f2df98059916c8"),
+            "modificationDate" : ISODate("2015-06-01T08:38:24.532Z"),
+            "creationDate" : ISODate("2015-06-01T08:38:24.532Z")
+        }, 
+        {
+            "name" : "Vierkant",
+            "sequence" : 2,
+            "description" : "Cakebeslag is een semi-vloeibaar deeg voornamelijk gebruikt voor het bakken van cakes. Het geeft een zacht en luchtig gebak.",
+            "price" : 2.5000000000000000,
+            "imageSrc" : "path to image",
+            "_id" : ObjectId("556c1a00b0f2df98059916c7"),
+            "modificationDate" : ISODate("2015-06-01T08:38:24.531Z"),
+            "creationDate" : ISODate("2015-06-01T08:38:24.531Z")
+        }
+    ],
+    "required" : true,
+    "sequence" : 2
+}
