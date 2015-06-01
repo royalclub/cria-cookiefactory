@@ -58,8 +58,15 @@
                 // REST url to server
                 db.orders = $resource('/api/orders/:_id', {}, actions);
                 return db;
+            }])
+        .factory('accountService', ['$resource', '$http',
+            function ($resource) {
+                var actions = {
+                        'get': {method: 'GET'}
+                    },
+                    db = {};
+                // REST url to server
+                db.users = $resource('/api/account', {}, actions);
+                return db;
             }]);
-
-
 }());
-
