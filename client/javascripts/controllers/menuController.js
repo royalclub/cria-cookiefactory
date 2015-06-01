@@ -22,7 +22,7 @@ cookieFactory.controller('menuController', function ($scope, $routeParams) {
         {name: "Over ons", url: "/#/about", active: "active"}
     ];
     $scope.activePage = "Home";
-    $scope.SetActivePage = function(pageName){
+    $scope.SetActivePage = function (pageName) {
         $scope.activePage = pageName;
         console.log(pageName);
     };
