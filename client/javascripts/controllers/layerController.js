@@ -2,6 +2,18 @@
 /*globals cookieFactory */
 
 /**
+ * TODO: create controller for layer list
+ * @param $scope
+ * @param layersService
+ * @constructor
+ */
+function layerListController($scope, layersService) {
+    "use strict";
+    // GET all layers
+    $scope.layers = layersService.layers.get();
+}
+
+/**
  * Controller for layer
  * @param $scope
  * @param $routeParams
@@ -11,11 +23,11 @@
  */
 function layerController($scope, $routeParams, $location, layersService) {
     "use strict";
-    // GET 1 cookie
 
+    // GET 1 cookie
     if ($routeParams._id !== 'new') {
-        $scope.layers = layersService.layers.get({_id: $routeParams._id}, function () {
-            console.log('$scope.requests ', $scope.requests);
+        layersService.layers.get({_id: $routeParams._id}, function (layer) {
+            $scope.layers = layer.doc;
         });
     }
 
@@ -40,5 +52,4 @@ function layerController($scope, $routeParams, $location, layersService) {
             });
         }
     };
-
 }

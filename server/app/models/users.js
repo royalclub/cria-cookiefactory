@@ -1,10 +1,12 @@
 /*jslint node:true */
+/*global CryptoJS*/
 
 (function () {
     "use strict";
 
     var mongoose = require('mongoose'),
         address = require('./address.js'),
+        crypto = require('crypto'),
         userSchema;
 
     userSchema = new mongoose.Schema({
@@ -20,6 +22,14 @@
         creationDate: {type: Date, "default": Date.now, required: true},
         modificationDate: {type: Date, "default": Date.now, required: true}
     }, {collection: "users"});
+
+    userSchema.method('validPassword', function (password) {
+        var hasher, hashedPassword;
+        hasher = crypto.createHash('sha512');
+        hasher.update(this.salt + password);
+        hashedPassword = hasher.digest('hex');
+        return (this.password === hashedPassword);
+    });
 
     module.exports = {
         schema: userSchema,
