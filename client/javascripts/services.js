@@ -54,8 +54,6 @@
                     data = {};
                 // REST url to server
                 data.users = $resource('/api/account', {}, actions);
-                data.loggedIn = false;
-                data.loggedInUser = null;
                 return data;
             }])
         .factory('authenticationService', ['dbService',
