@@ -82,10 +82,10 @@ function accountEditController($scope, $routeParams, $location, authenticationSe
 /**
  * Controller responsible for handling logout requests.
  */
-function accountLogoutController($scope, $routeParams, $location, accountService) {
+function accountLogoutController($scope, $routeParams, $location, dbService) {
     "use strict";
 
-    accountService.signout.signout({}, function () {
+    dbService.signout.signout({}, function () {
         window.location.href = '/';
     });
 }
