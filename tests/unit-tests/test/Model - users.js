@@ -14,7 +14,7 @@ var env = process.env.NODE_ENV || 'development'
 
 // Bootstrap db connection
 var mongoose = require('../../../server/node_modules/mongoose')
-mongoose.createConnection(config.db);
+mongoose.connect(config.db);
 
 /*
 // Debugging
@@ -33,14 +33,14 @@ model_files.forEach(function (file) {
 
 var User = mongoose.model('User'),
     testUser = {
-                    username: "henkdesteen",
+                    username: "henkdesteen1",
                     salt: "DitIsEenSalt",
                     password: "RipWAchtwoord",
                     firstName: "henk",
                     inserts: "de",
                     lastName: "Steen",
                     dateOfBirth: Date.now(),
-                    emailAddress: "henk@desteen.nl",
+                    emailAddress: "henk1@desteen.nl",
                     addresses: [{
                                 street: "Rietdekkersveld",
                                 streetNumber: 40,
