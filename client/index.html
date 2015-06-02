@@ -43,7 +43,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="accountDropdown" data-ng-controller="menuController">
                         <li role="presentation" ng-repeat="menuItem in menuItems" class="{{menuItem.active}}">
-                            <a role="menuitem" tabindex="-1" href="{{menuItem.url}}" class="navbar-link" ng-click="SetActivePage('{{}}')">{{menuItem.name}}</a>
+                            <a role="menuitem" tabindex="-1" href="{{menuItem.url}}" class="navbar-link" ng-click="SetActivePage(menuItem.name)">{{menuItem.name}}</a>
                         </li>
                     </ul>
                 </li>
@@ -56,8 +56,8 @@
             </div>
 
           <ul class="nav navbar-nav" data-ng-controller="menuController">
-            <li ng-repeat="item in menuItems" class="{{item.active}}">
-              <a href="{{item.url}}" class="navbar-link">{{item.name}}</a>
+            <li ng-repeat="item in menuItems" class="active">
+              <a href="{{item.url}}" class="navbar-link" ng-click="SetActivePage($index)">{{item.name}}</a>
             </li>
           </ul>
 
@@ -106,7 +106,7 @@
     </div>
     <!-- Breadcrumb -->
     <ol class="breadcrumb" ng-controller="menuController">
-        <li ng-repeat="item in breadcrumb" class="{{item.active}}"><a href="{{item.url}}">{{item.name}}</a></li>
+        <li ng-repeat="item in GetBreadcrumb()" class="{{item.active}}"><a href="{{item.url}}">{{item.name}}</a></li>
     </ol>
 
     <div data-ng-view=""></div>
