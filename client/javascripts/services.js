@@ -62,7 +62,7 @@
             function (dbService) {
                 return {
                     getUser: function (callback) {
-                        dbService.account.get(function (result) { 
+                        dbService.account.get(function (result) {
                             callback(result.loggedIn, result.doc);
                         });
                     }

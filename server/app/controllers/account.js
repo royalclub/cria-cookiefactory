@@ -5,6 +5,21 @@
 var mongoose = require('mongoose'),
     User = mongoose.model('User').model;
 
+
+function randomString(length) {
+    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz",
+        string_length = length,
+        randomstring = '',
+        i = 0,
+        rnum = 0;
+
+    for (i = 0; i < string_length; i++) {
+        rnum = Math.floor(Math.random() * chars.length);
+        randomstring += chars.substring(rnum, rnum + 1);
+    }
+    document.randform.randomfield.value = randomstring;
+}
+
 /**
  * Fetch information of the currently logged in user. If the user is not logged in, send a different response.
  */
@@ -40,11 +55,11 @@ exports.register = function (req, res) {
                 'timestamp': new Date(),
                 filename: __filename
             },
-            doc: doc,
+            doc: user,
             err: err
         };
 
-        if(!err) {
+        if (!err) {
             req.login(user);
         }
 
@@ -69,14 +84,3 @@ exports.signout = function (req, res) {
         ok: 1
     });
 };
-
-function randomString (length) {
-	var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-	var string_length = length;
-	var randomstring = '';
-	for (var i = 0; i < string_length; i++) {
-		var rnum = Math.floor(Math.random() * chars.length);
-		randomstring += chars.substring(rnum, rnum + 1);
-	}
-	document.randform.randomfield.value = randomstring;
-}

@@ -30,7 +30,7 @@
         hashedPassword = hasher.digest('hex');
         return (this.password === hashedPassword);
     });
-    
+
     userSchema.method('hashPassword', function (salt, password) {
         var hasher;
         hasher = crypto.createHash('sha512');
