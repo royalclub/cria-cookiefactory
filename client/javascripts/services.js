@@ -20,8 +20,8 @@
 
                 db.cookies = $resource('/api/cookies/:_id', {}, actions);
                 db.users = $resource('/api/users/:_id', {}, actions);
-                db.users = $resource('/api/layers/:_id', {}, actions);
-                db.users = $resource('/api/orders/:_id', {}, actions);
+                db.layers = $resource('/api/layers/:_id', {}, actions);
+                db.orders = $resource('/api/orders/:_id', {}, actions);
                 db.account = $resource('/api/account', {}, accountActions);
                 return db;
             }])
