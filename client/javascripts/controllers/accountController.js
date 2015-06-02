@@ -14,17 +14,15 @@ cookieFactory.controller('accountController', function ($scope, $routeParams, $l
     "use strict";
     accountService.users.get({}, function (user) {
         $scope.account = user;
-        console.log($scope.account);
+        
+        if (user === undefined || user === null) {
+            $scope.showLoginForm = true;
+            $scope.showWelcomeText = false;
+        } else {
+            $scope.showLoginForm = false;
+            $scope.showWelcomeText = true;
+        }
     });
-        // CREATE, UPDATE cookie
-        /*$scope.save = function (account) {
-            if (account && account._id !== undefined) {
-                console.log('Entering update');
-                accountService.users.update({ _id: account._id }, account, function (res) {
-                    $location.path("/account");
-                });
-            }
-        };*/
 });
 
 function accountController($scope, $routeParams, $location, accountService) {
