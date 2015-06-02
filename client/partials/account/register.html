@@ -1,0 +1,46 @@
+<h2>Een account aanmaken</h2>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="username" class="form-label col-md-2">Gebruikersnaam:</label>
+        <div class="col-md-10">
+            <input type="text" name="username" ng-model="user.username" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="form-label col-md-2">Email adres:</label>
+        <div class="col-md-10">
+            <input type="email" name="email" ng-model="user.emailAddress" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password" class="form-label col-md-2">Wachtwoord:</label>
+        <div class="col-md-10">
+            <input type="password" name="password" ng-model="user.password" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="firstname" class="form-label col-md-2">Voornaam:</label>
+        <div class="col-md-10">
+            <input type="text" name="firstname" ng-model="user.firstName" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="asserts" class="form-label col-md-2">Tussenvoegsels:</label>
+        <div class="col-md-10">
+            <input type="text" name="asserts" ng-model="user.asserts" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastname" class="form-label col-md-2">Achternaam:</label>
+        <div class="col-md-10">
+            <input type="text" name="lastname" ng-model="user.lastName" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="dateOfBirth" class="form-label col-md-2">Geboortedatum (DD/MM/YYYY):</label>
+        <div class="col-md-10">
+            <input type="date" name="dateOfBirth" ng-model="user.dateOfBirth" class="form-control" />
+        </div>
+    </div>
+    <input type="submit" ng-click="save(user)" value="Registreren" class="btn btn-primary" />
+</form>
