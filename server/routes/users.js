@@ -31,5 +31,4 @@ router
 router
     .delete('/users/:_id', controller.deleteOne);
 
-
 module.exports = router;

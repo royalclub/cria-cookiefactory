@@ -11,7 +11,6 @@ var activePage = 0;
     
 cookieFactory.controller('menuController', function ($scope, $routeParams) {
     "use strict";
-    console.log($routeParams);
     $scope.menuItems = [
         {name: "Home", url: "/#/", active: "", breadcrumb: [{name: "Cookie Factory", url: "/#/", active: "active"}]},
         {name: "Over ons", url: "/#/about", active: "", breadcrumb: [{name: "Cookie Factory", url: "/#/", active: ""},{name: "Over ons", url: "/#/about", active: "active"}]},

@@ -9,29 +9,27 @@
  * @param usersService
  * @constructor
  */
-function accountController($scope, $routeParams, $location, usersService) {
+
+cookieFactory.controller('accountController', function ($scope, $routeParams, $location, accountService) {
     "use strict";
+    accountService.users.get({}, function (user) {
+        $scope.account = user;
+        console.log($scope.account);
+    });
+        // CREATE, UPDATE cookie
+        /*$scope.save = function (account) {
+            if (account && account._id !== undefined) {
+                console.log('Entering update');
+                accountService.users.update({ _id: account._id }, account, function (res) {
+                    $location.path("/account");
+                });
+            }
+        };*/
+});
 
-    $scope.account = {
-        username: "henkdesteen",
-        firstName: "henk",
-        inserts: "de",
-        lastName: "Steen",
-        dateOfBirth: Date.now(),
-        emailAddress: "henk@desteen.nl",
-        addresses: [{
-            _id: 10,
-            street: "Rietdekkersveld",
-            streetNumber: 40,
-            zipCode: "7031DL",
-            city: "Wehl"
-        }, {
-            _id: 20,
-            street: "Weversveld",
-            streetNumber: 23,
-            zipCode: "5862GL",
-            city: "Doetinchem"
-        }]
-    };
+function accountController($scope, $routeParams, $location, accountService) {
+    "use strict";
+    accountService.users.get({}, function (user) {
+        $scope.account = user;
+    });
 }
-
