@@ -43,7 +43,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="accountDropdown" data-ng-controller="menuController">
                         <li role="presentation" ng-repeat="menuItem in menuItems" class="{{menuItem.active}}">
-                            <a role="menuitem" tabindex="-1" href="{{menuItem.url}}" class="navbar-link" ng-click="SetActivePage(menuItem.name)">{{menuItem.name}}</a>
+                            <a role="menuitem" tabindex="-1" href="{{menuItem.url}}" class="navbar-link" ng-click="SetActivePage($index)">{{menuItem.name}}</a>
                         </li>
                     </ul>
                 </li>
