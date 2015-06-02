@@ -8,8 +8,12 @@ var router = express.Router();
 
 var controller = require('../app/controllers/account.js');
 
-/** CREATE route for users */
+/** GET route for currently logged in user. */
 router
     .get('/account', controller.detail);
+
+/** POST route for signing out a user. */
+router
+    .post('/account/signout', controller.signout);
 
 module.exports = router;

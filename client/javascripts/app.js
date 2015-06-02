@@ -36,13 +36,19 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         // Account Details
         $routeProvider.when('/account', {
             templateUrl: 'partials/account/details.html',
-            controller: accountController
+            controller: accountDetailController
         });
 
         // Account Edit
         $routeProvider.when('/account/edit', {
             templateUrl: 'partials/account/edit.html',
-            controller: accountController
+            controller: accountEditController
+        });
+
+        // Account signout
+        $routeProvider.when('/account/logout', {
+            templateUrl: 'partials/account/logout.html',
+            controller: accountLogoutController
         });
 
         // Account EditAddress
