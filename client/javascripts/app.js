@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, layerController, testController, accountController, homeController, layerListController, addressController */
+/*global angular, cookieController, userController, layerController, testController, accountController, accountDetailController, accountEditController, accountRegisterController, accountLogoutController, homeController, layerListController, addressController */
 
 /**
  *
@@ -43,6 +43,12 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $routeProvider.when('/account/edit', {
             templateUrl: 'partials/account/edit.html',
             controller: accountEditController
+        });
+
+        // Account signout
+        $routeProvider.when('/account/register', {
+            templateUrl: 'partials/account/register.html',
+            controller: accountRegisterController
         });
 
         // Account signout

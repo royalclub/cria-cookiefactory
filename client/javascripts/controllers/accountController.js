@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*global cookieFactory, accountService, usersService, authenticationService */
+/*global cookieFactory, accountService, usersService, authenticationService, dbService */
 
 /**
  * Controller for Account
@@ -9,17 +9,15 @@
  * @param usersService
  * @constructor
  */
-cookieFactory.controller('accountController', function ($scope, $routeParams, $location, accountService) {
+cookieFactory.controller('accountController', function ($scope, $routeParams, $location, authenticationService) {
     "use strict";
-    accountService.users.get({}, function (user) {
-        $scope.account = user.doc;
 
-        console.log(user);
-
-        if (!user.loggedIn) {
+    authenticationService.getUser(function (loggedIn, loggedInUser) { 
+        if (!loggedIn) {
             $scope.showLoginForm = true;
             $scope.showWelcomeText = false;
         } else {
+            $scope.account = loggedInUser;
             $scope.showLoginForm = false;
             $scope.showWelcomeText = true;
         }
@@ -29,14 +27,33 @@ cookieFactory.controller('accountController', function ($scope, $routeParams, $l
 /**
  * Controller responsible for handling the account edit.
  */
+function accountRegisterController($scope, $routeParams, $location, authenticationService, dbService) {
+    "use strict";
+
+    authenticationService.getUser(function (loggedIn, loggedInUser) {
+        if (loggedIn) {
+            $location.path('/#/');
+        } else {
+            $scope.save = function (user) {
+                dbService.account.register(user, function () {
+                    $location.path("/");
+                });
+            }
+        }
+    });
+}
+
+/**
+ * Controller responsible for handling the account edit.
+ */
 function accountDetailController($scope, $routeParams, $location, authenticationService) {
     "use strict";
 
-    authenticationService.isLoggedIn(function (loggedIn) {
+    authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (!loggedIn) {
             $location.path('/#/');
         } else {
-            $scope.account = authenticationService.loggedInUser;
+            $scope.account = loggedInUser;
         }
     });
 }
@@ -48,13 +65,13 @@ function accountDetailController($scope, $routeParams, $location, authentication
 function accountEditController($scope, $routeParams, $location, authenticationService, usersService, accountService) {
     "use strict";
 
-    authenticationService.isLoggedIn(function (loggedIn) {
+    authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (!loggedIn) {
             $location.path('/#/');
         } else {
-            $scope.account = accountService.loggedInUser;
-            $scope.update = function (user) {
-                usersService.update(user, function () {
+            $scope.account = loggedInUser;
+            $scope.update = function (account) {
+                usersService.update(account, function () {
                     $location.path('/#/account');
                 });
             };
@@ -68,10 +85,8 @@ function accountEditController($scope, $routeParams, $location, authenticationSe
 function accountLogoutController($scope, $routeParams, $location, accountService) {
     "use strict";
 
-    console.log("accountLogoutController");
-
-    accountService.users.signout({}, function () {
-        console.log(".signout() callback");
-        $location.path("/");
+    accountService.signout.signout({}, function () {
+        window.location.href = '/';
+//        $location.path("/");
     });
 }
