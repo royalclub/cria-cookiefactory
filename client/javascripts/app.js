@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, layerController, testController, accountController, homeController, layerListController, addressController */
+/*global angular, cookieController, userController, layerController, cookieDesignController, accountController, homeController, layerListController, addressController */
 
 /**
  *
@@ -72,7 +72,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         // Design cookie
         $routeProvider.when('/cookies/design', {
             templateUrl: 'partials/cookies/design.html',
-            controller: testController
+            controller: cookieDesignController
         });
 
         // Get a list of users
