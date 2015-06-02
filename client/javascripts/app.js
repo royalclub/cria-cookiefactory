@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, layerController, cookieDesignController, accountController, homeController, layerListController, addressController */
+/*global angular, cookieController, userController, layerController, cookieDesignController, accountController, homeController, layerListController, addressController, accountDetailController, accountEditController, accountLogoutController */
 
 /**
  *

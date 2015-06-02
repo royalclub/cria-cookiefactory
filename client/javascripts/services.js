@@ -65,7 +65,7 @@
                             });
                         },
                         loggedInUser: null
-                    };                
+                    };
                 return data;
             }]);
 }());
