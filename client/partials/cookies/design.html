@@ -15,7 +15,7 @@
                 </div>
                 <hr />
             </div>
-            
+
             <div class="row">
                 <div class="col-xs-6" data-ng-repeat="option in currentLayer.options">
                     <a href="#" class="thumbnail">
@@ -24,15 +24,15 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-xs-8">
             <div class="row">
                 <a href="#" class="btn btn-default" data-ng-repeat="layer in layers" ng-click="onLayerClicked(layer._id, $event)">
-                  {{layer.name}}
+                  {{layers.name}}
                 </a>
                 <hr />
             </div>
-            
+
             <div class="row text-center">
                 <div class="text-center thumbnail">
                     <img src="images/cookies.jpg" alt="Cookie" />
@@ -43,7 +43,7 @@
     <div class="pull-right">
         <p>Totaalbedrag: &euro; {{total}}</p>
         <a ng-click="onProceedClicked($event)" class="btn btn-primary">
-            <span class="glyphicon glyphicon-ok"></span> 
+            <span class="glyphicon glyphicon-ok"></span>
             Volgende stap
         </a>
     </div>
