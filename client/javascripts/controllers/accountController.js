@@ -15,7 +15,7 @@ cookieFactory.controller('accountController', function ($scope, $routeParams, $l
     accountService.users.get({}, function (user) {
         $scope.account = user;
 
-        if(user === undefined || user === null) {
+        if (user === undefined || user === null) {
             $scope.showLoginForm = true;
             $scope.showWelcomeText = false;
         } else {
@@ -25,7 +25,7 @@ cookieFactory.controller('accountController', function ($scope, $routeParams, $l
     });
 });
 
-function accountController ($scope, $routeParams, $location, accountService) {
+function accountController($scope, $routeParams, $location, accountService) {
     "use strict";
     accountService.users.get({}, function (user) {
         $scope.account = user;
