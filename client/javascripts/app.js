@@ -64,7 +64,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         });
 
         // Design cookie
-        $routeProvider.when('/cookie/design', {
+        $routeProvider.when('/cookies/design', {
             templateUrl: 'partials/cookies/design.html',
             controller: testController
         });
