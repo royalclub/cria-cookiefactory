@@ -95,6 +95,18 @@
     app.use(flash());
     app.use(passport.initialize());
     app.use(passport.session());
+
+    passport.serializeUser(function (user, done) {
+        done(null, user.id);
+    });
+
+    passport.deserializeUser(function (id, done) {
+        var User = require('./app/models/users.js').model;
+        User.findById(id, function (err, user) {
+            done(err, user);
+        });
+    });
+
     passport.use(authenticationStrategy);
     app
         .post('/login', passport.authenticate('local', { successRedirect: '/#/', failureRedirect: '/#/cookies/design', failureFlash: true }));
