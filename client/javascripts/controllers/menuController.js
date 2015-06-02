@@ -10,7 +10,6 @@
 
 cookieFactory.controller('menuController', function ($scope, $routeParams) {
     "use strict";
-    console.log($routeParams);
     $scope.menuItems = [
         {name: "Home", url: "/#/", active: "active"},
         {name: "Over ons", url: "/#/about", active: ""},

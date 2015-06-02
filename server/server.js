@@ -10,6 +10,10 @@
     var fs = require('fs'),                             // Used to read files from the filesystem (__dirname)
         express = require('express'),                   // Fast, unopinionated, minimalist web framework for Node.js
         bodyParser = require("body-parser"),            // This does not handle multipart bodies, due to their complex and typically large nature. For multipart bodies, you may be interested in the following modules:
+        passport = require('passport'),
+        authenticationStrategy = require('./authentication.js'),
+        flash = require('connect-flash'),
+        session = require('express-session'),
         env,
         config,
         mongoose,
@@ -64,6 +68,11 @@
     app.set('port', process.env.PORT || config.port);                   // Set the port
 
     /**
+     * Set Express render engine
+     */
+    app.set('view engine', 'ejs');
+
+    /**
      * Express middleware
      */
     app.use(bodyParser.json());                                         // Configure body-parser with JSON input
@@ -80,6 +89,17 @@
     }
 
     /**
+     * Middleware for authentication (passportjs)
+     */
+    app.use(session({ secret: '9y6YLD3sRF3s' }));
+    app.use(flash());
+    app.use(passport.initialize());
+    app.use(passport.session());
+    passport.use(authenticationStrategy);
+    app
+        .post('/login', passport.authenticate('local', { successRedirect: '/#/', failureRedirect: '/#/cookies/design', failureFlash: true }));
+
+    /**
      * Bootstrap routes
      * @type {string}
      */
@@ -93,6 +113,11 @@
     /**
      * Middleware to serve static page
      */
+    app.get('/', function (req, res) {
+        res.render(__dirname + '/../client/index.ejs', {
+            message: req.flash()
+        });
+    });
     app.use(express.static(__dirname + '/../client/'));
 
     /**
