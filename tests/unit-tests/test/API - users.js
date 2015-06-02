@@ -24,14 +24,14 @@ describe('API Routing for CRUD operations on users', function () {
             request
                 .post('/users')
                 .send({
-                        username: "henkdesteen",
+                        username: "henkdesteen1",
                         salt: "DitIsEenSalt",
                         password: "RipWAchtwoord",
                         firstName: "henk",
                         inserts: "de",
                         lastName: "Steen",
                         dateOfBirth: Date.now(),
-                        emailAddress: "henk@desteen.nl",
+                        emailAddress: "henk1@desteen.nl",
                         addresses: [{
                                     street: "Rietdekkersveld",
                                     streetNumber: 40,
@@ -63,7 +63,7 @@ describe('API Routing for CRUD operations on users', function () {
                 JSON.parse(res.text)
                     .should.have.property('doc')
                     .and.have.property('username')
-                    .be.exactly('henkdesteen');
+                    .be.exactly('henkdesteen1');
                 JSON.parse(res.text)
                     .should.have.property('doc')
                     .and.have.property('addresses')
@@ -118,7 +118,7 @@ describe('API Routing for CRUD operations on users', function () {
                 JSON.parse(res.text)
                     .should.have.property('doc')
                     .and.have.property('username')
-                    .be.exactly('henkdesteen');
+                    .be.exactly('henkdesteen1');
                 JSON.parse(res.text)
                     .should.have.property('doc')
                     .and.have.property('addresses')

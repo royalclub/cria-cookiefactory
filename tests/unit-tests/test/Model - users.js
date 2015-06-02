@@ -33,14 +33,14 @@ model_files.forEach(function (file) {
 
 var User = mongoose.model('User'),
     testUser = {
-                    username: "henkdesteen",
+                    username: "henkdesteen1",
                     salt: "DitIsEenSalt",
                     password: "RipWAchtwoord",
                     firstName: "henk",
                     inserts: "de",
                     lastName: "Steen",
                     dateOfBirth: Date.now(),
-                    emailAddress: "henk@desteen.nl",
+                    emailAddress: "henk1@desteen.nl",
                     addresses: [{
                                 street: "Rietdekkersveld",
                                 streetNumber: 40,

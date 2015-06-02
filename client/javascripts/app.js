@@ -1,4 +1,5 @@
-/*global angular, cookieController, userController, layerController, testController, accountController, homeController, layerListController, addressController */
+/*global angular, cookieController, userController, layerController, testController, accountController, accountDetailController, accountEditController, accountRegisterController, accountLogoutController, homeController, layerListController, addressController */
+/*global angular, cookieController, userController, layerController, cookieDesignController, accountController, homeController, layerListController, addressController, accountDetailController, accountEditController, accountLogoutController */
 
 /**
  *
@@ -36,13 +37,25 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         // Account Details
         $routeProvider.when('/account', {
             templateUrl: 'partials/account/details.html',
-            controller: accountController
+            controller: accountDetailController
         });
 
         // Account Edit
         $routeProvider.when('/account/edit', {
             templateUrl: 'partials/account/edit.html',
-            controller: accountController
+            controller: accountEditController
+        });
+
+        // Account signout
+        $routeProvider.when('/account/register', {
+            templateUrl: 'partials/account/register.html',
+            controller: accountRegisterController
+        });
+
+        // Account signout
+        $routeProvider.when('/account/logout', {
+            templateUrl: 'partials/account/logout.html',
+            controller: accountLogoutController
         });
 
         // Account EditAddress
@@ -64,9 +77,9 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         });
 
         // Design cookie
-        $routeProvider.when('/cookie/design', {
+        $routeProvider.when('/cookies/design', {
             templateUrl: 'partials/cookies/design.html',
-            controller: testController
+            controller: cookieDesignController
         });
 
         // Get a list of users

@@ -3,7 +3,7 @@
 (function () {
     "use strict";
     angular.module('cookieFactory.services', ['ngResource'])
-        .factory('cookiesService', ['$resource', '$http',
+        .factory('dbService', ['$resource', '$http',
             function ($resource) {
                 var actions = {
                         'get': {method: 'GET'},
@@ -12,61 +12,60 @@
                         'update': {method: 'PUT'},
                         'delete': {method: 'DELETE'}
                     },
+                    accountActions = {
+                        'get': {method: 'GET'},
+                        'register': {method: 'POST'}
+                    },
+                    signOutAction = {
+                        'signout': {method: 'POST'}
+                    },
                     db = {};
-                // REST url to server
+
                 db.cookies = $resource('/api/cookies/:_id', {}, actions);
-                return db;
-            }])
-        .factory('usersService', ['$resource', '$http',
-            function ($resource) {
-                var actions = {
-                        'get': {method: 'GET'},
-                        'save': {method: 'POST'},
-                        'query': {method: 'GET', isArray: true},
-                        'update': {method: 'PUT'},
-                        'delete': {method: 'DELETE'}
-                    },
-                    db = {};
-                // REST url to server
                 db.users = $resource('/api/users/:_id', {}, actions);
-                return db;
-            }])
-        .factory('layersService', ['$resource', '$http',
-            function ($resource) {
-                var actions = {
-                        'get': {method: 'GET'},
-                        'save': {method: 'POST'},
-                        'query': {method: 'GET', isArray: true},
-                        'update': {method: 'PUT'},
-                        'delete': {method: 'DELETE'}
-                    },
-                    db = {};
-                // REST url to server
                 db.layers = $resource('/api/layers/:_id', {}, actions);
+                db.orders = $resource('/api/orders/:_id', {}, actions);
+                db.account = $resource('/api/account', {}, accountActions);
+                db.signout = $resource('/api/account/signout', {}, signOutAction);
                 return db;
             }])
-        .factory('ordersService', ['$resource', '$http',
-            function ($resource) {
-                var actions = {
-                        'get': {method: 'GET'},
-                        'save': {method: 'POST'},
-                        'query': {method: 'GET', isArray: true},
-                        'update': {method: 'PUT'},
-                        'delete': {method: 'DELETE'}
-                    },
-                    db = {};
-                // REST url to server
-                db.orders = $resource('/api/orders/:_id', {}, actions);
-                return db;
+        .factory('cookiesService', ['dbService',
+            function (dbService) {
+                return dbService;
+            }])
+        .factory('usersService', ['dbService',
+            function (dbService) {
+                return dbService;
+            }])
+        .factory('layersService', ['dbService',
+            function (dbService) {
+                return dbService;
+            }])
+        .factory('ordersService', ['dbService',
+            function (dbService) {
+                return dbService;
             }])
         .factory('accountService', ['$resource', '$http',
             function ($resource) {
                 var actions = {
-                        'get': {method: 'GET'}
+                        'get': {method: 'GET'},
+                        'signout': {method: 'POST'}
                     },
-                    db = {};
+                    data = {};
                 // REST url to server
-                db.users = $resource('/api/account', {}, actions);
-                return db;
+                data.users = $resource('/api/account', {}, actions);
+                data.loggedIn = false;
+                data.loggedInUser = null;
+                return data;
+            }])
+        .factory('authenticationService', ['dbService',
+            function (dbService) {
+                return {
+                    getUser: function (callback) {
+                        dbService.account.get(function (result) { 
+                            callback(result.loggedIn, result.doc);
+                        });
+                    }
+                };
             }]);
 }());

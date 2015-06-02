@@ -180,7 +180,7 @@ if [ -f ./test/static-analyzer/error_log.txt ]; then
 fi
 
 git merge --no-edit $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
-git commit -am "Merging from $STAGE2 to $STAGE2: `date`" | tee -a "$DIR/$CUR_SCRIPT"
+git commit -am "Merging from $STAGE1 to $STAGE2: `date`" | tee -a "$DIR/$CUR_SCRIPT"
 git push origin $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
 
 echo | tee -a "$DIR/$CUR_SCRIPT"
