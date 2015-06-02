@@ -1,4 +1,4 @@
-/*global angular, cookieController, userController, layerController, testController, accountController, homeController */
+/*global angular, cookieController, userController, layerController, testController, accountController, homeController, layerListController, addressController */
 
 /**
  *
@@ -39,6 +39,18 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             controller: accountController
         });
 
+        // Account Edit
+        $routeProvider.when('/account/edit', {
+            templateUrl: 'partials/account/edit.html',
+            controller: accountController
+        });
+
+        // Account EditAddress
+        $routeProvider.when('/account/address/edit/:_id', {
+            templateUrl: 'partials/account/address/edit.html',
+            controller: addressController
+        });
+
         // Get all cookies
         $routeProvider.when('/cookies/list', {
             templateUrl: 'partials/cookies/list.html',
@@ -70,13 +82,13 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         });
 
         // Get a list of layers
-        $routeProvider.when('/layers/list', {
+        $routeProvider.when('/layers', {
             templateUrl: 'partials/layers/list.html',
-            controller: layerController
+            controller: layerListController
         });
 
         // Get a list of layers
-        $routeProvider.when('/layers/:_id', {
+        $routeProvider.when('/layer/:_id', {
             templateUrl: 'partials/layers/detail.html',
             controller: layerController
         });
