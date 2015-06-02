@@ -13,7 +13,7 @@ cookieFactory.controller('menuController', function ($scope, $routeParams) {
     $scope.menuItems = [
         {name: "Home", url: "/#/", active: "active"},
         {name: "Over ons", url: "/#/about", active: ""},
-        {name: "Ontwerp koekje", url: "/#/cookies/design", active: ""},
+        {name: "Ontwerp koekje", url: "/#/cookie/design", active: ""},
         {name: "Contact", url: "/#/contact", active: ""}
     ];
     $scope.breadcrumb = [

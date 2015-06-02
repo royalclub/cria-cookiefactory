@@ -9,7 +9,7 @@
  */
 function layerListController($scope, cookiesService) {
     "use strict";
-    // GET all layers
+    // GET all cookies
     $scope.cookies = cookiesService.cookies.get();
 }
 
