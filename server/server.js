@@ -114,9 +114,9 @@
      * Middleware to serve static page
      */
     app.get('/', function (req, res) {
-       res.render(__dirname + '/../client/index.ejs', {
-           message: req.flash()
-       }); 
+        res.render(__dirname + '/../client/index.ejs', {
+            message: req.flash()
+        });
     });
     app.use(express.static(__dirname + '/../client/'));
 
