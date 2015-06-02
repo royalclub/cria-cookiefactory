@@ -9,21 +9,27 @@
  * @param usersService
  * @constructor
  */
-function accountController($scope, $routeParams, $location, usersService) {
+
+cookieFactory.controller('accountController', function ($scope, $routeParams, $location, accountService) {
     "use strict";
-
-    // GET 1 cookie
-    usersService.users.get({_id: '556c2223802620c40b9c97a6'}, function (user) {
-        $scope.account = user.doc;
+    accountService.users.get({}, function (user) {
+        $scope.account = user;
+        console.log($scope.account);
     });
+        // CREATE, UPDATE cookie
+        /*$scope.save = function (account) {
+            if (account && account._id !== undefined) {
+                console.log('Entering update');
+                accountService.users.update({ _id: account._id }, account, function (res) {
+                    $location.path("/account");
+                });
+            }
+        };*/
+});
 
-    // CREATE, UPDATE cookie
-    $scope.save = function (account) {
-        if (account && account._id !== undefined) {
-            console.log('Entering update');
-            usersService.users.update({_id: '556c2223802620c40b9c97a6'}, account, function (res) {
-                $location.path("/account");
-            });
-        }
-    };
+function accountController($scope, $routeParams, $location, accountService) {
+    "use strict";
+    accountService.users.get({}, function (user) {
+        $scope.account = user;
+    });
 }
