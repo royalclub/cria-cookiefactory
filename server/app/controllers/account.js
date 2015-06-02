@@ -51,24 +51,24 @@ exports.register = function (req, res) {
         return res.send(retObj);
 
     });
-}
+};
 
 /**
  * Method to log out a user.
  */
-exports.signout = function (req, res) { 
+exports.signout = function (req, res) {
     if (!req.user) {
         return res.send({
-            ok:0
+            ok: 0
         });
     }
 
     req.logout();
 
     return res.send({
-        ok:1
+        ok: 1
     });
-}
+};
 
 function randomString (length) {
 	var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
