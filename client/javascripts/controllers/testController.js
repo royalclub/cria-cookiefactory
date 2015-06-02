@@ -113,7 +113,7 @@ function testController($scope, $routeParams, $location, usersService) {
             }]
         }];
 
-        $scope.layers = layersService.layers.get();
+        //$scope.layers = layersService.layers.get();
 
         $scope.currentLayer = $scope.layers[0];
 
