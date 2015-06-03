@@ -8,7 +8,6 @@
         address = require('./address.js'),
         crypto = require('crypto'),
         userSchema;
-        
 
     userSchema = new mongoose.Schema({
         username: {type: String, required: true, minlength: 4, maxlength: 30, unique: true},
@@ -23,13 +22,21 @@
         creationDate: {type: Date, "default": Date.now, required: true},
         modificationDate: {type: Date, "default": Date.now, required: true}
     }, {collection: "users"});
-    
+
     userSchema.method('validPassword', function (password) {
         var hasher, hashedPassword;
         hasher = crypto.createHash('sha512');
         hasher.update(this.salt + password);
         hashedPassword = hasher.digest('hex');
         return (this.password === hashedPassword);
+    });
+
+    userSchema.method('hashPassword', function (salt, password) {
+        var hasher;
+        hasher = crypto.createHash('sha512');
+        hasher.update(this.salt + password);
+        this.salt = salt;
+        this.password = hasher.digest('hex');
     });
 
     module.exports = {

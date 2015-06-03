@@ -89,15 +89,29 @@
     }
 
     /**
-     * Middleware for authentication (passportjs)
+     * Middleware for authentication (Passport)
      */
     app.use(session({ secret: '9y6YLD3sRF3s' }));
     app.use(flash());
     app.use(passport.initialize());
     app.use(passport.session());
+
+    // Function responsible for parsing information of a user to a cookie.
+    passport.serializeUser(function (user, done) {
+        done(null, user.id);
+    });
+
+    // Function responsible for parsing information from a cookie to a User instance.
+    passport.deserializeUser(function (id, done) {
+        var User = require('./app/models/users.js').model;
+        User.findById(id, function (err, user) {
+            done(err, user);
+        });
+    });
+
     passport.use(authenticationStrategy);
     app
-        .post('/login', passport.authenticate('local', { successRedirect: '/#/', failureRedirect: '/#/cookies/design', failureFlash: true }));
+        .post('/login', passport.authenticate('local', { successRedirect: '/#/cookies/design', failureRedirect: '/#/cookies/design', failureFlash: true, successFlash: true }));
 
     /**
      * Bootstrap routes
@@ -114,9 +128,9 @@
      * Middleware to serve static page
      */
     app.get('/', function (req, res) {
-       res.render(__dirname + '/../client/index.ejs', {
-           message: req.flash()
-       }); 
+        res.render(__dirname + '/../client/index.ejs', {
+            message: req.flash()
+        });
     });
     app.use(express.static(__dirname + '/../client/'));
 

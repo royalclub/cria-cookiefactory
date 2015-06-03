@@ -14,7 +14,7 @@ var env = process.env.NODE_ENV || 'development'
 
 // Bootstrap db connection
 var mongoose = require('../../../server/node_modules/mongoose')
-mongoose.createConnection(config.db);
+mongoose.connect(config.db);
 
 /*
 // Debugging
@@ -33,7 +33,7 @@ model_files.forEach(function (file) {
 
 var Order = mongoose.model('Order'),
     testOrder = {
-                    "number": "kk200",
+                    "number": "kdk24500",
                     status: [{
                                 name: "bakken",
                                 description: "de koekjes zitten nu in de oven"
@@ -46,7 +46,46 @@ var Order = mongoose.model('Order'),
                                 lastName: "Steen"
                             }],
                     rules: [{
-                                cookie: null,
+                                cookie: [{
+                                            name: "koekje 5",
+                                            creator: "henkdesteen",
+                                            layers: [{
+                                                        name: "henk",
+                                                        required: true,
+                                                        sequence: 1,
+                                                        options: [{
+                                                                    name: "Zanddeeg",
+                                                                    sequence: 1,
+                                                                    description: "Zanddeeg heeft een kruimelige structuur en breekt makkelijk.",
+                                                                    price: 2.3,
+                                                                    imageSrc: "path to image"
+                                                                }, {
+                                                                    name: "Cakebeslag",
+                                                                    sequence: 2,
+                                                                    description: "Cakebeslag is een semi-vloeibaar deeg voornamelijk gebruikt voor het bakken van cakes. Het geeft een zacht en luchtig gebak.",
+                                                                    price: 2.5,
+                                                                    imageSrc: "path to image"
+                                                                }]
+                                                    }, {
+                                                        name: "vormen",
+                                                        required: true,
+                                                        sequence: 1,
+                                                        options: [{
+                                                                    name: "Rond",
+                                                                    sequence: 1,
+                                                                    description: null,
+                                                                    price: 2.3,
+                                                                    imageSrc: "path to image"
+                                                                }, {
+                                                                    name: "vierkant",
+                                                                    sequence: 2,
+                                                                    description: null,
+                                                                    price: 2.5,
+                                                                    imageSrc: "path to image"
+                                                                }]
+                                                    }]
+                                        }
+                                    ],
                                 box: null,
                                 amountOfBoxes: 4
                             }],

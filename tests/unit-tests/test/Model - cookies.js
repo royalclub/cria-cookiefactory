@@ -33,14 +33,14 @@ model_files.forEach(function (file) {
 
 var Cookie = mongoose.model('Cookie'),
     testCookie = {
-                    name: "koekje nummer 3",
+                    name: "koekje nummer 2",
                     creator: "henkdesteen",
                     layers: [{
-                                name: "deeg",
+                                name: "deeg ",
                                 required: true,
                                 sequence: 1,
                                 options: [{
-                                            name: "Zanddeeg",
+                                            name: "Zand deeg",
                                             sequence: 1,
                                             description: "Zanddeeg heeft een kruimelige structuur en breekt makkelijk.",
                                             price: 2.3,
@@ -53,7 +53,7 @@ var Cookie = mongoose.model('Cookie'),
                                             imageSrc: "path to image"
                                         }]
                             }, {
-                                name: "vormen",
+                                name: "vormen ",
                                 required: true,
                                 sequence: 1,
                                 options: [{
