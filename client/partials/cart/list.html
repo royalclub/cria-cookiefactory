@@ -10,14 +10,29 @@
         </tr>
     </thead>
     <tbody data-ng-controller="cartController">
+    <button type="button" class="btn btn-danger btn-xs" data-ng-click="addCartItem()"></button>
+    <span class="glyphicon glyphicon-trash"></span>
+    Voeg toe
         <tr data-ng-repeat="item in cartItems">
             <td>{{item._id}}</td>
             <td>{{item.name}}</td>
             <td>
-                <input type="number" class="form-control input-sm" value="{{item.amount}}" /> 
-                <a href="#" class="btn btn-danger btn-xs" ng-click="onRemoveClicked">
-                    <span class="glyphicon glyphicon-trash"></span> 
+                <input type="number" class="form-control input-sm" value="{{item.amount}}" ng-model="cart" ng-change ="updateCartItem(item._id,cart)" />
+                <button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteCartItem()"></button>
+                    <span class="glyphicon glyphicon-trash"></span>
                     Verwijder
+            </td>
+
+            <td>
+                <button type="button" class="btn btn-danger btn-xs" data-ng-click="updateCartItem(item._id)"></button>
+                <span class="glyphicon glyphicon-trash"></span>
+                ADD
+            </td>
+
+            <td>
+                <button type="button" class="btn btn-danger btn-xs" data-ng-click="addCartItem()"></button>
+                <span class="glyphicon glyphicon-trash"></span>
+                Voeg toe
             </td>
             <td>{{item.price}}</td>
         </tr>
@@ -49,13 +64,13 @@
 </table>
 <div class="pull-left">
     <a href="/#/cookie/design" class="btn btn-default">
-        <span class="glyphicon glyphicon-ok"></span> 
+        <span class="glyphicon glyphicon-ok"></span>
         Nieuw koekje ontwerpen
     </a>
 </div>
 <div class="pull-right">
     <a href="/#/cart/confirm" class="btn btn-success">
-        <span class="glyphicon glyphicon-shopping-cart"></span> 
+        <span class="glyphicon glyphicon-shopping-cart"></span>
         Afrekenen
     </a>
 </div>

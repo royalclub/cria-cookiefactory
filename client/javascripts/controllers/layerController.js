@@ -13,8 +13,6 @@ function layerController($scope, $routeParams, $location, layersService) {
     "use strict";
     // GET 1 cookie
 
-    var optionsTotal = 0.0, i = 0, l = 0;
-
     if ($routeParams._id !== 'new') {
         $scope.layers = layersService.layers.get({_id: $routeParams._id}, function () {
             console.log('$scope.requests ', $scope.requests);

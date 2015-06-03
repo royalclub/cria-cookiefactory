@@ -8,7 +8,7 @@
  * @see http://docs.angularjs.org/guide/concepts
  */
 
-var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute'])
+var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute' , 'ngCookies'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
@@ -55,7 +55,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         // Design cookie
         $routeProvider.when('/cookies/design', {
             templateUrl: 'partials/cookies/design.html',
-            controller: layerController
+            controller: testController
         });
 
         // Get a list of users
