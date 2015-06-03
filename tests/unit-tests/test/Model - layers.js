@@ -90,7 +90,7 @@ describe('Layer', function () {
         // Update Layer
         it("UPDATE Layer", function (done) {
             Layer
-                .findOneAndUpdate({_id: doc._id}, {name: 'deeg soort'}, {multi: false, runValidators: true}, function (err, result) {
+                .findOneAndUpdate({_id: doc._id}, {name: 'deeg  soort'}, {multi: false, runValidators: true}, function (err, result) {
                     if (err) {
                         throw err;
                     }
@@ -314,7 +314,7 @@ describe('Layer', function () {
         // Update Layer
         it("UPDATE Layer", function (done) {
             Layer
-                .findOneAndUpdate({_id: doc._id}, {name: 'deeg soort'}, {multi: false, runValidators: true}, function (err, result) {
+                .findOneAndUpdate({_id: doc._id}, {name: 'deeg  soort'}, {multi: false, runValidators: true}, function (err, result) {
                     if (err) {
                         throw err;
                     }

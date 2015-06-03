@@ -27,7 +27,7 @@ describe('API Routing for CRUD operations on cookies', function () {
                         name: "koekje nummer 3",
                         creator: "henkdesteen",
                         layers: [{
-                                    name: "deeg",
+                                    name: "deeg soort",
                                     required: true,
                                     sequence: 1,
                                     options: [{
@@ -44,7 +44,7 @@ describe('API Routing for CRUD operations on cookies', function () {
                                                 imageSrc: "path to image"
                                             }]
                                 }, {
-                                    name: "vormen",
+                                    name: "soorten vormen",
                                     required: true,
                                     sequence: 1,
                                     options: [{
@@ -162,7 +162,7 @@ describe('API Routing for CRUD operations on cookies', function () {
                         name: "koekje 5",
                         creator: "henkdesteen",
                         layers: [{
-                                    name: "deeg",
+                                    name: "deeg soort",
                                     required: true,
                                     sequence: 1,
                                     options: [{
@@ -179,7 +179,7 @@ describe('API Routing for CRUD operations on cookies', function () {
                                                 imageSrc: "path to image"
                                             }]
                                 }, {
-                                    name: "vormen",
+                                    name: "soorten vormen",
                                     required: true,
                                     sequence: 1,
                                     options: [{
