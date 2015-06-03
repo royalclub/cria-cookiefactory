@@ -9,7 +9,7 @@
  * @see http://docs.angularjs.org/guide/concepts
  */
 
-var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute' , 'ngCookies'])
+var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute', 'ngCookies'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 

@@ -16,17 +16,14 @@
         <tr data-ng-repeat="item in cartItems">
             <td>{{item._id}}</td>
             <td>{{item.name}}</td>
-            <td>
-                <input type="number" class="form-control input-sm" value="{{item.amount}}" ng-model="cart" ng-change ="updateCartItem(item._id,cart)" />
-                <button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteCartItem()"></button>
-                    <span class="glyphicon glyphicon-trash"></span>
-                    Verwijder
-            </td>
+
+
 
             <td>
-                <button type="button" class="btn btn-danger btn-xs" data-ng-click="updateCartItem(item._id)"></button>
-                <span class="glyphicon glyphicon-trash"></span>
-                ADD
+                <input type="number" name="input" class="input-mini" ng-model="item.amount" ng-change="updateCartItem(item._id,item.amount)" ng-model-options="{debounce: 1000}"></td>
+             <td>   <button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteCartItem($index)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Verwijder</button>
             </td>
 
             <td>
@@ -34,31 +31,31 @@
                 <span class="glyphicon glyphicon-trash"></span>
                 Voeg toe
             </td>
-            <td>{{item.price}}</td>
+            <td>{{item.price | currency : "€"}}</td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td><strong>Verzendkosten:</strong></td>
-            <td>&euro; {{shipping}}</td>
+            <td>{{shipping | currency : "€"}}</td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td><strong>Subtotaal:</strong></td>
-            <td>&euro; {{subtotal}}</td>
+            <td>{{subtotal | currency : "€"}}</td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td><strong>BTW (21%):</strong></td>
-            <td>&euro; {{tax}}</td>
+            <td>{{tax | currency : "€"}}</td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td><strong>Totaal:</strong></td>
-            <td>&euro; {{total}}</td>
+            <td>{{total | currency : "€"}}</td>
         </tr>
     </tbody>
 </table>
