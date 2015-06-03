@@ -56,7 +56,7 @@
             </div>
 
           <ul class="nav navbar-nav" data-ng-controller="menuController">
-            <li ng-repeat="item in menuItems" class="active">
+            <li ng-repeat="item in menuItems" class="{{$parent.IsActive(item.name)}}">
               <a href="{{item.url}}" class="navbar-link" ng-click="SetActivePage($index)">{{item.name}}</a>
             </li>
           </ul>
@@ -109,7 +109,7 @@
     </div>
     <!-- Breadcrumb -->
     <ol class="breadcrumb" ng-controller="menuController">
-        <li ng-repeat="item in GetBreadcrumb()" class="{{item.active}}"><a href="{{item.url}}">{{item.name}}</a></li>
+        <li ng-repeat="item in GetBreadcrumb()" class="{{item.active}}"><a ng-click="$parent.SetActivePage({{item.index}})" href="{{item.url}}">{{item.name}}</a></li>
     </ol>
 
     <% if (message.error) { %>
@@ -190,6 +190,7 @@
     <script src="./javascripts/controllers/userController.js"></script>
     <script src="./javascripts/controllers/accountController.js"></script>
     <script src="./javascripts/controllers/addressController.js"></script>
+    <script src="./javascripts/controllers/orderController.js"></script>
     <!--Services-->
     <script src="./javascripts/services.js"></script>
   </body>

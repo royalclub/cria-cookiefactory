@@ -12,10 +12,10 @@ var activePage = 0;
 cookieFactory.controller('menuController', function ($scope, $routeParams) {
     "use strict";
     $scope.menuItems = [
-        {name: "Home", url: "/#/", active: "", breadcrumb: [{name: "Cookie Factory", url: "/#/", active: "active"}]},
-        {name: "Over ons", url: "/#/about", active: "", breadcrumb: [{name: "Cookie Factory", url: "/#/", active: ""}, {name: "Over ons", url: "/#/about", active: "active"}]},
-        {name: "Ontwerp koekje", url: "/#/cookies/design", active: "", breadcrumb: [{name: "Cookie Factory", url: "/#/", active: ""}, {name: "Ontwerp Koekje", url: "/#/cookies/design", active: "active"}]},
-        {name: "Contact", url: "/#/contact", active: "", breadcrumb: [{name: "Cookie Factory", url: "/#/", active: ""}, {name: "Contact", url: "/#/contact", active: "active"}]}
+        {name: "Home", url: "/#/", active: "", breadcrumb: [{name: "Cookie Factory", url: "/#/", active: "active", index: 0}]},
+        {name: "Over ons", url: "/#/about", active: "", breadcrumb: [{name: "Cookie Factory", url: "/#/", active: "", index: 0}, {name: "Over ons", url: "/#/about", active: "active", index: 1}]},
+        {name: "Ontwerp koekje", url: "/#/cookies/design", active: "", breadcrumb: [{name: "Cookie Factory", url: "/#/", active: "", index: 0}, {name: "Ontwerp Koekje", url: "/#/cookies/design", active: "active", index: 2}]},
+        {name: "Contact", url: "/#/contact", active: "", breadcrumb: [{name: "Cookie Factory", url: "/#/", active: "", index: 0}, {name: "Contact", url: "/#/contact", active: "active", index: 3}]}
     ];
     $scope.SetActivePage = function (index) {
         activePage = index;

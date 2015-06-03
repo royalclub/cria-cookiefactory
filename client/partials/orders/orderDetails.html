@@ -1,0 +1,29 @@
+<h2>Gegevens</h2>
+<form name="shipmentAddress" ng-controller="orderController">
+	<div class="radio">
+  		<label>
+    		<input type="radio" name="deliveryType" id="home" value="option1" checked>
+			<strong>Laten bezorgen thuis of op een ander adres</strong>
+	  	</label>
+	</div>
+	<p>Stijn Buysstraat 15a<br />
+	6512 CK Nijmegen<br />
+	Nederland</p>
+	<a href="">> Ander bezorgadres kiezen</a>
+	<div class="radio">
+  		<label>
+    		<input type="radio" name="deliveryType" id="PostNL" value="option2">
+    		<strong>Afhalen bij een ophaalpunt bij u in de buurt</strong>
+  		</label>
+	</div>
+	<div class="form-group">
+    	<label for="deliveryDate">Bezorg datum</label>
+    	<input type="date" class="form-control" id="deliveryDate" placeholder="dd-mm-yyyy">
+  	</div>
+	<div class="pull-right">
+    	<a href="/#/orders/payment/" class="btn btn-default">
+        	<span ng-click="setDeliveryAddress()" class="glyphicon glyphicon-credit-card"></span> 
+        	Afrekenen
+    	</a>
+	</div>
+</form>
