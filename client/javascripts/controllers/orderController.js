@@ -16,11 +16,7 @@
  * @param orderService
  * @constructor
  */
-
-function orderController($scope, $routeParams, $location, orderService) {
-    "use strict";
-
-    $scope.order = {
+var newOrder = {
         orderLines: [{
             cookie: {},
             numberOf: 0
@@ -28,5 +24,31 @@ function orderController($scope, $routeParams, $location, orderService) {
         invoiceAddress: {},
         shipmentAddress: {}
     };
+
+function orderController($scope, $routeParams, $location, orderService) {
+    "use strict";
+
+    $scope.GetNewOrder = function () {
+        return newOrder;
+    };
+
+    $scope.SetOrderLines = function (cart) {
+        newOrder.orderLines = cart;
+    };
+
+    $scope.SetInvoiceAddress = function (address) {
+        newOrder.invoiceAddress = address;
+    };
+
+    $scope.SetShipmentAddress = function (address) {
+        newOrder.shipmetAddress = address;
+    };
+
+    $scope.SaveOrder = function () {
+        console.log("BAM!!");
+        orderService.orders.save({}, newOrder, function (res) {
+            console.log(res);
+        });
+        newOrder = { orderLines: [{ cookie: {}, numberOf: 0 }], invoiceAddress: {}, shipmentAddress: {} };
+    };
 }
-//

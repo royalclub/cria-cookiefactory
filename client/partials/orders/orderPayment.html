@@ -1,5 +1,5 @@
 <h2>Betalen</h2>
-<form>
+<form ng-controller="orderController">
 	<div class="jumbotron">
 	  	<div class="container">
  			<div class="radio">
@@ -26,5 +26,11 @@
 			  	<option>ANS Bank</option>
 			</select>
 	  	</div>
+	</div>
+	<div class="pull-right">
+    	<a href="/#/orders/confirmation/" class="btn btn-success">
+        	<span ng-click="SaveOrder()"></span> 
+        	Bestelling afronden
+    	</a>
 	</div>
 </form>
