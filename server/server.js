@@ -40,8 +40,9 @@
     /**
      * Debugging
      */
+    console.log("Environment: " + env);
     console.log("Debug: " + config.debug);
-
+    console.log("Port: " + config.port);
     mongoose.connection.on('error', function (err) {
         console.error('MongoDB error: %s', err);
     });

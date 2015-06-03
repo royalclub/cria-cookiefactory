@@ -1,5 +1,5 @@
-/*global angular, cookieController, userController, layerController, testController, accountController, accountDetailController, accountEditController, accountRegisterController, accountLogoutController, homeController, layerListController, addressController */
-/*global angular, cookieController, userController, layerController, cookieDesignController, accountController, homeController, layerListController, addressController, accountDetailController, accountEditController, accountLogoutController */
+/*global angular, cookieController, userController, layerController, testController, accountController, accountDetailController, accountEditController, accountRegisterController, accountLogoutController, homeController, layerListController, addressController, orderController */
+/*global angular, cookieController, userController, layerController, cookieDesignController, accountController, homeController, layerListController, addressController, accountDetailController, accountEditController, accountLogoutController, orderController */
 
 /**
  *
@@ -107,10 +107,20 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             controller: layerController
         });
 
-        // Get a list of orders
-        $routeProvider.when('/orders/list', {
-            templateUrl: 'partials/orders/list.html',
-//            controller: OrderListCtrl
+        // Get orderConfirmation
+        $routeProvider.when('/orders/confirmation', {
+            templateUrl: 'partials/orders/orderConfirmation.html',
+            controller: orderController
+        });
+        // Get orderDetails
+        $routeProvider.when('/orders/details/', {
+            templateUrl: 'partials/orders/orderDetails.html',
+            controller: orderController
+        });
+        // Get orderPayment
+        $routeProvider.when('/orders/payment/', {
+            templateUrl: 'partials/orders/orderPayment.html',
+            controller: orderController
         });
 
         //When no valid route is provided
