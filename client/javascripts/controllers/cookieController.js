@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*globals cookieFactory */
+/*globals cookieFactory, alert */
 
 /**
  * TODO: create controller for cookies list
@@ -112,15 +112,18 @@ function cookieDesignController($scope, $routeParams, $location, layersService) 
         };
 
         $scope.onProceedClicked = function (cookieName, $event) {
-            var cookie = {
+            if (cookieName === undefined) {
+                alert('De naam van het koekje is ingevuld!');
+            } else if ($scope.selectedLayers < 4) {
+                alert('1 of meerder layers zijn niet geslecteerd!');
+            } else {
+                document.cookie = 'key=' + JSON.stringify([{
                     "name" : cookieName,
                     "creator" : "henkdesteen",
                     "layers" : $scope.selectedLayers
-                };
-
-            console.log([cookie]);
-            document.cookie = 'key=' + [cookie];
-            $location.path("/cart");
+                }]);
+                $location.path("/cart");
+            }
             $event.preventDefault();
         };
     }
