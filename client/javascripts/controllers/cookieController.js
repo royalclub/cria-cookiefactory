@@ -60,6 +60,8 @@ function cookieDesignController($scope, $routeParams, $location, layersService) 
     var optionsTotal = 0.0,
         i = 0,
         l = 0;
+    $scope.cookieName = null;
+    $scope.selectedLayers = [];
 
     if ($routeParams._id === undefined) {
         layersService.layers.get(function (layers) {
@@ -72,7 +74,6 @@ function cookieDesignController($scope, $routeParams, $location, layersService) 
         });
 
         $scope.onLayerClicked = function (_id, $event) {
-            console.log("layer clicked: " + _id);
             for (l = 0; l < $scope.layers.length; l += 1) {
                 if ($scope.layers[l]._id === _id) {
                     $scope.currentLayer = $scope.layers[l];
@@ -81,17 +82,46 @@ function cookieDesignController($scope, $routeParams, $location, layersService) 
             $event.preventDefault();
         };
 
-        $scope.onLayerOptionClicked = function (name, $event) {
-            console.log("layer option clicked: " + name);
-            // TODO: Update the layer choice in the cookie.
+        $scope.onLayerOptionClicked = function (option, $event) {
+            var layer = {
+                    "name" : $scope.currentLayer.name,
+                    "required" : $scope.currentLayer.required,
+                    "sequence" : $scope.currentLayer.sequence,
+                    "options" : option
+                };
+
+            function layerNotExists() {
+                for (l = 0; l < $scope.selectedLayers.length; l += 1) {
+                    if ($scope.selectedLayers[l].name === $scope.currentLayer.name) {
+                        $scope.selectedLayers[l].options = option;
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            if ($scope.selectedLayers.length === 0) {
+                $scope.selectedLayers.push(layer);
+            } else {
+                if (layerNotExists()) {
+                    $scope.selectedLayers.push(layer);
+                }
+            }
+            console.log("layer option clicked: " + option.name);
             $event.preventDefault();
         };
 
-        $scope.onProceedClicked = function ($event) {
-            console.log("proceed clicked");
-            // TODO: Add cookie to chart or save layer.
-            $event.preventDefault();
+        $scope.onProceedClicked = function (cookieName, $event) {
+            var cookie = {
+                    "name" : cookieName,
+                    "creator" : "henkdesteen",
+                    "layers" : $scope.selectedLayers
+                };
+
+            console.log([cookie]);
+            document.cookie = 'key=' + [cookie];
             $location.path("/cart");
+            $event.preventDefault();
         };
     }
 }
