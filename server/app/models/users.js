@@ -31,6 +31,14 @@
         return (this.password === hashedPassword);
     });
 
+    userSchema.method('hashPassword', function (salt, password) {
+        var hasher;
+        hasher = crypto.createHash('sha512');
+        hasher.update(this.salt + password);
+        this.salt = salt;
+        this.password = hasher.digest('hex');
+    });
+
     module.exports = {
         schema: userSchema,
         model: mongoose.model('User', userSchema)
