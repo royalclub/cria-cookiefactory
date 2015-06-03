@@ -9,19 +9,20 @@
  * @see http://docs.angularjs.org/guide/concepts
  */
 
-var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute'])
+var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute', 'ngCookies'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
         // Home
         $routeProvider.when('/', {
             templateUrl: 'partials/home.html',
-            controller: homeController,
+            controller: homeController
         });
 
         // About
         $routeProvider.when('/about', {
-            templateUrl: 'partials/about.html'
+            templateUrl: 'partials/about.html',
+            label: 'Over ons'
         });
 
         // Contact
