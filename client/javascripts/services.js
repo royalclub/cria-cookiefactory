@@ -54,15 +54,13 @@
                     data = {};
                 // REST url to server
                 data.users = $resource('/api/account', {}, actions);
-                data.loggedIn = false;
-                data.loggedInUser = null;
                 return data;
             }])
         .factory('authenticationService', ['dbService',
             function (dbService) {
                 return {
                     getUser: function (callback) {
-                        dbService.account.get(function (result) { 
+                        dbService.account.get(function (result) {
                             callback(result.loggedIn, result.doc);
                         });
                     }

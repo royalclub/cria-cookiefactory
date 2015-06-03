@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-xs-6" data-ng-repeat="option in currentLayer.options">
                     <a href="#" class="thumbnail">
-                      <img ng-src="{{option.imageSrc}}" ng-alt="{{option.description}}" data-id="{{option.name}}" ng-click="onLayerOptionClicked(option.name, $event)">
+                      <img ng-src="images/{{currentLayer.name}}/{{option.imageSrc}}" ng-alt="{{option.description}}" data-id="{{option.name}}" ng-click="onLayerOptionClicked(option.name, $event)">
                     </a>
                 </div>
             </div>
