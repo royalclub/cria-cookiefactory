@@ -119,7 +119,7 @@
         </li>
     </ul>
     <ol class="breadcrumb" ng-controller="menuController">
-        <li ng-repeat="item in GetBreadcrumb()" class="{{item.active}}"><a ng-click="$parent.SetActivePage({{item.index}})" href="{{item.url}}">{{item.name}}</a></li>
+        <li ng-repeat="item in GetBreadcrumb()" class="{{item.active}}"><a ng-click="$parent.SetActivePage(item.index)" href="{{item.url}}">{{item.name}}</a></li>
     </ol>
 
 
