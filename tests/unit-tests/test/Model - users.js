@@ -13,8 +13,13 @@ var env = process.env.NODE_ENV || 'development'
     , config = require('../../../server/config/config.js')[env];
 
 // Bootstrap db connection
-var mongoose = require('../../../server/node_modules/mongoose')
-mongoose.createConnection(config.db);
+var mongoose = require('../../../server/node_modules/mongoose');
+if (mongoose.host === undefined) {
+    mongoose.connect(config.db);
+    mongoose.connection.on('error', function (err) {
+        console.error('MongoDB error: %s', err);
+    });
+}
 
 /*
 // Debugging
