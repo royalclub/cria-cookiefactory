@@ -30,6 +30,7 @@ describe('API Routing for CRUD operations on cookies', function () {
                                     name: "deeg soort",
                                     required: true,
                                     sequence: 1,
+                                    imageSrc: "path to image",
                                     options: [{
                                                 name: "Zanddeeg",
                                                 sequence: 1,
@@ -47,6 +48,7 @@ describe('API Routing for CRUD operations on cookies', function () {
                                     name: "soorten vormen",
                                     required: true,
                                     sequence: 1,
+                                    imageSrc: "path to image",
                                     options: [{
                                                 name: "Rond",
                                                 sequence: 1,
@@ -165,6 +167,7 @@ describe('API Routing for CRUD operations on cookies', function () {
                                     name: "deeg soort",
                                     required: true,
                                     sequence: 1,
+                                    imageSrc: "path to image",
                                     options: [{
                                                 name: "Zanddeeg",
                                                 sequence: 1,
@@ -182,6 +185,7 @@ describe('API Routing for CRUD operations on cookies', function () {
                                     name: "soorten vormen",
                                     required: true,
                                     sequence: 1,
+                                    imageSrc: "path to image",
                                     options: [{
                                                 name: "Rond",
                                                 sequence: 1,
