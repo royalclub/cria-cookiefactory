@@ -44,6 +44,7 @@ describe('API Routing for CRUD operations on orders', function () {
                                                         name: "deeg",
                                                         required: true,
                                                         sequence: 1,
+                                                        imageSrc: "path to image",
                                                         options: [{
                                                                     name: "Zanddeeg",
                                                                     sequence: 1,
@@ -61,6 +62,7 @@ describe('API Routing for CRUD operations on orders', function () {
                                                         name: "vormen",
                                                         required: true,
                                                         sequence: 1,
+                                                        imageSrc: "path to image",
                                                         options: [{
                                                                     name: "Rond",
                                                                     sequence: 1,
@@ -204,6 +206,7 @@ describe('API Routing for CRUD operations on orders', function () {
                                                         name: "deeg",
                                                         required: true,
                                                         sequence: 1,
+                                                        imageSrc: "path to image",
                                                         options: [{
                                                                     name: "Zanddeeg",
                                                                     sequence: 1,
@@ -221,6 +224,7 @@ describe('API Routing for CRUD operations on orders', function () {
                                                         name: "vormen",
                                                         required: true,
                                                         sequence: 1,
+                                                        imageSrc: "path to image",
                                                         options: [{
                                                                     name: "Rond",
                                                                     sequence: 1,

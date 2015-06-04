@@ -21,14 +21,6 @@ if (mongoose.host === undefined) {
     });
 }
 
-/*
-// Debugging
-mongoose.connection.on('error', function (err) {
-    console.error('MongoDB error: %s', err);
-});
-mongoose.set('debug', config.debug);
-*/
-
 // Bootstrap models
 var models_path = __dirname + '/../../../server/app/models'
     , model_files = fs.readdirSync(models_path);
@@ -58,6 +50,7 @@ var Order = mongoose.model('Order'),
                                                         name: "henk",
                                                         required: true,
                                                         sequence: 1,
+                                                        imageSrc: "path to image",
                                                         options: [{
                                                                     name: "Zanddeeg",
                                                                     sequence: 1,
@@ -75,6 +68,7 @@ var Order = mongoose.model('Order'),
                                                         name: "vormen",
                                                         required: true,
                                                         sequence: 2,
+                                                        imageSrc: "path to image",
                                                         options: [{
                                                                     name: "Rond",
                                                                     sequence: 1,
