@@ -85,8 +85,12 @@ describe('Cookie', function () {
 
         // CREATE Cookie
         it("CREATE Cookie", function (done) {
-            doc = new Cookie(testCookie);
-            doc.save(done);
+           try { 
+                doc = new Cookie(testCookie);
+                doc.save(done);
+           } catch (e) {
+               console.error(e);
+           }
         });
 
         // GET all Cookies
