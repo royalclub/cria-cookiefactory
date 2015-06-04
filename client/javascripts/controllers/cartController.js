@@ -3,7 +3,7 @@
 
 cookieFactory.controller('cartController', ['$scope', '$cookies', '$cookieStore', '$window', function ($scope, $cookies, $cookieStore, $window, $location) {
     "use strict";
-    var i, layer;
+    var b, layer;
 
     //$cookieStore.put('key', [{_id: 1, name: "Koekie Speciale", amount: 1, price: 8.99},{_id: 451, name: "Pauperkoekje Deluxe 3000", amount: 1, price: 34.99}]);
 
@@ -25,13 +25,12 @@ cookieFactory.controller('cartController', ['$scope', '$cookies', '$cookieStore'
         } else {
             console.log($cookieStore.get('key'));
             $scope.cartItems = $cookieStore.get('key');
-            for (i = 0; i < $scope.cartItems.length; i += 1){
-                $scope.cartItems[i].price = 0;
-                for (layer = 0; layer < $scope.cartItems[i].layers.length; layer += 1){
-                    $scope.cartItems[i].price = $scope.cartItems[i].layers[layer].options.price + $scope.cartItems[i].price
-
+            for (b = 0; b < $scope.cartItems.length; b += 1) {
+                $scope.cartItems[b].price = 0;
+                for (layer = 0; layer < $scope.cartItems[b].layers.length; layer += 1) {
+                    $scope.cartItems[b].price = $scope.cartItems[b].layers[layer].options.price + $scope.cartItems[b].price;
                 }
-                $scope.cartItems[i].amount = 1;
+                $scope.cartItems[b].amount = 1;
             }
             $cookieStore.put('key', $scope.cartItems);
             $scope.itemCount = $scope.cartItems.length;
