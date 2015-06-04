@@ -1,0 +1,1 @@
+"C:\Program Files\MongoDB 2.6 Standard\bin\mongodump" -h server3.tezzt.nl -d groep9-dev -o .
