@@ -70,14 +70,12 @@
                     }
                 };
             }])
-        .factory('cookies', function(){
-                  var cookies = {};
-                
-                  cookies.list = [];
-                
-                  cookies.add = function(cookie){
-                    cookies.list.push({id: cookies.list.length, text: cookie});
-                  };
-                  return cookies;
-            });
+        .factory('cookies', function () {
+            var cookies = {};
+            cookies.list = [];
+            cookies.add = function (cookie) {
+                cookies.list.push({id: cookies.list.length, text: cookie});
+            };
+            return cookies;
+        });
 }());

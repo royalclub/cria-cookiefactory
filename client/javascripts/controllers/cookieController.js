@@ -63,7 +63,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
         l = 0;
     $scope.cookieName = null;
     $scope.selectedLayers = [];
-    
+
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (loggedIn) {
             $scope.userName = loggedInUser.username;
@@ -118,7 +118,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
                 optionsTotal += $scope.selectedLayers[i].options.price;
             }
             $scope.total = optionsTotal;
-            
+
             $event.preventDefault();
         };
 
@@ -139,17 +139,16 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             }
             $event.preventDefault();
         };
-        
+
         $scope.save = function (cookieName) {
             var cookie = {
-                        "name" : cookieName,
-                        "creator" : $scope.userName,
-                        "layers" : $scope.selectedLayers
-                    };
+                    "name" : cookieName,
+                    "creator" : $scope.userName,
+                    "layers" : $scope.selectedLayers
+                };
             console.log('Entering save');
             dbService.cookies.save(cookie, function (res) {
                 console.log(res.err);
-                
             });
         };
     }
