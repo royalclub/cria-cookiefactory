@@ -13,8 +13,13 @@ var env = process.env.NODE_ENV || 'development'
     , config = require('../../../server/config/config.js')[env];
 
 // Bootstrap db connection
-var mongoose = require('../../../server/node_modules/mongoose')
-mongoose.connect(config.db);
+var mongoose = require('../../../server/node_modules/mongoose');
+if (mongoose.host === undefined) {
+    mongoose.connect(config.db);
+    mongoose.connection.on('error', function (err) {
+        console.error('MongoDB error: %s', err);
+    });
+}
 
 /*
 // Debugging
@@ -69,7 +74,7 @@ var Order = mongoose.model('Order'),
                                                     }, {
                                                         name: "vormen",
                                                         required: true,
-                                                        sequence: 1,
+                                                        sequence: 2,
                                                         options: [{
                                                                     name: "Rond",
                                                                     sequence: 1,
@@ -134,6 +139,7 @@ describe('Order', function () {
             Order
                 .find({_id: doc._id}, function (err, result) {
                     if (result.length !== 1) {
+                        console.log(result);
                         throw err;
                     }
                     done();
@@ -143,7 +149,7 @@ describe('Order', function () {
         // Update Order
         it("UPDATE Order", function (done) {
             Order
-                .findOneAndUpdate({_id: doc._id}, {'number': 'kk200'}, {multi: false, runValidators: true}, function (err, result) {
+                .findOneAndUpdate({_id: doc._id}, {'number': 'kk2001'}, {multi: false, runValidators: true}, function (err, result) {
                     if (err) {
                         throw err;
                     }
