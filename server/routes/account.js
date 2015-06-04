@@ -12,6 +12,10 @@ var controller = require('../app/controllers/account.js');
 router
     .get('/account', controller.detail);
 
+/** POST route for registering a user. */
+router
+    .post('/account', controller.register);
+
 /** POST route for signing out a user. */
 router
     .post('/account/signout', controller.signout);
