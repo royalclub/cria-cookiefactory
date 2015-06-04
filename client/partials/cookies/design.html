@@ -1,4 +1,4 @@
-<div class="designCookie">
+<div class="designCookie" ng-controller="cookieDesignController">
     <div class="row">
         <form class="inline-form">
             <div class="form-group">
@@ -40,10 +40,14 @@
         </div>
     </div>
     <div class="pull-right">
+        <a ng-click="save(cookieName)" class="btn btn-primary" ng-show="showSaveButton">
+            <span class="glyphicon glyphicon-ok"></span> 
+            Opslaan
+        </a>
         <p>Totaalbedrag: &euro; {{total}}</p>
         <a ng-click="onProceedClicked(cookieName, $event)" class="btn btn-primary">
             <span class="glyphicon glyphicon-ok"></span> 
-            Volgende stap
+            Winkelwagen
         </a>
     </div>
 </div>
