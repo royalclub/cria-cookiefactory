@@ -7,9 +7,9 @@
      * Module dependencies.
      * @type {exports}
      */
-    var fs = require('fs'),                             // Used to read files from the filesystem (__dirname)
-        express = require('express'),                   // Fast, unopinionated, minimalist web framework for Node.js
-        bodyParser = require("body-parser"),            // This does not handle multipart bodies, due to their complex and typically large nature. For multipart bodies, you may be interested in the following modules:
+    var fs = require('fs'),
+        express = require('express'),
+        bodyParser = require("body-parser"),
         passport = require('passport'),
         authenticationStrategy = require('./authentication.js'),
         flash = require('connect-flash'),
