@@ -33,6 +33,10 @@
             function (dbService) {
                 return dbService;
             }])
+        .factory('orderService', ['dbService',
+            function (dbService) {
+                return dbService;
+            }])
         .factory('usersService', ['dbService',
             function (dbService) {
                 return dbService;
