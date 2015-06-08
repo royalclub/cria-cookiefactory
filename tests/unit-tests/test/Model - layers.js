@@ -41,6 +41,7 @@ var Layer = mongoose.model('Layer'),
                     name: "deeg",
                     required: true,
                     sequence: 1,
+                    imageSrc: "path to image",
                     options: [{
                                 name: "Zanddeeg",
                                 sequence: 1,

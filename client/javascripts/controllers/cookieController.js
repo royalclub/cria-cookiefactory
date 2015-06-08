@@ -54,7 +54,8 @@ function cookieController($scope, $routeParams, $location, cookiesService) {
     };
 }
 
-function cookieDesignController($scope, $routeParams, $location, layersService) {
+//function cookieDesignController($scope, $routeParams, $location, layersService, authenticationService) {
+cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, layersService, authenticationService, cookies, dbService) {
     "use strict";
 
     var optionsTotal = 0.0,
@@ -63,14 +64,18 @@ function cookieDesignController($scope, $routeParams, $location, layersService) 
     $scope.cookieName = null;
     $scope.selectedLayers = [];
 
+    authenticationService.getUser(function (loggedIn, loggedInUser) {
+        if (loggedIn) {
+            $scope.userName = loggedInUser.username;
+            $scope.showSaveButton = true;
+        }
+    });
+
     if ($routeParams._id === undefined) {
         layersService.layers.get(function (layers) {
             $scope.layers = layers.doc;
             $scope.currentLayer = layers.doc[0];
-            for (i = 0; i < $scope.currentLayer.options.length; i += 1) {
-                optionsTotal += $scope.currentLayer.options[i].price;
-            }
-            $scope.total = optionsTotal;
+            $scope.total = 0;
         });
 
         $scope.onLayerClicked = function (_id, $event) {
@@ -107,24 +112,44 @@ function cookieDesignController($scope, $routeParams, $location, layersService) 
                     $scope.selectedLayers.push(layer);
                 }
             }
-            console.log("layer option clicked: " + option.name);
+            optionsTotal = 0;
+            for (i = 0; i < $scope.selectedLayers.length; i += 1) {
+                console.log($scope.selectedLayers[i].options);
+                optionsTotal += $scope.selectedLayers[i].options.price;
+            }
+            $scope.total = optionsTotal;
+
             $event.preventDefault();
         };
 
         $scope.onProceedClicked = function (cookieName, $event) {
-            if (cookieName === undefined) {
+            if (!cookieName) {
                 alert('De naam van het koekje is ingevuld!');
             } else if ($scope.selectedLayers < 4) {
                 alert('1 of meerder layers zijn niet geslecteerd!');
             } else {
-                document.cookie = 'key=' + JSON.stringify([{
-                    "name" : cookieName,
-                    "creator" : "henkdesteen",
-                    "layers" : $scope.selectedLayers
-                }]);
+                var cookie = {
+                        "name" : cookieName,
+                        "creator" : $scope.userName,
+                        "layers" : $scope.selectedLayers
+                    };
+                cookies.add(cookie);
+                document.cookie = JSON.stringify('key=' + [cookie]);
                 $location.path("/cart");
             }
             $event.preventDefault();
         };
+
+        $scope.save = function (cookieName) {
+            var cookie = {
+                    "name" : cookieName,
+                    "creator" : $scope.userName,
+                    "layers" : $scope.selectedLayers
+                };
+            console.log('Entering save');
+            dbService.cookies.save(cookie, function (res) {
+                console.log(res.err);
+            });
+        };
     }
-}
+});

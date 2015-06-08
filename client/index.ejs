@@ -1,83 +1,63 @@
 <!DOCTYPE html>
 <html data-ng-app="cookieFactory">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CookieFactory</title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet" />
-    <link href="./css/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href="./css/custom.css" rel="stylesheet" />
-</head>
-
-<body role="document" ng-controller="cartController">
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="hidden-md hidden-lg">
-            <div class="navbar-header navbar-custom-header">
-                <a class="navbar-brand" href="/#/">CookieFactory</a>
-            </div>
-
-            <ul class="nav nav-custom navbar-nav">
-                <li class="dropdown">
-                    <a href="/#/account" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>TheCookieFactory</title>
+        <link href="./css/bootstrap.min.css" rel="stylesheet" />
+        <link href="./css/bootstrap-theme.min.css" rel="stylesheet" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link href="./css/custom.css" rel="stylesheet" />
+    </head>
+    
+    <body role="document">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="hidden-md hidden-lg">
+                    <div class="navbar-header navbar-custom-header"></div>
+                    <ul class="nav nav-custom navbar-nav">
+                        <li class="dropdown">
+                            <a href="/#/account" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <span class="glyphicon glyphicon-user"></span>
+                                <span class="sr-only">Account</span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="accountDropdown">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="/#/account/login">Inloggen</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="/#/account/register">Registreren</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/#/cart">
+                            <span class="glyphicon glyphicon-shopping-cart" data-ng-controller="cartController"></span>
+                            <span class="sr-only">Winkelwagen</span>
+                            <span class="badge" id="cartItemsNumber">{{itemCount}}</span>
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="hidden-xs hidden-sm">
+                    <div class="navbar-header"></div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/#/account">
                         <span class="glyphicon glyphicon-user"></span>
                         <span class="sr-only">Account</span>
-                        <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="accountDropdown">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/#/account/login">Inloggen</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/#/account/register">Registreren</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/#/cart">
-                        <span class="glyphicon glyphicon-shopping-cart" data-ng-controller="cartController"></span>
+                        </li>
+                        <li>
+                            <a href="/#/cart" data-ng-controller="cartController">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
                         <span class="sr-only">Winkelwagen</span>
                         <span class="badge">{{itemCount}}</span>
                     </a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="glyphicon glyphicon-menu-hamburger"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="accountDropdown" data-ng-controller="menuController">
-                        <li role="presentation" ng-repeat="menuItem in menuItems" class="{{menuItem.active}}">
-                            <a role="menuitem" tabindex="-1" href="{{menuItem.url}}" class="navbar-link" ng-click="SetActivePage($index)">{{menuItem.name}}</a>
                         </li>
                     </ul>
-                </li>
-            </ul>
-        </div>
-
-        <div class="hidden-xs hidden-sm">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/#/">CookieFactory</a>
-            </div>
-
-          <ul class="nav navbar-nav" data-ng-controller="menuController">
-            <li ng-repeat="item in menuItems" class="{{$parent.IsActive(item.name)}}">
-              <a href="{{item.url}}" class="navbar-link" ng-click="SetActivePage($index)">{{item.name}}</a>
-            </li>
-          </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/#/account">
-                        <span class="glyphicon glyphicon-user"></span>
-                        <span class="sr-only">Account</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/#/cart" data-ng-controller="cartController">
-                        <span class="glyphicon glyphicon-shopping-cart"></span>
-                        <span class="sr-only">Winkelwagen</span>
-                        <span class="badge" id="cartItemsNumber">{{itemCount}}</span>
-                    </a>
-                </li>
-            </ul>
-
-            <div class="navbar-right" ng-controller="accountController" ng-show="showLoginForm">
+                    <div class="navbar-right" ng-controller="accountController" ng-show="showLoginForm">
                 <form class="navbar-form" role="search" method="post" action="/login" id="loginForm">
                     <div class="form-group">
                         <input type="text" class="form-control" name="username" placeholder="Gebruikersnaam">
@@ -91,119 +71,151 @@
             <span class="navbar-text navbar-right" ng-controller="accountController" ng-show="showWelcomeText">
                 Welkom, {{account.firstName}}! <a href="/#/account/logout" class="navbar-link">[Logout]</a>
             </span>
-        </div>
-    </div>
-</nav>
-
-
-<!-- Banner -->
-<div class="container" role="main">
-    <div class="jumbotron">
-        <div class="container">
-            <h1>The Cookie Factory</h1>
-            <p>Ontwerp je eigen koekje.</p>
-            <p>
-                <a class="btn btn-primary btn-lg" href="/#/cookie/design" role="button">Klik hier</a>
-            </p>
-        </div>
-    </div>
-    <!-- Breadcrumb -->
-
-    <ul class="breadcrumb">
-        <li ng-repeat="breadcrumb in breadcrumbs.getAll()">
-            <span class="divider">/</span>
-            <ng-switch on="$last">
-                <span ng-switch-when="true">{{breadcrumb.name}}</span>
-                <span ng-switch-default><a href="{{breadcrumb.path}}">{{breadcrumb.name}}</a></span>
-            </ng-switch>
-        </li>
-    </ul>
-    <ol class="breadcrumb" ng-controller="menuController">
-        <li ng-repeat="item in GetBreadcrumb()" class="{{item.active}}"><a ng-click="$parent.SetActivePage(item.index)" href="{{item.url}}">{{item.name}}</a></li>
-    </ol>
-
-
-    <% if (message.error) { %>
-    <div class="alert alert-danger" role="alert"><p><%= message.error %></p></div>
-    <% } else if (message.warning) { %>
-    <div class="alert alert-warn" role="alert"><p><%= message.warning %></p></div>
-    <% } else if (message.info) { %>
-    <div class="alert alert-info" role="alert"><p><%= message.info %></p></div>
-    <% } else if (message.success) { %>
-    <div class="alert alert-success" role="alert"><p><%= message.success %></p></div>
-    <% } %>
-
-    <div data-ng-view=""></div>
-
-</div>
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-4">
-            <span>
-              <h4>Contactinformatie</h4>
-              <hr />
-              <address>
-                  <strong>The Cookie Factory</strong>
-                  <br />Ruitenberglaan 26
-                  <br />6826 CC Arnhem</address>
-              <p><span class="glyphicon glyphicon-phone"></span> 026 369 1555</p>
-              <p><span class="glyphicon glyphicon-envelope"></span> info@cookiefactory.nl</p>
-            </span>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-            <span>
-              <h4>Menu</h4>
-              <hr />
-              <ul data-ng-controller="menuController">
-                <li ng-repeat="item in menuItems">
-                  <a href="{{item.url}}">{{item.name}}</a>
-                </li>
-              </ul>
-            </span>
+        </nav>
+        <!-- Banner -->
+        <div class="container" role="main">
+            <div class="jumbotron">
+                <div class="container"></div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <p>
-                <h4>Zoeken</h4>
-                <hr />
-                </p>
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label for="txtSearch" class="sr-only">Zoeken</label>
-                        <div class="input-group">
-                            <input type="text" name="txtSearch" id="txtSearch" placeholder="Voer zoekterm in..." class="form-control">
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </div>
-                        </div>
+            <!-- static menu (.navbar-default2) -->
+            <nav class="navbar navbar-default2 navbar-static-top">
+                <div class="container">
+                    <div class="hidden-md hidden-lg">
+                        <div class="navbar-header navbar-custom-header"></div>
+                        <ul class="nav nav-custom navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="accountDropdown" data-ng-controller="menuController">
+                                    <li role="presentation" ng-repeat="menuItem in menuItems" class="{{menuItem.active}}">
+                                        <a role="menuitem" tabindex="-1" href="{{menuItem.url}}" class="navbar-link" ng-click="SetActivePage('{{}}')">{{menuItem.name}}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
-                </form>
-                <p>&nbsp;</p>
-                <p>Copyright &copy; 2015 - The Cookie Factory - All rights reserved.</p>
+                    <div class="hidden-xs hidden-sm">
+                        <div class="navbar-header"></div>
+                        <ul class="nav navbar-nav" data-ng-controller="menuController">
+                            <li ng-repeat="item in menuItems" class="{{item.active}}">
+                                <a href="{{item.url}}" class="navbar-link">{{item.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Breadcrumb -->
+            <br>
+            <ol class="breadcrumb" ng-controller="menuController">Waar ben ik:
+                <li ng-repeat="item in breadcrumb" class="{{item.active}}">
+                    <b>
+                        <a href="{{item.url}}">{{item.name}}</a>
+                    </b>
+                </li>
+            </ol>
+            <div class="introtext">
+                <div class="textCol1">
+                    <h1>Stel zelf
+                        <br>heerlijke
+                        <Br>koekjes
+                        <br>samen!</h1>
+                </div>
+                <div class="textCol2">Bij The Cookie Factory kun je zelf heerlijke koekjes ontwerpen! Voor elke gelegenheid is wel een speciaal koekje te bedenken.
+                    <Br>En het is heel simpel, jij klikt wat je wilt en wij kneden het deeg voor je, bakken en versieren zoals jij het hebt bedacht.
+                    <br>
+                    <br>We sturen ze naar je toe, zodat jij lekker kan genieten van je &quot;zelfgemaakte&quot; koekjes!</div>
+                <div class="textCol3">
+                    <img src="images/introkoekje.png">
+                </div>
             </div>
+            <div data-ng-view=""></div>
         </div>
-    </div>
-</footer>
-    <!-- Lib -->
-    <script src="./javascripts/lib/angular.min.js"></script>
-    <script src="./javascripts/lib/angular-route.min.js"></script>
-    <script src="./javascripts/lib/angular-resource.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.1/angular-cookies.min.js"></script>
-    <script src="./javascripts/lib/jquery-1.11.3.min.js"></script>
-    <script src="./javascripts/lib/bootstrap.min.js"></script>
-    <!-- App -->
-    <script src="./javascripts/app.js"></script>
-    <!--Controllers-->
-    <script src="./javascripts/controllers/homeController.js"></script>
-    <script src="./javascripts/controllers/menuController.js"></script>
-    <script src="./javascripts/controllers/cookieController.js"></script>
-    <script src="./javascripts/controllers/layerController.js"></script>
-    <script src="./javascripts/controllers/cartController.js"></script>
-    <script src="./javascripts/controllers/userController.js"></script>
-    <script src="./javascripts/controllers/accountController.js"></script>
-    <script src="./javascripts/controllers/addressController.js"></script>
-    <script src="./javascripts/controllers/orderController.js"></script>
-    <!--Services-->
-    <script src="./javascripts/services.js"></script>
-  </body>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <span>
+                            <br>
+                            <Br>
+                            <Br>
+                            <h5>Contactinformatie</h5>
+                            <address>
+                                <strong>The Cookie Factory</strong>
+                                <br />Ruitenberglaan 26
+                                <br />6826 CC Arnhem</address>
+                            <p>
+                                <span class="glyphicon glyphicon-phone"></span>026 369 1555</p>
+                            <p>
+                                <span class="glyphicon glyphicon-envelope"></span>info@cookiefactory.nl</p>
+                            <p>&nbsp;</p>
+                            <p>Copyright &copy; 2015 - The Cookie Factory - All rights reserved.</p>
+                        </span>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <span>
+                            <Br>
+                            <br>
+                            <br>
+                            <h5>Sitemap</h5>
+                            <ul data-ng-controller="menuController">
+                                <li class="sitemap" ng-repeat="item in menuItems">
+                                    <a href="{{item.url}}">{{item.name}}</a>
+                                </li>
+                            </ul>
+                        </span>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <br>
+                        <br>
+                        <Br>
+                        <p>
+                            <h5>Zoeken</h5>
+                        </p>
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="txtSearch" class="sr-only">Zoeken</label>
+                                <div class="input-group">
+                                    <input type="text" name="txtSearch" id="txtSearch" placeholder="Voer zoekterm in..." class="form-control">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <p>&nbsp;</p>
+                        <p>Betaalmiddelen
+                            <br>
+                            <img style="padding-top:8px;" src="images/betaalmiddelen.png">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Lib -->
+        <script src="./javascripts/lib/angular.min.js"></script>
+        <script src="./javascripts/lib/angular-route.min.js"></script>
+        <script src="./javascripts/lib/angular-resource.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.1/angular-cookies.min.js"></script>
+        <script src="./javascripts/lib/jquery-1.11.3.min.js"></script>
+        <script src="./javascripts/lib/bootstrap.min.js"></script>
+        <!-- App -->
+        <script src="./javascripts/app.js"></script>
+        <!--Controllers-->
+        <script src="./javascripts/controllers/homeController.js"></script>
+        <script src="./javascripts/controllers/menuController.js"></script>
+        <script src="./javascripts/controllers/cookieController.js"></script>
+        <script src="./javascripts/controllers/layerController.js"></script>
+        <script src="./javascripts/controllers/cartController.js"></script>
+        <script src="./javascripts/controllers/userController.js"></script>
+        <script src="./javascripts/controllers/accountController.js"></script>
+        <script src="./javascripts/controllers/addressController.js"></script>
+        <script src="./javascripts/controllers/orderController.js"></script>
+        <!--Services-->
+        <script src="./javascripts/services.js"></script>
+    </body>
+
 </html>

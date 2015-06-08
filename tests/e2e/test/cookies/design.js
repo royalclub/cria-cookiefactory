@@ -1,10 +1,60 @@
-//// Load configuration
-//var env = process.env.NODE_ENV || 'development';
-//var config = require('../../server/config/config.js')[env],
-//    localConfig = require('./../config-test.json');
-//
-//console.log('>>>>>', env, '<<<<<');
-//
+// Load configuration
+var env = 'development';
+var config = require('../../../../server/config/config.js')[env],
+    localConfig = require('./../../../config-test.json');
+
+// Bootstrap db connection
+var mongoose = require('../../../../server/node_modules/mongoose');
+if (mongoose.host === undefined) {
+    mongoose.connect(config.db);
+    mongoose.connection.on('error', function (err) {
+        console.error('MongoDB error: %s', err);
+    });
+}
+
+// Load required models
+var layer = require('../../../../server/app/models/layers.js').model,
+    layerOption = require('../../../../server/app/models/layerOptions.js').model;
+
+// Print some information.
+console.log('>>>>>  <<<<<');
+console.log("Environment: ", env);
+console.log('Host: ', localConfig.host);
+console.log('Port: ', config.port);
+console.log('Debug: ', config.debug);
+
+describe('/#/cookies/design', function () {
+
+    beforeEach(function () {
+       browser.get('http://' + localConfig.host + ':' + config.port + '/#/cookies/design'); 
+    });
+
+    
+    it("should update the list of options", function () {
+        layer
+            .find({}, {})
+            .sort({'sequence': 1})
+            .exec(function (err, doc) {
+                var i;
+
+                if(err) { 
+                    throw 'Fetching layers from the database failed. ' + err;
+                }
+
+                for(i = 1; i < doc.length; i++) {
+                    element(By.xpath('///html/body/div/div[2]/div/div[2]/div[2]/div[1]/a[' + i + ']'))
+                        .click()
+                        .then(function () {
+                            return browser.findElement(by.xPath('//html/body/div/div[2]/div/div[2]/div[1]/div[2]/div['+ i +']/a/img'));                            
+                        })
+                        .then(function (el) {
+                            console.log("Found element ", el);
+                        });
+                }
+            });
+    });
+});
+
 //describe('Book test homepage', function () {
 //
 //    beforeEach(function () {

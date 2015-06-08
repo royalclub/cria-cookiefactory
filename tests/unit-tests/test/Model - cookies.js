@@ -42,6 +42,7 @@ var Cookie = mongoose.model('Cookie'),
                                 name: "deeg ",
                                 required: true,
                                 sequence: 1,
+                                imageSrc: "path to image",
                                 options: [{
                                             name: "Zand deeg",
                                             sequence: 1,
@@ -59,6 +60,7 @@ var Cookie = mongoose.model('Cookie'),
                                 name: "vormen ",
                                 required: true,
                                 sequence: 1,
+                                imageSrc: "path to image",
                                 options: [{
                                             name: "Rond",
                                             sequence: 1,
@@ -85,8 +87,12 @@ describe('Cookie', function () {
 
         // CREATE Cookie
         it("CREATE Cookie", function (done) {
-            doc = new Cookie(testCookie);
-            doc.save(done);
+           try { 
+                doc = new Cookie(testCookie);
+                doc.save(done);
+           } catch (e) {
+               console.log(e);
+           }
         });
 
         // GET all Cookies

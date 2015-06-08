@@ -79,8 +79,9 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
 
         // Design cookie
         $routeProvider.when('/cookies/design', {
-            templateUrl: 'partials/cookies/design.html',
-            controller: cookieDesignController
+            templateUrl: 'partials/cookies/design.html'
+            /*,
+            controller: cookieDesignController*/
         });
 
         // Get a list of users
