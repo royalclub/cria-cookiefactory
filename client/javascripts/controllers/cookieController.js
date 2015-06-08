@@ -3,17 +3,6 @@
 
 /**
  * @param $scope
- * @param dbService
- * @constructor
- */
-function layerListController($scope, dbService) {
-    "use strict";
-    // GET all cookies
-    $scope.cookies = dbService.cookies.get();
-}
-
-/**
- * @param $scope
  * @param $routeParams
  * @param $location
  * @param dbService
@@ -161,4 +150,26 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             });
         };
     }
+});
+
+/**
+ * @param $scope
+ * @param $routeParams
+ * @param $location
+ * @param authenticationService
+ * @param dbService
+ * @constructor
+ */
+cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, authenticationService, dbService) {
+    "use strict";
+    
+    authenticationService.getUser(function (loggedIn, loggedInUser) {
+        if(loggedIn) {
+            dbService.cookies.get({'creator' : loggedInUser.username }, function (cookies) {
+                $scope.cookies = cookies.doc;
+            });
+        } else {
+            $location.path("/#/cookies/design");
+        }
+    });
 });
