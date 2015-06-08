@@ -13,28 +13,20 @@ function layerListController($scope, cookiesService) {
     $scope.cookies = cookiesService.cookies.get();
 }
 
-/**
- * Controller for Cookies
- * @param $scope
- * @param $routeParams
- * @param $location
- * @param cookiesService
- * @constructor
- */
 
-function cookieController($scope, $routeParams, $location, cookiesService) {
+function cookieController($scope, $routeParams, $location, dbService) {
     "use strict";
 
     // GET 1 cookie
     if ($routeParams._id !== 'new') {
-        $scope.cookies = cookiesService.cookies.get({_id: $routeParams._id}, function () {
+        $scope.cookies = dbService.cookies.get({_id: $routeParams._id}, function () {
             console.log('$scope.requests ', $scope.requests);
         });
     }
 
     // DELETE cookie
     $scope.delete = function () {
-        cookiesService.cookies.delete({_id: $routeParams._id});
+        dbService.cookies.delete({_id: $routeParams._id});
         $location.path("/cookies");
     };
 
@@ -42,20 +34,29 @@ function cookieController($scope, $routeParams, $location, cookiesService) {
     $scope.save = function () {
         if ($scope.cookies.doc && $scope.cookies.doc._id !== undefined) {
             console.log('Entering update');
-            cookiesService.cookies.update({_id: $routeParams._id}, $scope.cookies.doc, function (res) {
+            dbService.cookies.update({_id: $routeParams._id}, $scope.cookies.doc, function (res) {
                 console.log(res);
             });
         } else {
             console.log('Entering save');
-            cookiesService.cookies.save({}, $scope.cookies.doc, function (res) {
+            dbService.cookies.save({}, $scope.cookies.doc, function (res) {
                 console.log(res);
             });
         }
     };
 }
 
-//function cookieDesignController($scope, $routeParams, $location, layersService, authenticationService) {
-cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, layersService, authenticationService, cookies, dbService) {
+/**
+ * TODO: create controller for design a cookie
+ * @param $scope
+ * @param $routeParams
+ * @param $location
+ * @param authenticationService
+ * @param cookies
+ * @param dbService
+ * @constructor
+ */
+cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, authenticationService, cookies, dbService) {
     "use strict";
 
     var optionsTotal = 0.0,
@@ -72,22 +73,23 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
     });
 
     if ($routeParams._id === undefined) {
-        layersService.layers.get(function (layers) {
+        dbService.layers.get(function (layers) {
             $scope.layers = layers.doc;
             $scope.currentLayer = layers.doc[0];
             $scope.total = 0;
         });
 
         $scope.onLayerClicked = function (_id, $event) {
+            $event.preventDefault();
             for (l = 0; l < $scope.layers.length; l += 1) {
                 if ($scope.layers[l]._id === _id) {
                     $scope.currentLayer = $scope.layers[l];
                 }
             }
-            $event.preventDefault();
         };
 
         $scope.onLayerOptionClicked = function (option, $event) {
+            $event.preventDefault();
             var layer = {
                     "name" : $scope.currentLayer.name,
                     "required" : $scope.currentLayer.required,
@@ -114,42 +116,39 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             }
             optionsTotal = 0;
             for (i = 0; i < $scope.selectedLayers.length; i += 1) {
-                console.log($scope.selectedLayers[i].options);
                 optionsTotal += $scope.selectedLayers[i].options.price;
             }
             $scope.total = optionsTotal;
-
-            $event.preventDefault();
         };
 
         $scope.onProceedClicked = function (cookieName, $event) {
+            $event.preventDefault();
             if (!cookieName) {
                 alert('De naam van het koekje is ingevuld!');
             } else if ($scope.selectedLayers < 4) {
                 alert('1 of meerder layers zijn niet geslecteerd!');
             } else {
-                var cookie = {
-                        "name" : cookieName,
-                        "creator" : $scope.userName,
-                        "layers" : $scope.selectedLayers
-                    };
+                var cookie = getCookie(cookieName);
                 cookies.add(cookie);
-                document.cookie = JSON.stringify('key=' + [cookie]);
+                document.cookie = 'key=' + JSON.stringify([cookie]);
                 $location.path("/cart");
             }
-            $event.preventDefault();
         };
 
         $scope.save = function (cookieName) {
-            var cookie = {
-                    "name" : cookieName,
-                    "creator" : $scope.userName,
-                    "layers" : $scope.selectedLayers
-                };
+            var cookie = getCookie(cookieName);
             console.log('Entering save');
             dbService.cookies.save(cookie, function (res) {
                 console.log(res.err);
             });
         };
+        
+        function getCookie(cookieName){
+            return {
+                    "name" : cookieName,
+                    "creator" : $scope.userName,
+                    "layers" : $scope.selectedLayers
+                };
+        }
     }
 });
