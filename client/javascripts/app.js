@@ -112,7 +112,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             controller: orderController
         });
         // Get orderDetails
-        $routeProvider.when('/orders/details/', {
+        $routeProvider.when('/orders/details', {
             templateUrl: 'partials/orders/orderDetails.html',
             controller: orderController
         });
