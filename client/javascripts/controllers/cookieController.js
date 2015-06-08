@@ -160,16 +160,16 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
  * @param dbService
  * @constructor
  */
-cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, authenticationService, dbService) {
+cookieFactory.controller('cookieListController', function ($scope, $routeParams, $location, authenticationService, dbService) {
     "use strict";
-    
+
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if(loggedIn) {
-            dbService.cookies.get({'creator' : loggedInUser.username }, function (cookies) {
+            dbService.cookies.get({ 'creator': loggedInUser.username }, function (cookies) {
                 $scope.cookies = cookies.doc;
             });
         } else {
-            $location.path("/#/cookies/design");
+            $location.path("/cookies/design");
         }
     });
 });

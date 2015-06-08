@@ -15,7 +15,6 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
 
         // Home
         $routeProvider.when('/', {
-            templateUrl: 'partials/home.html',
             controller: homeController
         });
 
@@ -47,7 +46,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             controller: accountEditController
         });
 
-        // Account signout
+        // Account register
         $routeProvider.when('/account/register', {
             templateUrl: 'partials/account/register.html',
             controller: accountRegisterController
@@ -65,10 +64,8 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             controller: addressController
         });
 
-        // Get all cookies
         $routeProvider.when('/cookies/list', {
-            templateUrl: 'partials/cookies/list.html',
-            controller: cookieController
+            templateUrl: 'partials/cookies/list.html'
         });
 
         // Get 1 cookie
