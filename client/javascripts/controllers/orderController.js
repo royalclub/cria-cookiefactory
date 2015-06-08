@@ -61,6 +61,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
 
     // Proceed to payment
     $scope.ProceedToPayment = function () {
+        console.debug($cookieStore.get('key'));
         if (!$scope.userName) {
             alert("U bent niet ingelogd.");
         }
