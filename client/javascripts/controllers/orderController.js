@@ -27,7 +27,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
         "number": null,
         status: "new",
         user: null,
-        rules: $cookieStore.get('key'),
+        rules: null,
         invoiceAdress: null,
         shipmentAddress: null,
         vatPercentage: null
@@ -55,7 +55,6 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (loggedIn) {
             $scope.userName = loggedInUser.username;
-            $scope.showSaveButton = true;
         }
     });
 
@@ -64,8 +63,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
         console.debug($cookieStore.get('key'));
         if (!$scope.userName) {
             alert("U bent niet ingelogd.");
-        }
-        if (!$scope.shipment.shipmentType) {
+        } else if (!$scope.shipment.shipmentType) {
             alert("U heeft nog geen verzend wijze gekozen.");
         } else if (!$scope.shipment.shipmentAddress) {
             alert('Er is nog geen verzendadres bekend.');
@@ -74,7 +72,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
         } else if (!$scope.shipment.shipmentDate.date) {
             alert('U heeft nog geen verzenddatum ingevoerd.');
         } else {
-            document.cookie = JSON.stringify('key=' + $scope.order);
+            $cookieStore.put("myOrder", $scope.order);
             console.log("redirect to payment");
             $location.path("/orders/payment/");
         }
@@ -82,12 +80,19 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
 
     // Proceed to confirmation
     $scope.ProceedToConfirmation = function () {
-        if (!$scope.payment.paymentOption) {
+        if (!$scope.userName) {
+            alert("U bent niet ingelogd.");
+        } else if (!$scope.payment.paymentOption) {
             alert("Selecteer een betaal optie.");
         } else if ($scope.payment.bank === "" && $scope.payment.paymentOption === "IDeal") {
             alert("Selecteer een bank");
         } else {
-            document.cookie = JSON.stringify('key=' + $scope.order);
+            $scope.initRestId = function(){
+                $scope.$broadcast("emptyCartEvent");
+            };
+            console.debug($cookieStore.get("myOrder"));
+            $scope.order = $cookieStore.get("myOrder");
+            $cookieStore.put("myOrder", $scope.order);
             $location.path("/orders/confirmation/");
         }
     };

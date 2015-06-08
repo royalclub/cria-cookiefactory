@@ -93,8 +93,11 @@ cookieFactory.controller('cartController', ['$scope', '$cookies', '$cookieStore'
         calculatePrices($scope);
     };
 
-
-
+    $scope.$on("emptyCartEvent", function (event) {
+       console.log("POEP");
+       $cookieStore.put('key', [{}]);
+       $scope.cartItems = null;
+    });
 
     $scope.$watch(function (scope) { return scope.itemCount; },
         function (newValue) {
