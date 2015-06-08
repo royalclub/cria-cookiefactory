@@ -2,18 +2,12 @@
 /*globals cookieFactory, alert */
 
 /**
- * TODO: create controller for cookies list
  * @param $scope
- * @param cookiesService
+ * @param $routeParams
+ * @param $location
+ * @param dbService
  * @constructor
  */
-function layerListController($scope, cookiesService) {
-    "use strict";
-    // GET all cookies
-    $scope.cookies = cookiesService.cookies.get();
-}
-
-
 function cookieController($scope, $routeParams, $location, dbService) {
     "use strict";
 
@@ -47,16 +41,14 @@ function cookieController($scope, $routeParams, $location, dbService) {
 }
 
 /**
- * TODO: create controller for design a cookie
  * @param $scope
  * @param $routeParams
  * @param $location
  * @param authenticationService
- * @param cookies
  * @param dbService
  * @constructor
  */
-cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, authenticationService, cookies, dbService, $cookieStore) {
+cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, authenticationService, dbService) {
     "use strict";
 
     var optionsTotal = 0.0,
@@ -133,7 +125,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             var browserCookieName = 'key', cookie, storage;
             $event.preventDefault();
             if (!cookieName) {
-                alert('De naam van het koekje is ingevuld!');
+                alert('De naam van het koekje is niet ingevuld!');
             } else if ($scope.selectedLayers < 4) {
                 alert('1 of meerder layers zijn niet geslecteerd!');
             } else {
@@ -158,4 +150,26 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             });
         };
     }
+});
+
+/**
+ * @param $scope
+ * @param $routeParams
+ * @param $location
+ * @param authenticationService
+ * @param dbService
+ * @constructor
+ */
+cookieFactory.controller('cookieListController', function ($scope, $routeParams, $location, authenticationService, dbService) {
+    "use strict";
+
+    authenticationService.getUser(function (loggedIn, loggedInUser) {
+        if(loggedIn) {
+            dbService.cookies.get({ 'creator': loggedInUser.username }, function (cookies) {
+                $scope.cookies = cookies.doc;
+            });
+        } else {
+            $location.path("/cookies/design");
+        }
+    });
 });

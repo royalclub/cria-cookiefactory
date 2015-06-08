@@ -32,11 +32,11 @@ function accountRegisterController($scope, $routeParams, $location, authenticati
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (loggedIn) {
-            $location.path('/#/');
+            $location.path('/cookies/design');
         } else {
             $scope.save = function (user) {
                 dbService.account.register(user, function () {
-                    $location.path("/");
+                    $location.path("/cookies/design");
                 });
             };
         }
@@ -51,7 +51,7 @@ function accountDetailController($scope, $routeParams, $location, authentication
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (!loggedIn) {
-            $location.path('/#/');
+            $location.path('/cookies/design');
         } else {
             $scope.account = loggedInUser;
         }
@@ -67,7 +67,7 @@ function accountEditController($scope, $routeParams, $location, authenticationSe
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (!loggedIn) {
-            $location.path('/#/');
+            $location.path('/cookies/design');
         } else {
             $scope.account = loggedInUser;
             $scope.update = function (account) {
@@ -86,6 +86,6 @@ function accountLogoutController($scope, $routeParams, $location, dbService) {
     "use strict";
 
     dbService.signout.signout({}, function () {
-        window.location.href = '/';
+        window.location.href = '/#/cookies/design';
     });
 }
