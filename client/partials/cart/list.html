@@ -9,22 +9,16 @@
             <th>Totaal</th>
         </tr>
     </thead>
-    <tbody data-ng-controller="cartController">
-
+    <tbody>
         <tr data-ng-repeat="item in cartItems">
             <td>{{item._id}}</td>
             <td>{{item.name}}</td>
-
-
-
             <td >
                 <input type="number" name="input" class="input-mini" ng-model="item.amount" ng-change="updateCartItem(item._id,item.amount)" ng-model-options="{debounce: 1000}">
                 <button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteCartItem($index)">
                     <span class="glyphicon glyphicon-trash"></span>
                     Verwijder</button>
             </td>
-
-
             <td>{{item.price | currency : "€"}}</td>
         </tr>
         <tr>
