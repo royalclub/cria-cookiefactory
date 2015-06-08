@@ -23,17 +23,14 @@ cookieFactory.controller('cartController', function ($scope, $cookies, $window, 
             localStorage.setItem(storageCookieName, JSON.stringify([]));
             $scope.itemCount = 0;
         } else {
-            
             $scope.cartItems = JSON.parse(localStorage.getItem(storageCookieName));
-            
             for (b = 0; b < $scope.cartItems.length; b += 1) {
-                $scope.orderRules.push( {
+                $scope.orderRules.push({
                     cookie : $scope.cartItems[b],
                     box : null,
                     amountOfBoxes : 1
                 });
             }
-            
             for (b = 0; b < $scope.cartItems.length; b += 1) {
                 $scope.cartItems[b].price = 0;
                 for (layer = 0; layer < $scope.cartItems[b].layers.length; layer += 1) {
@@ -64,7 +61,7 @@ cookieFactory.controller('cartController', function ($scope, $cookies, $window, 
     $scope.$watch(function (scope) { return scope.itemCount; },
         function (newValue) {
             document.getElementById("cartItemsNumber").innerHTML = newValue;
-    });
+        });
 
     $scope.onProceedClicked = function ($event) {
         $event.preventDefault();
