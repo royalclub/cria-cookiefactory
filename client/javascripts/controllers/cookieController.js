@@ -56,7 +56,7 @@ function cookieController($scope, $routeParams, $location, dbService) {
  * @param dbService
  * @constructor
  */
-cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, authenticationService, cookies, dbService) {
+cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, authenticationService, cookies, dbService, $cookieStore) {
     "use strict";
 
     var optionsTotal = 0.0,
@@ -64,6 +64,14 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
         l = 0;
     $scope.cookieName = null;
     $scope.selectedLayers = [];
+
+    function getCookie(cookieName) {
+        return {
+            "name" : cookieName,
+            "creator" : $scope.userName,
+            "layers" : $scope.selectedLayers
+        };
+    }
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (loggedIn) {
@@ -122,15 +130,21 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
         };
 
         $scope.onProceedClicked = function (cookieName, $event) {
+            var browserCookieName = 'key', cookie, storage;
             $event.preventDefault();
             if (!cookieName) {
                 alert('De naam van het koekje is ingevuld!');
             } else if ($scope.selectedLayers < 4) {
                 alert('1 of meerder layers zijn niet geslecteerd!');
             } else {
-                var cookie = getCookie(cookieName);
-                cookies.add(cookie);
-                document.cookie = 'key=' + JSON.stringify([cookie]);
+                cookie = getCookie(cookieName);
+                storage = JSON.parse(localStorage.getItem(browserCookieName));
+                if (!storage) {
+                    localStorage.setItem(browserCookieName, JSON.stringify([cookie]));
+                } else {
+                    storage.push(cookie);
+                    localStorage.setItem(browserCookieName, JSON.stringify(storage));
+                }
                 $location.path("/cart");
             }
         };
@@ -140,15 +154,8 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             console.log('Entering save');
             dbService.cookies.save(cookie, function (res) {
                 console.log(res.err);
+                alert('Er is iets fout gegaan, koekje is niet opgeslagen!');
             });
         };
-        
-        function getCookie(cookieName){
-            return {
-                    "name" : cookieName,
-                    "creator" : $scope.userName,
-                    "layers" : $scope.selectedLayers
-                };
-        }
     }
 });
