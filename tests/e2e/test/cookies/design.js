@@ -28,28 +28,20 @@ describe('/#/cookies/design', function () {
     beforeEach(function () {
        browser.get('http://' + localConfig.host + ':' + config.port + '/#/cookies/design'); 
     });
-
     
-    it("should update the list of options", function () {
+    it("should show all layers", function () {
         layer
-            .find({}, {})
-            .sort({'sequence': 1})
+            .find({})
+            .sort({ 'sequence': 1 })
             .exec(function (err, doc) {
-                var i;
+                var i = 0;
 
                 if(err) { 
                     throw 'Fetching layers from the database failed. ' + err;
                 }
 
-                for(i = 1; i < doc.length; i++) {
-                    element(By.xpath('///html/body/div/div[2]/div/div[2]/div[2]/div[1]/a[' + i + ']'))
-                        .click()
-                        .then(function () {
-                            return browser.findElement(by.xPath('//html/body/div/div[2]/div/div[2]/div[1]/div[2]/div['+ i +']/a/img'));                            
-                        })
-                        .then(function (el) {
-                            console.log("Found element ", el);
-                        });
+                for(i = 1; i <= doc.length; i += 1) {
+                    expect(element(by.xpath("//html/body/div/div[2]/div/div[2]/div[2]/div[1]/a[" + i + "]")).isPresent()).toBe(true);
                 }
             });
     });
