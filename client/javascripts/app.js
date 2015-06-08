@@ -79,8 +79,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
 
         // Design cookie
         $routeProvider.when('/cookies/design', {
-            templateUrl: 'partials/cookies/design.html',
-            controller: cookieDesignController
+            templateUrl: 'partials/cookies/design.html'
         });
 
         // Get a list of users
@@ -108,7 +107,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         });
 
         // Get orderConfirmation
-        $routeProvider.when('/orders/confirmation', {
+        $routeProvider.when('/orders/confirmation/', {
             templateUrl: 'partials/orders/orderConfirmation.html',
             controller: orderController
         });

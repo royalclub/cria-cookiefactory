@@ -10,8 +10,8 @@
 
 var newOrder = {
         orderLines: [],
-        invoiceAddress: null,
-        shipmentAddress: null
+        invoiceAddress: {},
+        shipmentAddress: {}
     };
 
 /**
@@ -25,23 +25,20 @@ var newOrder = {
 
 function orderController($scope, $routeParams, $location, orderService) {
     "use strict";
+    $scope.shipment = { shipmentDate: new Date(), shipmentType: null, invoiceAddress: 'poep', shipmentAddress: "poep", orderLines: ["poep"] };
+    $scope.payment = { paymentOption: "IDeal", bank: "", paid: 0 };
 
-    $scope.GetNewOrder = function () {
-        return newOrder;
+    // Lists
+    $scope.shipmentTypes = [{ id: "Home", description: "Laten bezorgen thuis of op een ander adres" }, { id: "PostNL", description: "Afhalen bij een ophaalpunt bij u in de buurt" }];
+    $scope.paymentOptions = [{ id: "Acceptgiro", description: "Betaal binnen 30 dagen na het plaatsen van de order."}, { id: "IDeal", description: "Betaal direct met behulp van IDeal." }];
+    $scope.banks = [{ id: "ING Bank", name: "ING Bank" }, { id: "ASN Bank", name: "ASN Bank" }];
+
+    $scope.SetShipmentType = function (shipmentType) {
+        $scope.shipment.shipmentType = shipmentType;
     };
 
-    $scope.SetOrderLines = function (cart) {
-        newOrder.orderLines = cart;
-    };
-
-    $scope.SetInvoiceAddress = function (address) {
-        newOrder.invoiceAddress = address;
-        $location.path('/#/order/payment/');
-    };
-
-    $scope.SetShipmentAddress = function (address) {
-        newOrder.shipmetAddress = address;
-        $location.path('/#/order/payment/');
+    $scope.SetPaymentOption = function (paymentOption) {
+        $scope.payment.paymentOption = paymentOption;
     };
 
     $scope.SaveOrder = function () {
@@ -49,20 +46,32 @@ function orderController($scope, $routeParams, $location, orderService) {
         orderService.orders.save({}, newOrder, function (res) {
             console.log(res);
         });
-        newOrder = { orderLines: [{ cookie: {}, numberOf: 0 }], invoiceAddress: {}, shipmentAddress: {} };
     };
 
-    // Navigation
-    $scope.OnProceedToPayment = function ($event) {
-        console.log("CHECK!");
-        if (newOrder.shipmentAddress === undefined) {
-            alert('Er is nog geen verzendadress bekend.');
-        } else if (newOrder.orderLines.lenght === undefined) {
+    // Proceed to payment
+    $scope.ProceedToPayment = function () {
+        if (!$scope.shipment.shipmentType) {
+            alert("U heeft nog geen verzend wijze gekozen.");
+        } else if (!$scope.shipment.shipmentAddress) {
+            alert('Er is nog geen verzendadres bekend.');
+        } else if ($scope.shipment.orderLines.length === 0) {
             alert('De order bevat geen items.');
+        } else if (!$scope.shipment.shipmentDate.date) {
+            alert('U heeft nog geen verzenddatum ingevoerd.');
         } else {
             console.log("redirect to payment");
             $location.path("/orders/payment/");
         }
-        $event.preventDefault();
+    };
+
+    // Proceed to confirmation
+    $scope.ProceedToConfirmation = function () {
+        if (!$scope.payment.paymentOption) {
+            alert("Selecteer een betaal optie.");
+        } else if ($scope.payment.bank === "" && $scope.payment.paymentOption === "IDeal") {
+            alert("Selecteer een bank");
+        } else {
+            $location.path("/orders/confirmation/");
+        }
     };
 }

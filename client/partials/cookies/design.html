@@ -1,4 +1,4 @@
-<div class="designCookie">
+<div class="designCookie" ng-controller="cookieDesignController">
     <div class="row">
         <form class="inline-form">
             <div class="form-group">
@@ -26,7 +26,7 @@
         </div>
         <div class="col-xs-8">
             <div class="row">
-                <a href="#" class="btn btn-default" data-ng-repeat="layer in layers" ng-click="onLayerClicked(layer._id, $event)">
+                <a class="btn btn-default" data-ng-repeat="layer in layers" ng-click="onLayerClicked(layer._id, $event)">
                   {{layer.name}}
                 </a>
                 <hr />
@@ -34,16 +34,20 @@
             
             <div class="row text-center">
                 <div class="text-center thumbnail">
-                    <img src="images/transparant/hart.png" alt="Cookie" />
+                    <img src="images/cookies.jpg" alt="Cookie" />
                 </div>
             </div>
         </div>
     </div>
     <div class="pull-right">
+        <a ng-click="save(cookieName)" class="btn btn-primary" ng-show="showSaveButton">
+            <span class="glyphicon glyphicon-ok"></span> 
+            Opslaan
+        </a>
         <p>Totaalbedrag: &euro; {{total}}</p>
         <a ng-click="onProceedClicked(cookieName, $event)" class="btn btn-primary">
             <span class="glyphicon glyphicon-ok"></span> 
-            Volgende stap
+            Winkelwagen
         </a>
     </div>
 </div>
