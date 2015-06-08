@@ -108,7 +108,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         });
 
         // Get orderConfirmation
-        $routeProvider.when('/orders/confirmation', {
+        $routeProvider.when('/orders/confirmation/', {
             templateUrl: 'partials/orders/orderConfirmation.html',
             controller: orderController
         });
