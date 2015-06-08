@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*globals cookieFactory, alert */
+/*globals cookieFactory, alert,  accountService, usersService, authenticationService, dbService */
 
 /**
  * TODO: create controller for orders list
@@ -14,11 +14,13 @@
  * @param $routeParams
  * @param $location
  * @param orderService
+ * @param usersService
  * @constructor
  */
 
-function orderController($scope, $routeParams, $location, orderService, $cookieStore, authenticationService) {
+function orderController($scope, $routeParams, $location, orderService, $cookieStore, authenticationService, usersService) {
     "use strict";
+
     $scope.shipment = { shipmentDate: new Date(), shipmentType: null, invoiceAddress: 'poep', shipmentAddress: "poep", orderLines: ["poep"] };
     $scope.payment = { paymentOption: "IDeal", bank: "", paid: 0 };
 
@@ -36,13 +38,24 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
     $scope.shipmentTypes = [{ id: "Home", description: "Laten bezorgen thuis of op een ander adres" }, { id: "PostNL", description: "Afhalen bij een ophaalpunt bij u in de buurt" }];
     $scope.paymentOptions = [{ id: "Acceptgiro", description: "Betaal binnen 30 dagen na het plaatsen van de order."}, { id: "IDeal", description: "Betaal direct met behulp van IDeal." }];
     $scope.banks = [{ id: "ING Bank", name: "ING Bank" }, { id: "ASN Bank", name: "ASN Bank" }];
+    $scope.addresses = [{ street: "Rietdekkersveld", streetNumber: 40, zipCode: "7031 DL", city: "Wehl" }, { street: "Weversveld", streetNumber: 23, zipCode: "5862 GL", city: "Doetinchem" }];
 
     $scope.SetShipmentType = function (shipmentType) {
         $scope.shipment.shipmentType = shipmentType;
     };
 
+    $scope.SetShipmentAddress = function (index) {
+        console.log(index);
+        $scope.order.shipmentAddress = $scope.addresses[index];
+    };
+
     $scope.SetPaymentOption = function (paymentOption) {
         $scope.payment.paymentOption = paymentOption;
+    };
+
+    $scope.SetPaymentAddress = function (index) {
+        console.log(index);
+        $scope.order.paymentAddress = $scope.addresses[index];
     };
 
     $scope.SaveOrder = function () {
@@ -51,12 +64,6 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
             console.log(res);
         });
     };
-
-    authenticationService.getUser(function (loggedIn, loggedInUser) {
-        if (loggedIn) {
-            $scope.userName = loggedInUser.username;
-        }
-    });
 
     // Proceed to payment
     $scope.ProceedToPayment = function () {
@@ -80,6 +87,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
 
     // Proceed to confirmation
     $scope.ProceedToConfirmation = function () {
+        console.log($scope.userName);
         if (!$scope.userName) {
             alert("U bent niet ingelogd.");
         } else if (!$scope.payment.paymentOption) {
@@ -87,7 +95,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
         } else if ($scope.payment.bank === "" && $scope.payment.paymentOption === "IDeal") {
             alert("Selecteer een bank");
         } else {
-            $scope.initRestId = function(){
+            $scope.initRestId = function () {
                 $scope.$broadcast("emptyCartEvent");
             };
             console.debug($cookieStore.get("myOrder"));
@@ -96,4 +104,11 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
             $location.path("/orders/confirmation/");
         }
     };
+
+    authenticationService.getUser(function (loggedIn, loggedInUser) {
+        if (loggedIn) {
+            $scope.userName = loggedInUser.username;
+            console.log(loggedInUser.address);
+        }
+    });
 }
