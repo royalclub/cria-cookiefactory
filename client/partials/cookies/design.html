@@ -44,7 +44,7 @@
             <span class="glyphicon glyphicon-ok"></span> 
             Opslaan
         </a>
-        <p>Totaalbedrag: &euro; {{total}}</p>
+        <p>Totaalbedrag: {{total | currency : "€"}}</p>
         <a ng-click="onProceedClicked(cookieName, $event)" class="btn btn-primary">
             <span class="glyphicon glyphicon-ok"></span> 
             Winkelwagen
