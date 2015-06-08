@@ -43,18 +43,18 @@
                 <div class="hidden-xs hidden-sm">
                     <div class="navbar-header"></div>
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="/#/account">
-                        <span class="glyphicon glyphicon-user"></span>
-                        <span class="sr-only">Account</span>
-                    </a>
+                        <li ng-show="showWelcomeText" ng-controller="accountController">
+                                <a href="/#/account">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span class="sr-only">Account</span>
+                                </a>
                         </li>
                         <li>
                             <a href="/#/cart" data-ng-controller="cartController">
-                        <span class="glyphicon glyphicon-shopping-cart"></span>
-                        <span class="sr-only">Winkelwagen</span>
-                        <span class="badge">{{itemCount}}</span>
-                    </a>
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                <span class="sr-only">Winkelwagen</span>
+                                <span class="badge">{{itemCount}}</span>
+                            </a>
                         </li>
                     </ul>
                     <div class="navbar-right" ng-controller="accountController" ng-show="showLoginForm">

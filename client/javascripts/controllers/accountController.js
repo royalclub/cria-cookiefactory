@@ -86,6 +86,6 @@ function accountLogoutController($scope, $routeParams, $location, dbService) {
     "use strict";
 
     dbService.signout.signout({}, function () {
-        window.location.href = '/cookies/design';
+        window.location.href = '/#/cookies/design';
     });
 }
