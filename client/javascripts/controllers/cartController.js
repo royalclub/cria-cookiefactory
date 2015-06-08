@@ -66,7 +66,7 @@ cookieFactory.controller('cartController', function ($scope, $cookies, $window, 
     $scope.onProceedClicked = function ($event) {
         $event.preventDefault();
         console.log($scope.orderRules);
-        localStorage.setItem('myOrder', JSON.stringify($scope.orderRules));
+        localStorage.setItem('myOrderRules', JSON.stringify($scope.orderRules));
         $location.path("/orders/details");
     };
 });

@@ -12,7 +12,7 @@
 
     orderSchema = new mongoose.Schema({
         "number": {type: String, required: true, unique: true},
-        status: [orderStatus.schema],
+        status: {type: Number, required: true},
         user: [orderUser.schema],
         rules: [orderRule.schema],
         invoiceAddress: [address.schema],

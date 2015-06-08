@@ -1,10 +1,11 @@
 /*jslint node: true */
-/*globals cookieFactory, alert,  accountService, usersService, authenticationService, dbService */
+/*globals cookieFactory, alert,  accountService, authenticationService, dbService */
 
 /**
  * TODO: create controller for orders list
  * @param $scope
  * @param orderService
+ * @param dbService
  * @constructor
  */
 
@@ -14,25 +15,31 @@
  * @param $routeParams
  * @param $location
  * @param orderService
- * @param usersService
+ * @param dbService
  * @constructor
  */
 
-function orderController($scope, $routeParams, $location, orderService, $cookieStore, authenticationService, usersService) {
+function orderController($scope, $routeParams, $location, orderService, $cookieStore, authenticationService, usersService, dbService) {
     "use strict";
 
     $scope.shipment = { shipmentDate: new Date(), shipmentType: null, invoiceAddress: 'poep', shipmentAddress: "poep", orderLines: ["poep"] };
     $scope.payment = { paymentOption: "IDeal", bank: "", paid: 0 };
 
+    authenticationService.getUser(function (loggedIn, loggedInUser) {
+        if (loggedIn) {
+            $scope.userName = loggedInUser.username;
+        }
+    });
+
     // Lists
     $scope.order = {
-        "number": null,
-        status: "new",
-        user: null,
-        rules: null,
+        "number": Math.floor((Math.random()*6)+1),
+        status: 1,
+        user: $scope.userName,
+        rules: JSON.parse(localStorage.getItem('myOrderRules')),
         invoiceAdress: null,
         shipmentAddress: null,
-        vatPercentage: null
+        vatPercentage: 21
     };
 
     $scope.shipmentTypes = [{ id: "Home", description: "Laten bezorgen thuis of op een ander adres" }, { id: "PostNL", description: "Afhalen bij een ophaalpunt bij u in de buurt" }];
@@ -58,16 +65,17 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
         $scope.order.paymentAddress = $scope.addresses[index];
     };
 
-    $scope.SaveOrder = function () {
-        console.log("BAM!!");
-        orderService.orders.save({}, $scope.shipment, function (res) {
-            console.log(res);
+    $scope.save = function (cookieName) {
+        console.log('Entering save');
+        dbService.orders.save($scope.order, function (res) {
+            console.log(res.err);
+            alert('Er is iets fout gegaan, de order is niet opgeslagen!');
         });
     };
 
     // Proceed to payment
     $scope.ProceedToPayment = function () {
-        console.debug($cookieStore.get('key'));
+        console.debug($scope.order);
         if (!$scope.userName) {
             alert("U bent niet ingelogd.");
         } else if (!$scope.shipment.shipmentType) {
@@ -79,15 +87,14 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
         } else if (!$scope.shipment.shipmentDate.date) {
             alert('U heeft nog geen verzenddatum ingevoerd.');
         } else {
-            $cookieStore.put("myOrder", $scope.order);
-            console.log("redirect to payment");
+            $scope.save();
             $location.path("/orders/payment/");
         }
     };
 
     // Proceed to confirmation
     $scope.ProceedToConfirmation = function () {
-        console.log($scope.userName);
+        console.log(localStorage.getItem('myOrderRules'));
         if (!$scope.userName) {
             alert("U bent niet ingelogd.");
         } else if (!$scope.payment.paymentOption) {
@@ -100,15 +107,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
             };
             console.debug($cookieStore.get("myOrder"));
             $scope.order = $cookieStore.get("myOrder");
-            $cookieStore.put("myOrder", $scope.order);
             $location.path("/orders/confirmation/");
         }
     };
-
-    authenticationService.getUser(function (loggedIn, loggedInUser) {
-        if (loggedIn) {
-            $scope.userName = loggedInUser.username;
-            console.log(loggedInUser.address);
-        }
-    });
 }
