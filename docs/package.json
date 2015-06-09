@@ -1,4 +1,5 @@
 {
-    "name": "books-jsdoc",
-    "version": "0.0.1"
+  "name": "books-jsdoc",
+  "version": "0.0.1",
+  "dependencies": {}
 }
