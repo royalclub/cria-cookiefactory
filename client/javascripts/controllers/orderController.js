@@ -22,7 +22,7 @@
 function orderController($scope, $routeParams, $location, orderService, $cookieStore, authenticationService, usersService, dbService) {
     "use strict";
 
-    $scope.shipment = { shipmentDate: new Date(), shipmentType: null, invoiceAddress: 'poep', shipmentAddress: "poep", orderLines: ["poep"] };
+    $scope.shipment = { shipmentDate: new Date(), shipmentType: null };
     $scope.payment = { paymentOption: "IDeal", bank: "", paid: 0 };
     $scope.user = {};
 
@@ -31,19 +31,19 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
             $scope.user = loggedInUser;
             $scope.addresses = $scope.user.addresses;
             $scope.userName = $scope.user.username;
+            $scope.order.user = [{username: $scope.user.username, emailAddress: $scope.user.emailAddress, firstName: $scope.user.firstName, inserts: 1, lastName: $scope.user.lastName}];
         } else {
             $location.path("/#/");
         }
     });
-
+    console.log('poep ', $scope.orderUser);
     // Lists
     $scope.order = {
-        "number": Math.floor((Math.random() * 6) + 1),
-        "status": { name: "New", description: "Dit is een nieuwe order!!!",  creationDate: null, modificationDate: null },
-        user: $scope.userName,
+        "number": Math.floor((Math.random() * 99999999) + 1),
+        "status": [{ name: "New", description: "Dit is een nieuwe order!!!"}],
         rules: JSON.parse(localStorage.getItem('myOrderRules')),
-        invoiceAddress: null,
-        shipmentAddress: null,
+        invoiceAddress: [],
+        shipmentAddress: [],
         vatPercentage: 21
     };
 
@@ -56,7 +56,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
     };
 
     $scope.SetShipmentAddress = function (index) {
-        $scope.order.shipmentAddress = $scope.addresses[index];
+        $scope.order.shipmentAddress = [$scope.addresses[index]];
     };
 
     $scope.SetPaymentOption = function (paymentOption) {
@@ -64,13 +64,15 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
     };
 
     $scope.SetPaymentAddress = function (index) {
-        $scope.order.invoiceAddress = $scope.addresses[index];
+        $scope.order.invoiceAddress = [$scope.addresses[index]];
     };
 
     $scope.save = function (cookieName) {
         dbService.orders.save($scope.order, function (res) {
-            console.log(res.err);
-            alert('Er is iets fout gegaan, de order is niet opgeslagen!');
+            if (res.err) {
+                console.log(res.err);
+                alert("De order is niet opgeslagen!");
+            }
         });
     };
 
@@ -81,9 +83,9 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
             alert("U bent niet ingelogd.");
         } else if (!$scope.shipment.shipmentType) {
             alert("U heeft nog geen verzend wijze gekozen.");
-        } else if (!$scope.shipment.shipmentAddress) {
+        } else if (!$scope.order.shipmentAddress) {
             alert('Er is nog geen verzendadres bekend.');
-        } else if ($scope.shipment.orderLines.length === 0) {
+        } else if ($scope.order.rules.length === 0) {
             alert('De order bevat geen items.');
         } else if (!$scope.shipment.shipmentDate.date) {
             alert('U heeft nog geen verzenddatum ingevoerd.');

@@ -54,6 +54,9 @@ function accountDetailController($scope, $routeParams, $location, authentication
             $location.path('/cookies/design');
         } else {
             $scope.account = loggedInUser;
+            $scope.updateAddress = function (adressId) {
+                $location.path("/account/address/edit/" + adressId);
+            };
         }
     });
 }

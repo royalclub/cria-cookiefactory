@@ -6,35 +6,45 @@
  * @param $scope
  * @param $routeParams
  * @param $location
- * @param usersService
+ * @param dbService
  * @constructor
  */
-function addressController($scope, $routeParams, $location, usersService) {
+function addressController($scope, $routeParams, $location, dbService, authenticationService) {
     "use strict";
 
-    // GET 1 cookie
-    usersService.users.get({_id: '556c2223802620c40b9c97a6'}, function (user) {
-        var index;
-        $scope.user = user.doc;
-        for (index = 0; index < user.doc.addresses.length; index++) {
-            if (user.doc.addresses[index]._id === $routeParams._id) {
-                $scope.address = user.doc.addresses[index];
+    // GET 1 user
+    authenticationService.getUser(function (loggedIn, loggedInUser) {
+        if (!loggedIn) {
+            $scope.showLoginForm = true;
+            $scope.showWelcomeText = false;
+        } else {
+            var index;
+            $scope.account = loggedInUser;
+            for (index = 0; index < $scope.account.addresses.length; index++) {
+                if ($scope.account.addresses[index]._id === $routeParams._id) {
+                    $scope.address = $scope.account.addresses[index];
+                }
             }
         }
     });
 
     // CREATE, UPDATE cookie
-    $scope.save = function (account, address) {
+    $scope.save = function (address) {
         var index;
         if (address && address._id !== undefined) {
-            for (index = 0; index < account.addresses.length - 1; index++) {
-                if (account.addresses[index]._id === $routeParams._id) {
-                    account.addresses[index] = address;
+            for (index = 0; index < $scope.account.addresses.length; index++) {
+                if ($scope.account.addresses[index]._id === address._id) {
+                    $scope.account.addresses[index] = address;
                 }
             }
-            usersService.users.update({_id: '556c2223802620c40b9c97a6'}, account, function (res) {
-                $location.path("/account");
-            });
+            if ($scope.account && $scope.account._id !== undefined) {
+                dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
+                    if (res.err) {
+                        console.log(res.err);
+                    }
+                    $location.path('/account');
+                });
+            }
         }
     };
 }

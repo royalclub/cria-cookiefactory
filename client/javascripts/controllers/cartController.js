@@ -35,7 +35,7 @@ cookieFactory.controller('cartController', function ($scope, $location) {
             $scope.cartItems = JSON.parse(localStorage.getItem(storageCookieName));
             for (b = 0; b < $scope.cartItems.length; b += 1) {
                 $scope.orderRules.push({
-                    cookie : $scope.cartItems[b],
+                    cookie : [$scope.cartItems[b]],
                     box : null,
                     amountOfBoxes : 1
                 });

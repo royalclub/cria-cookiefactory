@@ -1,1 +1,1 @@
-{"indexes":[{"v":1,"name":"_id_","key":{"_id":1},"ns":"groep9-dev.orderrules"},{"v":1,"name":"layers.name_1","key":{"layers.name":1},"unique":true,"ns":"groep9-dev.orderrules","background":true,"safe":null}]}
+{ "indexes" : [ { "v" : 1, "name" : "_id_", "key" : { "_id" : 1 }, "ns" : "groep9-dev.orderrules" }, { "v" : 1, "name" : "layers.name_1", "key" : { "layers.name" : 1 }, "unique" : true, "ns" : "groep9-dev.orderrules", "background" : true, "safe" : null } ] }
