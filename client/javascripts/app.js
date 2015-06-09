@@ -1,5 +1,5 @@
-/*global angular, cookieController, userController, layerController, testController, accountController, accountDetailController, accountEditController, accountRegisterController, accountLogoutController, homeController, addressController, orderController */
-/*global angular, cookieController, userController, layerController, cookieDesignController, accountController, homeController, addressController, accountDetailController, accountEditController, accountLogoutController, orderController */
+/*global angular, cookieController, userController, testController, accountController, accountDetailController, accountEditController, accountRegisterController, accountLogoutController, homeController, addressController, orderController */
+/*global angular, cookieController, userController, cookieDesignController, accountController, homeController, addressController, accountDetailController, accountEditController, accountLogoutController, orderController */
 
 /**
  *
@@ -15,7 +15,11 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
 
         // Home
         $routeProvider.when('/', {
-            controller: homeController
+            templateUrl: 'partials/about.html',
+            controller: function ($location) {
+                console.log("TEST");
+                $location.path('/#/cookies/design');
+            }
         });
 
         // About
@@ -89,12 +93,6 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $routeProvider.when('/users/list/:_id', {
             templateUrl: 'partials/user-detail.html',
             controller: userController
-        });
-        
-        // Get a list of layers
-        $routeProvider.when('/layer/:_id', {
-            templateUrl: 'partials/layers/detail.html',
-            controller: layerController
         });
 
         // Get orderConfirmation
