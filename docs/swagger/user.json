@@ -1,0 +1,165 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: CRIA CookieFactory
+  description: CRIA Groep 9
+  version: "1.0.0"
+# the domain of the service
+host: server3.tezzt.nl
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /api
+produces:
+  - application/json
+paths:
+  /users:
+    get:
+      summary: Users Types
+      description: Retrieve a list of all Users.
+      parameters:
+        - name: userid
+          in: query
+          description: The id of the user
+          required: false
+          type: number
+          format: double
+      tags:
+        - Users
+      responses:
+        200:
+          description: An array of Users
+          schema:
+            $ref: '#/definitions/UserResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/UserResponse'
+    post:
+      summary: Create user
+      description: Create a new user.
+      tags:
+        - Users
+      responses:
+        200:
+          description: The new user.
+          schema:
+            $ref: '#/definitions/UserResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/UserResponse'
+    put:
+      summary: Update Cookie.
+      description: Update a single user.
+      parameters:
+        - name: cookieid
+          in: query
+          description: The id of the user.
+          required: false
+          type: number
+          format: double
+      tags:
+        - Users
+      responses:
+        200:
+          description: The update the user.
+          schema:
+            $ref: '#/definitions/UserResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/UserResponse'
+    delete:
+      summary: Delete user.
+      description: Delete a single user.
+      parameters:
+        - name: cookieid
+          in: query
+          type: integer
+          format: int32
+          description: The id of the user.
+      tags:
+        - Users
+      responses:
+        200:
+          description: Ok.
+          schema:
+            $ref: '#/definitions/UserResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/UserResponse'
+definitions:
+  UserResponse:
+    properties:
+      meta:
+        type: object
+        $ref: '#/definitions/meta'
+      doc:
+        type: object
+        $ref: '#/definitions/User'
+      err:
+        type: object
+        description: The error information.
+  meta:
+    properties:
+      action:
+        type: string
+        description: The action in the controller.
+      timestamp:
+        type: string
+        description: The date and time on which the request was made.
+      filename:
+        type: string
+        description: The name of the file from which the request was completed.
+  User:
+    properties:
+      username:
+        type: string
+        description: username of a user.
+      salt:
+        type: string
+        description: salt of a user.
+      password:
+        type: string
+        description: password of a user.
+      firstName:
+        type: string
+        description: firstName date of a user
+      inserts:
+        type: string
+        description: inserts date of a user
+      lastName:
+        type: string
+        description: lastName of a user.
+      dateOfBirth:
+        type: boolean
+        description: dateOfBirth of a user.
+      emailAddress:
+        type: number
+        description: emailAddress of a user.
+      addresses:
+        $ref: '#/definitions/Addresses'
+      creationDate:
+        type: string
+        description: Creation date of a user
+      modificationDate:
+        type: string
+        description: Modification date of a user
+  Addresses:
+    properties:
+      street:
+        type: string
+        description: street of a user.
+      streetNumber:
+        type: number
+        description: streetNumber of a user.
+      zipCode:
+        type: string
+        description: zipCode of a user.
+      city:
+        type: string
+        description: city of a user.

@@ -1,0 +1,275 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: CRIA CookieFactory
+  description: CRIA Groep 9
+  version: "1.0.0"
+# the domain of the service
+host: server3.tezzt.nl
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /api
+produces:
+  - application/json
+paths:
+  /orders:
+    get:
+      summary: Get orders
+      description: Retrieve a list of all Orders, or one Order.
+      parameters:
+        - name: layerid
+          in: query
+          description: The id of the order
+          required: false
+          type: number
+          format: double
+      tags:
+        - Orders
+      responses:
+        200:
+          description: An array of Orders
+          schema:
+            $ref: '#/definitions/OrderResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/OrderResponse'
+    post:
+      summary: Create order
+      description: Create a new Order.
+      tags:
+        - Orders
+      responses:
+        200:
+         description: An array of products
+         schema:
+            $ref: '#/definitions/OrderResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/OrderResponse'
+    put:
+      summary: Update Order.
+      description: Update a single Order.
+      parameters:
+        - name: orderid
+          in: query
+          description: The id of the order.
+          required: false
+          type: number
+          format: double
+      tags:
+        - Orders
+      responses:
+        200:
+          description: Order has been updated.
+          schema:
+            $ref: '#/definitions/OrderResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/OrderResponse'
+    delete:
+      summary: Delete Order.
+      description: Delete a single Order.
+      parameters:
+        - name: orderid
+          in: query
+          type: integer
+          format: int32
+          description: The id of the order.
+      tags:
+        - Orders
+      responses:
+        200:
+          description: Ok.
+          schema:
+            $ref: '#/definitions/OrderResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/OrderResponse'
+definitions:
+  OrderResponse:
+    properties:
+      meta:
+        type: object
+        $ref: '#/definitions/meta'
+      doc:
+        type: object
+        $ref: '#/definitions/Order'
+      err:
+        type: object
+        description: The error information.
+  meta:
+    properties:
+      action:
+        type: string
+        description: The action in the controller.
+      timestamp:
+        type: string
+        description: The date and time on which the request was made.
+      filename:
+        type: string
+        description: The name of the file from which the request was completed.
+  Cookie:
+    properties:
+      name:
+        type: string
+        description: Name of a cookie.
+      creator:
+        type: string
+        description: Creator of a cookie.
+      layers:
+        $ref: '#/definitions/Layer'
+      creationDate:
+        type: string
+        description: Creation date of a cookie
+      modificationDate:
+        type: string
+        description: Modification date of a cookie
+  Layer:
+    properties:
+      name:
+        type: string
+        description: Name of a layer.
+      required:
+        type: boolean
+        description: Creator of a layer.
+      sequence:
+        type: number
+        description: Sequence of a layer.
+      options:
+        $ref: '#/definitions/LayerOption'
+      imageSrc:
+        type: string
+        description: Image source of a layer
+      creationDate:
+        type: string
+        description: Creation date of a layer
+      modificationDate:
+        type: string
+        description: Modification date of a layer
+  LayerOption:
+    properties:
+      name:
+        type: string
+        description: Name of a layer option.
+      sequence:
+        type: number
+        description: Sequence of a layer option.
+      description:
+        type: string
+        description: Description of a layer option.
+      price:
+        type: string
+        description: Price of a layer option.
+      imageSrc:
+        type: string
+        description: Image source of a layer option.
+      creationDate:
+        type: string
+        description: Creation date of a layer option.
+      modificationDate:
+        type: string
+        description: Modification date of a layer option.
+  Order:
+    properties:
+      _id:
+        type: number
+        description: Unique identification number.
+      number:
+        type: string
+        description: Custom order number which must be unique.
+      status:
+        type: object
+        $ref: '#/definitions/OrderStatus'
+      user:
+        type: object
+        $ref: '#/definitions/OrderUser'
+      rules:
+        type: array
+        items:
+          $ref: '#/definitions/OrderRule'
+      invoiceAddress:
+        type: object
+        $ref: '#/definitions/Address'
+      shipmentAddress:
+        type: object
+        $ref: '#/definitions/Address'
+      vatPercentage:
+        type: number
+        description: Tax percentage.
+      creationDate:
+        type: string
+        description: Date of creation.
+      modificationDate:
+        type: string
+        description: Date of modification.
+  OrderStatus:
+    properties:
+      name:
+        type: string
+        description: The name of the status.
+      description:
+        type: string
+        description: The description.
+      creationDate:
+        type: string
+        description: Date of creation.
+      modificationDate:
+        type: string
+        description: Date of modification.
+  OrderUser:
+    properties:
+      username:
+        type: string
+        description: username of a user.
+      firstName:
+        type: string
+        description: firstName date of a user
+      inserts:
+        type: string
+        description: inserts date of a user
+      lastName:
+        type: string
+        description: lastName of a user.
+      emailAddress:
+        type: number
+        description: emailAddress of a user.
+  OrderRule:
+    properties:
+      cookie:
+        type: object
+        items:
+          $ref: '#/definitions/Cookie'
+      box:
+        type: object
+        items:
+          $ref: '#/definitions/Box'
+      amountOfBoxes:
+        type: number
+        description: The amount of boxes.
+  Box:
+    properties:
+      name:
+        type: string
+        description: Name of the box.
+      description:
+        type: string
+        description: The description.
+      capacity:
+        type: number
+        description: Maximum amount of cookies in one package.
+      imageSrc:
+        type: string
+        description: Link to image of the box.
+      creationDate:
+        type: string
+        description: Date of creation.
+      modificationDate:
+        type: string
+        description: Date of modification.

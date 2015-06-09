@@ -1,6 +1,8 @@
 <h2>Cookies</h2>
-<input ng-model="query" placeholder="Type to start searching...">
-
-<ul id="cookieList">
-    <li data-ng-repeat="cookie in cookies.doc | filter:query"><a href="/#/cookies/detail/{{cookie._id}}">{{cookie.name}}, {{cookie.creator}}</a></li>
-</ul>
+<div ng-controller="cookieListController">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" data-ng-repeat="cookie in cookies">
+        <a href="#" class="thumbnail cookieDisplay" title="{{cookie.name}}">
+          <img data-ng-repeat="layer in cookie.layers" ng-src="images/{{layer.imageSrc}}" style="z-index:{{ (layer.sequence===1) ? 999 : layer.sequence }};">
+        </a>
+    </div>
+</div>

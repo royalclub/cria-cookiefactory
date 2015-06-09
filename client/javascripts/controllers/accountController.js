@@ -32,11 +32,11 @@ function accountRegisterController($scope, $routeParams, $location, authenticati
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (loggedIn) {
-            $location.path('/#/');
+            $location.path('/cookies/design');
         } else {
             $scope.save = function (user) {
                 dbService.account.register(user, function () {
-                    $location.path("/");
+                    $location.path("/cookies/design");
                 });
             };
         }
@@ -51,9 +51,12 @@ function accountDetailController($scope, $routeParams, $location, authentication
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (!loggedIn) {
-            $location.path('/#/');
+            $location.path('/cookies/design');
         } else {
             $scope.account = loggedInUser;
+            $scope.updateAddress = function (adressId) {
+                $location.path("/account/address/edit/" + adressId);
+            };
         }
     });
 }
@@ -62,18 +65,21 @@ function accountDetailController($scope, $routeParams, $location, authentication
 /**
  * Controller responsible for handling the account edit.
  */
-function accountEditController($scope, $routeParams, $location, authenticationService, usersService, accountService) {
+function accountEditController($scope, $routeParams, $location, authenticationService, dbService, accountService) {
     "use strict";
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (!loggedIn) {
-            $location.path('/#/');
+            $location.path('/cookies/design');
         } else {
             $scope.account = loggedInUser;
             $scope.update = function (account) {
-                usersService.update(account, function () {
-                    $location.path('/#/account');
-                });
+                if (account && account._id !== undefined) {
+                    dbService.users.update({_id: account._id}, account, function (res) {
+                        console.log(res);
+                        $location.path('/account');
+                    });
+                }
             };
         }
     });
@@ -86,6 +92,6 @@ function accountLogoutController($scope, $routeParams, $location, dbService) {
     "use strict";
 
     dbService.signout.signout({}, function () {
-        window.location.href = '/';
+        window.location.href = '/#/cookies/design';
     });
 }
