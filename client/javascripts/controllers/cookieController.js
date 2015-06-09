@@ -159,7 +159,7 @@ cookieFactory.controller('cookieListController', function ($scope, $routeParams,
     "use strict";
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
-        if(loggedIn) {
+        if (loggedIn) {
             dbService.cookies.get({ 'creator': loggedInUser.username }, function (cookies) {
                 $scope.cookies = cookies.doc;
             });

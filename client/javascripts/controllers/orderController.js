@@ -50,7 +50,6 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
     $scope.shipmentTypes = [{ id: "Home", description: "Laten bezorgen thuis of op een ander adres" }, { id: "PostNL", description: "Afhalen bij een ophaalpunt bij u in de buurt" }];
     $scope.paymentOptions = [{ id: "Acceptgiro", description: "Betaal binnen 30 dagen na het plaatsen van de order."}, { id: "IDeal", description: "Betaal direct met behulp van IDeal." }];
     $scope.banks = [{ id: "ING Bank", name: "ING Bank" }, { id: "ASN Bank", name: "ASN Bank" }];
-    console.log($scope.user);
 
     $scope.SetShipmentType = function (shipmentType) {
         $scope.shipment.shipmentType = shipmentType;
