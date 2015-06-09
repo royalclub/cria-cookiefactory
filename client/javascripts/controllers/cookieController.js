@@ -2,59 +2,15 @@
 /*globals cookieFactory, alert */
 
 /**
- * TODO: create controller for cookies list
- * @param $scope
- * @param cookiesService
+ * Controller for cookie design
  * @constructor
- */
-function layerListController($scope, cookiesService) {
-    "use strict";
-    // GET all cookies
-    $scope.cookies = cookiesService.cookies.get();
-}
-
-/**
- * Controller for Cookies
  * @param $scope
  * @param $routeParams
  * @param $location
- * @param cookiesService
- * @constructor
+ * @param authenticationService
+ * @param dbService
  */
-
-function cookieController($scope, $routeParams, $location, cookiesService) {
-    "use strict";
-
-    // GET 1 cookie
-    if ($routeParams._id !== 'new') {
-        $scope.cookies = cookiesService.cookies.get({_id: $routeParams._id}, function () {
-            console.log('$scope.requests ', $scope.requests);
-        });
-    }
-
-    // DELETE cookie
-    $scope.delete = function () {
-        cookiesService.cookies.delete({_id: $routeParams._id});
-        $location.path("/cookies");
-    };
-
-    // CREATE, UPDATE cookie
-    $scope.save = function () {
-        if ($scope.cookies.doc && $scope.cookies.doc._id !== undefined) {
-            console.log('Entering update');
-            cookiesService.cookies.update({_id: $routeParams._id}, $scope.cookies.doc, function (res) {
-                console.log(res);
-            });
-        } else {
-            console.log('Entering save');
-            cookiesService.cookies.save({}, $scope.cookies.doc, function (res) {
-                console.log(res);
-            });
-        }
-    };
-}
-
-function cookieDesignController($scope, $routeParams, $location, layersService) {
+cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, authenticationService, dbService) {
     "use strict";
 
     var optionsTotal = 0.0,
@@ -63,26 +19,62 @@ function cookieDesignController($scope, $routeParams, $location, layersService) 
     $scope.cookieName = null;
     $scope.selectedLayers = [];
 
+    /**
+     * Creates the final cookie object
+     * @constructor
+     * @param cookieName
+     */
+    function getCookie(cookieName) {
+        return {
+            "name" : cookieName,
+            "creator" : $scope.userName,
+            "layers" : $scope.selectedLayers
+        };
+    }
+
+    /**
+     * Gets the logedin user information
+     * @constructor
+     * @param loggedIn
+     * @param loggedInUser
+     */
+    authenticationService.getUser(function (loggedIn, loggedInUser) {
+        if (loggedIn) {
+            $scope.userName = loggedInUser.username;
+            $scope.showSaveButton = true;
+        }
+    });
+
     if ($routeParams._id === undefined) {
-        layersService.layers.get(function (layers) {
+        dbService.layers.get(function (layers) {
             $scope.layers = layers.doc;
             $scope.currentLayer = layers.doc[0];
-            for (i = 0; i < $scope.currentLayer.options.length; i += 1) {
-                optionsTotal += $scope.currentLayer.options[i].price;
-            }
-            $scope.total = optionsTotal;
+            $scope.total = 0;
         });
 
+        /**
+         * Layertoption change based on the selected layer
+         * @constructor
+         * @param _id
+         * @param $event
+         */
         $scope.onLayerClicked = function (_id, $event) {
+            $event.preventDefault();
             for (l = 0; l < $scope.layers.length; l += 1) {
                 if ($scope.layers[l]._id === _id) {
                     $scope.currentLayer = $scope.layers[l];
                 }
             }
-            $event.preventDefault();
         };
 
+        /**
+         * Vuls the cookie with the selected layer and layeroption
+         * @constructor
+         * @param option
+         * @param $event
+         */
         $scope.onLayerOptionClicked = function (option, $event) {
+            $event.preventDefault();
             var layer = {
                     "name" : $scope.currentLayer.name,
                     "required" : $scope.currentLayer.required,
@@ -107,24 +99,72 @@ function cookieDesignController($scope, $routeParams, $location, layersService) 
                     $scope.selectedLayers.push(layer);
                 }
             }
-            console.log("layer option clicked: " + option.name);
-            $event.preventDefault();
+            optionsTotal = 0;
+            for (i = 0; i < $scope.selectedLayers.length; i += 1) {
+                optionsTotal += $scope.selectedLayers[i].options.price;
+            }
+            $scope.total = optionsTotal;
         };
 
+        /**
+         * Execute when user want to go to the cart
+         * @constructor
+         * @param cookieName
+         * @param $event
+         */
         $scope.onProceedClicked = function (cookieName, $event) {
-            if (cookieName === undefined) {
-                alert('De naam van het koekje is ingevuld!');
+            var browserCookieName = 'key', cookie, storage;
+            $event.preventDefault();
+            if (!cookieName) {
+                alert('De naam van het koekje is niet ingevuld!');
             } else if ($scope.selectedLayers < 4) {
                 alert('1 of meerder layers zijn niet geslecteerd!');
             } else {
-                document.cookie = 'key=' + JSON.stringify([{
-                    "name" : cookieName,
-                    "creator" : "henkdesteen",
-                    "layers" : $scope.selectedLayers
-                }]);
+                cookie = getCookie(cookieName);
+                storage = JSON.parse(localStorage.getItem(browserCookieName));
+                if (!storage) {
+                    localStorage.setItem(browserCookieName, JSON.stringify([cookie]));
+                } else {
+                    storage.push(cookie);
+                    localStorage.setItem(browserCookieName, JSON.stringify(storage));
+                }
                 $location.path("/cart");
             }
-            $event.preventDefault();
+        };
+
+        /**
+         * Saves the data to the database
+         * @constructor
+         * @param cookieName
+         */
+        $scope.save = function (cookieName) {
+            var cookie = getCookie(cookieName);
+            dbService.cookies.save(cookie, function (res) {
+                console.log(res.err);
+                alert('Er is iets fout gegaan, koekje is niet opgeslagen!');
+            });
         };
     }
-}
+});
+
+/**
+ * @param $scope
+ * @param $routeParams
+ * @param $location
+ * @param authenticationService
+ * @param dbService
+ * @constructor
+ */
+cookieFactory.controller('cookieListController', function ($scope, $routeParams, $location, authenticationService, dbService) {
+    "use strict";
+
+    authenticationService.getUser(function (loggedIn, loggedInUser) {
+        if (loggedIn) {
+            dbService.cookies.get({ 'creator': loggedInUser.username }, function (cookies) {
+                $scope.cookies = cookies.doc;
+            });
+        } else {
+            $location.path("/cookies/design");
+        }
+    });
+});

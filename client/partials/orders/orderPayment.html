@@ -1,11 +1,11 @@
 <h2>Betalen</h2>
-<form ng-controller="orderController">
+<form name="orderPayment" ng-submit="ProceedToConfirmation()">
 	<div class="jumbotron">
 	  	<div class="container">
  			<div class="radio">
   				<label>
-    				<input type="radio" name="paymentType" id="home" value="30days" checked>
-					<strong>Laten bezorgen thuis of op een ander adres</strong>
+    				<input type="radio" name="paymentOption" id="home" value="30days" checked ng-click="SetPaymentOption('30Days')">
+					<strong>Betaal binnen 30 dagen na het plaatsen van uw order. Wij sturen hiervoor een acceptgiro mee.</strong>
 	  			</label>
 			</div>
 	  	</div>
@@ -14,23 +14,18 @@
 	  	<div class="container">
 	  		<div class="radio">
   				<label>
-    				<input type="radio" name="paymentType" id="home" value="IDeal" checked>
-					<strong>Laten bezorgen thuis of op een ander adres</strong>
+    				<input type="radio" name="paymentOption" id="home" value="IDeal" checked ng-click="SetPaymentOption('IDeal')">
+					<strong>Betaal direct met behulp van IDeal.</strong>
 	  			</label>
 			</div>
-			<select class="form-control">
-			  	<option>ING</option>
-			  	<option>Rabobank</option>
-			  	<option>ABN Amro Bank</option>
-			  	<option>SNS Bank</option>
-			  	<option>ANS Bank</option>
-			</select>
+			Selecteer uw bank
+			<select class="form-control" ng-model="payment.bank"
+                ng-options="obj.id as obj.name for obj in banks">
+	        </select>
+			{{ payment.bank }}
 	  	</div>
 	</div>
 	<div class="pull-right">
-    	<a href="/#/orders/confirmation/" class="btn btn-success">
-        	<span ng-click="SaveOrder()"></span> 
-        	Bestelling afronden
-    	</a>
+		<input type="submit" id="submit" value="Bestelling afronden" />
 	</div>
 </form>
