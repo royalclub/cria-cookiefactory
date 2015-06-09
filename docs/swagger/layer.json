@@ -15,92 +15,92 @@ basePath: /api
 produces:
   - application/json
 paths:
-  /cookies:
+  /layers:
     get:
-      summary: Cookies Types
-      description: Retrieve a list of all Cookies.
+      summary: Get layers
+      description: Retrieve a list of all Layers, or one Layer.
       parameters:
-        - name: cookieid
+        - name: layerid
           in: query
-          description: The id of the cookie
+          description: The id of the layer
           required: false
           type: number
           format: double
       tags:
-        - Cookies
+        - Layers
       responses:
         200:
-          description: An array of Cookies
+          description: An array of Layers
           schema:
-            $ref: '#/definitions/CookieResponse'
+            $ref: '#/definitions/LayerResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/CookieResponse'
+            $ref: '#/definitions/LayerResponse'
     post:
-      summary: Create cookie
-      description: Create a new Cookie.
+      summary: Create layer
+      description: Create a new Layer.
       tags:
-        - Cookies
+        - Layers
       responses:
         200:
-          description: The new cookie.
-          schema:
-            $ref: '#/definitions/CookieResponse'
+         description: An array of products
+         schema:
+            $ref: '#/definitions/LayerResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/CookieResponse'
+            $ref: '#/definitions/LayerResponse'
     put:
-      summary: Update Cookie.
-      description: Update a single Cookie.
+      summary: Update Layer.
+      description: Update a single Layer.
       parameters:
-        - name: cookieid
+        - name: layerid
           in: query
-          description: The id of the cookie.
+          description: The id of the layer.
           required: false
           type: number
           format: double
       tags:
-        - Cookies
+        - Layers
       responses:
         200:
           description: The update the user.
           schema:
-            $ref: '#/definitions/CookieResponse'
+            $ref: '#/definitions/LayerResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/CookieResponse'
+            $ref: '#/definitions/LayerResponse'
     delete:
-      summary: Delete Cookie.
-      description: Delete a single Cookie.
+      summary: Delete Layer.
+      description: Delete a single Layer.
       parameters:
-        - name: cookieid
+        - name: layerid
           in: query
           type: integer
           format: int32
-          description: The id of the cookie.
+          description: The id of the layer.
       tags:
-        - Cookies
+        - Layers
       responses:
         200:
           description: Ok.
           schema:
-            $ref: '#/definitions/CookieResponse'
+            $ref: '#/definitions/LayerResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/CookieResponse'
+            $ref: '#/definitions/LayerResponse'
 definitions:
-  CookieResponse:
+  LayerResponse:
     properties:
       meta:
         type: object
         $ref: '#/definitions/meta'
       doc:
         type: object
-        $ref: '#/definitions/Cookie'
+        $ref: '#/definitions/Layer'
       err:
         type: object
         description: The error information.
@@ -176,3 +176,4 @@ definitions:
       modificationDate:
         type: string
         description: Modification date of a layer option.
+        
