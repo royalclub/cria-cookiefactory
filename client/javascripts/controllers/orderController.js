@@ -69,8 +69,10 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
 
     $scope.save = function (cookieName) {
         dbService.orders.save($scope.order, function (res) {
-            console.log(res.err);
-            alert('Er is iets fout gegaan, de order is niet opgeslagen!');
+            if (res.err) {
+                console.log(res.err);
+                alert("De order is niet opgeslagen!");
+            }
         });
     };
 

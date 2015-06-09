@@ -38,13 +38,13 @@ function addressController($scope, $routeParams, $location, dbService, authentic
                 }
             }
             if ($scope.account && $scope.account._id !== undefined) {
-                    dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
-                        if(res.err){
-                            console.log(res.err);
-                        }
-                        $location.path('/account');
-                    });
-                }
+                dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
+                    if (res.err) {
+                        console.log(res.err);
+                    }
+                    $location.path('/account');
+                });
+            }
         }
     };
 }
