@@ -79,13 +79,13 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
                     "name" : $scope.currentLayer.name,
                     "required" : $scope.currentLayer.required,
                     "sequence" : $scope.currentLayer.sequence,
-                    "options" : option
+                    "options" : [option]
                 };
 
             function layerNotExists() {
                 for (l = 0; l < $scope.selectedLayers.length; l += 1) {
                     if ($scope.selectedLayers[l].name === $scope.currentLayer.name) {
-                        $scope.selectedLayers[l].options = option;
+                        $scope.selectedLayers[l].options[0] = option;
                         return false;
                     }
                 }
@@ -101,7 +101,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             }
             optionsTotal = 0;
             for (i = 0; i < $scope.selectedLayers.length; i += 1) {
-                optionsTotal += $scope.selectedLayers[i].options.price;
+                optionsTotal += $scope.selectedLayers[i].options[0].price;
             }
             $scope.total = optionsTotal;
         };
