@@ -14,7 +14,7 @@ var router = express.Router();
  */
 var controller = require('../app/controllers/orders.js');
 
-/** CREATE route for books */
+/** CREATE route for orders */
 router
     .post('/orders', controller.create);
 
