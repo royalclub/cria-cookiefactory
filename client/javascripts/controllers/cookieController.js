@@ -142,7 +142,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             var cookie = getCookie(cookieName);
             dbService.cookies.save(cookie, function (res) {
                 if (res.err) {
-                console.log(res.err);
+                    console.log(res.err);
                     alert('Er is iets fout gegaan, koekje is niet opgeslagen!');
                 }
             });
