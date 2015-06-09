@@ -33,7 +33,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
 
     // Lists
     $scope.order = {
-        "number": Math.floor((Math.random()*6)+1),
+        "number": Math.floor((Math.random() * 6) + 1),
         status: 1,
         user: $scope.userName,
         rules: JSON.parse(localStorage.getItem('myOrderRules')),
