@@ -134,6 +134,7 @@
         });
     });
     app.use(express.static(__dirname + '/../client/'));
+    app.use('/swagger.json', express.static(__dirname + '/swagger.json'));
 
     /**
      * Middleware to catch all unmatched routes

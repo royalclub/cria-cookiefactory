@@ -14,7 +14,6 @@ var env = process.env.NODE_ENV || 'development'
 
 // Bootstrap db connection
 var mongoose = require('../../../server/node_modules/mongoose');
-console.log(mongoose);
 if (mongoose.host === undefined) {
     mongoose.connect(config.db);
     mongoose.connection.on('error', function (err) {
