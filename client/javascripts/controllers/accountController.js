@@ -62,7 +62,7 @@ function accountDetailController($scope, $routeParams, $location, authentication
 /**
  * Controller responsible for handling the account edit.
  */
-function accountEditController($scope, $routeParams, $location, authenticationService, usersService, accountService) {
+function accountEditController($scope, $routeParams, $location, authenticationService, dbService, accountService) {
     "use strict";
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
@@ -71,9 +71,12 @@ function accountEditController($scope, $routeParams, $location, authenticationSe
         } else {
             $scope.account = loggedInUser;
             $scope.update = function (account) {
-                usersService.update(account, function () {
-                    $location.path('/#/account');
-                });
+                if (account && account._id !== undefined) {
+                    dbService.users.update({_id: account._id}, account, function (res) {
+                        console.log(res);
+                        $location.path('/account');
+                    });
+                }
             };
         }
     });
