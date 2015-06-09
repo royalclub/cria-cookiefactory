@@ -15,7 +15,7 @@ basePath: /api
 produces:
   - application/json
 paths:
-  /cookies:
+  /users:
     get:
       summary: Users Types
       description: Retrieve a list of all Users.

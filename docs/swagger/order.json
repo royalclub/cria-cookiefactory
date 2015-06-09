@@ -15,92 +15,92 @@ basePath: /api
 produces:
   - application/json
 paths:
-  /layers:
+  /orders:
     get:
-      summary: Get layers
-      description: Retrieve a list of all Layers, or one Layer.
+      summary: Get orders
+      description: Retrieve a list of all Orders, or one Order.
       parameters:
         - name: layerid
           in: query
-          description: The id of the layer
+          description: The id of the order
           required: false
           type: number
           format: double
       tags:
-        - Layers
+        - Orders
       responses:
         200:
-          description: An array of Layers
+          description: An array of Orders
           schema:
-            $ref: '#/definitions/LayerResponse'
+            $ref: '#/definitions/OrderResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/LayerResponse'
+            $ref: '#/definitions/OrderResponse'
     post:
-      summary: Create layer
-      description: Create a new Layer.
+      summary: Create order
+      description: Create a new Order.
       tags:
-        - Layers
+        - Orders
       responses:
         200:
          description: An array of products
          schema:
-            $ref: '#/definitions/LayerResponse'
+            $ref: '#/definitions/OrderResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/LayerResponse'
+            $ref: '#/definitions/OrderResponse'
     put:
-      summary: Update Layer.
-      description: Update a single Layer.
+      summary: Update Order.
+      description: Update a single Order.
       parameters:
-        - name: layerid
+        - name: orderid
           in: query
-          description: The id of the layer.
+          description: The id of the order.
           required: false
           type: number
           format: double
       tags:
-        - Layers
+        - Orders
       responses:
         200:
-          description: The update the user.
+          description: Order has been updated.
           schema:
-            $ref: '#/definitions/LayerResponse'
+            $ref: '#/definitions/OrderResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/LayerResponse'
+            $ref: '#/definitions/OrderResponse'
     delete:
-      summary: Delete Layer.
-      description: Delete a single Layer.
+      summary: Delete Order.
+      description: Delete a single Order.
       parameters:
-        - name: layerid
+        - name: orderid
           in: query
           type: integer
           format: int32
-          description: The id of the layer.
+          description: The id of the order.
       tags:
-        - Layers
+        - Orders
       responses:
         200:
           description: Ok.
           schema:
-            $ref: '#/definitions/LayerResponse'
+            $ref: '#/definitions/OrderResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/LayerResponse'
+            $ref: '#/definitions/OrderResponse'
 definitions:
-  LayerResponse:
+  OrderResponse:
     properties:
       meta:
         type: object
         $ref: '#/definitions/meta'
       doc:
         type: object
-        $ref: '#/definitions/Layer'
+        $ref: '#/definitions/Order'
       err:
         type: object
         description: The error information.
@@ -176,4 +176,100 @@ definitions:
       modificationDate:
         type: string
         description: Modification date of a layer option.
-        
+  Order:
+    properties:
+      _id:
+        type: number
+        description: Unique identification number.
+      number:
+        type: string
+        description: Custom order number which must be unique.
+      status:
+        type: object
+        $ref: '#/definitions/OrderStatus'
+      user:
+        type: object
+        $ref: '#/definitions/OrderUser'
+      rules:
+        type: array
+        items:
+          $ref: '#/definitions/OrderRule'
+      invoiceAddress:
+        type: object
+        $ref: '#/definitions/Address'
+      shipmentAddress:
+        type: object
+        $ref: '#/definitions/Address'
+      vatPercentage:
+        type: number
+        description: Tax percentage.
+      creationDate:
+        type: string
+        description: Date of creation.
+      modificationDate:
+        type: string
+        description: Date of modification.
+  OrderStatus:
+    properties:
+      name:
+        type: string
+        description: The name of the status.
+      description:
+        type: string
+        description: The description.
+      creationDate:
+        type: string
+        description: Date of creation.
+      modificationDate:
+        type: string
+        description: Date of modification.
+  OrderUser:
+    properties:
+      username:
+        type: string
+        description: username of a user.
+      firstName:
+        type: string
+        description: firstName date of a user
+      inserts:
+        type: string
+        description: inserts date of a user
+      lastName:
+        type: string
+        description: lastName of a user.
+      emailAddress:
+        type: number
+        description: emailAddress of a user.
+  OrderRule:
+    properties:
+      cookie:
+        type: object
+        items:
+          $ref: '#/definitions/Cookie'
+      box:
+        type: object
+        items:
+          $ref: '#/definitions/Box'
+      amountOfBoxes:
+        type: number
+        description: The amount of boxes.
+  Box:
+    properties:
+      name:
+        type: string
+        description: Name of the box.
+      description:
+        type: string
+        description: The description.
+      capacity:
+        type: number
+        description: Maximum amount of cookies in one package.
+      imageSrc:
+        type: string
+        description: Link to image of the box.
+      creationDate:
+        type: string
+        description: Date of creation.
+      modificationDate:
+        type: string
+        description: Date of modification.
