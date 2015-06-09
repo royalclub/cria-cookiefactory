@@ -15,7 +15,7 @@
 			<h2>Factuuradres</h2>
 			<div ng-repeat="address in addresses" class="radio">
 			    <label>
-			        <input type="radio" name="paymentAddress" value="{{$index}}" id="paymentAddress" ng-click="SetPaymentAddress({{$index}})">
+			        <input type="radio" name="paymentAddress" value="{{$index}}" id="paymentAddress" ng-click="SetPaymentAddress($index)">
 			        <strong>{{address.street}} {{address.streetNumber}}<br />{{address.zipCode}} {{address.city}}</strong>
 			    </label>
 			</div>
@@ -25,7 +25,7 @@
 			<h2>Verzendadres</h2>
 			<div ng-repeat="address in addresses" class="radio">
 		        <label>
-	                <input type="radio" name="shipmentAddress" ng-model="index" value="{{$index}}" id="shipmentAddress" ng-click="SetShipmentAddress({{$index}})">
+	                <input type="radio" name="shipmentAddress" ng-model="index" value="{{$index}}" id="shipmentAddress" ng-click="SetShipmentAddress($index)">
 			        <strong>{{address.street}} {{address.streetNumber}}<br />{{address.zipCode}} {{address.city}}</strong>
 	            </label>
 	        </div>
