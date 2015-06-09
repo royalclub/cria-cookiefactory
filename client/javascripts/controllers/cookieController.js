@@ -79,6 +79,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
                     "name" : $scope.currentLayer.name,
                     "required" : $scope.currentLayer.required,
                     "sequence" : $scope.currentLayer.sequence,
+                    "imageSrc" : $scope.currentLayer.imageSrc,
                     "options" : [option]
                 };
 
@@ -140,8 +141,10 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
         $scope.save = function (cookieName) {
             var cookie = getCookie(cookieName);
             dbService.cookies.save(cookie, function (res) {
+                if (res.err) {
                 console.log(res.err);
-                alert('Er is iets fout gegaan, koekje is niet opgeslagen!');
+                    alert('Er is iets fout gegaan, koekje is niet opgeslagen!');
+                }
             });
         };
     }
