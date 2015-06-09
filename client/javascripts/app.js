@@ -17,7 +17,6 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $routeProvider.when('/', {
             templateUrl: 'partials/about.html',
             controller: function ($location) {
-                console.log("TEST");
                 $location.path('/cookies/design');
             }
         });

@@ -14,7 +14,6 @@ function cookieController($scope, $routeParams, $location, dbService) {
     // GET 1 cookie
     if ($routeParams._id !== 'new') {
         $scope.cookies = dbService.cookies.get({_id: $routeParams._id}, function () {
-            console.log('$scope.requests ', $scope.requests);
         });
     }
 
@@ -27,14 +26,10 @@ function cookieController($scope, $routeParams, $location, dbService) {
     // CREATE, UPDATE cookie
     $scope.save = function () {
         if ($scope.cookies.doc && $scope.cookies.doc._id !== undefined) {
-            console.log('Entering update');
             dbService.cookies.update({_id: $routeParams._id}, $scope.cookies.doc, function (res) {
-                console.log(res);
             });
         } else {
-            console.log('Entering save');
             dbService.cookies.save({}, $scope.cookies.doc, function (res) {
-                console.log(res);
             });
         }
     };
@@ -143,7 +138,6 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
 
         $scope.save = function (cookieName) {
             var cookie = getCookie(cookieName);
-            console.log('Entering save');
             dbService.cookies.save(cookie, function (res) {
                 console.log(res.err);
                 alert('Er is iets fout gegaan, koekje is niet opgeslagen!');

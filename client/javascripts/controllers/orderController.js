@@ -52,7 +52,6 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
     };
 
     $scope.SetShipmentAddress = function (index) {
-        console.log(index);
         $scope.order.shipmentAddress = $scope.addresses[index];
     };
 
@@ -61,12 +60,10 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
     };
 
     $scope.SetPaymentAddress = function (index) {
-        console.log(index);
         $scope.order.paymentAddress = $scope.addresses[index];
     };
 
     $scope.save = function (cookieName) {
-        console.log('Entering save');
         dbService.orders.save($scope.order, function (res) {
             console.log(res.err);
             alert('Er is iets fout gegaan, de order is niet opgeslagen!');
