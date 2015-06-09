@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: CRIA CookieFactory
-  description: CRIA Groep 9
+  description: CRIA Groep 9.
   version: "1.0.0"
 # the domain of the service
 host: server3.tezzt.nl
@@ -19,7 +19,6 @@ paths:
       description: Fetch information about the currently logged in user.
       tags:
         - Account
-        - Authorization
       responses:
         200:
           description: A single instance of the account.
@@ -49,7 +48,6 @@ paths:
       description: Logs out the currently active user both session and cookie will be cleared.
       tags:
         - Account
-        - Authorization
       responses:
         200:
           description: Default response with no doc body.

@@ -11,14 +11,14 @@
         </thead>
         <tbody>
             <tr data-ng-repeat="item in orderRules">
-                <td>{{item.cookie.name}}</td>
+                <td>{{item.cookie[0].name}}</td>
                 <td>
                     <input type="number" name="input" min="1" class="input-mini" ng-model="item.amountOfBoxes" ng-change="updateCartItem()"
                     ng-model-options="{debounce: 1000}">
                     <button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteCartItem($index)">
                         <span class="glyphicon glyphicon-trash"></span>Verwijder</button>
                 </td>
-                <td>{{item.cookie.price * item.amountOfBoxes | currency : "€"}}</td>
+                <td>{{item.cookie[0].price * item.amountOfBoxes | currency : "€"}}</td>
             </tr>
             <tr>
                 <td></td>
