@@ -28,7 +28,7 @@ function addressController($scope, $routeParams, $location, dbService, authentic
         }
     });
 
-    // CREATE, UPDATE cookie
+    // UPDATE user
     $scope.save = function (address) {
         var index;
         if (address && address._id !== undefined) {
