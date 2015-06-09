@@ -70,7 +70,7 @@ function accountEditController($scope, $routeParams, $location, authenticationSe
             $location.path('/cookies/design');
         } else {
             $scope.account = loggedInUser;
-            $scope.update = function (account) {                
+            $scope.update = function (account) {
                 if (account && account._id !== undefined) {
                     dbService.users.update({_id: account._id}, account, function (res) {
                         console.log(res);
