@@ -15,7 +15,7 @@ basePath: /api
 produces:
   - application/json
 paths:
-  /cookies:
+  /layers:
     get:
       summary: Get layers
       description: Retrieve a list of all Layers, or one Layer.
@@ -55,7 +55,7 @@ paths:
       summary: Update Layer.
       description: Update a single Layer.
       parameters:
-        - name: cookieid
+        - name: layerid
           in: query
           description: The id of the layer.
           required: false
@@ -76,7 +76,7 @@ paths:
       summary: Delete Layer.
       description: Delete a single Layer.
       parameters:
-        - name: cookieid
+        - name: layerid
           in: query
           type: integer
           format: int32

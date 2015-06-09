@@ -15,7 +15,7 @@ basePath: /api
 produces:
   - application/json
 paths:
-  /cookies:
+  /orders:
     get:
       summary: Get orders
       description: Retrieve a list of all Orders, or one Order.
