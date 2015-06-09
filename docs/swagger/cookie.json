@@ -32,29 +32,25 @@ paths:
         200:
           description: An array of Cookies
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Cookie'
+            $ref: '#/definitions/CookieResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Response'
+            $ref: '#/definitions/CookieResponse'
     post:
       summary: Create cookie
       description: Create a new Cookie.
       tags:
-        - Estimates
+        - Cookies
       responses:
         200:
-          description: An array of products
+          description: The new cookie.
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Cookie'
+            $ref: '#/definitions/CookieResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Response'
+            $ref: '#/definitions/CookieResponse'
     put:
       summary: Update Cookie.
       description: Update a single Cookie.
@@ -66,16 +62,16 @@ paths:
           type: number
           format: double
       tags:
-        - User
+        - Cookies
       responses:
         200:
           description: The update the user.
           schema:
-            $ref: '#/definitions/Cookie'
+            $ref: '#/definitions/CookieResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Response'
+            $ref: '#/definitions/CookieResponse'
     delete:
       summary: Delete Cookie.
       description: Delete a single Cookie.
@@ -86,18 +82,18 @@ paths:
           format: int32
           description: The id of the cookie.
       tags:
-        - User
+        - Cookies
       responses:
         200:
           description: Ok.
           schema:
-            $ref: '#/definitions/Cookie'
+            $ref: '#/definitions/CookieResponse'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Response'
+            $ref: '#/definitions/CookieResponse'
 definitions:
-  Response:
+  CookieResponse:
     properties:
       meta:
         type: object
@@ -180,4 +176,3 @@ definitions:
       modificationDate:
         type: string
         description: Modification date of a layer option.
-        
