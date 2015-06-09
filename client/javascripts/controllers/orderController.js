@@ -24,20 +24,25 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
 
     $scope.shipment = { shipmentDate: new Date(), shipmentType: null, invoiceAddress: 'poep', shipmentAddress: "poep", orderLines: ["poep"] };
     $scope.payment = { paymentOption: "IDeal", bank: "", paid: 0 };
+    $scope.user = {};
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (loggedIn) {
-            $scope.userName = loggedInUser.username;
+            $scope.user = loggedInUser;
+            $scope.addresses = $scope.user.addresses;
+            $scope.userName = $scope.user.username;
+        } else {
+            $location.path("/#/");
         }
     });
 
     // Lists
     $scope.order = {
-        "number": Math.floor((Math.random()*6)+1),
-        status: 1,
+        "number": Math.floor((Math.random() * 6) + 1),
+        "status": { name: "New", description: "Dit is een nieuwe order!!!",  creationDate: null, modificationDate: null },
         user: $scope.userName,
         rules: JSON.parse(localStorage.getItem('myOrderRules')),
-        invoiceAdress: null,
+        invoiceAddress: null,
         shipmentAddress: null,
         vatPercentage: 21
     };
@@ -45,7 +50,6 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
     $scope.shipmentTypes = [{ id: "Home", description: "Laten bezorgen thuis of op een ander adres" }, { id: "PostNL", description: "Afhalen bij een ophaalpunt bij u in de buurt" }];
     $scope.paymentOptions = [{ id: "Acceptgiro", description: "Betaal binnen 30 dagen na het plaatsen van de order."}, { id: "IDeal", description: "Betaal direct met behulp van IDeal." }];
     $scope.banks = [{ id: "ING Bank", name: "ING Bank" }, { id: "ASN Bank", name: "ASN Bank" }];
-    $scope.addresses = [{ street: "Rietdekkersveld", streetNumber: 40, zipCode: "7031 DL", city: "Wehl" }, { street: "Weversveld", streetNumber: 23, zipCode: "5862 GL", city: "Doetinchem" }];
 
     $scope.SetShipmentType = function (shipmentType) {
         $scope.shipment.shipmentType = shipmentType;
@@ -60,7 +64,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
     };
 
     $scope.SetPaymentAddress = function (index) {
-        $scope.order.paymentAddress = $scope.addresses[index];
+        $scope.order.invoiceAddress = $scope.addresses[index];
     };
 
     $scope.save = function (cookieName) {
