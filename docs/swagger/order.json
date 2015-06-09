@@ -20,7 +20,7 @@ paths:
       summary: Get orders
       description: Retrieve a list of all Orders, or one Order.
       parameters:
-        - name: layerid
+        - name: _id
           in: query
           description: The id of the order
           required: false
@@ -55,10 +55,10 @@ paths:
       summary: Update Order.
       description: Update a single Order.
       parameters:
-        - name: orderid
+        - name: _id
           in: query
           description: The id of the order.
-          required: false
+          required: true
           type: number
           format: double
       tags:
