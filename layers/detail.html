@@ -1,0 +1,17 @@
+<h2>Layer</h2>
+
+
+<form name="layerForm">
+
+    <p>Id: <input type="text" data-ng-model="layers._id" readonly>{{layers._id}}</p>
+
+    <p>Name: <input type="text" data-ng-model="layers.name"></p>
+
+    <div ng-repeat="option in layers.options">
+            <p> Option: <input type="text" data-ng-model="option.name"></p>
+            <p> Description: <input type="text" data-ng-model="option.description"></p>
+            <p> Price: <input type="text" data-ng-model="option.price"></p>
+            <p> imageSrc: <input type="text" data-ng-model="option.imageSrc"></p>
+    </div>
+
+</form>
