@@ -27,7 +27,6 @@ function addressController($scope, $routeParams, $location, usersService) {
     $scope.save = function (account, address) {
         var index;
         if (address && address._id !== undefined) {
-            console.log('Entering update');
             for (index = 0; index < account.addresses.length - 1; index++) {
                 if (account.addresses[index]._id === $routeParams._id) {
                     account.addresses[index] = address;

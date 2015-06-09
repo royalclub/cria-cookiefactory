@@ -1,12 +1,21 @@
 /*jslint node: true */
 /*globals angular,cookieFactory*/
 
-cookieFactory.controller('cartController', function ($scope, $cookies, $window, $location) {
+/**
+ * Controller for cart
+ * @constructor
+ * @param $scope
+ * @param $location
+ */
+cookieFactory.controller('cartController', function ($scope, $location) {
     "use strict";
     var b, layer, storageCookieName = 'key', storage;
     $scope.orderRules = [];
     $scope.shipping = 3.99;
 
+    /**
+     * Calculates the all the prices
+     */
     function calculatePrices() {
         var subtotal = 0.0, i;
         for (i = 0; i < $scope.cartItems.length; i += 1) {
@@ -44,6 +53,11 @@ cookieFactory.controller('cartController', function ($scope, $cookies, $window, 
         }
     }
 
+    /**
+     * Deletes a cartitem
+     * @constructor
+     * @param $index
+     */
     $scope.deleteCartItem = function ($index) {
         $scope.cartItems.splice($index, 1);
         $scope.orderRules.splice($index, 1);
@@ -52,20 +66,32 @@ cookieFactory.controller('cartController', function ($scope, $cookies, $window, 
         calculatePrices();
     };
 
+    /**
+     * Updates a cartitem
+     */
     $scope.updateCartItem = function () {
         localStorage.setItem(storageCookieName, JSON.stringify($scope.cartItems));
         $scope.itemCount = $scope.cartItems.length;
         calculatePrices();
     };
 
+    /**
+     * Sets the amount of items in the menubar
+     * @constructor
+     * @param scope
+     */
     $scope.$watch(function (scope) { return scope.itemCount; },
         function (newValue) {
             document.getElementById("cartItemsNumber").innerHTML = newValue;
         });
 
+    /**
+     * Sets the orderrules in the localstorage and navigates to order detail
+     * @constructor
+     * @param $event
+     */
     $scope.onProceedClicked = function ($event) {
         $event.preventDefault();
-        console.log($scope.orderRules);
         localStorage.setItem('myOrderRules', JSON.stringify($scope.orderRules));
         $location.path("/orders/details");
     };
