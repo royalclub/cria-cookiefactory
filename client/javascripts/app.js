@@ -71,12 +71,6 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             templateUrl: 'partials/cookies/list.html'
         });
 
-        // Get 1 cookie
-        $routeProvider.when('/cookies/detail/:_id', {
-            templateUrl: 'partials/cookies/detail.html',
-            controller: cookieController
-        });
-
         // Design cookie
         $routeProvider.when('/cookies/design', {
             templateUrl: 'partials/cookies/design.html'

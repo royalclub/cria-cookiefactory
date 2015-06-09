@@ -2,46 +2,13 @@
 /*globals cookieFactory, alert */
 
 /**
- * @param $scope
- * @param $routeParams
- * @param $location
- * @param dbService
+ * Controller for cookie design
  * @constructor
- */
-function cookieController($scope, $routeParams, $location, dbService) {
-    "use strict";
-
-    // GET 1 cookie
-    if ($routeParams._id !== 'new') {
-        $scope.cookies = dbService.cookies.get({_id: $routeParams._id}, function () {
-        });
-    }
-
-    // DELETE cookie
-    $scope.delete = function () {
-        dbService.cookies.delete({_id: $routeParams._id});
-        $location.path("/cookies");
-    };
-
-    // CREATE, UPDATE cookie
-    $scope.save = function () {
-        if ($scope.cookies.doc && $scope.cookies.doc._id !== undefined) {
-            dbService.cookies.update({_id: $routeParams._id}, $scope.cookies.doc, function (res) {
-            });
-        } else {
-            dbService.cookies.save({}, $scope.cookies.doc, function (res) {
-            });
-        }
-    };
-}
-
-/**
  * @param $scope
  * @param $routeParams
  * @param $location
  * @param authenticationService
  * @param dbService
- * @constructor
  */
 cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, authenticationService, dbService) {
     "use strict";
@@ -52,6 +19,11 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
     $scope.cookieName = null;
     $scope.selectedLayers = [];
 
+    /**
+     * Creates the final cookie object
+     * @constructor
+     * @param cookieName
+     */
     function getCookie(cookieName) {
         return {
             "name" : cookieName,
@@ -60,6 +32,12 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
         };
     }
 
+    /**
+     * Gets the logedin user information
+     * @constructor
+     * @param loggedIn
+     * @param loggedInUser
+     */
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (loggedIn) {
             $scope.userName = loggedInUser.username;
@@ -74,6 +52,12 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             $scope.total = 0;
         });
 
+        /**
+         * Layertoption change based on the selected layer
+         * @constructor
+         * @param _id
+         * @param $event
+         */
         $scope.onLayerClicked = function (_id, $event) {
             $event.preventDefault();
             for (l = 0; l < $scope.layers.length; l += 1) {
@@ -83,6 +67,12 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             }
         };
 
+        /**
+         * Vuls the cookie with the selected layer and layeroption
+         * @constructor
+         * @param option
+         * @param $event
+         */
         $scope.onLayerOptionClicked = function (option, $event) {
             $event.preventDefault();
             var layer = {
@@ -116,6 +106,12 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             $scope.total = optionsTotal;
         };
 
+        /**
+         * Execute when user want to go to the cart
+         * @constructor
+         * @param cookieName
+         * @param $event
+         */
         $scope.onProceedClicked = function (cookieName, $event) {
             var browserCookieName = 'key', cookie, storage;
             $event.preventDefault();
@@ -136,6 +132,11 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             }
         };
 
+        /**
+         * Saves the data to the database
+         * @constructor
+         * @param cookieName
+         */
         $scope.save = function (cookieName) {
             var cookie = getCookie(cookieName);
             dbService.cookies.save(cookie, function (res) {
