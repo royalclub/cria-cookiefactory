@@ -23,29 +23,29 @@ console.log('Host: ', localConfig.host);
 console.log('Port: ', config.port);
 console.log('Debug: ', config.debug);
 
-describe('/#/cookies/design', function () {
-
-    beforeEach(function () {
-       browser.get('http://' + localConfig.host + ':' + config.port + '/#/cookies/design'); 
-    });
-    
-    it("should show all layers", function () {
-        layer
-            .find({})
-            .sort({ 'sequence': 1 })
-            .exec(function (err, doc) {
-                var i = 0;
-
-                if(err) { 
-                    throw 'Fetching layers from the database failed. ' + err;
-                }
-
-                for(i = 1; i <= doc.length; i += 1) {
-                    expect(element(by.xpath("//html/body/div/div[2]/div/div[2]/div[2]/div[1]/a[" + i + "]")).isPresent()).toBe(true);
-                }
-            });
-    });
-});
+// describe('/#/cookies/design', function () {
+// 
+//     beforeEach(function () {
+//        browser.get('http://' + localConfig.host + ':' + config.port + '/#/cookies/design'); 
+//     });
+//     
+//     it("should show all layers", function () {
+//         layer
+//             .find({})
+//             .sort({ 'sequence': 1 })
+//             .exec(function (err, doc) {
+//                 var i = 0;
+// 
+//                 if(err) { 
+//                     throw 'Fetching layers from the database failed. ' + err;
+//                 }
+// 
+//                 for(i = 1; i <= doc.length; i += 1) {
+//                     expect(element(by.xpath("//html/body/div/div[2]/div/div[2]/div[2]/div[1]/a[" + i + "]")).isPresent()).toBe(true);
+//                 }
+//             });
+//     });
+// });
 
 //describe('Book test homepage', function () {
 //
