@@ -1,15 +1,8 @@
 <h2>User</h2>
-
-
 <form name="userForm">
     <p>Streetnaam: <input type="text" data-ng-model="address.street"></p>
-    
     <p>Straatnumer: <input type="text" data-ng-model="address.streetNumber"></p>
-    
     <p>PostCode: <input type="text" data-ng-model="address.zipCode"></p>
-
     <p>Wachtwoord: <input type="text" data-ng-model="address.city"></p>
-
-    <button type="button" data-ng-click="save(user, address)" id="saveBtn">Save</button>
-
+    <button type="button" data-ng-click="save(address)" id="saveBtn">Save</button>
 </form>

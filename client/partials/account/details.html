@@ -53,10 +53,10 @@
                             {{address.zipCode}} {{address.city}}
                         </td>
                         <td>
-                            <a href="/#/account/address/edit/{{address._id}}/" class="btn btn-warning">
-                                <span class="glyphicon glyphicon-pencil"></span>
+                            <a ng-click="updateAddress(address._id)" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-glyphicon-pencil"></span> 
                                 Aanpassen
-                            </a> 
+                            </a>
                             <a href="#" class="btn btn-danger" ng-click="onRemoveClicked(address._id)">
                                 <span class="glyphicon glyphicon-trash"></span>
                                 Verwijder
@@ -68,7 +68,7 @@
             <a href="/#/account/address/add" class="btn btn-success">
                 <span class="glyphicon glyphicon-plus"></span> 
                 Nieuw adres toevoegen
-            </a>        
+            </a>
         </div>
     </div>
 </div>
