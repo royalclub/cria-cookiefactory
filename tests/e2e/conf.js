@@ -20,7 +20,7 @@ exports.config = {
     // ----- What tests to run -----
     //
     // Spec patterns are relative to the location of this config.
-    specs: ['test/**/*.js'],
+    specs: ['leeg.js'],
 
     // ----- Options to be passed to minijasminenode -----
     //
