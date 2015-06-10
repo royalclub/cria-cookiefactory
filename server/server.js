@@ -85,6 +85,8 @@
     if (config.debug) {
         app.use(function (req, res, next) {
             console.log('%s %s %s', req.method, req.url, req.path);
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             next();                                                    // Required to continue
         });
     }
@@ -134,7 +136,8 @@
         });
     });
     app.use(express.static(__dirname + '/../client/'));
-    app.use('/swagger.json', express.static(__dirname + '/api/swagger.json'));
+    app.use('/api/swagger.json', express.static(__dirname + '/swagger.json'));
+    app.use('/api/docs/', express.static(__dirname + '/../docs/api/'));
 
     /**
      * Middleware to catch all unmatched routes
