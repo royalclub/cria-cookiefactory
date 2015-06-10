@@ -62,6 +62,12 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         });
 
         // Account EditAddress
+        $routeProvider.when('/account/address/add', {
+            templateUrl: 'partials/account/address/add.html',
+            controller: addressController
+        });
+
+        // Account EditAddress
         $routeProvider.when('/account/address/edit/:_id', {
             templateUrl: 'partials/account/address/edit.html',
             controller: addressController
