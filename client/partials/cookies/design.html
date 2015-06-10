@@ -1,53 +1,57 @@
-<div class="designCookie" ng-controller="cookieDesignController">
-    <div class="row">
-        <form class="inline-form">
-            <div class="form-group">
-                <input type="text" class="form-control" name="txtCookieName" id="txtCookieName" ng-model="cookieName" placeholder="Geef je koekje een naam..." />
+<div ng-controller="cookieDesignController">
+    <h1><img src="img/titleTriangle.png">Ontwerp je eigen koekje</h1>
+    
+    <div class="optionsCookie">
+        <a href="#" data-ng-repeat="layer in layers" ng-click="onLayerClicked(layer._id, $event)">
+            <div class="optionBox" style="background:url(img/optie/{{layer.imageSrc}}); width:222px; height:129px;">
+                <span class="optionTextSelect">{{layer.name}}</span>
+                <div class={{(layer.name === currentLayer.name) ? "optionSelect" : "" }}></div>
             </div>
-        </form>
-        <hr />
+        </a>
     </div>
-    <div class="row">
-        <div class="col-xs-4">
-            <div class="row">
-                <div class="text-center">
-                    <h1>{{currentLayer.name}}</h1>
-                </div>
-                <hr />
-            </div>
-            
-            <div class="row">
-                <div class="col-xs-6" data-ng-repeat="option in currentLayer.options">
-                    <a href="#" class="thumbnail">
-                      <img ng-src="images/{{option.imageSrc}}" ng-alt="{{option.description}}" data-id="{{option.name}}" ng-click="onLayerOptionClicked(option, $event)">
-                    </a>
-                </div>
-            </div>
+    <span style="width:20px; margin-left:10px;"></span>
+    <a href="#" class="ingredienten"><img src="img/bekijkingredienten.png" /></a>
+    <span style="width:70px; height:10px; margin-left:195px;"></span>
+    <form class="inline-form">
+        <div class="form-group">
+            <input type="text" class="form-control" name="txtCookieName" id="txtCookieName" ng-model="cookieName" placeholder="Geef je koekje een naam..." />
         </div>
-        <div class="col-xs-8">
-            <div class="row">
-                <a class="btn btn-default" data-ng-repeat="layer in layers" ng-click="onLayerClicked(layer._id, $event)">
-                  {{layer.name}}
-                </a>
-                <hr />
-            </div>
-            
-            <div class="row text-center">
-                <div class="text-center thumbnail">
-                    <img src="images/cookies.jpg" alt="Cookie" />
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pull-right">
         <a ng-click="save(cookieName)" class="btn btn-primary" ng-show="showSaveButton">
             <span class="glyphicon glyphicon-ok"></span> 
             Opslaan
         </a>
-        <p>Totaalbedrag: {{total | currency : "€"}}</p>
-        <a ng-click="onProceedClicked(cookieName, $event)" class="btn btn-primary">
-            <span class="glyphicon glyphicon-ok"></span> 
-            Winkelwagen
-        </a>
+    </form>
+    <br />
+    <div class="cookieDesign">
+        <div class="choiceContainer">
+            <span>
+                <h1>{{currentLayer.name}}</h1>
+            </span>
+            <a href="#" data-ng-repeat="option in currentLayer.options" data-id="{{option.name}}" ng-click="onLayerOptionClicked(option, $event)">
+                <div class="choiceBox" style="background-image:url(img/keuzes/{{option.imageSrc}}); width:150px; height:90px;">
+                    <div class="overlayChoice"> <!-- TODO: choiceSelect if selected -->
+                        <span class="keuzeText">{{option.name}}</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="cookieLoad">
+            <img class="layers" style="z-index:4;" src="img/cookieLayer/rondLayer.png" width="400" height="370" />
+            <img class="layers" style="z-index:1;" src="img/cookieLayer/vanilleLayer.png" width="390" height="370" />
+            <img class="layers" style="z-index:2;" src="img/cookieLayer/havermoutRozijnLayer.png" width="390" height="370">
+            <img class="layers" style="z-index:3;" src="img/cookieLayer/pecannotenLayer.png" width="390" height="370">
+            <span class="displayKeuze">
+                <p style="padding:5px; background:#FFF;">Pecannoten
+                    <img src="img/questionmark.png" style="margin-top:-4px">
+                </p>
+                <p class="displayDuurzaam">Dit is een duurzame keuze.
+                    <br>Het ingredi&euml;nt komt per vrachtschip uit de Verenigde Staten.</p>
+            </span>
+        </div>
+        <p class="bedrag">{{total | currency : "€"}}</p>
     </div>
+    <p style="height:5px; width:500px; float:left;"></p>
+    <div class="brownBar" style="width:620px;"></div>
+    <a class="nextBtn" ng-click="onProceedClicked(cookieName, $event)">Toevoegen winkelwagen</a>
+    <p style="height:20px; width:500px; float:left;"></p>
 </div>
