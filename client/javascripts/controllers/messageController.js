@@ -37,7 +37,7 @@ cookieFactory.controller('messageController', function ($scope, messageService) 
                 $scope.showWarning = false;
                 $scope.showInfo = false;
                 $scope.showSuccess = false;
-             }, 1);
+            }, 1);
         });
     }
 });

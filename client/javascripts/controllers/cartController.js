@@ -24,7 +24,7 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
         $scope.tax = (subtotal / 100) * 21;
         $scope.total = $scope.subtotal + $scope.tax;
     }
-    
+
     if ($scope.cartItems === undefined) {
         storage = JSON.parse(localStorage.getItem(storageCookieName));
         if (!storage) {
