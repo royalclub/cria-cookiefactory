@@ -42,10 +42,7 @@
             </a>
         </div>
         <div class="cookieLoad">
-            <img class="layers" style="z-index:4;" src="img/layeroption/cookie/rond.png" width="400" height="370" />
-            <img class="layers" style="z-index:1;" src="img/layeroption/cookie/vanille.png" width="390" height="370" />
-            <img class="layers" style="z-index:2;" src="img/layeroption/cookie/havermoutrozijn.png" width="390" height="370">
-            <img class="layers" style="z-index:3;" src="img/layeroption/cookie/pecannoten.png" width="390" height="370">
+            <img class="layers" ng-repeat="layer in selectedLayers" style="z-index:{{(layer.sequence===1) ? 999 : layer.sequence}};" src="img/layeroption/cookie/{{layer.options[0].imageSrc}}" width="400" height="370" />
             <span class="displayKeuze">
                 <p style="padding:5px; background:#FFF;">Pecannoten
                     <img src="img/questionmark.png" style="margin-top:-4px">
