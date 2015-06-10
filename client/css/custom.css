@@ -333,3 +333,20 @@ color:#3a5780;}
 	margin: 0 0 10px 0;
 }
 
+input, textarea {
+	border: 2px solid #745a33;
+}
+
+.title img {
+	margin: 26px 0;
+	float: right;
+}
+
+.title .col-md-8 {
+	padding: 0;	
+}
+
+.right {
+	float: right;
+	color: #5eb299;
+}
