@@ -99,7 +99,7 @@ h1 {font-family:VAGrounded;
 	height:466px;
 	}
 
-.choiceContainer{
+.choiceContainer {
 	float:left;
 	margin:10px 30px 0 30px;
 	display:inline-block;}
@@ -324,7 +324,6 @@ color:#3a5780;}
 	
 .form-control{width:200px !important;}
 
-<<<<<<< HEAD
 .center {
 	text-align: center;
 }
@@ -333,5 +332,4 @@ color:#3a5780;}
 	border: solid 2px #745a33;
 	margin: 0 0 10px 0;
 }
-=======
->>>>>>> 716e63f19e4d7eeed263e4c35ab783e1319c49cd
+
