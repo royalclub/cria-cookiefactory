@@ -16,8 +16,10 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
     var optionsTotal = 0.0,
         i = 0,
         l = 0;
-    $scope.cookieName = null;
-    $scope.selectedLayers = [];
+
+    $scope.cookieName = null;           // The name of the cookie.
+    $scope.selectedLayers = [];         // Object that will be saved in the database.
+    $scope.currentLayer = {};           // Currently selected layer for the editor.
 
     /**
      * Creates the final cookie object
@@ -63,6 +65,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             for (l = 0; l < $scope.layers.length; l += 1) {
                 if ($scope.layers[l]._id === _id) {
                     $scope.currentLayer = $scope.layers[l];
+                    $scope.currentLayerIndex = l;
                 }
             }
         };
