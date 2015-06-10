@@ -318,3 +318,8 @@ input, textarea {
 .center {
 	text-align: center;
 }
+
+.border {
+	border: solid 2px #745a33;
+	margin: 0 0 10px 0;
+}

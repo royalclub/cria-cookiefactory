@@ -1,7 +1,8 @@
 <h2>Betalen</h2>
+<p>Kies een van de betaal methode om uw bestelling af te ronden.</p>
 <form name="orderPayment" ng-submit="ProceedToConfirmation()">
-	<div class="jumbotron">
-	  	<div class="container">
+	<div class="border row">
+	  	<div class="col-md-12">
  			<div class="radio">
   				<label>
     				<input type="radio" name="paymentOption" id="home" value="30days" checked ng-click="SetPaymentOption('30Days')">
@@ -10,8 +11,8 @@
 			</div>
 	  	</div>
 	</div>
-	<div class="jumbotron">
-	  	<div class="container">
+	<div class="border row">
+	  	<div class="col-md-12">
 	  		<div class="radio">
   				<label>
     				<input type="radio" name="paymentOption" id="home" value="IDeal" checked ng-click="SetPaymentOption('IDeal')">
@@ -22,10 +23,12 @@
 			<select class="form-control" ng-model="payment.bank"
                 ng-options="obj.id as obj.name for obj in banks">
 	        </select>
-			{{ payment.bank }}
+			<p></p>
 	  	</div>
 	</div>
-	<div class="pull-right">
-		<input type="submit" id="submit" value="Bestelling afronden" />
+	<div class="pull-right row">
+		<div class="col-md-12">
+			<input type="submit" id="submit" value="Bestelling afronden" />
+		</div>
 	</div>
 </form>
