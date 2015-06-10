@@ -1,97 +1,1419 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Swagger UI</title>
-  <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-  <link href='css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='css/reset.css' media='print' rel='stylesheet' type='text/css'/>
-  <link href='css/print.css' media='print' rel='stylesheet' type='text/css'/>
-  <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
-  <script src='lib/handlebars-2.0.0.js' type='text/javascript'></script>
-  <script src='lib/underscore-min.js' type='text/javascript'></script>
-  <script src='lib/backbone-min.js' type='text/javascript'></script>
-  <script src='swagger-ui.js' type='text/javascript'></script>
-  <script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
-  <script src='lib/marked.js' type='text/javascript'></script>
-  <script src='lib/swagger-oauth.js' type='text/javascript'></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>API Reference</title>
+  </head>
+  <body>
+  <h1>CRIA CookieFactory</h1>
+    <div class="app-desc">CRIA Groep 9</div>
+    <div class="app-desc">Version: 1.0.0</div>
+    <div class="license-info">All rights reserved!</div>
+  <h2>Access</h2>
+  <h2>Methods</h2>
+  
+  
+  
+  <div class="method">
+    <div class="method-path"><pre class="get"><code class="huge"><span>get</span>: /account</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Account</span></div>
+    <div class="method-summary"><span class="nickname">accountGet</span> Get current logged in user</div>
+    <div class="method-notes">Fetch information about the currently logged in user.</div>
 
-  <script type="text/javascript">
-    $(function () {
-      var url = window.location.search.match(/url=([^&]+)/);
-      if (url && url.length > 1) {
-        url = decodeURIComponent(url[1]);
-      } else {
-        url = "../../api/swagger.json";
-      }
-      window.swaggerUi = new SwaggerUi({
-        url: url,
-        dom_id: "swagger-ui-container",
-        supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
-        onComplete: function(swaggerApi, swaggerUi){
-          
-          }
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
 
-          $('pre code').each(function(i, e) {
-            hljs.highlightBlock(e)
-          });
+    <div class="return-type"><a href="#">AccountResponse</a></div>
 
-          addApiKeyAuthorization();
-        },
-        onFailure: function(data) {
-          log("Unable to Load SwaggerUI");
-        },
-        docExpansion: "none",
-        apisSorter: "alpha",
-        showRequestHeaders: false
-      });
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;firstName&quot; : &quot;aeiou&quot;,
+    &quot;lastName&quot; : &quot;aeiou&quot;,
+    &quot;emailAddress&quot; : &quot;aeiou&quot;,
+    &quot;addresses&quot; : [ {
+      &quot;zipCode&quot; : &quot;aeiou&quot;,
+      &quot;streetNumber&quot; : &quot;aeiou&quot;,
+      &quot;city&quot; : &quot;aeiou&quot;,
+      &quot;street&quot; : &quot;aeiou&quot;,
+      &quot;_id&quot; : 123
+    } ],
+    &quot;dateOfBirth&quot; : &quot;aeiou&quot;,
+    &quot;_id&quot; : 123,
+    &quot;inserts&quot; : &quot;aeiou&quot;,
+    &quot;username&quot; : &quot;aeiou&quot;
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="post"><code class="huge"><span>post</span>: /account</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Account</span></div>
+    <div class="method-summary"><span class="nickname">accountPost</span> Register Account</div>
+    <div class="method-notes">Register a new account.</div>
 
-      function addApiKeyAuthorization(){
-        var key = encodeURIComponent($('#input_apiKey')[0].value);
-        if(key && key.trim() != "") {
-            var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
-            window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
-            log("added key " + key);
-        }
-      }
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
 
-      $('#input_apiKey').change(addApiKeyAuthorization);
+    <div class="return-type"><a href="#">AccountResponse</a></div>
 
-      // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
-      /*
-        var apiKey = "myApiKeyXXXX123456789";
-        $('#input_apiKey').val(apiKey);
-      */
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;firstName&quot; : &quot;aeiou&quot;,
+    &quot;lastName&quot; : &quot;aeiou&quot;,
+    &quot;emailAddress&quot; : &quot;aeiou&quot;,
+    &quot;addresses&quot; : [ {
+      &quot;zipCode&quot; : &quot;aeiou&quot;,
+      &quot;streetNumber&quot; : &quot;aeiou&quot;,
+      &quot;city&quot; : &quot;aeiou&quot;,
+      &quot;street&quot; : &quot;aeiou&quot;,
+      &quot;_id&quot; : 123
+    } ],
+    &quot;dateOfBirth&quot; : &quot;aeiou&quot;,
+    &quot;_id&quot; : 123,
+    &quot;inserts&quot; : &quot;aeiou&quot;,
+    &quot;username&quot; : &quot;aeiou&quot;
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="post"><code class="huge"><span>post</span>: /account/signout</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Account</span></div>
+    <div class="method-summary"><span class="nickname">accountSignoutPost</span> Sign out the currently active user.</div>
+    <div class="method-notes">Logs out the currently active user both session and cookie will be cleared.</div>
 
-      window.swaggerUi.load();
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
 
-      function log() {
-        if ('console' in window) {
-          console.log.apply(console, arguments);
-        }
-      }
-  });
-  </script>
-</head>
+    <div class="return-type"><a href="#">AccountResponse</a></div>
 
-<body class="swagger-section">
-<div id='header'>
-  <div class="swagger-ui-wrap">
-    <a id="logo" href="http://swagger.io">swagger</a>
-    <form id='api_selector'>
-      <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
-      <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
-      <div class='input'><a id="explore" href="#">Explore</a></div>
-    </form>
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;firstName&quot; : &quot;aeiou&quot;,
+    &quot;lastName&quot; : &quot;aeiou&quot;,
+    &quot;emailAddress&quot; : &quot;aeiou&quot;,
+    &quot;addresses&quot; : [ {
+      &quot;zipCode&quot; : &quot;aeiou&quot;,
+      &quot;streetNumber&quot; : &quot;aeiou&quot;,
+      &quot;city&quot; : &quot;aeiou&quot;,
+      &quot;street&quot; : &quot;aeiou&quot;,
+      &quot;_id&quot; : 123
+    } ],
+    &quot;dateOfBirth&quot; : &quot;aeiou&quot;,
+    &quot;_id&quot; : 123,
+    &quot;inserts&quot; : &quot;aeiou&quot;,
+    &quot;username&quot; : &quot;aeiou&quot;
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="get"><code class="huge"><span>get</span>: /cookies</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Cookies</span></div>
+    <div class="method-summary"><span class="nickname">cookiesGet</span> Cookies Types</div>
+    <div class="method-notes">Retrieve a list of all Cookies.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">cookieid (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the cookie </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">CookieResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;creator&quot; : &quot;aeiou&quot;,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;name&quot; : &quot;aeiou&quot;,
+    &quot;layers&quot; : {
+      &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;options&quot; : {
+        &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+        &quot;modificationDate&quot; : &quot;aeiou&quot;,
+        &quot;price&quot; : &quot;aeiou&quot;,
+        &quot;name&quot; : &quot;aeiou&quot;,
+        &quot;description&quot; : &quot;aeiou&quot;,
+        &quot;imageSrc&quot; : &quot;aeiou&quot;,
+        &quot;creationDate&quot; : &quot;aeiou&quot;
+      },
+      &quot;imageSrc&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;,
+      &quot;required&quot; : true
+    },
+    &quot;creationDate&quot; : &quot;aeiou&quot;
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="put"><code class="huge"><span>put</span>: /cookies</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Cookies</span></div>
+    <div class="method-summary"><span class="nickname">cookiesPut</span> Update Cookie.</div>
+    <div class="method-notes">Update a single Cookie.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">cookieid (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the cookie. </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">CookieResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;creator&quot; : &quot;aeiou&quot;,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;name&quot; : &quot;aeiou&quot;,
+    &quot;layers&quot; : {
+      &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;options&quot; : {
+        &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+        &quot;modificationDate&quot; : &quot;aeiou&quot;,
+        &quot;price&quot; : &quot;aeiou&quot;,
+        &quot;name&quot; : &quot;aeiou&quot;,
+        &quot;description&quot; : &quot;aeiou&quot;,
+        &quot;imageSrc&quot; : &quot;aeiou&quot;,
+        &quot;creationDate&quot; : &quot;aeiou&quot;
+      },
+      &quot;imageSrc&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;,
+      &quot;required&quot; : true
+    },
+    &quot;creationDate&quot; : &quot;aeiou&quot;
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="post"><code class="huge"><span>post</span>: /cookies</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Cookies</span></div>
+    <div class="method-summary"><span class="nickname">cookiesPost</span> Create cookie</div>
+    <div class="method-notes">Create a new Cookie.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">CookieResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;creator&quot; : &quot;aeiou&quot;,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;name&quot; : &quot;aeiou&quot;,
+    &quot;layers&quot; : {
+      &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;options&quot; : {
+        &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+        &quot;modificationDate&quot; : &quot;aeiou&quot;,
+        &quot;price&quot; : &quot;aeiou&quot;,
+        &quot;name&quot; : &quot;aeiou&quot;,
+        &quot;description&quot; : &quot;aeiou&quot;,
+        &quot;imageSrc&quot; : &quot;aeiou&quot;,
+        &quot;creationDate&quot; : &quot;aeiou&quot;
+      },
+      &quot;imageSrc&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;,
+      &quot;required&quot; : true
+    },
+    &quot;creationDate&quot; : &quot;aeiou&quot;
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="delete"><code class="huge"><span>delete</span>: /cookies</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Cookies</span></div>
+    <div class="method-summary"><span class="nickname">cookiesDelete</span> Delete Cookie.</div>
+    <div class="method-notes">Delete a single Cookie.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">cookieid (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the cookie. </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">CookieResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;creator&quot; : &quot;aeiou&quot;,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;name&quot; : &quot;aeiou&quot;,
+    &quot;layers&quot; : {
+      &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;options&quot; : {
+        &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+        &quot;modificationDate&quot; : &quot;aeiou&quot;,
+        &quot;price&quot; : &quot;aeiou&quot;,
+        &quot;name&quot; : &quot;aeiou&quot;,
+        &quot;description&quot; : &quot;aeiou&quot;,
+        &quot;imageSrc&quot; : &quot;aeiou&quot;,
+        &quot;creationDate&quot; : &quot;aeiou&quot;
+      },
+      &quot;imageSrc&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;,
+      &quot;required&quot; : true
+    },
+    &quot;creationDate&quot; : &quot;aeiou&quot;
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="get"><code class="huge"><span>get</span>: /layers</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Layers</span></div>
+    <div class="method-summary"><span class="nickname">layersGet</span> Get layers</div>
+    <div class="method-notes">Retrieve a list of all Layers, or one Layer.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">layerid (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the layer </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">LayerResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;name&quot; : &quot;aeiou&quot;,
+    &quot;options&quot; : {
+      &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;price&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;description&quot; : &quot;aeiou&quot;,
+      &quot;imageSrc&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;
+    },
+    &quot;imageSrc&quot; : &quot;aeiou&quot;,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;required&quot; : true
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="put"><code class="huge"><span>put</span>: /layers</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Layers</span></div>
+    <div class="method-summary"><span class="nickname">layersPut</span> Update Layer.</div>
+    <div class="method-notes">Update a single Layer.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">layerid (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the layer. </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">LayerResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;name&quot; : &quot;aeiou&quot;,
+    &quot;options&quot; : {
+      &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;price&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;description&quot; : &quot;aeiou&quot;,
+      &quot;imageSrc&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;
+    },
+    &quot;imageSrc&quot; : &quot;aeiou&quot;,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;required&quot; : true
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="post"><code class="huge"><span>post</span>: /layers</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Layers</span></div>
+    <div class="method-summary"><span class="nickname">layersPost</span> Create layer</div>
+    <div class="method-notes">Create a new Layer.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">LayerResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;name&quot; : &quot;aeiou&quot;,
+    &quot;options&quot; : {
+      &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;price&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;description&quot; : &quot;aeiou&quot;,
+      &quot;imageSrc&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;
+    },
+    &quot;imageSrc&quot; : &quot;aeiou&quot;,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;required&quot; : true
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="delete"><code class="huge"><span>delete</span>: /layers</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Layers</span></div>
+    <div class="method-summary"><span class="nickname">layersDelete</span> Delete Layer.</div>
+    <div class="method-notes">Delete a single Layer.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">layerid (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the layer. </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">LayerResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;name&quot; : &quot;aeiou&quot;,
+    &quot;options&quot; : {
+      &quot;sequence&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;price&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;description&quot; : &quot;aeiou&quot;,
+      &quot;imageSrc&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;
+    },
+    &quot;imageSrc&quot; : &quot;aeiou&quot;,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;required&quot; : true
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="get"><code class="huge"><span>get</span>: /orders</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Orders</span></div>
+    <div class="method-summary"><span class="nickname">ordersGet</span> Get orders</div>
+    <div class="method-notes">Retrieve a list of all Orders, or one Order.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">id (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the order </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">OrderResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;shipmentAddress&quot; : &quot;&quot;,
+    &quot;number&quot; : &quot;aeiou&quot;,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;vatPercentage&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;rules&quot; : [ {
+      &quot;cookie&quot; : &quot;{}&quot;,
+      &quot;box&quot; : &quot;{}&quot;,
+      &quot;amountOfBoxes&quot; : 1.3579000000000001069366817318950779736042022705078125
+    } ],
+    &quot;invoiceAddress&quot; : {
+      &quot;zipCode&quot; : &quot;aeiou&quot;,
+      &quot;streetNumber&quot; : &quot;aeiou&quot;,
+      &quot;city&quot; : &quot;aeiou&quot;,
+      &quot;street&quot; : &quot;aeiou&quot;,
+      &quot;_id&quot; : 123
+    },
+    &quot;_id&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;user&quot; : {
+      &quot;firstName&quot; : &quot;aeiou&quot;,
+      &quot;lastName&quot; : &quot;aeiou&quot;,
+      &quot;emailAddress&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;inserts&quot; : &quot;aeiou&quot;,
+      &quot;username&quot; : &quot;aeiou&quot;
+    },
+    &quot;status&quot; : {
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;description&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;
+    }
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="put"><code class="huge"><span>put</span>: /orders</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Orders</span></div>
+    <div class="method-summary"><span class="nickname">ordersPut</span> Update Order.</div>
+    <div class="method-notes">Update a single Order.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the order. </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">OrderResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;shipmentAddress&quot; : &quot;&quot;,
+    &quot;number&quot; : &quot;aeiou&quot;,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;vatPercentage&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;rules&quot; : [ {
+      &quot;cookie&quot; : &quot;{}&quot;,
+      &quot;box&quot; : &quot;{}&quot;,
+      &quot;amountOfBoxes&quot; : 1.3579000000000001069366817318950779736042022705078125
+    } ],
+    &quot;invoiceAddress&quot; : {
+      &quot;zipCode&quot; : &quot;aeiou&quot;,
+      &quot;streetNumber&quot; : &quot;aeiou&quot;,
+      &quot;city&quot; : &quot;aeiou&quot;,
+      &quot;street&quot; : &quot;aeiou&quot;,
+      &quot;_id&quot; : 123
+    },
+    &quot;_id&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;user&quot; : {
+      &quot;firstName&quot; : &quot;aeiou&quot;,
+      &quot;lastName&quot; : &quot;aeiou&quot;,
+      &quot;emailAddress&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;inserts&quot; : &quot;aeiou&quot;,
+      &quot;username&quot; : &quot;aeiou&quot;
+    },
+    &quot;status&quot; : {
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;description&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;
+    }
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="post"><code class="huge"><span>post</span>: /orders</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Orders</span></div>
+    <div class="method-summary"><span class="nickname">ordersPost</span> Create order</div>
+    <div class="method-notes">Create a new Order.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">OrderResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;shipmentAddress&quot; : &quot;&quot;,
+    &quot;number&quot; : &quot;aeiou&quot;,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;vatPercentage&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;rules&quot; : [ {
+      &quot;cookie&quot; : &quot;{}&quot;,
+      &quot;box&quot; : &quot;{}&quot;,
+      &quot;amountOfBoxes&quot; : 1.3579000000000001069366817318950779736042022705078125
+    } ],
+    &quot;invoiceAddress&quot; : {
+      &quot;zipCode&quot; : &quot;aeiou&quot;,
+      &quot;streetNumber&quot; : &quot;aeiou&quot;,
+      &quot;city&quot; : &quot;aeiou&quot;,
+      &quot;street&quot; : &quot;aeiou&quot;,
+      &quot;_id&quot; : 123
+    },
+    &quot;_id&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;user&quot; : {
+      &quot;firstName&quot; : &quot;aeiou&quot;,
+      &quot;lastName&quot; : &quot;aeiou&quot;,
+      &quot;emailAddress&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;inserts&quot; : &quot;aeiou&quot;,
+      &quot;username&quot; : &quot;aeiou&quot;
+    },
+    &quot;status&quot; : {
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;description&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;
+    }
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="delete"><code class="huge"><span>delete</span>: /orders</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Orders</span></div>
+    <div class="method-summary"><span class="nickname">ordersDelete</span> Delete Order.</div>
+    <div class="method-notes">Delete a single Order.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">orderid (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the order. </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">OrderResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;shipmentAddress&quot; : &quot;&quot;,
+    &quot;number&quot; : &quot;aeiou&quot;,
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;vatPercentage&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;rules&quot; : [ {
+      &quot;cookie&quot; : &quot;{}&quot;,
+      &quot;box&quot; : &quot;{}&quot;,
+      &quot;amountOfBoxes&quot; : 1.3579000000000001069366817318950779736042022705078125
+    } ],
+    &quot;invoiceAddress&quot; : {
+      &quot;zipCode&quot; : &quot;aeiou&quot;,
+      &quot;streetNumber&quot; : &quot;aeiou&quot;,
+      &quot;city&quot; : &quot;aeiou&quot;,
+      &quot;street&quot; : &quot;aeiou&quot;,
+      &quot;_id&quot; : 123
+    },
+    &quot;_id&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;user&quot; : {
+      &quot;firstName&quot; : &quot;aeiou&quot;,
+      &quot;lastName&quot; : &quot;aeiou&quot;,
+      &quot;emailAddress&quot; : 1.3579000000000001069366817318950779736042022705078125,
+      &quot;inserts&quot; : &quot;aeiou&quot;,
+      &quot;username&quot; : &quot;aeiou&quot;
+    },
+    &quot;status&quot; : {
+      &quot;modificationDate&quot; : &quot;aeiou&quot;,
+      &quot;name&quot; : &quot;aeiou&quot;,
+      &quot;description&quot; : &quot;aeiou&quot;,
+      &quot;creationDate&quot; : &quot;aeiou&quot;
+    }
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="get"><code class="huge"><span>get</span>: /users</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Users</span></div>
+    <div class="method-summary"><span class="nickname">usersGet</span> Users Types</div>
+    <div class="method-notes">Retrieve a list of all Users.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">userid (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the user </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">UserResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;firstName&quot; : &quot;aeiou&quot;,
+    &quot;lastName&quot; : &quot;aeiou&quot;,
+    &quot;password&quot; : &quot;aeiou&quot;,
+    &quot;emailAddress&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;addresses&quot; : {
+      &quot;zipCode&quot; : &quot;aeiou&quot;,
+      &quot;streetNumber&quot; : &quot;aeiou&quot;,
+      &quot;city&quot; : &quot;aeiou&quot;,
+      &quot;street&quot; : &quot;aeiou&quot;,
+      &quot;_id&quot; : 123
+    },
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;salt&quot; : &quot;aeiou&quot;,
+    &quot;dateOfBirth&quot; : true,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;inserts&quot; : &quot;aeiou&quot;,
+    &quot;username&quot; : &quot;aeiou&quot;
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="put"><code class="huge"><span>put</span>: /users</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Users</span></div>
+    <div class="method-summary"><span class="nickname">usersPut</span> Update Cookie.</div>
+    <div class="method-notes">Update a single user.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">cookieid (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the user. </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">UserResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;firstName&quot; : &quot;aeiou&quot;,
+    &quot;lastName&quot; : &quot;aeiou&quot;,
+    &quot;password&quot; : &quot;aeiou&quot;,
+    &quot;emailAddress&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;addresses&quot; : {
+      &quot;zipCode&quot; : &quot;aeiou&quot;,
+      &quot;streetNumber&quot; : &quot;aeiou&quot;,
+      &quot;city&quot; : &quot;aeiou&quot;,
+      &quot;street&quot; : &quot;aeiou&quot;,
+      &quot;_id&quot; : 123
+    },
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;salt&quot; : &quot;aeiou&quot;,
+    &quot;dateOfBirth&quot; : true,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;inserts&quot; : &quot;aeiou&quot;,
+    &quot;username&quot; : &quot;aeiou&quot;
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="post"><code class="huge"><span>post</span>: /users</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Users</span></div>
+    <div class="method-summary"><span class="nickname">usersPost</span> Create user</div>
+    <div class="method-notes">Create a new user.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">UserResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;firstName&quot; : &quot;aeiou&quot;,
+    &quot;lastName&quot; : &quot;aeiou&quot;,
+    &quot;password&quot; : &quot;aeiou&quot;,
+    &quot;emailAddress&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;addresses&quot; : {
+      &quot;zipCode&quot; : &quot;aeiou&quot;,
+      &quot;streetNumber&quot; : &quot;aeiou&quot;,
+      &quot;city&quot; : &quot;aeiou&quot;,
+      &quot;street&quot; : &quot;aeiou&quot;,
+      &quot;_id&quot; : 123
+    },
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;salt&quot; : &quot;aeiou&quot;,
+    &quot;dateOfBirth&quot; : true,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;inserts&quot; : &quot;aeiou&quot;,
+    &quot;username&quot; : &quot;aeiou&quot;
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  <div class="method">
+    <div class="method-path"><pre class="delete"><code class="huge"><span>delete</span>: /users</code></pre></div>
+    <div class="method-tags"> <span class="method-tag">Users</span></div>
+    <div class="method-summary"><span class="nickname">usersDelete</span> Delete user.</div>
+    <div class="method-notes">Delete a single user.</div>
+
+    <h3 class="field-label">Parameters</h3>
+    <div class="field-items">
+      <div class="param">cookieid (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The id of the user. </div>
+      
+    </div>  <!-- field-items -->
+    <h3 class="field-label">Return type</h3>
+
+    <div class="return-type"><a href="#">UserResponse</a></div>
+
+    
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;err&quot; : &quot;{}&quot;,
+  &quot;meta&quot; : {
+    &quot;filename&quot; : &quot;aeiou&quot;,
+    &quot;action&quot; : &quot;aeiou&quot;,
+    &quot;timestamp&quot; : &quot;aeiou&quot;
+  },
+  &quot;doc&quot; : {
+    &quot;firstName&quot; : &quot;aeiou&quot;,
+    &quot;lastName&quot; : &quot;aeiou&quot;,
+    &quot;password&quot; : &quot;aeiou&quot;,
+    &quot;emailAddress&quot; : 1.3579000000000001069366817318950779736042022705078125,
+    &quot;addresses&quot; : {
+      &quot;zipCode&quot; : &quot;aeiou&quot;,
+      &quot;streetNumber&quot; : &quot;aeiou&quot;,
+      &quot;city&quot; : &quot;aeiou&quot;,
+      &quot;street&quot; : &quot;aeiou&quot;,
+      &quot;_id&quot; : 123
+    },
+    &quot;modificationDate&quot; : &quot;aeiou&quot;,
+    &quot;salt&quot; : &quot;aeiou&quot;,
+    &quot;dateOfBirth&quot; : true,
+    &quot;creationDate&quot; : &quot;aeiou&quot;,
+    &quot;inserts&quot; : &quot;aeiou&quot;,
+    &quot;username&quot; : &quot;aeiou&quot;
+  }
+}</code></pre>
+    
+  </div> <!-- method -->
+  <hr>
+  
+  
+
+  <h2>Models</h2>
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="AccountResponse">AccountResponse</a></h3>
+    <div class="field-items">
+      <div class="param">meta </div><div class="param-desc"><span class="param-type">meta</span> </div>
+      <div class="param">doc </div><div class="param-desc"><span class="param-type">Account</span> </div>
+      <div class="param">err </div><div class="param-desc"><span class="param-type">Object</span> The error information.</div>
+      
+    </div>  <!-- field-items -->
   </div>
-</div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CookieResponse">CookieResponse</a></h3>
+    <div class="field-items">
+      <div class="param">meta </div><div class="param-desc"><span class="param-type">meta</span> </div>
+      <div class="param">doc </div><div class="param-desc"><span class="param-type">Cookie</span> </div>
+      <div class="param">err </div><div class="param-desc"><span class="param-type">Object</span> The error information.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="LayerResponse">LayerResponse</a></h3>
+    <div class="field-items">
+      <div class="param">meta </div><div class="param-desc"><span class="param-type">meta</span> </div>
+      <div class="param">doc </div><div class="param-desc"><span class="param-type">Layer</span> </div>
+      <div class="param">err </div><div class="param-desc"><span class="param-type">Object</span> The error information.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="OrderResponse">OrderResponse</a></h3>
+    <div class="field-items">
+      <div class="param">meta </div><div class="param-desc"><span class="param-type">meta</span> </div>
+      <div class="param">doc </div><div class="param-desc"><span class="param-type">Order</span> </div>
+      <div class="param">err </div><div class="param-desc"><span class="param-type">Object</span> The error information.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="UserResponse">UserResponse</a></h3>
+    <div class="field-items">
+      <div class="param">meta </div><div class="param-desc"><span class="param-type">meta</span> </div>
+      <div class="param">doc </div><div class="param-desc"><span class="param-type">User</span> </div>
+      <div class="param">err </div><div class="param-desc"><span class="param-type">Object</span> The error information.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Meta">Meta</a></h3>
+    <div class="field-items">
+      <div class="param">action </div><div class="param-desc"><span class="param-type">String</span> The action in the controller.</div>
+      <div class="param">timestamp </div><div class="param-desc"><span class="param-type">String</span> The date and time on which the request was made.</div>
+      <div class="param">filename </div><div class="param-desc"><span class="param-type">String</span> The name of the file from which the request was completed.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Account">Account</a></h3>
+    <div class="field-items">
+      <div class="param">_id </div><div class="param-desc"><span class="param-type">Integer</span> The unique identifier.</div>
+      <div class="param">username </div><div class="param-desc"><span class="param-type">String</span> Login name of the user.</div>
+      <div class="param">firstName </div><div class="param-desc"><span class="param-type">String</span> The first name.</div>
+      <div class="param">lastName </div><div class="param-desc"><span class="param-type">String</span> The last name.</div>
+      <div class="param">inserts </div><div class="param-desc"><span class="param-type">String</span> The inserts of the user, such as \&quot;van\&quot; or \&quot;de\&quot;</div>
+      <div class="param">emailAddress </div><div class="param-desc"><span class="param-type">String</span> The email address of the user.</div>
+      <div class="param">addresses </div><div class="param-desc"><span class="param-type">array[Address]</span> </div>
+      <div class="param">dateOfBirth </div><div class="param-desc"><span class="param-type">String</span> The date of birth</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Address">Address</a></h3>
+    <div class="field-items">
+      <div class="param">_id </div><div class="param-desc"><span class="param-type">Integer</span> The unique identifier.</div>
+      <div class="param">street </div><div class="param-desc"><span class="param-type">String</span> The name of the street.</div>
+      <div class="param">streetNumber </div><div class="param-desc"><span class="param-type">String</span> The number of the street.</div>
+      <div class="param">zipCode </div><div class="param-desc"><span class="param-type">String</span> The postal code of the address.</div>
+      <div class="param">city </div><div class="param-desc"><span class="param-type">String</span> The name of the city.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Cookie">Cookie</a></h3>
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type">String</span> Name of a cookie.</div>
+      <div class="param">creator </div><div class="param-desc"><span class="param-type">String</span> Creator of a cookie.</div>
+      <div class="param">layers </div><div class="param-desc"><span class="param-type">Layer</span> </div>
+      <div class="param">creationDate </div><div class="param-desc"><span class="param-type">String</span> Creation date of a cookie</div>
+      <div class="param">modificationDate </div><div class="param-desc"><span class="param-type">String</span> Modification date of a cookie</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Layer">Layer</a></h3>
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type">String</span> Name of a layer.</div>
+      <div class="param">required </div><div class="param-desc"><span class="param-type">Boolean</span> Creator of a layer.</div>
+      <div class="param">sequence </div><div class="param-desc"><span class="param-type">BigDecimal</span> Sequence of a layer.</div>
+      <div class="param">options </div><div class="param-desc"><span class="param-type">LayerOption</span> </div>
+      <div class="param">imageSrc </div><div class="param-desc"><span class="param-type">String</span> Image source of a layer</div>
+      <div class="param">creationDate </div><div class="param-desc"><span class="param-type">String</span> Creation date of a layer</div>
+      <div class="param">modificationDate </div><div class="param-desc"><span class="param-type">String</span> Modification date of a layer</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="LayerOption">LayerOption</a></h3>
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type">String</span> Name of a layer option.</div>
+      <div class="param">sequence </div><div class="param-desc"><span class="param-type">BigDecimal</span> Sequence of a layer option.</div>
+      <div class="param">description </div><div class="param-desc"><span class="param-type">String</span> Description of a layer option.</div>
+      <div class="param">price </div><div class="param-desc"><span class="param-type">String</span> Price of a layer option.</div>
+      <div class="param">imageSrc </div><div class="param-desc"><span class="param-type">String</span> Image source of a layer option.</div>
+      <div class="param">creationDate </div><div class="param-desc"><span class="param-type">String</span> Creation date of a layer option.</div>
+      <div class="param">modificationDate </div><div class="param-desc"><span class="param-type">String</span> Modification date of a layer option.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Order">Order</a></h3>
+    <div class="field-items">
+      <div class="param">_id </div><div class="param-desc"><span class="param-type">BigDecimal</span> Unique identification number.</div>
+      <div class="param">number </div><div class="param-desc"><span class="param-type">String</span> Custom order number which must be unique.</div>
+      <div class="param">status </div><div class="param-desc"><span class="param-type">OrderStatus</span> </div>
+      <div class="param">user </div><div class="param-desc"><span class="param-type">OrderUser</span> </div>
+      <div class="param">rules </div><div class="param-desc"><span class="param-type">array[OrderRule]</span> </div>
+      <div class="param">invoiceAddress </div><div class="param-desc"><span class="param-type">Address</span> </div>
+      <div class="param">shipmentAddress </div><div class="param-desc"><span class="param-type">Address</span> </div>
+      <div class="param">vatPercentage </div><div class="param-desc"><span class="param-type">BigDecimal</span> Tax percentage.</div>
+      <div class="param">creationDate </div><div class="param-desc"><span class="param-type">String</span> Date of creation.</div>
+      <div class="param">modificationDate </div><div class="param-desc"><span class="param-type">String</span> Date of modification.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="OrderStatus">OrderStatus</a></h3>
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type">String</span> The name of the status.</div>
+      <div class="param">description </div><div class="param-desc"><span class="param-type">String</span> The description.</div>
+      <div class="param">creationDate </div><div class="param-desc"><span class="param-type">String</span> Date of creation.</div>
+      <div class="param">modificationDate </div><div class="param-desc"><span class="param-type">String</span> Date of modification.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="OrderUser">OrderUser</a></h3>
+    <div class="field-items">
+      <div class="param">username </div><div class="param-desc"><span class="param-type">String</span> username of a user.</div>
+      <div class="param">firstName </div><div class="param-desc"><span class="param-type">String</span> firstName date of a user</div>
+      <div class="param">inserts </div><div class="param-desc"><span class="param-type">String</span> inserts date of a user</div>
+      <div class="param">lastName </div><div class="param-desc"><span class="param-type">String</span> lastName of a user.</div>
+      <div class="param">emailAddress </div><div class="param-desc"><span class="param-type">BigDecimal</span> emailAddress of a user.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="OrderRule">OrderRule</a></h3>
+    <div class="field-items">
+      <div class="param">cookie </div><div class="param-desc"><span class="param-type">Object</span> </div>
+      <div class="param">box </div><div class="param-desc"><span class="param-type">Object</span> </div>
+      <div class="param">amountOfBoxes </div><div class="param-desc"><span class="param-type">BigDecimal</span> The amount of boxes.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Box">Box</a></h3>
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type">String</span> Name of the box.</div>
+      <div class="param">description </div><div class="param-desc"><span class="param-type">String</span> The description.</div>
+      <div class="param">capacity </div><div class="param-desc"><span class="param-type">BigDecimal</span> Maximum amount of cookies in one package.</div>
+      <div class="param">imageSrc </div><div class="param-desc"><span class="param-type">String</span> Link to image of the box.</div>
+      <div class="param">creationDate </div><div class="param-desc"><span class="param-type">String</span> Date of creation.</div>
+      <div class="param">modificationDate </div><div class="param-desc"><span class="param-type">String</span> Date of modification.</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="User">User</a></h3>
+    <div class="field-items">
+      <div class="param">username </div><div class="param-desc"><span class="param-type">String</span> username of a user.</div>
+      <div class="param">salt </div><div class="param-desc"><span class="param-type">String</span> salt of a user.</div>
+      <div class="param">password </div><div class="param-desc"><span class="param-type">String</span> password of a user.</div>
+      <div class="param">firstName </div><div class="param-desc"><span class="param-type">String</span> firstName date of a user</div>
+      <div class="param">inserts </div><div class="param-desc"><span class="param-type">String</span> inserts date of a user</div>
+      <div class="param">lastName </div><div class="param-desc"><span class="param-type">String</span> lastName of a user.</div>
+      <div class="param">dateOfBirth </div><div class="param-desc"><span class="param-type">Boolean</span> dateOfBirth of a user.</div>
+      <div class="param">emailAddress </div><div class="param-desc"><span class="param-type">BigDecimal</span> emailAddress of a user.</div>
+      <div class="param">addresses </div><div class="param-desc"><span class="param-type">Address</span> </div>
+      <div class="param">creationDate </div><div class="param-desc"><span class="param-type">String</span> Creation date of a user</div>
+      <div class="param">modificationDate </div><div class="param-desc"><span class="param-type">String</span> Modification date of a user</div>
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  <style>
+body { 
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
 
-<div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>
-<div id="swagger-ui-container" class="swagger-ui-wrap"></div>
-</body>
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+	display: none;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+  </style>
+  </body>
 </html>
