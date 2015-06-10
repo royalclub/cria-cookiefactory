@@ -4,13 +4,13 @@
 /**
  * TODO: create controller for user list
  * @param $scope
- * @param usersService
+ * @param dbService
  * @constructor
  */
-function userListController($scope, usersService) {
+function userListController($scope, dbService) {
     "use strict";
     // GET all layers
-    $scope.users = usersService.users.get();
+    $scope.users = dbService.users.get();
 }
 
 /**
@@ -18,22 +18,22 @@ function userListController($scope, usersService) {
  * @param $scope
  * @param $routeParams
  * @param $location
- * @param usersService
+ * @param dbService
  * @constructor
  */
-function userController($scope, $routeParams, $location, usersService) {
+function userController($scope, $routeParams, $location, dbService) {
     "use strict";
 
     // GET 1 cookie
     if ($routeParams._id !== 'new') {
-        $scope.users = usersService.users.get({_id: $routeParams._id}, function () {
+        $scope.users = dbService.users.get({_id: $routeParams._id}, function () {
             console.log('$scope.requests ', $scope.requests);
         });
     }
 
     // DELETE cookie
     $scope.delete = function () {
-        usersService.users.delete({_id: $routeParams._id});
+        dbService.users.delete({_id: $routeParams._id});
         $location.path("/users");
     };
 
@@ -42,12 +42,12 @@ function userController($scope, $routeParams, $location, usersService) {
 
         if ($scope.users.doc && $scope.users.doc._id !== undefined) {
             console.log('Entering update');
-            usersService.users.update({_id: $routeParams._id}, $scope.users.doc, function (res) {
+            dbService.users.update({_id: $routeParams._id}, $scope.users.doc, function (res) {
                 console.log(res);
             });
         } else {
             console.log('Entering save');
-            usersService.users.save({}, $scope.users.doc, function (res) {
+            dbService.users.save({}, $scope.users.doc, function (res) {
                 console.log(res);
             });
         }

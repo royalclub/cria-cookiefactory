@@ -69,5 +69,34 @@
                         });
                     }
                 };
-            }]);
+            }])
+        .factory('messageService',
+            function () {
+                var message = {}, i;
+                message.list = [];
+                message.callbacks = [];
+
+                message.setMessage = function (textMessage, typeMessage) {
+                    message.list.push({
+                        text : textMessage,
+                        'type' : typeMessage
+                    });
+
+                    for (i = 0; i < message.callbacks.length; i += 1) {
+                        message.callbacks[i](textMessage, typeMessage);
+                    }
+                };
+
+                message.registerCallback = function (callback) {
+                    var e;
+                    message.callbacks.push(callback);
+
+                    for (e = 0; e < message.list.length; e += 1) {
+                        for (i = 0; i < message.callbacks.length; i += 1) {
+                            message.callbacks[i](message.list[e].text, message.list[e].type);
+                        }
+                    }
+                };
+                return message;
+            });
 }());

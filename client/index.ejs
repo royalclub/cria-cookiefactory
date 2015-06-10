@@ -56,8 +56,24 @@
                 </li>
             </ol>
 
-        <img src="img/introtext.png" />
+            <img src="img/introtext.png" />
         
+            <div ng-controller="messageController">
+                <div class="alert alert-danger" role="alert" ng-show="showDanger"><p>{{message.error}}</p></div>
+                <div class="alert alert-warning" role="alert" ng-show="showWarning"><p>{{message.warning}}</p></div>
+                <div class="alert alert-info" role="alert" ng-show="showInfo"><p>{{message.info}}</p></div>
+                <div class="alert alert-success" role="alert" ng-show="showSuccess"><p>{{message.success}}</p></div>
+            </div>
+                <% if (message.error) { %>
+                <div class="alert alert-danger" role="alert"><p><%= message.error %></p></div>
+                <% } else if (message.warning) { %>
+                <div class="alert alert-warn" role="alert"><p><%= message.warning %></p></div>
+                <% } else if (message.info) { %>
+                <div class="alert alert-info" role="alert"><p><%= message.info %></p></div>
+                <% } else if (message.success) { %>
+                <div class="alert alert-success" role="alert"><p><%= message.success %></p></div>
+                <% } %>
+
         <div data-ng-view=""></div>
     </div>
 
@@ -74,6 +90,7 @@
 <script src="./javascripts/app.js"></script>
 <!--Controllers-->
 <script src="./javascripts/controllers/menuController.js"></script>
+<script src="./javascripts/controllers/messageController.js"></script>
 <script src="./javascripts/controllers/cookieController.js"></script>
 <script src="./javascripts/controllers/cartController.js"></script>
 <script src="./javascripts/controllers/userController.js"></script>

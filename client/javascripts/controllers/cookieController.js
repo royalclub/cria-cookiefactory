@@ -10,7 +10,7 @@
  * @param authenticationService
  * @param dbService
  */
-cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, authenticationService, dbService) {
+cookieFactory.controller('cookieDesignController', function ($scope, $routeParams, $location, authenticationService, dbService, messageService) {
     "use strict";
 
     var optionsTotal = 0.0,
@@ -117,12 +117,14 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
          * @param $event
          */
         $scope.onProceedClicked = function (cookieName, $event) {
-            var browserCookieName = 'key', cookie, storage;
+            var browserCookieName = 'key', cookie, storage, text;
             $event.preventDefault();
             if (!cookieName) {
-                alert('De naam van het koekje is niet ingevuld!');
-            } else if ($scope.selectedLayers < 4) {
-                alert('1 of meerder layers zijn niet geslecteerd!');
+                text = 'De naam van het koekje is niet ingevuld!';
+                messageService.setMessage(text, 'danger');
+            } else if ($scope.selectedLayers.length < 4) {
+                text = '1 of meerder layers zijn niet geslecteerd!';
+                messageService.setMessage(text, 'danger');
             } else {
                 cookie = getCookie(cookieName);
                 storage = JSON.parse(localStorage.getItem(browserCookieName));
