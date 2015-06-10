@@ -1,8 +1,10 @@
+<img src="img/introtext.png" />
+
 <div ng-controller="cookieDesignController">
     <h1><img src="img/titleTriangle.png">Ontwerp je eigen koekje</h1>
     
     <div class="optionsCookie">
-        <a href="#" data-ng-repeat="layer in layers" ng-click="onLayerClicked(layer._id, $event)">
+        <a href="#" data-ng-repeat="layer in layers" ng-click="onLayerClicked(layer._id, $event)" ng-show="selectedLayers.length >= $index">
             <div class="optionBox" style="background:url(img/layer/{{layer.imageSrc}}); width:222px; height:129px;">
                 <span class="optionText" ng-show="layer.name !== currentLayer.name">{{layer.name}}</span>
                 <span class="optionTextSelect" ng-show="layer.name === currentLayer.name">{{layer.name}}</span>
@@ -11,17 +13,19 @@
             </div>
         </a>
     </div>
-    <span style="width:20px; margin-left:10px;"></span>
-    <a href="#" class="ingredienten"><img src="img/bekijkingredienten.png" /></a>
     <span style="width:70px; height:10px; margin-left:195px;"></span>
     <form class="inline-form">
         <div class="form-group">
-            <input type="text" class="form-control" name="txtCookieName" id="txtCookieName" ng-model="cookieName" placeholder="Geef je koekje een naam..." />
+            <div style="float: left; margin-left: 15px; width: 483px;">
+                <input type="text" class="form-control" style="width:100% !important;" name="txtCookieName" id="txtCookieName" ng-model="cookieName" placeholder="Geef je koekje een naam..."  />
+            </div>
+            <div style="float: left; margin-left: 20px; width: 80px;">
+                <a ng-click="save(cookieName)" class="btn btn-primary" ng-show="showSaveButton">
+                    <span class="glyphicon glyphicon-ok"></span> 
+                    Opslaan
+                </a>
+            </div>
         </div>
-        <a ng-click="save(cookieName)" class="btn btn-primary" ng-show="showSaveButton">
-            <span class="glyphicon glyphicon-ok"></span> 
-            Opslaan
-        </a>
     </form>
     <br />
     <div class="cookieDesign">
@@ -38,10 +42,7 @@
             </a>
         </div>
         <div class="cookieLoad">
-            <img class="layers" style="z-index:4;" src="img/layeroption/cookie/rond.png" width="400" height="370" />
-            <img class="layers" style="z-index:1;" src="img/layeroption/cookie/vanille.png" width="390" height="370" />
-            <img class="layers" style="z-index:2;" src="img/layeroption/cookie/havermoutrozijn.png" width="390" height="370">
-            <img class="layers" style="z-index:3;" src="img/layeroption/cookie/pecannoten.png" width="390" height="370">
+            <img class="layers" ng-repeat="layer in selectedLayers" style="z-index:{{(layer.sequence===1) ? 999 : layer.sequence}};" src="img/layeroption/cookie/{{layer.options[0].imageSrc}}" width="400" height="370" />
             <span class="displayKeuze">
                 <p style="padding:5px; background:#FFF;">Pecannoten
                     <img src="img/questionmark.png" style="margin-top:-4px">

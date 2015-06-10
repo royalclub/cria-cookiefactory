@@ -90,7 +90,7 @@ h1 {font-family:VAGrounded;
 .cookieDesign {
 	float:left;
 	position:relative;
-	background: #ecfaf3;
+	background: white;
 	border:2px #5eb299 solid;
 	width:600px;
 	margin-left:15px;
@@ -99,7 +99,7 @@ h1 {font-family:VAGrounded;
 	height:466px;
 	}
 
-.choiceContainer{
+.choiceContainer {
 	float:left;
 	margin:10px 30px 0 30px;
 	display:inline-block;}
@@ -324,3 +324,29 @@ color:#3a5780;}
 	
 .form-control{width:200px !important;}
 
+.center {
+	text-align: center;
+}
+
+.border {
+	border: solid 2px #745a33;
+	margin: 0 0 10px 0;
+}
+
+input, textarea {
+	border: 2px solid #745a33;
+}
+
+.title img {
+	margin: 26px 0;
+	float: right;
+}
+
+.title .col-md-8 {
+	padding: 0;	
+}
+
+.right {
+	float: right;
+	color: #5eb299;
+}
