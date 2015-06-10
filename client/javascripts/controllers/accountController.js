@@ -54,9 +54,28 @@ function accountDetailController($scope, $routeParams, $location, authentication
             $location.path('/cookies/design');
         } else {
             $scope.account = loggedInUser;
-            $scope.updateAddress = function (adressId) {
+            $scope.onUpdateAddressClicked = function (adressId) {
                 $location.path("/account/address/edit/" + adressId);
             };
+            /*$scope.onRemoveAddressClicked = function (adressId) {
+                var index;
+                $scope.account = loggedInUser;
+                for (index = 0; index < $scope.account.addresses.length; index++) {
+                    if ($scope.account.addresses[index]._id === adressId) {
+                        
+                        
+                        
+                        $scope.address = $scope.account.addresses[index];
+                    }
+                }
+                
+                dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
+                    if (res.err) {
+                        console.log(res.err);
+                    }
+                    $location.path('/account');
+                });
+            };*/
         }
     });
 }

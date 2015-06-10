@@ -53,11 +53,11 @@
                             {{address.zipCode}} {{address.city}}
                         </td>
                         <td>
-                            <a ng-click="updateAddress(address._id)" class="btn btn-warning">
+                            <a class="btn btn-warning" ng-click="onUpdateAddressClicked(address._id)">
                                 <span class="glyphicon glyphicon-glyphicon-pencil"></span> 
                                 Aanpassen
                             </a>
-                            <a href="#" class="btn btn-danger" ng-click="onRemoveClicked(address._id)">
+                            <a class="btn btn-danger" ng-click="onRemoveAddressClicked(address._id)">
                                 <span class="glyphicon glyphicon-trash"></span>
                                 Verwijder
                             </a>

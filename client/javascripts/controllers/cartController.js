@@ -11,7 +11,6 @@ cookieFactory.controller('cartController', function ($scope, $location) {
     "use strict";
     var b, layer, storageCookieName = 'key', storage;
     $scope.orderRules = [];
-    $scope.shipping = 3.99;
 
     /**
      * Calculates the all the prices
@@ -21,7 +20,7 @@ cookieFactory.controller('cartController', function ($scope, $location) {
         for (i = 0; i < $scope.cartItems.length; i += 1) {
             subtotal += $scope.orderRules[i].cookie[0].price * $scope.orderRules[i].amountOfBoxes;
         }
-        $scope.subtotal = subtotal + $scope.shipping;
+        $scope.subtotal = subtotal;
         $scope.tax = (subtotal / 100) * 21;
         $scope.total = $scope.subtotal + $scope.tax;
     }
