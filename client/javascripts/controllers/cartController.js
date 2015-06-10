@@ -7,7 +7,7 @@
  * @param $scope
  * @param $location
  */
-cookieFactory.controller('cartController', function ($scope, $location) {
+cookieFactory.controller('cartController', function ($scope, $location, authenticationService, messageService) {
     "use strict";
     var b, layer, storageCookieName = 'key', storage;
     $scope.orderRules = [];
@@ -90,8 +90,18 @@ cookieFactory.controller('cartController', function ($scope, $location) {
      * @param $event
      */
     $scope.onProceedClicked = function ($event) {
+        var text;
         $event.preventDefault();
-        localStorage.setItem('myOrderRules', JSON.stringify($scope.orderRules));
-        $location.path("/orders/details");
+
+        authenticationService.getUser(function (loggedIn, loggedInUser) {
+            if (loggedIn) {
+                $event.preventDefault();
+                localStorage.setItem('myOrderRules', JSON.stringify($scope.orderRules));
+                $location.path("/orders/details");
+            } else {
+                text = 'U moet eerst inloggen voordat u verder kan gaan.';
+                messageService.setMessage(text, 'danger');
+            }
+        });
     };
 });
