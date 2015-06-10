@@ -32,6 +32,12 @@ cookieFactory.controller('messageController', function ($scope, messageService) 
                 $scope.showSuccess = true;
                 $scope.message.success = text;
             }
+            setTimeout(function () {
+                $scope.showDanger = false;
+                $scope.showWarning = false;
+                $scope.showInfo = false;
+                $scope.showSuccess = false;
+            }, 1);
         });
     }
 });
