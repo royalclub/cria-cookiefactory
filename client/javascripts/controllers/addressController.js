@@ -45,18 +45,15 @@ function addressController($scope, $routeParams, $location, dbService, authentic
                     $location.path('/account');
                 });
             }
-        } else {
-            if (address) {
-                console.log("new address!", address);
-                $scope.account.addresses[$scope.account.addresses.length] = address;
-                if ($scope.account && $scope.account._id !== undefined) {
+        } else if (address) {
+            $scope.account.addresses[$scope.account.addresses.length] = address;
+            if ($scope.account && $scope.account._id !== undefined) {
                 dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
                     if (res.err) {
                         console.log(res.err);
                     }
                     $location.path('/account');
                 });
-            }
             }
         }
     };
