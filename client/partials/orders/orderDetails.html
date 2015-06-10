@@ -19,6 +19,7 @@
 			        <strong>{{address.street}} {{address.streetNumber}}<br />{{address.zipCode}} {{address.city}}</strong>
 			    </label>
 			</div>
+			<a href="">> Voeg een nieuw adres toe</a>
 		</div>
 	
 		<div class="col-md-6" ng-show="shipment.shipmentType == 'Home'">
@@ -29,6 +30,7 @@
 			        <strong>{{address.street}} {{address.streetNumber}}<br />{{address.zipCode}} {{address.city}}</strong>
 	            </label>
 	        </div>
+			<a ng-click="$('#addAddress').show()">> Voeg een nieuw adres toe</a>
 		</div>
 	</div>
 
@@ -46,3 +48,6 @@
 		<input class="btn btn-success" type="submit" id="submit" value="Afrekenen" />
 	</div>
 </form>
+<div id="addAddress" hidden>
+	<p>poep</p>
+</div>
