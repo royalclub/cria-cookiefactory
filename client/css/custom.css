@@ -295,6 +295,9 @@ color:#3a5780;}
 .right {
 	float: right;
 }
+.left {
+	float: left;
+}
 .no-padding {
 	padding: 0;
 }
@@ -310,4 +313,8 @@ form a {
 input, textarea {
 	border: solid 2px #745a33;
 	color: #745a33;
+}
+
+.center {
+	text-align: center;
 }
