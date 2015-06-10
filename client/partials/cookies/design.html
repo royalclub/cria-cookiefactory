@@ -3,9 +3,11 @@
     
     <div class="optionsCookie">
         <a href="#" data-ng-repeat="layer in layers" ng-click="onLayerClicked(layer._id, $event)">
-            <div class="optionBox" style="background:url(img/optie/{{layer.imageSrc}}); width:222px; height:129px;">
-                <span class="optionTextSelect">{{layer.name}}</span>
-                <div class={{(layer.name === currentLayer.name) ? "optionSelect" : "" }}></div>
+            <div class="optionBox" style="background:url(img/layer/{{layer.imageSrc}}); width:222px; height:129px;">
+                <span class="optionText" ng-show="layer.name !== currentLayer.name">{{layer.name}}</span>
+                <span class="optionTextSelect" ng-show="layer.name === currentLayer.name">{{layer.name}}</span>
+                <div class="overlayBox" ng-show="layer.name !== currentLayer.name"></div>
+                <div class="optionSelect" ng-show="layer.name === currentLayer.name"></div>
             </div>
         </a>
     </div>
@@ -28,7 +30,7 @@
                 <h1>{{currentLayer.name}}</h1>
             </span>
             <a href="#" data-ng-repeat="option in currentLayer.options" data-id="{{option.name}}" ng-click="onLayerOptionClicked(option, $event)">
-                <div class="choiceBox" style="background-image:url(img/keuzes/{{option.imageSrc}}); width:150px; height:90px;">
+                <div class="choiceBox" style="background-image:url(img/layeroption/{{option.imageSrc}}); width:150px; height:90px;">
                     <div class="overlayChoice"> <!-- TODO: choiceSelect if selected -->
                         <span class="keuzeText">{{option.name}}</span>
                     </div>
@@ -36,10 +38,10 @@
             </a>
         </div>
         <div class="cookieLoad">
-            <img class="layers" style="z-index:4;" src="img/cookieLayer/rondLayer.png" width="400" height="370" />
-            <img class="layers" style="z-index:1;" src="img/cookieLayer/vanilleLayer.png" width="390" height="370" />
-            <img class="layers" style="z-index:2;" src="img/cookieLayer/havermoutRozijnLayer.png" width="390" height="370">
-            <img class="layers" style="z-index:3;" src="img/cookieLayer/pecannotenLayer.png" width="390" height="370">
+            <img class="layers" style="z-index:4;" src="img/layeroption/cookie/rond.png" width="400" height="370" />
+            <img class="layers" style="z-index:1;" src="img/layeroption/cookie/vanille.png" width="390" height="370" />
+            <img class="layers" style="z-index:2;" src="img/layeroption/cookie/havermoutrozijn.png" width="390" height="370">
+            <img class="layers" style="z-index:3;" src="img/layeroption/cookie/pecannoten.png" width="390" height="370">
             <span class="displayKeuze">
                 <p style="padding:5px; background:#FFF;">Pecannoten
                     <img src="img/questionmark.png" style="margin-top:-4px">
@@ -54,4 +56,3 @@
     <div class="brownBar" style="width:620px;"></div>
     <a class="nextBtn" ng-click="onProceedClicked(cookieName, $event)">Toevoegen winkelwagen</a>
     <p style="height:20px; width:500px; float:left;"></p>
-</div>
