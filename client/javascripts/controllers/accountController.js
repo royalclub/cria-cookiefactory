@@ -46,7 +46,7 @@ function accountRegisterController($scope, $routeParams, $location, authenticati
 /**
  * Controller responsible for handling the account edit.
  */
-function accountDetailController($scope, $routeParams, $location, authenticationService) {
+function accountDetailController($scope, $routeParams, $location, authenticationService, dbService) {
     "use strict";
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
@@ -57,25 +57,17 @@ function accountDetailController($scope, $routeParams, $location, authentication
             $scope.onUpdateAddressClicked = function (adressId) {
                 $location.path("/account/address/edit/" + adressId);
             };
-            /*$scope.onRemoveAddressClicked = function (adressId) {
-                var index;
-                $scope.account = loggedInUser;
-                for (index = 0; index < $scope.account.addresses.length; index++) {
-                    if ($scope.account.addresses[index]._id === adressId) {
-                        
-                        
-                        
-                        $scope.address = $scope.account.addresses[index];
-                    }
+            $scope.onRemoveAddressClicked = function (index) {
+                $scope.account.addresses.splice(index, 1);
+                if ($scope.account && $scope.account._id !== undefined) {
+                    dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
+                        if (res.err) {
+                            console.log(res.err);
+                        }
+                        $location.path('/account');
+                    });
                 }
-                
-                dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
-                    if (res.err) {
-                        console.log(res.err);
-                    }
-                    $location.path('/account');
-                });
-            };*/
+            };
         }
     });
 }
