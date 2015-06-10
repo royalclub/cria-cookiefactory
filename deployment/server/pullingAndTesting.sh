@@ -120,9 +120,9 @@ echo "`date` - STAGE2, unit-tests" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
-git fetch --all
-git reset --hard
-git pull
+git merge --no-edit $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
+git commit -am "Merging from $STAGE1 to $STAGE2: `date`" | tee -a "$DIR/$CUR_SCRIPT"
+git push origin $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
 
 # Set environment for stage
 export NODE_ENV=test
@@ -179,10 +179,6 @@ if [ -f ./test/static-analyzer/error_log.txt ]; then
 	exit 1
 fi
 
-git merge --no-edit $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
-git commit -am "Merging from $STAGE1 to $STAGE2: `date`" | tee -a "$DIR/$CUR_SCRIPT"
-git push origin $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
-
 echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` - STAGE3, end to end" | tee -a "$DIR/$CUR_SCRIPT"
@@ -190,9 +186,9 @@ echo "`date` -------------------------------------------------------------------
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
-git fetch --all
-git reset --hard
-git pull
+git merge --no-edit $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
+git commit -am "Merging from $STAGE2 to $STAGE3: `date`" | tee -a "$DIR/$CUR_SCRIPT"
+git push origin $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
 
 # Set environment for stage
 export NODE_ENV=acceptance
@@ -259,10 +255,6 @@ if [ $TEST_FAILURUES -ne 1 ]; then
 	exit 1
 fi
 
-git merge --no-edit $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
-git commit -am "Merging from $STAGE2 to $STAGE3: `date`" | tee -a "$DIR/$CUR_SCRIPT"
-git push origin $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
-
 echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` - STAGE4, production" | tee -a "$DIR/$CUR_SCRIPT"
@@ -270,10 +262,6 @@ echo "`date` -------------------------------------------------------------------
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE4 | tee -a "$DIR/$CUR_SCRIPT"
-git fetch --all
-git reset --hard
-git pull
-
 git merge --no-edit $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
 git commit -am "Merging from $STAGE3 to $STAGE4: `date`" | tee -a "$DIR/$CUR_SCRIPT"
 git push origin $STAGE4 | tee -a "$DIR/$CUR_SCRIPT"
@@ -285,10 +273,6 @@ echo "`date` -------------------------------------------------------------------
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout master | tee -a "$DIR/$CUR_SCRIPT"
-git fetch --all
-git reset --hard
-git pull
-
 git merge --no-edit $STAGE4 | tee -a "$DIR/$CUR_SCRIPT"
 git commit -am "Merging from $STAGE4 to master: `date`" | tee -a "$DIR/$CUR_SCRIPT"
 git push origin master | tee -a "$DIR/$CUR_SCRIPT"
