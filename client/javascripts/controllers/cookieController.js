@@ -114,13 +114,13 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
          * @param $event
          */
         $scope.onProceedClicked = function (cookieName, $event) {
-            var browserCookieName = 'key', cookie, storage;
+            var browserCookieName = 'key', cookie, storage, text;
             $event.preventDefault();
             if (!cookieName) {
-                var error = 'De naam van het koekje is niet ingevuld!';
-                messageService.setMessage(error, 'danger');
+                text = 'De naam van het koekje is niet ingevuld!';
+                messageService.setMessage(text, 'danger');
             } else if ($scope.selectedLayers.length < 4) {
-                var text = '1 of meerder layers zijn niet geslecteerd!';
+                text = '1 of meerder layers zijn niet geslecteerd!';
                 messageService.setMessage(text, 'danger');
             } else {
                 cookie = getCookie(cookieName);
