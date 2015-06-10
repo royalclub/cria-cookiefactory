@@ -9,7 +9,7 @@
  */
 cookieFactory.controller('cartController', function ($scope, $location, authenticationService, messageService) {
     "use strict";
-    var b, layer, storageCookieName = 'key', storage;
+    var b, layer, storageCookieName = 'key', storageOrderRules = 'myOrderRules', storage;
     $scope.orderRules = [];
 
     /**
@@ -92,11 +92,11 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
     $scope.onProceedClicked = function ($event) {
         var text;
         $event.preventDefault();
+        localStorage.setItem(storageOrderRules, JSON.stringify($scope.orderRules));
 
         authenticationService.getUser(function (loggedIn, loggedInUser) {
             if (loggedIn) {
                 $event.preventDefault();
-                localStorage.setItem('myOrderRules', JSON.stringify($scope.orderRules));
                 $location.path("/orders/details");
             } else {
                 text = 'U moet eerst inloggen voordat u verder kan gaan.';
