@@ -27,7 +27,8 @@
 	
 
 .content {
-	padding:10px 0 0 60px;
+	padding:10px 60px 0 60px;
+	width:1024px;
 	height:100%;
 	background:#FFF;
 	float:left;}
