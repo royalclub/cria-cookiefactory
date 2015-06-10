@@ -1,3 +1,5 @@
+<img src="img/introtext.png" />
+
 <div ng-controller="cookieDesignController">
     <h1><img src="img/titleTriangle.png">Ontwerp je eigen koekje</h1>
     
@@ -11,17 +13,19 @@
             </div>
         </a>
     </div>
-    <span style="width:20px; margin-left:10px;"></span>
-    <a href="#" class="ingredienten"><img src="img/bekijkingredienten.png" /></a>
     <span style="width:70px; height:10px; margin-left:195px;"></span>
     <form class="inline-form">
         <div class="form-group">
-            <input type="text" class="form-control" name="txtCookieName" id="txtCookieName" ng-model="cookieName" placeholder="Geef je koekje een naam..." />
+            <div style="float: left; margin-left: 15px; width: 483px;">
+                <input type="text" class="form-control" style="width:100% !important;" name="txtCookieName" id="txtCookieName" ng-model="cookieName" placeholder="Geef je koekje een naam..."  />
+            </div>
+            <div style="float: left; margin-left: 20px; width: 80px;">
+                <a ng-click="save(cookieName)" class="btn btn-primary" ng-show="showSaveButton">
+                    <span class="glyphicon glyphicon-ok"></span> 
+                    Opslaan
+                </a>
+            </div>
         </div>
-        <a ng-click="save(cookieName)" class="btn btn-primary" ng-show="showSaveButton">
-            <span class="glyphicon glyphicon-ok"></span> 
-            Opslaan
-        </a>
     </form>
     <br />
     <div class="cookieDesign">
