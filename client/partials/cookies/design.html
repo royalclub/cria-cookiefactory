@@ -6,10 +6,10 @@
     <div class="optionsCookie">
         <a href="#" data-ng-repeat="layer in layers" ng-click="onLayerClicked(layer._id, $event)" ng-show="selectedLayers.length >= $index">
             <div class="optionBox" style="background:url(img/layer/{{layer.imageSrc}}); width:222px; height:129px;">
-                <span class="optionText" ng-show="layer.name !== currentLayer.name">{{layer.name}}</span>
-                <span class="optionTextSelect" ng-show="layer.name === currentLayer.name">{{layer.name}}</span>
-                <div class="overlayBox" ng-show="layer.name !== currentLayer.name"></div>
-                <div class="optionSelect" ng-show="layer.name === currentLayer.name"></div>
+                <span class="optionText" ng-show="getCurrentLayerIndex(layer) === -1">{{layer.name}}</span>
+                <span class="optionTextSelect" ng-show="getCurrentLayerIndex(layer) != -1">{{layer.name}}</span>
+                <div class="overlayBox" ng-show="getCurrentLayerIndex(layer) === -1"></div>
+                <div class="optionSelect" ng-show="getCurrentLayerIndex(layer) != -1"></div>
             </div>
         </a>
     </div>
@@ -35,7 +35,10 @@
             </span>
             <a href="#" data-ng-repeat="option in currentLayer.options" data-id="{{option.name}}" ng-click="onLayerOptionClicked(option, $event)">
                 <div class="choiceBox" style="background-image:url(img/layeroption/{{option.imageSrc}}); width:150px; height:90px;">
-                    <div class="overlayChoice"> <!-- TODO: choiceSelect if selected -->
+                    <div class="overlayChoice" ng-show="currentLayerOption.name !== option.name">
+                        <span class="keuzeText">{{option.name}}</span>
+                    </div>
+                    <div class="choiceSelect" ng-show="currentLayerOption.name === option.name">
                         <span class="keuzeText">{{option.name}}</span>
                     </div>
                 </div>
@@ -43,12 +46,12 @@
         </div>
         <div class="cookieLoad">
             <img class="layers" ng-repeat="layer in selectedLayers" style="z-index:{{(layer.sequence===1) ? 999 : layer.sequence}};"ng-src="img/layeroption/cookie/{{layer.options[0].imageSrc}}" width="400" height="370" />
-            <span class="displayKeuze" style="z-index:1000;">
-                <p style="padding:5px; background:#FFF;">Pecannoten
+            <span class="displayKeuze" style="z-index:1000;" ng-show="currentLayerOption">
+                <p style="padding:5px; background:#FFF;">
+                    {{currentLayerOption.name}}
                     <img src="img/questionmark.png" style="margin-top:-4px">
                 </p>
-                <p class="displayDuurzaam">Dit is een duurzame keuze.
-                    <br>Het ingredi&euml;nt komt per vrachtschip uit de Verenigde Staten.</p>
+                <p class="displayDuurzaam">{{currentLayerOption.description}}</p>
             </span>
         </div>
         <p class="bedrag">{{total | currency : "€"}}</p>
