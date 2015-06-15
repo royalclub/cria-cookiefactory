@@ -1,5 +1,4 @@
-/*global angular, cookieController, userController, testController, accountController, accountDetailController, accountEditController, accountRegisterController, accountLogoutController, homeController, addressController, orderController */
-/*global angular, cookieController, userController, cookieDesignController, accountController, homeController, addressController, accountDetailController, accountEditController, accountLogoutController, orderController */
+/*global console, angular, cookieController, userController, testController, accountController, accountDetailController, accountEditController, accountRegisterController, accountLogoutController, homeController, addressController, orderController */
 
 /**
  *
@@ -18,11 +17,17 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             templateUrl: 'partials/about.html',
             controller: function ($location) {
                 $location.path('/cookies/design');
+                console.warn("Home: Redirect to cookie design.");
             }
         });
 
+        // Design cookie
+        $routeProvider.when('/cookies/design', {
+            templateUrl: 'partials/cookies/design.html'
+        });
+
         $stateProvider.state('home', {
-            url: '/',
+            url: '/cookies/design',
             ncyBreadcrumb: {
                 label: 'Cookie Factory'
             }
@@ -36,8 +41,8 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $stateProvider.state('about', {
             url: '/about',
             ncyBreadcrumb: {
-                label: 'about',
-                parent: 'home'
+                parent: 'home',
+                label: 'about'
             }
         });
 
@@ -49,8 +54,8 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $stateProvider.state('contact', {
             url: '/contact',
             ncyBreadcrumb: {
-                label: 'contact',
-                parent: 'home'
+                parent: 'home',
+                label: 'contact'
             }
         });
 
@@ -62,8 +67,8 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $stateProvider.state('cart', {
             url: '/cart',
             ncyBreadcrumb: {
-                label: 'cart',
-                parent: 'home'
+                parent: 'home',
+                label: 'winkelwagen'
             }
         });
 
@@ -76,8 +81,8 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $stateProvider.state('account', {
             url: '/account',
             ncyBreadcrumb: {
-                label: 'account',
-                parent: 'home'
+                parent: 'home',
+                label: 'account'
             }
         });
 
@@ -95,7 +100,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             }
         });
 
-        // Account EditAddress
+        // Account add Address
         $routeProvider.when('/account/address/add', {
             templateUrl: 'partials/account/address/add.html',
             controller: addressController
@@ -109,14 +114,14 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             }
         });
 
-        // Account EditAddress
+        // Account edit Address
         $routeProvider.when('/account/address/edit/:_id', {
             templateUrl: 'partials/account/address/edit.html',
             controller: addressController
         });
 
         $stateProvider.state('account edit address', {
-            url: '/account/address/add',
+            url: '/account/address/edit',
             ncyBreadcrumb: {
                 parent: 'account',
                 label: 'edit address'
@@ -132,7 +137,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $stateProvider.state('register', {
             url: '/account/register',
             ncyBreadcrumb: {
-                parent: 'register',
+                parent: 'home',
                 label: 'register'
             }
         });
@@ -142,33 +147,42 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             templateUrl: 'partials/cookies/list.html'
         });
 
-        // Design cookie
-        $routeProvider.when('/cookies/design', {
-            templateUrl: 'partials/cookies/design.html'
+        $stateProvider.state('cookie list', {
+            url: '/cookies/list',
+            ncyBreadcrumb: {
+                parent: 'home',
+                label: 'koekjes lijst'
+            }
         });
 
-        // Get a list of users
-        $routeProvider.when('/users/list', {
-            templateUrl: 'partials/users/list.html',
-            controller: userController
-        });
-
-        // Get 1 user
-        $routeProvider.when('/users/list/:_id', {
-            templateUrl: 'partials/user-detail.html',
-            controller: userController
-        });
-
-        // Get orderConfirmation
-        $routeProvider.when('/orders/confirmation/', {
-            templateUrl: 'partials/orders/orderConfirmation.html',
-            controller: orderController
-        });
         // Get orderDetails
         $routeProvider.when('/orders/details', {
             templateUrl: 'partials/orders/orderDetails.html',
             controller: orderController
         });
+
+        $stateProvider.state('order detail', {
+            url: '/orders/details',
+            ncyBreadcrumb: {
+                parent: 'cart',
+                label: 'order details'
+            }
+        });
+
+        // Get orderConfirmation
+        $routeProvider.when('/orders/confirmation', {
+            templateUrl: 'partials/orders/orderConfirmation.html',
+            controller: orderController
+        });
+
+        $stateProvider.state('order confirm', {
+            url: '/orders/confirmation',
+            ncyBreadcrumb: {
+                parent: 'order detail',
+                label: 'order'
+            }
+        });
+
         // Get orderPayment
         $routeProvider.when('/orders/payment/', {
             templateUrl: 'partials/orders/orderPayment.html',
@@ -176,7 +190,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         });
 
         //When no valid route is provided
-        //$routeProvider.otherwise({
-          //  redirectTo: "/"
-        //});
+        $routeProvider.otherwise({
+            redirectTo: "/"
+        });
     });
