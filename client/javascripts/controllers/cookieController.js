@@ -30,7 +30,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
     $scope.getCurrentLayerIndex = function (currentLayer) {
         var layerIdx = 0;
 
-        for(layerIdx = 0; layerIdx < $scope.selectedLayers.length; layerIdx += 1) {
+        for (layerIdx = 0; layerIdx < $scope.selectedLayers.length; layerIdx += 1) {
             if ($scope.selectedLayers[layerIdx].name === currentLayer.name) {
                 return layerIdx;
             }
