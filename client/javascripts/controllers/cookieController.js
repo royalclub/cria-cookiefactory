@@ -20,6 +20,39 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
     $scope.cookieName = null;           // The name of the cookie.
     $scope.selectedLayers = [];         // Object that will be saved in the database.
     $scope.currentLayer = {};           // Currently selected layer for the editor.
+    $scope.currentLayerOption = {};    // Currently selected layer option.
+
+
+    /**
+     * Gets the index of the currently selected layer in the selectedLayers property.
+     * @param {Layer} currentLayer  The layer that is currently selected.
+     */
+    $scope.getCurrentLayerIndex = function (currentLayer) {
+        var layerIdx = 0;
+
+        for (layerIdx = 0; layerIdx < $scope.selectedLayers.length; layerIdx += 1) {
+            if ($scope.selectedLayers[layerIdx].name === currentLayer.name) {
+                return layerIdx;
+            }
+        }
+
+        return -1;
+    };
+
+    /**
+     * Set the currentLayerOption based on the current layer.
+     */
+    $scope.updateCurrentLayerOption = function () {
+        var currentLayerIdx = -1;
+
+        currentLayerIdx = $scope.getCurrentLayerIndex($scope.currentLayer);
+
+        if (currentLayerIdx >= 0 && currentLayerIdx < $scope.selectedLayers.length) {
+            $scope.currentLayerOption = $scope.selectedLayers[currentLayerIdx].options[0];
+        } else {
+            $scope.currentLayerOption = null;
+        }
+    };
 
     /**
      * Creates the final cookie object
@@ -52,6 +85,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             $scope.layers = layers.doc;
             $scope.currentLayer = layers.doc[0];
             $scope.total = 0;
+            $scope.updateCurrentLayerOption();
         });
 
         /**
@@ -65,9 +99,10 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             for (l = 0; l < $scope.layers.length; l += 1) {
                 if ($scope.layers[l]._id === _id) {
                     $scope.currentLayer = $scope.layers[l];
-                    $scope.currentLayerIndex = l;
+                    break;
                 }
             }
+            $scope.updateCurrentLayerOption();
         };
 
         /**
@@ -108,6 +143,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
                 optionsTotal += $scope.selectedLayers[i].options[0].price;
             }
             $scope.total = optionsTotal;
+            $scope.updateCurrentLayerOption();
         };
 
         /**
