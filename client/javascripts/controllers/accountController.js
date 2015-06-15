@@ -46,7 +46,7 @@ function accountRegisterController($scope, $routeParams, $location, authenticati
 /**
  * Controller responsible for handling the account edit.
  */
-function accountDetailController($scope, $routeParams, $location, authenticationService, dbService) {
+function accountDetailController($scope, $routeParams, $location, authenticationService, dbService, locationService) {
     "use strict";
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
@@ -67,6 +67,11 @@ function accountDetailController($scope, $routeParams, $location, authentication
                         $location.path('/account');
                     });
                 }
+            };
+
+            $scope.addAddress = function () {
+                locationService.latestLocation = $location.$$path;
+                $location.path("/account/address/add");
             };
         }
     });
