@@ -34,7 +34,7 @@
             </div>
             <a href="/#/cart" data-ng-controller="cartController">
                 <img src="img/ShoppingCart.png" width="30px" height="30px">
-                <span class="badge" id="cartItemsNumber">{{itemCount}}</span>
+                <span class="badge" id="cartItemsNumber" ng-show="cartItems !== null">{{cartItems.length}}</span>
             </a>
         </div>
     </div>
@@ -48,7 +48,6 @@
     <div class="content">
         <br>
         <!-- Breadcrumb -->
-        <br>
         <div ncy-breadcrumb></div>
 
         <div ng-controller="messageController">
