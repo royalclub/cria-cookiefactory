@@ -19,9 +19,11 @@
  * @constructor
  */
 
-function orderController($scope, $routeParams, $location, orderService, $cookieStore, authenticationService, usersService, dbService, messageService, locationService) {
+function orderController($scope, $routeParams, $location, orderService, authenticationService, usersService, dbService, messageService, locationService) {
     "use strict";
-    var text;
+    var 
+        text,
+        storageCookieName = 'cookies';
 
     $scope.shipment = { shipmentDate: new Date(), shipmentType: null };
     $scope.payment = { paymentOption: "IDeal", bank: "", paid: 0 };
@@ -31,7 +33,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
         if (loggedIn) {
             $scope.user = loggedInUser;
             $scope.addresses = $scope.user.addresses;
-            $scope.order.user = [{username: $scope.user.username, emailAddress: $scope.user.emailAddress, firstName: $scope.user.firstName, inserts: 1, lastName: $scope.user.lastName}];
+            $scope.order.user = [{username: $scope.user.username, emailAddress: $scope.user.emailAddress, firstName: $scope.user.firstName, inserts: $scope.user.inserts, lastName: $scope.user.lastName}];
         } else {
             text = 'U moet eerst inloggen voordat u verder kan gaan.';
             messageService.setMessage(text, 'danger');
@@ -42,8 +44,8 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
     // Lists
     $scope.order = {
         "number": Math.floor((Math.random() * 99999999) + 1),
-        "status": [{ name: "New", description: "Dit is een nieuwe order!!!"}],
-        rules: JSON.parse(localStorage.getItem('myOrderRules')),
+        "status": [{ name: "Nieuw", description: "Dit is een nieuwe order!"}],
+        rules: JSON.parse(localStorage.getItem(storageCookieName)),
         invoiceAddress: [],
         shipmentAddress: [],
         vatPercentage: 21
@@ -131,7 +133,6 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
             $scope.initRestId = function () {
                 $scope.$broadcast("emptyCartEvent");
             };
-            $scope.order = $cookieStore.get("myOrder");
             $location.path("/orders/confirmation/");
         }
     };
