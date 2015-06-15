@@ -16,7 +16,6 @@ cookieFactory.controller('accountController', function ($scope, $routeParams, $l
         if (!loggedIn) {
             $scope.showLoginForm = true;
             $scope.showWelcomeText = false;
-            $location.path($location.$$path);
         } else {
             $scope.account = loggedInUser;
             $scope.showLoginForm = false;
