@@ -170,6 +170,20 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             }
         });
 
+        // Get orderPayment
+        $routeProvider.when('/orders/payment', {
+            templateUrl: 'partials/orders/orderPayment.html',
+            controller: orderController
+        });
+
+        $stateProvider.state('order payment', {
+            url: '/orders/payment',
+            ncyBreadcrumb: {
+                parent: 'order detail',
+                label: 'betalen'
+            }
+        });
+
         // Get orderConfirmation
         $routeProvider.when('/orders/confirmation', {
             templateUrl: 'partials/orders/orderConfirmation.html',
@@ -179,15 +193,9 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         $stateProvider.state('order confirm', {
             url: '/orders/confirmation',
             ncyBreadcrumb: {
-                parent: 'order detail',
-                label: 'order'
+                parent: 'order payment',
+                label: 'voltooid'
             }
-        });
-
-        // Get orderPayment
-        $routeProvider.when('/orders/payment/', {
-            templateUrl: 'partials/orders/orderPayment.html',
-            controller: orderController
         });
 
         //When no valid route is provided
