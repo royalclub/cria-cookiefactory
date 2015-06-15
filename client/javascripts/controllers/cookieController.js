@@ -26,19 +26,35 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
     $scope.editCookieIndex = -1;
 
     /**
+     * Get the index of a collection, assuming the 'name' property of the item exists.
+     * @param {array} collection    The collection to loop through.
+     * @param {any} item    The item to look for inside the collection.
+     */
+    $scope.getIndexByName = function (collection, item) {
+        var idx = -1;
+
+        for (idx = 0; idx < collection.length; idx += 1) {
+            if (collection[idx].name === item.name) {
+                return idx;
+            }
+        }
+        return -1;
+    };
+
+    /**
+     * Get the index of the $scope.layers
+     * @param {Layer}   The Layer object to find.
+     */
+    $scope.getLayerIndex = function (layer) {
+        return $scope.getIndexByName($scope.layers, layer);
+    };
+
+    /**
      * Gets the index of the currently selected layer in the selectedLayers property.
      * @param {Layer} currentLayer  The layer that is currently selected.
      */
     $scope.getCurrentLayerIndex = function (currentLayer) {
-        var layerIdx = 0;
-
-        for (layerIdx = 0; layerIdx < $scope.selectedLayers.length; layerIdx += 1) {
-            if ($scope.selectedLayers[layerIdx].name === currentLayer.name) {
-                return layerIdx;
-            }
-        }
-
-        return -1;
+        return $scope.getIndexByName($scope.selectedLayers, currentLayer);
     };
 
     /**
@@ -62,16 +78,17 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
         $scope.editCookieIndex = localStorage.getItem(storageEditCookieName);
         if ($scope.editCookieIndex !== null) {
             orderRule = JSON.parse(localStorage.getItem(storageCookieName))[$scope.editCookieIndex];
-            console.log(orderRule);
             $scope.cookieName = orderRule.cookie[0].name;
             $scope.selectedLayers = orderRule.cookie[0].layers;
             $scope.currentLayer = $scope.selectedLayers[0];
             localStorage.removeItem(storageEditCookieName);
+            console.log("removeItem");
         } else {
             $scope.selectedLayers = [];
             $scope.currentLayer = $scope.layers[0];
         }
         $scope.updateCurrentLayerOption();
+        console.log("Updated");
     };
 
     /**
@@ -113,12 +130,12 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
 
     dbService.layers.get(function (layers) {
         $scope.layers = layers.doc;
-        $scope.total = 0;
+        $scope.total = 0.0;
         $scope.initialize();
     });
 
     /**
-     * Layertoption change based on the selected layer
+     * LayerOption change based on the selected layer
      * @constructor
      * @param _id
      * @param $event
@@ -143,12 +160,13 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
     $scope.onLayerOptionClicked = function (option, $event) {
         $event.preventDefault();
         var layer = {
-            "name" : $scope.currentLayer.name,
-            "required" : $scope.currentLayer.required,
-            "sequence" : $scope.currentLayer.sequence,
-            "imageSrc" : $scope.currentLayer.imageSrc,
-            "options" : [option]
-        };
+                "name" : $scope.currentLayer.name,
+                "required" : $scope.currentLayer.required,
+                "sequence" : $scope.currentLayer.sequence,
+                "imageSrc" : $scope.currentLayer.imageSrc,
+                "options" : [option]
+            },
+            layerIdx = -1;
 
         function layerNotExists() {
             for (l = 0; l < $scope.selectedLayers.length; l += 1) {
@@ -172,6 +190,12 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             optionsTotal += $scope.selectedLayers[i].options[0].price;
         }
         $scope.total = optionsTotal;
+
+        // Automatically select the next layer.
+        layerIdx = $scope.getLayerIndex($scope.currentLayer);
+        if (layerIdx < $scope.layers.length - 1) {
+            $scope.currentLayer = $scope.layers[layerIdx + 1];
+        }
         $scope.updateCurrentLayerOption();
     };
 
