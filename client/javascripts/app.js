@@ -155,7 +155,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
                 label: 'koekjes lijst'
             }
         });
-        
+
         // Get orderDetails
         $routeProvider.when('/orders/details', {
             templateUrl: 'partials/orders/orderDetails.html',
@@ -183,7 +183,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
                 label: 'order'
             }
         });
-        
+
         // Get orderPayment
         $routeProvider.when('/orders/payment/', {
             templateUrl: 'partials/orders/orderPayment.html',
@@ -192,6 +192,6 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
 
         //When no valid route is provided
         $routeProvider.otherwise({
-           redirectTo: "/"
+            redirectTo: "/"
         });
     });
