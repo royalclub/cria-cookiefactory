@@ -9,7 +9,7 @@
  * @param dbService
  * @constructor
  */
-function addressController($scope, $routeParams, $location, dbService, authenticationService) {
+function addressController($scope, $routeParams, $location, dbService, authenticationService, messageService, locationService) {
     "use strict";
 
     // GET 1 user
@@ -30,7 +30,7 @@ function addressController($scope, $routeParams, $location, dbService, authentic
 
     // UPDATE user
     $scope.save = function (address) {
-        var index;
+        var index, text;
         if (address && address._id !== undefined) {
             for (index = 0; index < $scope.account.addresses.length; index++) {
                 if ($scope.account.addresses[index]._id === address._id) {
@@ -40,19 +40,28 @@ function addressController($scope, $routeParams, $location, dbService, authentic
             if ($scope.account && $scope.account._id !== undefined) {
                 dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
                     if (res.err) {
+                        text = 'Niet alles is ingevuld of goed ingevuld!.';
+                        messageService.setMessage(text, 'danger');
                         console.log(res.err);
+                    } else {
+                        $location.path(locationService.latestLocation);
                     }
-                    $location.path('/account');
                 });
             }
-        } else if (address) {
-            $scope.account.addresses[$scope.account.addresses.length] = address;
+        } else if (address && address._id === undefined) {
+            console.log($scope.account.addresses);
+            $scope.account.addresses.push(address);
+            console.log($scope.account.addresses);
             if ($scope.account && $scope.account._id !== undefined) {
                 dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
                     if (res.err) {
+                        text = 'Niet alles is ingevuld of goed ingevuld!.';
+                        messageService.setMessage(text, 'danger');
+                        $scope.account.addresses.splice($scope.account.addresses.length - 1, 1);
                         console.log(res.err);
+                    } else {
+                        $location.path(locationService.latestLocation);
                     }
-                    $location.path('/account');
                 });
             }
         }

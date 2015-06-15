@@ -70,6 +70,12 @@
                     }
                 };
             }])
+        .factory('locationService',
+            function () {
+                var location = {};
+                location.latestLocation = '';
+                return location;
+            })
         .factory('messageService',
             function () {
                 var message = {}, i;
