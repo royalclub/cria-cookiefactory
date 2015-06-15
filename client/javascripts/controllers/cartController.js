@@ -15,18 +15,18 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
     /**
      * Calculate the price of a single cookie.
      */
-    $scope.calculateCookiePrice = function (cookie) {
+    $scope.calculateOrderRulePrice = function (orderRule) {
         var layerIdx = 0, subtotal = 0.0;
 
-        if (cookie.layers === undefined) {
+        if (orderRule.cookie[0].layers === undefined) {
             return 0.0;
         }
 
-        for (layerIdx = 0; layerIdx < cookie.layers.length; layerIdx += 1) {
-            subtotal += cookie.layers[layerIdx].options[0].price;
+        for (layerIdx = 0; layerIdx < orderRule.cookie[0].layers.length; layerIdx += 1) {
+            subtotal += orderRule.cookie[0].layers[layerIdx].options[0].price;
         }
 
-        return subtotal;
+        return subtotal * (orderRule.box[0].capacity * orderRule.amountOfBoxes);
     };
 
     /**
@@ -37,7 +37,7 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
 
         if ($scope.cartItems !== null) {
             for (cookieIdx = 0; cookieIdx < $scope.cartItems.length; cookieIdx += 1) {
-                subtotal += $scope.calculateCookiePrice($scope.cartItems[cookieIdx].cookie[0]);
+                subtotal += $scope.calculateOrderRulePrice($scope.cartItems[cookieIdx]);
             }
             $scope.subtotal = subtotal;
             $scope.tax = (subtotal / 100) * 21;
@@ -78,6 +78,7 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
      */
     $scope.updateCartItem = function () {
         localStorage.setItem(storageCookieName, JSON.stringify($scope.cartItems));
+        console.log($scope.cartItems);
         $scope.calculatePrices();
     };
 

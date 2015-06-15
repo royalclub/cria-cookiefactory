@@ -22,7 +22,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
     $scope.cookieName = null;           // The name of the cookie.
     $scope.selectedLayers = [];         // Object that will be saved in the database.
     $scope.currentLayer = {};           // Currently selected layer for the editor.
-    $scope.currentLayerOption = {};    // Currently selected layer option.
+    $scope.currentLayerOption = {};     // Currently selected layer option.
     $scope.editCookieIndex = -1;
 
     /**
@@ -57,13 +57,14 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
     };
 
     $scope.initialize = function () {
-        var editCookie;
+        var orderRule;
 
         $scope.editCookieIndex = localStorage.getItem(storageEditCookieName);
         if ($scope.editCookieIndex !== null) {
-            editCookie = JSON.parse(localStorage.getItem(storageCookieName))[$scope.editCookieIndex];
-            $scope.cookieName = editCookie.cookie[0].name;
-            $scope.selectedLayers = editCookie.cookie[0].layers;
+            orderRule = JSON.parse(localStorage.getItem(storageCookieName))[$scope.editCookieIndex];
+            console.log(orderRule);
+            $scope.cookieName = orderRule.cookie[0].name;
+            $scope.selectedLayers = orderRule.cookie[0].layers;
             $scope.currentLayer = $scope.selectedLayers[0];
             localStorage.removeItem(storageEditCookieName);
         } else {
@@ -90,7 +91,9 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             cookie: [{
                 "name": cookieName,
                 "creator": $scope.userName,
-                "layers": $scope.selectedLayers
+                "layers": $scope.selectedLayers,
+                "creationDate": new Date(),
+                "modificationDate": new Date()
             }]
         };
     }
