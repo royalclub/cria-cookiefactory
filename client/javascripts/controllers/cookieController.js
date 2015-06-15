@@ -82,13 +82,11 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             $scope.selectedLayers = orderRule.cookie[0].layers;
             $scope.currentLayer = $scope.selectedLayers[0];
             localStorage.removeItem(storageEditCookieName);
-            console.log("removeItem");
         } else {
             $scope.selectedLayers = [];
             $scope.currentLayer = $scope.layers[0];
         }
         $scope.updateCurrentLayerOption();
-        console.log("Updated");
     };
 
     /**

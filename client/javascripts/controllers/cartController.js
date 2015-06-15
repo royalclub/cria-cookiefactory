@@ -80,7 +80,6 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
      */
     $scope.updateCartItem = function () {
         localStorage.setItem(storageCookieName, JSON.stringify($scope.cartItems));
-        console.log($scope.cartItems);
         $scope.calculatePrices();
     };
 
