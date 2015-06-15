@@ -80,7 +80,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             orderRule = JSON.parse(localStorage.getItem(storageCookieName))[$scope.editCookieIndex];
             $scope.cookieName = orderRule.cookie[0].name;
             $scope.selectedLayers = orderRule.cookie[0].layers;
-            $scope.currentLayer = $scope.selectedLayers[0];
+            $scope.currentLayer = $scope.layers[0];
             localStorage.removeItem(storageEditCookieName);
         } else {
             $scope.selectedLayers = [];
