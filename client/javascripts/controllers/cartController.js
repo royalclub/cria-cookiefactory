@@ -9,48 +9,53 @@
  */
 cookieFactory.controller('cartController', function ($scope, $location, authenticationService, messageService) {
     "use strict";
-    var b, layer, storageCookieName = 'key', storageOrderRules = 'myOrderRules', storage;
-    $scope.orderRules = [];
+    var storageCookieName = 'cookies', storageEditCookieName = 'editCookie';
+    $scope.cartItems = null;
+
+    /**
+     * Calculate the price of a single cookie.
+     */
+    $scope.calculateCookiePrice = function (cookie) {
+        var layerIdx = 0, subtotal = 0.0;
+
+        if (cookie.layers === undefined) {
+            return 0.0;
+        }
+
+        for (layerIdx = 0; layerIdx < cookie.layers.length; layerIdx += 1) {
+            subtotal += cookie.layers[layerIdx].options[0].price;
+        }
+
+        return subtotal;
+    };
 
     /**
      * Calculates the all the prices
      */
-    function calculatePrices() {
-        var subtotal = 0.0, i;
-        for (i = 0; i < $scope.cartItems.length; i += 1) {
-            subtotal += $scope.orderRules[i].cookie[0].price * $scope.orderRules[i].amountOfBoxes;
-        }
-        $scope.subtotal = subtotal;
-        $scope.tax = (subtotal / 100) * 21;
-        $scope.total = $scope.subtotal + $scope.tax;
-    }
+    $scope.calculatePrices = function () {
+        var subtotal = 0.0, cookieIdx = 0;
 
-    if ($scope.cartItems === undefined) {
-        storage = JSON.parse(localStorage.getItem(storageCookieName));
-        if (!storage) {
-            localStorage.setItem(storageCookieName, JSON.stringify([]));
-            $scope.itemCount = 0;
-        } else {
-            $scope.cartItems = JSON.parse(localStorage.getItem(storageCookieName));
-            for (b = 0; b < $scope.cartItems.length; b += 1) {
-                $scope.orderRules.push({
-                    cookie : [$scope.cartItems[b]],
-                    box : null,
-                    amountOfBoxes : 1
-                });
+        if ($scope.cartItems !== null) {
+            for (cookieIdx = 0; cookieIdx < $scope.cartItems.length; cookieIdx += 1) {
+                subtotal += $scope.calculateCookiePrice($scope.cartItems[cookieIdx].cookie[0]);
             }
-            for (b = 0; b < $scope.cartItems.length; b += 1) {
-                $scope.cartItems[b].price = 0;
-                for (layer = 0; layer < $scope.cartItems[b].layers.length; layer += 1) {
-                    $scope.cartItems[b].price = $scope.cartItems[b].layers[layer].options[0].price + $scope.cartItems[b].price;
-                }
-                $scope.cartItems[b].amount = 1;
-            }
-            localStorage.setItem(storageCookieName, JSON.stringify($scope.cartItems));
-            $scope.itemCount = $scope.cartItems.length;
-            calculatePrices();
+            $scope.subtotal = subtotal;
+            $scope.tax = (subtotal / 100) * 21;
+            $scope.total = $scope.subtotal + $scope.tax;
         }
-    }
+    };
+
+
+    $scope.initialize = function () {
+        $scope.loadCart();
+        $scope.calculatePrices();
+    };
+
+    $scope.loadCart = function () {
+        $scope.cartItems = JSON.parse(localStorage.getItem(storageCookieName));
+    };
+
+    $scope.initialize();
 
     /**
      * Deletes a cartitem
@@ -59,10 +64,13 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
      */
     $scope.deleteCartItem = function ($index) {
         $scope.cartItems.splice($index, 1);
-        $scope.orderRules.splice($index, 1);
         localStorage.setItem(storageCookieName, JSON.stringify($scope.cartItems));
-        $scope.itemCount = $scope.cartItems.length;
-        calculatePrices();
+        $scope.calculatePrices();
+    };
+
+    $scope.editCartItem = function (index) {
+        localStorage.setItem(storageEditCookieName, index);
+        $location.path('/cookies/design');
     };
 
     /**
@@ -70,8 +78,7 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
      */
     $scope.updateCartItem = function () {
         localStorage.setItem(storageCookieName, JSON.stringify($scope.cartItems));
-        $scope.itemCount = $scope.cartItems.length;
-        calculatePrices();
+        $scope.calculatePrices();
     };
 
     /**
@@ -79,10 +86,14 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
      * @constructor
      * @param scope
      */
-    $scope.$watch(function (scope) { return scope.itemCount; },
+    $scope.$watch(
+        function (scope) { 
+            return ($scope.cartItems === null) ? 0 : $scope.cartItems.length;
+        },
         function (newValue) {
             document.getElementById("cartItemsNumber").innerHTML = newValue;
-        });
+        }
+    );
 
     /**
      * Sets the orderrules in the localstorage and navigates to order detail
@@ -92,7 +103,6 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
     $scope.onProceedClicked = function ($event) {
         var text;
         $event.preventDefault();
-        localStorage.setItem(storageOrderRules, JSON.stringify($scope.orderRules));
 
         authenticationService.getUser(function (loggedIn, loggedInUser) {
             if (loggedIn) {

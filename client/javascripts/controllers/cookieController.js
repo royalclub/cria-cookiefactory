@@ -15,13 +15,15 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
 
     var optionsTotal = 0.0,
         i = 0,
-        l = 0;
+        l = 0,
+        storageCookieName = 'cookies',
+        storageEditCookieName = 'editCookie';
 
     $scope.cookieName = null;           // The name of the cookie.
     $scope.selectedLayers = [];         // Object that will be saved in the database.
     $scope.currentLayer = {};           // Currently selected layer for the editor.
     $scope.currentLayerOption = {};    // Currently selected layer option.
-
+    $scope.editCookieIndex = -1;
 
     /**
      * Gets the index of the currently selected layer in the selectedLayers property.
@@ -54,6 +56,23 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
         }
     };
 
+    $scope.initialize = function () {
+        var editCookie;
+
+        $scope.editCookieIndex = localStorage.getItem(storageEditCookieName);
+        if ($scope.editCookieIndex !== null) {
+            editCookie = JSON.parse(localStorage.getItem(storageCookieName))[$scope.editCookieIndex];
+            $scope.cookieName = editCookie.cookie[0].name;
+            $scope.selectedLayers = editCookie.cookie[0].layers;
+            $scope.currentLayer = $scope.selectedLayers[0];
+            localStorage.removeItem(storageEditCookieName);
+        } else {
+            $scope.selectedLayers = [];
+            $scope.currentLayer = $scope.layers[0];
+        }
+        $scope.updateCurrentLayerOption();
+    };
+
     /**
      * Creates the final cookie object
      * @constructor
@@ -61,9 +80,18 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
      */
     function getCookie(cookieName) {
         return {
-            "name" : cookieName,
-            "creator" : $scope.userName,
-            "layers" : $scope.selectedLayers
+            box: [{
+                name: 'Standaard',
+                description: 'Standaard verpakking',
+                capacity: 1,
+                imageSrc: 'img/box.png'
+            }],
+            amountOfBoxes: 1,
+            cookie: [{
+                "name": cookieName,
+                "creator": $scope.userName,
+                "layers": $scope.selectedLayers
+            }]
         };
     }
 
@@ -80,115 +108,127 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
         }
     });
 
-    if ($routeParams._id === undefined) {
-        dbService.layers.get(function (layers) {
-            $scope.layers = layers.doc;
-            $scope.currentLayer = layers.doc[0];
-            $scope.total = 0;
-            $scope.updateCurrentLayerOption();
-        });
+    dbService.layers.get(function (layers) {
+        $scope.layers = layers.doc;
+        $scope.total = 0;
+        $scope.initialize();
+    });
 
-        /**
-         * Layertoption change based on the selected layer
-         * @constructor
-         * @param _id
-         * @param $event
-         */
-        $scope.onLayerClicked = function (_id, $event) {
-            $event.preventDefault();
-            for (l = 0; l < $scope.layers.length; l += 1) {
-                if ($scope.layers[l]._id === _id) {
-                    $scope.currentLayer = $scope.layers[l];
-                    break;
-                }
+    /**
+     * Layertoption change based on the selected layer
+     * @constructor
+     * @param _id
+     * @param $event
+     */
+    $scope.onLayerClicked = function (_id, $event) {
+        $event.preventDefault();
+        for (l = 0; l < $scope.layers.length; l += 1) {
+            if ($scope.layers[l]._id === _id) {
+                $scope.currentLayer = $scope.layers[l];
+                break;
             }
-            $scope.updateCurrentLayerOption();
+        }
+        $scope.updateCurrentLayerOption();
+    };
+
+    /**
+     * Fills the cookie with the selected layer and layeroption
+     * @constructor
+     * @param option
+     * @param $event
+     */
+    $scope.onLayerOptionClicked = function (option, $event) {
+        $event.preventDefault();
+        var layer = {
+            "name" : $scope.currentLayer.name,
+            "required" : $scope.currentLayer.required,
+            "sequence" : $scope.currentLayer.sequence,
+            "imageSrc" : $scope.currentLayer.imageSrc,
+            "options" : [option]
         };
 
-        /**
-         * Vuls the cookie with the selected layer and layeroption
-         * @constructor
-         * @param option
-         * @param $event
-         */
-        $scope.onLayerOptionClicked = function (option, $event) {
-            $event.preventDefault();
-            var layer = {
-                    "name" : $scope.currentLayer.name,
-                    "required" : $scope.currentLayer.required,
-                    "sequence" : $scope.currentLayer.sequence,
-                    "imageSrc" : $scope.currentLayer.imageSrc,
-                    "options" : [option]
-                };
-
-            function layerNotExists() {
-                for (l = 0; l < $scope.selectedLayers.length; l += 1) {
-                    if ($scope.selectedLayers[l].name === $scope.currentLayer.name) {
-                        $scope.selectedLayers[l].options[0] = option;
-                        return false;
-                    }
+        function layerNotExists() {
+            for (l = 0; l < $scope.selectedLayers.length; l += 1) {
+                if ($scope.selectedLayers[l].name === $scope.currentLayer.name) {
+                    $scope.selectedLayers[l].options[0] = option;
+                    return false;
                 }
-                return true;
             }
+            return true;
+        }
 
-            if ($scope.selectedLayers.length === 0) {
+        if ($scope.selectedLayers.length === 0) {
+            $scope.selectedLayers.push(layer);
+        } else {
+            if (layerNotExists()) {
                 $scope.selectedLayers.push(layer);
-            } else {
-                if (layerNotExists()) {
-                    $scope.selectedLayers.push(layer);
-                }
             }
-            optionsTotal = 0;
-            for (i = 0; i < $scope.selectedLayers.length; i += 1) {
-                optionsTotal += $scope.selectedLayers[i].options[0].price;
-            }
-            $scope.total = optionsTotal;
-            $scope.updateCurrentLayerOption();
-        };
+        }
+        optionsTotal = 0;
+        for (i = 0; i < $scope.selectedLayers.length; i += 1) {
+            optionsTotal += $scope.selectedLayers[i].options[0].price;
+        }
+        $scope.total = optionsTotal;
+        $scope.updateCurrentLayerOption();
+    };
 
-        /**
-         * Execute when user want to go to the cart
-         * @constructor
-         * @param cookieName
-         * @param $event
-         */
-        $scope.onProceedClicked = function (cookieName, $event) {
-            var browserCookieName = 'key', cookie, storage, text;
-            $event.preventDefault();
-            if (!cookieName) {
-                text = 'De naam van het koekje is niet ingevuld!';
-                messageService.setMessage(text, 'danger');
-            } else if ($scope.selectedLayers.length < 4) {
-                text = '1 of meerder layers zijn niet geslecteerd!';
-                messageService.setMessage(text, 'danger');
-            } else {
-                cookie = getCookie(cookieName);
-                storage = JSON.parse(localStorage.getItem(browserCookieName));
-                if (!storage) {
-                    localStorage.setItem(browserCookieName, JSON.stringify([cookie]));
-                } else {
-                    storage.push(cookie);
-                    localStorage.setItem(browserCookieName, JSON.stringify(storage));
-                }
-                $location.path("/cart");
-            }
-        };
+    $scope.validateCookie = function (cookieName) {
+        if (!cookieName) {
+            throw 'De naam van het koekje is niet ingevuld.';
+        }
+        if ($scope.selectedLayers.length !== $scope.layers.length) {
+            throw 'Niet alle lagen zijn gekozen.';
+        }
+    };
 
-        /**
-         * Saves the data to the database
-         * @constructor
-         * @param cookieName
-         */
-        $scope.save = function (cookieName) {
-            var cookie = getCookie(cookieName);
-            dbService.cookies.save(cookie, function (res) {
-                if (res.err) {
-                    console.log(res.err);
-                    alert('Er is iets fout gegaan, koekje is niet opgeslagen!');
-                }
-            });
-        };
-    }
+    /**
+     * Execute when user want to go to the cart
+     * @constructor
+     * @param cookieName
+     * @param $event
+     */
+    $scope.onProceedClicked = function (cookieName, $event) {
+        var cookie, storage;
+        $event.preventDefault();
+
+        try {
+            $scope.validateCookie(cookieName);
+        } catch (ex) {
+            messageService.setMessage(ex, 'danger');
+            return;
+        }
+
+        cookie = getCookie(cookieName);
+        storage = JSON.parse(localStorage.getItem(storageCookieName));
+        if ($scope.editCookieIndex !== null) { // apparently we're editing an existing cookie, so let's update it now.
+            storage[$scope.editCookieIndex] = cookie;
+            localStorage.setItem(storageCookieName, JSON.stringify(storage));
+        } else {
+            if (!storage) { // first cookie in localStorage.
+                localStorage.setItem(storageCookieName, JSON.stringify([cookie]));
+            } else {
+                storage.push(cookie);
+                localStorage.setItem(storageCookieName, JSON.stringify(storage));
+            }
+        }
+
+        $location.path("/cart");
+    };
+
+    /**
+     * Saves the data to the database
+     * @constructor
+     * @param cookieName
+     */
+    $scope.save = function (cookieName) {
+        var cookie = getCookie(cookieName);
+        dbService.cookies.save(cookie, function (res) {
+            if (res.err) {
+                console.log(res.err);
+                alert('Er is iets fout gegaan, koekje is niet opgeslagen!');
+            }
+        });
+    };
 });
 
 /**
