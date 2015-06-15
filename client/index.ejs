@@ -14,7 +14,7 @@
 
 <div class="mainContainer"> 
     <div class="header">
-        <div class="top">
+        <div class="top navbar-right">
             <form class="navbar-form" role="search" method="post" action="/login" id="loginForm" ng-controller="accountController" ng-show="showLoginForm">
                 <div class="form-group">
                     <input type="text" class="form-control" name="username" placeholder="Gebruikersnaam">
@@ -24,53 +24,48 @@
                 </div>
                 <input type="submit" class="btn btn-primary" value="Login">
             </form>
-            <span class="navbar-text navbar-right" ng-controller="accountController" ng-show="showWelcomeText">
-                Welkom, {{account.firstName}}! <a href="/#/account/logout" class="navbar-link">[Logout]</a>
-            </span>
-            
-            <a href="/#/account">
-                <img src="img/iconprofile.png" width="30px" height="30px">
-            </a>
+            <div ng-controller="accountController" ng-show="showWelcomeText">
+                <span class="navbar-text">
+                    Welkom, {{account.firstName}}! <a ng-click="logout()" logout class="navbar-link">[Logout]</a>
+                </span>
+                <a href="/#/account">
+                    <img src="img/iconprofile.png" width="30px" height="30px">
+                </a>
+            </div>
             <a href="/#/cart" data-ng-controller="cartController">
                 <img src="img/ShoppingCart.png" width="30px" height="30px">
                 <span class="badge" id="cartItemsNumber">{{itemCount}}</span>
             </a>
-        </div>    
+        </div>
     </div>
-    
+
      <div class="menu">
         <span style="margin-left:280px; line-height:38px;" data-ng-controller="menuController">
             <a ng-repeat="item in menuItems" href="{{item.url}}">{{item.name}}</a>
         </span>   
     </div>
-   
-    <div class="content">
-        <br /> 
-        <!-- Breadcrumb -->
-            <br>
-            <ol class="breadcrumb" ng-controller="menuController">Waar ben ik:
-                <li ng-repeat="item in breadcrumb" class="{{item.active}}">
-                    <b>
-                        <a href="{{item.url}}">{{item.name}}</a>
-                    </b>
-                </li>
-            </ol>
 
-            <div ng-controller="messageController">
-                <div class="alert alert-danger" role="alert" ng-show="showDanger"><p>{{message.error}}</p></div>
-                <div class="alert alert-warning" role="alert" ng-show="showWarning"><p>{{message.warning}}</p></div>
-                <div class="alert alert-info" role="alert" ng-show="showInfo"><p>{{message.info}}</p></div>
-                <div class="alert alert-success" role="alert" ng-show="showSuccess"><p>{{message.success}}</p></div>
-            </div>
-                <% if (message.error) { %>
-                <div class="alert alert-danger" role="alert"><p><%= message.error %></p></div>
-                <% } else if (message.warning) { %>
-                <div class="alert alert-warn" role="alert"><p><%= message.warning %></p></div>
-                <% } else if (message.info) { %>
-                <div class="alert alert-info" role="alert"><p><%= message.info %></p></div>
-                <% } else if (message.success) { %>
-                <div class="alert alert-success" role="alert"><p><%= message.success %></p></div>
-                <% } %>
+    <div class="content">
+        <br>
+        <!-- Breadcrumb -->
+        <br>
+        <div ncy-breadcrumb></div>
+
+        <div ng-controller="messageController">
+            <div class="alert alert-danger" role="alert" ng-show="showDanger"><p>{{message.error}}</p></div>
+            <div class="alert alert-warning" role="alert" ng-show="showWarning"><p>{{message.warning}}</p></div>
+            <div class="alert alert-info" role="alert" ng-show="showInfo"><p>{{message.info}}</p></div>
+            <div class="alert alert-success" role="alert" ng-show="showSuccess"><p>{{message.success}}</p></div>
+        </div>
+            <% if (message.error) { %>
+            <div class="alert alert-danger" role="alert"><p><%= message.error %></p></div>
+            <% } else if (message.warning) { %>
+            <div class="alert alert-warn" role="alert"><p><%= message.warning %></p></div>
+            <% } else if (message.info) { %>
+            <div class="alert alert-info" role="alert"><p><%= message.info %></p></div>
+            <% } else if (message.success) { %>
+            <div class="alert alert-success" role="alert"><p><%= message.success %></p></div>
+            <% } %>
 
         <div data-ng-view=""></div>
         <p style="height:20px; width:500px; float:left; clear: both;"></p>
@@ -82,9 +77,10 @@
 <script src="./javascripts/lib/angular.min.js"></script>
 <script src="./javascripts/lib/angular-route.min.js"></script>
 <script src="./javascripts/lib/angular-resource.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.1/angular-cookies.min.js"></script>
 <script src="./javascripts/lib/jquery-1.11.3.min.js"></script>
 <script src="./javascripts/lib/bootstrap.min.js"></script>
+<script src="./javascripts/lib/angular-ui-router.js"></script>
+<script src="./javascripts/lib/angular-breadcrumb.js"></script>
 <!-- App -->
 <script src="./javascripts/app.js"></script>
 <!--Controllers-->
