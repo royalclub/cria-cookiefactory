@@ -39,10 +39,10 @@
             </a>
 		</div>
 	</div>
-
+    <p>&nbsp;</p>
 	<div class="form-group">
 		<label for="shipment.shipmentDate">Bezorg datum</label>
-  		<input class="form-control" ng-model="shipment.shipmentDate.date" name="shipment.shipmentDate" min="2015-01-01" max="2018-12-31" required placeholder="yyyy-MM-dd" />
+  		<input class="form-control" type="date" ng-model="shipment.shipmentDate.date" name="shipment.shipmentDate" min="2015-01-01" max="2018-12-31" required placeholder="yyyy-MM-dd" />
 	</div>
 	<span class="error" ng-show="orderDetails.input.$error.required">
          Required!</span>
