@@ -14,13 +14,13 @@
                 <tr data-ng-repeat="item in cartItems">
                     <td>
                         <strong>{{item.cookie[0].name}}</strong> 
-                        <a href="#" ng-click="editCartItem($index)"><span class="glyphicon glyphicon-pencil"></span></a><br />
+                        <a href="#" ng-click="editCartItem($event, $index)"><span class="glyphicon glyphicon-pencil"></span></a><br />
                         <span ng-repeat="layer in item.cookie[0].layers">{{layer.name}}: <em>{{layer.options[0].name}}</em> ({{layer.options[0].price | currency: "€"}})<br /></span>
                     </td>
                     <td>
                         <input type="number" name="input" min="1" class="input-mini" ng-model="item.amountOfBoxes" ng-change="updateCartItem()"
                         ng-model-options="{debounce: 1000}">
-                        <button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteCartItem($index)">
+                        <button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteCartItem($event, $index)">
                             <span class="glyphicon glyphicon-trash"></span> 
                             Verwijder
                         </button>
@@ -50,7 +50,7 @@
                 </tr>
             </tbody>
         </table>
-        <a href="/#/cookie/design" class="btn btn-default">
+        <a href="/#/cookies/design" class="btn btn-default">
             <span class="glyphicon glyphicon-ok"></span> 
             Nieuw koekje ontwerpen
         </a>
