@@ -18,9 +18,11 @@ cookieFactory.controller('menuController', function ($scope, $routeParams) {
         {name: "Contact", url: "/#/contact", active: "", breadcrumb: [{name: "Cookie Factory", url: "/#/", active: "", index: 0}, {name: "Contact", url: "/#/contact", active: "active", index: 4}]}
     ];
     $scope.SetActivePage = function (index) {
+        console.log('SetActivePage');
         activePage = index;
     };
     $scope.GetBreadcrumb = function () {
+        console.log('GetBreadcrumb');
         return $scope.menuItems[activePage].breadcrumb;
     };
     $scope.IsActive = function (name) {
