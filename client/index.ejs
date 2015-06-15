@@ -46,14 +46,10 @@
     </div>
 
     <div class="content">
-        <br> 
+        <br>
         <!-- Breadcrumb -->
         <br>
-        <ol class="breadcrumb" ng-controller="menuController">Waar ben ik:
-            <li ng-repeat="item in breadcrumb" class="{{item.active}}">
-                    <a href="{{item.url}}">{{item.name}}</a>
-            </li>
-        </ol>
+        <div ncy-breadcrumb></div>
 
         <div ng-controller="messageController">
             <div class="alert alert-danger" role="alert" ng-show="showDanger"><p>{{message.error}}</p></div>
@@ -83,6 +79,8 @@
 <script src="./javascripts/lib/angular-resource.min.js"></script>
 <script src="./javascripts/lib/jquery-1.11.3.min.js"></script>
 <script src="./javascripts/lib/bootstrap.min.js"></script>
+<script src="./javascripts/lib/angular-ui-router.js"></script>
+<script src="./javascripts/lib/angular-breadcrumb.js"></script>
 <!-- App -->
 <script src="./javascripts/app.js"></script>
 <!--Controllers-->
