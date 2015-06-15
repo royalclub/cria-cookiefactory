@@ -13,7 +13,7 @@
 	
 .header {
 	width:1024px;
-	height:244px;
+	height:196px;
 	margin-top:-10px;
 	background:url(../img/header.png);
 	float:left;
@@ -43,10 +43,22 @@
 
 /* top */
 
+.form-control{
+	height:25px !important;}
+
+.btn{
+	line-height:15px !important;
+	background:#5eb299;}
+
+.btn:hover{opacity:0.8;
+background:#5eb299;}
 
 .top {
-	float:right;
-	margin:10px 70px 0 0;}	
+	float:left;
+	font-size:12px;
+	height:55px;
+	width:1024px;
+	background:url(../img/topbar.png);}	
 
 .top a:hover{
 	opacity:0.8;}
@@ -54,6 +66,9 @@
 	
 h2 {
 	}
+	
+	.navbar-text {margin-top:-28px;
+	float:right}
 
 a img {
 	border:none;}
