@@ -87,6 +87,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             $scope.currentLayer = $scope.layers[0];
         }
         $scope.updateCurrentLayerOption();
+        $scope.calculateCookiePrice();
     };
 
     /**
@@ -183,11 +184,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
                 $scope.selectedLayers.push(layer);
             }
         }
-        optionsTotal = 0;
-        for (i = 0; i < $scope.selectedLayers.length; i += 1) {
-            optionsTotal += $scope.selectedLayers[i].options[0].price;
-        }
-        $scope.total = optionsTotal;
+        $scope.calculateCookiePrice();
 
         // Automatically select the next layer.
         layerIdx = $scope.getLayerIndex($scope.currentLayer);
@@ -195,6 +192,14 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
             $scope.currentLayer = $scope.layers[layerIdx + 1];
         }
         $scope.updateCurrentLayerOption();
+    };
+
+    $scope.calculateCookiePrice = function () {
+        optionsTotal = 0;
+        for (i = 0; i < $scope.selectedLayers.length; i += 1) {
+            optionsTotal += $scope.selectedLayers[i].options[0].price;
+        }
+        $scope.total = optionsTotal;
     };
 
     $scope.validateCookie = function (cookieName) {

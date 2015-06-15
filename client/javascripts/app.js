@@ -1,5 +1,4 @@
-/*global angular, cookieController, userController, testController, accountController, accountDetailController, accountEditController, accountRegisterController, accountLogoutController, homeController, addressController, orderController */
-/*global angular, cookieController, userController, cookieDesignController, accountController, homeController, addressController, accountDetailController, accountEditController, accountLogoutController, orderController */
+/*global console, angular, cookieController, userController, testController, accountController, accountDetailController, accountEditController, accountRegisterController, accountLogoutController, homeController, addressController, orderController */
 
 /**
  *
