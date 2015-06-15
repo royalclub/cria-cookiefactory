@@ -62,13 +62,15 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
      * @constructor
      * @param $index
      */
-    $scope.deleteCartItem = function ($index) {
-        $scope.cartItems.splice($index, 1);
+    $scope.deleteCartItem = function (event, index) {
+        event.preventDefault();
+        $scope.cartItems.splice(index, 1);
         localStorage.setItem(storageCookieName, JSON.stringify($scope.cartItems));
         $scope.calculatePrices();
     };
 
-    $scope.editCartItem = function (index) {
+    $scope.editCartItem = function (event, index) {
+        event.preventDefault();
         localStorage.setItem(storageEditCookieName, index);
         $location.path('/cookies/design');
     };
@@ -88,7 +90,7 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
      * @param scope
      */
     $scope.$watch(
-        function (scope) { 
+        function (scope) {
             return ($scope.cartItems === null) ? 0 : $scope.cartItems.length;
         },
         function (newValue) {
