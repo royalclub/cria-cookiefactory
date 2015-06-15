@@ -19,7 +19,7 @@
  * @constructor
  */
 
-function orderController($scope, $routeParams, $location, orderService, $cookieStore, authenticationService, usersService, dbService, messageService) {
+function orderController($scope, $routeParams, $location, orderService, $cookieStore, authenticationService, usersService, dbService, messageService, locationService) {
     "use strict";
     var text;
 
@@ -31,7 +31,6 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
         if (loggedIn) {
             $scope.user = loggedInUser;
             $scope.addresses = $scope.user.addresses;
-            $scope.userName = $scope.user.username;
             $scope.order.user = [{username: $scope.user.username, emailAddress: $scope.user.emailAddress, firstName: $scope.user.firstName, inserts: 1, lastName: $scope.user.lastName}];
         } else {
             text = 'U moet eerst inloggen voordat u verder kan gaan.';
@@ -39,6 +38,7 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
             $location.path("/cart");
         }
     });
+
     // Lists
     $scope.order = {
         "number": Math.floor((Math.random() * 99999999) + 1),
@@ -77,11 +77,17 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
         $scope.order.invoiceAddress = [$scope.addresses[index]];
     };
 
+    $scope.addAddress = function () {
+        locationService.latestLocation = $location.$$path;
+        $location.path("/account/address/add");
+    };
+
     $scope.save = function (cookieName) {
         dbService.orders.save($scope.order, function (res) {
             if (res.err) {
                 console.log(res.err);
-                alert("De order is niet opgeslagen!");
+                text = 'De order is niet opgeslagen!';
+                messageService.setMessage(text, 'danger');
             }
         });
     };
@@ -92,13 +98,17 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
         if (!$scope.userName) {
             alert("U bent niet ingelogd.");
         } else if (!$scope.shipment.shipmentType) {
-            alert("U heeft nog geen verzend wijze gekozen.");
+            text = 'U heeft nog geen verzend wijze gekozen.';
+            messageService.setMessage(text, 'danger');
         } else if (!$scope.order.shipmentAddress) {
-            alert('Er is nog geen verzendadres bekend.');
+            text = 'Er is nog geen verzendadres bekend.';
+            messageService.setMessage(text, 'danger');
         } else if ($scope.order.rules.length === 0) {
-            alert('De order bevat geen items.');
+            text = 'De order bevat geen items.';
+            messageService.setMessage(text, 'danger');
         } else if (!$scope.shipment.shipmentDate.date) {
-            alert('U heeft nog geen verzenddatum ingevoerd.');
+            text = 'U heeft nog geen verzenddatum ingevoerd.';
+            messageService.setMessage(text, 'danger');
         } else {
             $scope.save();
             $location.path("/orders/payment/");
@@ -109,16 +119,18 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
     $scope.ProceedToConfirmation = function () {
         console.log(localStorage.getItem('myOrderRules'));
         if (!$scope.userName) {
-            alert("U bent niet ingelogd.");
+            text = 'U bent niet ingelogd.';
+            messageService.setMessage(text, 'danger');
         } else if (!$scope.payment.paymentOption) {
-            alert("Selecteer een betaal optie.");
+            text = 'Selecteer een betaal optie.';
+            messageService.setMessage(text, 'danger');
         } else if ($scope.payment.bank === "" && $scope.payment.paymentOption === "IDeal") {
-            alert("Selecteer een bank");
+            text = 'Selecteer een bank';
+            messageService.setMessage(text, 'danger');
         } else {
             $scope.initRestId = function () {
                 $scope.$broadcast("emptyCartEvent");
             };
-            console.debug($cookieStore.get("myOrder"));
             $scope.order = $cookieStore.get("myOrder");
             $location.path("/orders/confirmation/");
         }
