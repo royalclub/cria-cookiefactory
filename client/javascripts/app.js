@@ -55,12 +55,6 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             controller: accountRegisterController
         });
 
-        // Account signout
-        $routeProvider.when('/account/logout', {
-            templateUrl: 'partials/account/logout.html',
-            controller: accountLogoutController
-        });
-
         // Account EditAddress
         $routeProvider.when('/account/address/add', {
             templateUrl: 'partials/account/address/add.html',
