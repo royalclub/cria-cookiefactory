@@ -18,6 +18,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
             templateUrl: 'partials/about.html',
             controller: function ($location) {
                 $location.path('/cookies/design');
+                console.warn("Home: Redirect to cookie design.");
             }
         });
 
@@ -176,7 +177,7 @@ var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', '
         });
 
         //When no valid route is provided
-        //$routeProvider.otherwise({
-          //  redirectTo: "/"
-        //});
+        $routeProvider.otherwise({
+           redirectTo: "/"
+        });
     });
