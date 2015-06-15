@@ -14,7 +14,7 @@
 
 <div class="mainContainer"> 
     <div class="header">
-        <div class="top navbar-right">
+        <div class="top">
             <form class="navbar-form" role="search" method="post" action="/login" id="loginForm" ng-controller="accountController" ng-show="showLoginForm">
                 <div class="form-group">
                     <input type="text" class="form-control" name="username" placeholder="Gebruikersnaam">
@@ -24,15 +24,15 @@
                 </div>
                 <input type="submit" class="btn btn-primary" value="Login">
             </form>
-            <div ng-controller="accountController" ng-show="showWelcomeText">
-                <span class="navbar-text">
+           <div ng-controller="accountController" ng-show="showWelcomeText">
+               <span class="navbar-text">
                     Welkom, {{account.firstName}}! <a ng-click="logout()" logout class="navbar-link">[Logout]</a>
                 </span>
-                <a href="/#/account">
+                <a href="/#/account" style="float:right; margin-top:-35px;">
                     <img src="img/iconprofile.png" width="30px" height="30px">
                 </a>
             </div>
-            <a href="/#/cart" data-ng-controller="cartController">
+            <a href="/#/cart" data-ng-controller="cartController" style="float:right; margin-top:-35px;">
                 <img src="img/ShoppingCart.png" width="30px" height="30px">
                 <span class="badge" id="cartItemsNumber" ng-show="cartItems !== null">{{cartItems.length}}</span>
             </a>
