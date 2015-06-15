@@ -21,7 +21,7 @@
 
 function orderController($scope, $routeParams, $location, orderService, authenticationService, usersService, dbService, messageService, locationService) {
     "use strict";
-    var 
+    var
         text,
         storageCookieName = 'cookies';
 

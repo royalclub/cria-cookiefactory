@@ -193,14 +193,14 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
         }
         $scope.updateCurrentLayerOption();
     };
-    
+
     $scope.calculateCookiePrice = function () {
         optionsTotal = 0;
         for (i = 0; i < $scope.selectedLayers.length; i += 1) {
             optionsTotal += $scope.selectedLayers[i].options[0].price;
         }
         $scope.total = optionsTotal;
-    }
+    };
 
     $scope.validateCookie = function (cookieName) {
         if (!cookieName) {
