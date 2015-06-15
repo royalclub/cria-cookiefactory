@@ -19,8 +19,9 @@
  * @constructor
  */
 
-function orderController($scope, $routeParams, $location, orderService, $cookieStore, authenticationService, usersService, dbService) {
+function orderController($scope, $routeParams, $location, orderService, $cookieStore, authenticationService, usersService, dbService, messageService) {
     "use strict";
+    var text;
 
     $scope.shipment = { shipmentDate: new Date(), shipmentType: null };
     $scope.payment = { paymentOption: "IDeal", bank: "", paid: 0 };
@@ -33,10 +34,11 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
             $scope.userName = $scope.user.username;
             $scope.order.user = [{username: $scope.user.username, emailAddress: $scope.user.emailAddress, firstName: $scope.user.firstName, inserts: 1, lastName: $scope.user.lastName}];
         } else {
-            $location.path("/#/");
+            text = 'U moet eerst inloggen voordat u verder kan gaan.';
+            messageService.setMessage(text, 'danger');
+            $location.path("/cart");
         }
     });
-    console.log('poep ', $scope.orderUser);
     // Lists
     $scope.order = {
         "number": Math.floor((Math.random() * 99999999) + 1),
@@ -47,9 +49,17 @@ function orderController($scope, $routeParams, $location, orderService, $cookieS
         vatPercentage: 21
     };
 
-    $scope.shipmentTypes = [{ id: "Home", description: "Laten bezorgen thuis of op een ander adres" }, { id: "PostNL", description: "Afhalen bij een ophaalpunt bij u in de buurt" }];
+    $scope.shipmentTypes = [{ id: "Home", description: "Thuis bezorgen of op een ander adres" }, { id: "PostNL", description: "Afhalen bij een ophaalpunt bij u in de buurt" }];
     $scope.paymentOptions = [{ id: "Acceptgiro", description: "Betaal binnen 30 dagen na het plaatsen van de order."}, { id: "IDeal", description: "Betaal direct met behulp van IDeal." }];
-    $scope.banks = [{ id: "ING Bank", name: "ING Bank" }, { id: "ASN Bank", name: "ASN Bank" }];
+    $scope.banks = [{ id: "ING", name: "ING" },
+                    { id: "Rabobank", name: "Rabobank" },
+                    { id: "ABN Amro Bank", name: "ABN Amro Bank" },
+                    { id: "SNS Bank", name: "SNS Bank" },
+                    { id: "ASN Bank", name: "ASN Bank" },
+                    { id: "Triodos Bank", name: "Triodos Ban" },
+                    { id: "RegioBank", name: "RegioBank" },
+                    { id: "Van Lanschot Bankiers", name: "Van Lanschot Bankiers" },
+                    { id: "Knab", name: "Knab" }];
 
     $scope.SetShipmentType = function (shipmentType) {
         $scope.shipment.shipmentType = shipmentType;
