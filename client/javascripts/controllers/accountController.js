@@ -9,17 +9,26 @@
  * @param usersService
  * @constructor
  */
-cookieFactory.controller('accountController', function ($scope, $routeParams, $location, authenticationService) {
+cookieFactory.controller('accountController', function ($scope, $routeParams, $location, authenticationService, dbService) {
     "use strict";
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (!loggedIn) {
             $scope.showLoginForm = true;
             $scope.showWelcomeText = false;
+            $location.path($location.$$path);
         } else {
             $scope.account = loggedInUser;
             $scope.showLoginForm = false;
             $scope.showWelcomeText = true;
+
+            //responsible for handling logout requests.
+            $scope.logout = function () {
+                dbService.signout.signout({}, function () {
+                    location.reload();
+                    $location.path($location.$$path);
+                });
+            };
         }
     });
 });
@@ -98,17 +107,5 @@ function accountEditController($scope, $routeParams, $location, authenticationSe
                 }
             };
         }
-    });
-}
-
-/**
- * Controller responsible for handling logout requests.
- */
-function accountLogoutController($scope, $routeParams, $location, dbService) {
-    "use strict";
-
-    dbService.signout.signout({}, function () {
-        location.reload();
-        window.location.href = '/#/cookies/design';
     });
 }
