@@ -17,13 +17,15 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
         i = 0,
         l = 0,
         storageCookieName = 'cookies',
-        storageEditCookieName = 'editCookie';
+        storageEditCookieName = 'editCookie',
+        storageEditExistingCookieName = 'editExistingCookie';
 
     $scope.cookieName = null;           // The name of the cookie.
     $scope.selectedLayers = [];         // Object that will be saved in the database.
     $scope.currentLayer = {};           // Currently selected layer for the editor.
     $scope.currentLayerOption = {};     // Currently selected layer option.
-    $scope.editCookieIndex = -1;
+    $scope.editCookieIndex = null;
+    $scope.existingCookie = {};
 
     /**
      * Get the index of a collection, assuming the 'name' property of the item exists.
@@ -75,17 +77,23 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
     $scope.initialize = function () {
         var orderRule;
 
-        $scope.editCookieIndex = localStorage.getItem(storageEditCookieName);
-        if ($scope.editCookieIndex !== null) {
-            orderRule = JSON.parse(localStorage.getItem(storageCookieName))[$scope.editCookieIndex];
-            $scope.cookieName = orderRule.cookie[0].name;
-            $scope.selectedLayers = orderRule.cookie[0].layers;
-            $scope.currentLayer = $scope.layers[0];
-            localStorage.removeItem(storageEditCookieName);
+        $scope.existingCookie = JSON.parse(localStorage.getItem(storageEditExistingCookieName));
+        if ($scope.existingCookie !== null) {
+            $scope.cookieName = $scope.existingCookie.name;
+            $scope.selectedLayers = $scope.existingCookie.layers;
+            localStorage.removeItem(storageEditExistingCookieName);
         } else {
-            $scope.selectedLayers = [];
-            $scope.currentLayer = $scope.layers[0];
+            $scope.editCookieIndex = localStorage.getItem(storageEditCookieName);
+            if ($scope.editCookieIndex !== null) {
+                orderRule = JSON.parse(localStorage.getItem(storageCookieName))[$scope.editCookieIndex];
+                $scope.cookieName = orderRule.cookie[0].name;
+                $scope.selectedLayers = orderRule.cookie[0].layers;
+                localStorage.removeItem(storageEditCookieName);
+            } else {
+                $scope.selectedLayers = [];
+            }
         }
+        $scope.currentLayer = $scope.layers[0];
         $scope.updateCurrentLayerOption();
         $scope.calculateCookiePrice();
     };
@@ -230,7 +238,7 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
 
         cookie = getCookie(cookieName);
         storage = JSON.parse(localStorage.getItem(storageCookieName));
-        if ($scope.editCookieIndex !== null) { // apparently we're editing an existing cookie, so let's update it now.
+        if ($scope.editCookieIndex !== null) { // apparently we're editing an cookie from the cart, so let's update it now.
             storage[$scope.editCookieIndex] = cookie;
             localStorage.setItem(storageCookieName, JSON.stringify(storage));
         } else {
@@ -252,15 +260,29 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
      */
     $scope.save = function (cookieName) {
         var cookie = getCookie(cookieName);
-        dbService.cookies.save(cookie.cookie[0], function (res) {
-            if (res.err) {
-                console.log(res.err);
-                messageService.setMessage('Er is iets fout gegaan, koekje is niet opgeslagen!', 'danger');
-            } else {
-                messageService.setMessage('Het koekje is opgeslagen.', 'success');
-                $location.path("/cookies/list");
-            }
-        });
+        if ($scope.existingCookie !== null && $scope.existingCookie.creator === $scope.userName) {
+            cookie.creationDate = $scope.existingCookie.creationDate;
+
+            dbService.cookies.update({_id: $scope.existingCookie._id}, cookie.cookie[0], function (res) {
+                if (res.err) {
+                    console.log(res.err);
+                    messageService.setMessage('Er is iets fout gegaan, koekje is niet opgeslagen!', 'danger');
+                } else {
+                    messageService.setMessage('Het koekje is opgeslagen.', 'success');
+                    $location.path("/cookies/list");
+                }
+            });
+        } else {
+            dbService.cookies.save(cookie.cookie[0], function (res) {
+                if (res.err) {
+                    console.log(res.err);
+                    messageService.setMessage('Er is iets fout gegaan, koekje is niet opgeslagen!', 'danger');
+                } else {
+                    messageService.setMessage('Het koekje is opgeslagen.', 'success');
+                    $location.path("/cookies/list");
+                }
+            });
+        }
     };
 });
 
@@ -275,11 +297,12 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
 cookieFactory.controller('cookieListController', function ($scope, $routeParams, $location, authenticationService, dbService, messageService) {
     "use strict";
 
+    var storageEditExistingCookieName = 'editExistingCookie';
+    $scope.account = null;
+
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (loggedIn) {
             $scope.account = loggedInUser;
-        } else {
-            $location.path("/cookies/design");
         }
 
         dbService.cookies.get({}, function (cookies) {
@@ -287,9 +310,17 @@ cookieFactory.controller('cookieListController', function ($scope, $routeParams,
         });
 
         $scope.edit = function (event, id) {
+            var editableCookie = null;
             event.preventDefault();
-            messageService.setMessage("Deze functionaliteit is nog in aanbouw.", "warning");
-            console.warn("TODO!");
+
+            editableCookie = $scope.getCookieById(id);
+
+            if (editableCookie === null) {
+                messageService.setMessage("U probeert een ongeldig koekje aan te passen.", "danger");
+                return;
+            }
+            localStorage.setItem(storageEditExistingCookieName, JSON.stringify(editableCookie));
+            $location.path("/cookies/design");
         };
 
         $scope.delete = function (event, id) {
