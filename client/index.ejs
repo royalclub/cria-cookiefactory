@@ -4,7 +4,6 @@
     <link href="./css/bootstrap.min.css" rel="stylesheet" />
     <link href="./css/bootstrap-theme.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="./css/custom.css">
-    <link rel="stylesheet" type="text/css" href="./css/stylesheet.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>The Cookie Factory</title>
@@ -23,18 +22,20 @@
             </div>
             <input type="submit" class="btn btn-primary" value="Login">
         </form>
-       <div ng-controller="accountController" ng-show="showWelcomeText">
-           <span class="navbar-text">
-                Welkom, {{account.firstName}}! <a ng-click="logout()" logout class="navbar-link">[Logout]</a>
-            </span>
-            <a href="/#/account" style="float:right; margin-top:-35px;">
+        <div ng-controller="accountController" ng-show="showWelcomeText" class="img-btn">
+            <a href="/#/account" class="navbar-right">
                 <img src="img/iconprofile.png" width="30px" height="30px">
             </a>
+            <span class="navbar-text navbar-right">
+                Welkom, {{account.firstName}}! <a ng-click="logout()" logout class="navbar-link">[Uitloggen]</a>
+            </span>
         </div>
-        <a href="/#/cart" data-ng-controller="cartController" style="float:right; margin-top:-35px;">
-            <img src="img/ShoppingCart.png" width="30px" height="30px">
+        <div ng-controller="cartController" class="navbar-right" style="margin-right: 5px;" class="img-btn">
+            <a href="/#/cart">
+                <img src="img/ShoppingCart.png" width="30px" height="30px">
+            </a>
             <span class="badge" id="cartItemsNumber" ng-show="cartItems !== null">{{cartItems.length}}</span>
-        </a>
+        </div>
     </div>
     <div class="header"></div>
 
