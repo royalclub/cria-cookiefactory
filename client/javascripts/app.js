@@ -8,193 +8,103 @@
  * @see http://docs.angularjs.org/guide/concepts
  */
 
-var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute', 'ui.router', 'ncy-angular-breadcrumb'])
-    .config(function ($routeProvider, $stateProvider) {
+var cookieFactory = angular.module('cookieFactory', ['cookieFactory.services', 'ngRoute', 'ng-breadcrumbs'])
+    .config(function ($routeProvider) {
         "use strict";
 
         // Home
         $routeProvider.when('/', {
-            templateUrl: 'partials/about.html',
-            controller: function ($location) {
-                $location.path('/cookies/design');
-                console.warn("Home: Redirect to cookie design.");
-            }
+            templateUrl: 'partials/cookies/design.html',
+            label: 'Cookie Factory'
         });
 
         // Design cookie
         $routeProvider.when('/cookies/design', {
-            templateUrl: 'partials/cookies/design.html'
-        });
-
-        $stateProvider.state('home', {
-            url: '/cookies/design',
-            ncyBreadcrumb: {
-                label: 'Cookie Factory'
+            templateUrl: 'partials/about.html',
+            controller: function ($location) {
+                $location.path('/n');
+                console.warn("Home: Redirect to cookie design.");
             }
         });
 
         // About
         $routeProvider.when('/about', {
             templateUrl: 'partials/about.html',
-        });
-
-        $stateProvider.state('about', {
-            url: '/about',
-            ncyBreadcrumb: {
-                parent: 'home',
-                label: 'about'
-            }
+            label: 'about'
         });
 
         // Contact
         $routeProvider.when('/contact', {
             templateUrl: 'partials/contact.html',
-        });
-
-        $stateProvider.state('contact', {
-            url: '/contact',
-            ncyBreadcrumb: {
-                parent: 'home',
-                label: 'contact'
-            }
+            label: 'contact'
         });
 
         // Cart
         $routeProvider.when('/cart', {
             templateUrl: 'partials/cart/list.html',
-        });
-
-        $stateProvider.state('cart', {
-            url: '/cart',
-            ncyBreadcrumb: {
-                parent: 'home',
-                label: 'winkelwagen'
-            }
+            label: 'winkelwagen'
         });
 
         // Account Details
         $routeProvider.when('/account', {
             templateUrl: 'partials/account/details.html',
-            controller: accountDetailController
-        });
-
-        $stateProvider.state('account', {
-            url: '/account',
-            ncyBreadcrumb: {
-                parent: 'home',
-                label: 'account'
-            }
+            controller: accountDetailController,
+            label: 'account'
         });
 
         // Account Edit
         $routeProvider.when('/account/edit', {
             templateUrl: 'partials/account/edit.html',
-            controller: accountEditController
-        });
-
-        $stateProvider.state('account edit', {
-            url: '/account/edit',
-            ncyBreadcrumb: {
-                parent: 'account',
-                label: 'account edit'
-            }
+            controller: accountEditController,
+            label: 'account edit'
         });
 
         // Account add Address
         $routeProvider.when('/account/address/add', {
             templateUrl: 'partials/account/address/add.html',
-            controller: addressController
-        });
-
-        $stateProvider.state('account add account', {
-            url: '/account/address/add',
-            ncyBreadcrumb: {
-                parent: 'account',
-                label: 'add account'
-            }
+            controller: addressController,
+            label: 'add account'
         });
 
         // Account edit Address
         $routeProvider.when('/account/address/edit/:_id', {
             templateUrl: 'partials/account/address/edit.html',
-            controller: addressController
-        });
-
-        $stateProvider.state('account edit address', {
-            url: '/account/address/edit',
-            ncyBreadcrumb: {
-                parent: 'account',
-                label: 'edit address'
-            }
+            controller: addressController,
+            label: 'edit address'
         });
 
         // Account register
         $routeProvider.when('/account/register', {
             templateUrl: 'partials/account/register.html',
-            controller: accountRegisterController
-        });
-
-        $stateProvider.state('register', {
-            url: '/account/register',
-            ncyBreadcrumb: {
-                parent: 'home',
-                label: 'register'
-            }
+            controller: accountRegisterController,
+            label: 'register'
         });
 
         // a list of cookies
         $routeProvider.when('/cookies/list', {
-            templateUrl: 'partials/cookies/list.html'
-        });
-
-        $stateProvider.state('cookie list', {
-            url: '/cookies/list',
-            ncyBreadcrumb: {
-                parent: 'home',
-                label: 'koekjes lijst'
-            }
+            templateUrl: 'partials/cookies/list.html',
+            label: 'koekjes lijst'
         });
 
         // Get orderDetails
-        $routeProvider.when('/orders/details', {
+        $routeProvider.when('/cart/orders/details', {
             templateUrl: 'partials/orders/orderDetails.html',
-            controller: orderController
-        });
-
-        $stateProvider.state('order detail', {
-            url: '/orders/details',
-            ncyBreadcrumb: {
-                parent: 'cart',
-                label: 'order details'
-            }
+            controller: orderController,
+            label: 'order details'
         });
 
         // Get orderPayment
-        $routeProvider.when('/orders/payment', {
+        $routeProvider.when('/cart/orders/details/payment', {
             templateUrl: 'partials/orders/orderPayment.html',
-            controller: orderController
-        });
-
-        $stateProvider.state('order payment', {
-            url: '/orders/payment',
-            ncyBreadcrumb: {
-                parent: 'order detail',
-                label: 'betalen'
-            }
+            controller: orderController,
+            label: 'betalen'
         });
 
         // Get orderConfirmation
-        $routeProvider.when('/orders/confirmation', {
+        $routeProvider.when('/cart/orders/details/payment/confirmation', {
             templateUrl: 'partials/orders/orderConfirmation.html',
-            controller: orderController
-        });
-
-        $stateProvider.state('order confirm', {
-            url: '/orders/confirmation',
-            ncyBreadcrumb: {
-                parent: 'order payment',
-                label: 'voltooid'
-            }
+            controller: orderController,
+            label: 'voltooid'
         });
 
         //When no valid route is provided

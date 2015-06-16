@@ -113,7 +113,7 @@ function orderController($scope, $routeParams, $location, orderService, authenti
             messageService.setMessage(text, 'danger');
         } else {
             $scope.save();
-            $location.path("/orders/payment/");
+            $location.path("/cart/orders/details/payment");
         }
     };
 
@@ -133,7 +133,7 @@ function orderController($scope, $routeParams, $location, orderService, authenti
             $scope.initRestId = function () {
                 localStorage.removeItem(storageCookieName);
             };
-            $location.path("/orders/confirmation/");
+            $location.path("/cart/orders/details/payment/confirmation");
         }
     };
 }

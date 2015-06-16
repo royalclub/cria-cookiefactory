@@ -8,7 +8,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>The Cookie Factory</title>
 </head>
-
 <body>
 
 <div class="mainContainer"> 
@@ -48,7 +47,12 @@
     <div class="content">
         <br>
         <!-- Breadcrumb -->
-        <div ncy-breadcrumb></div>
+        <ol class="ab-nav breadcrumb" data-ng-controller="menuController">
+            <li ng-repeat="breadcrumb in breadcrumbs.get() track by breadcrumb.path" ng-class="{ active: $last }">
+              <a ng-if="!$last" ng-href="#{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+              <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+            </li>
+          </ol>
 
         <div ng-controller="messageController">
             <div class="alert alert-danger" role="alert" ng-show="showDanger"><p>{{message.error}}</p></div>
@@ -78,8 +82,7 @@
 <script src="./javascripts/lib/angular-resource.min.js"></script>
 <script src="./javascripts/lib/jquery-1.11.3.min.js"></script>
 <script src="./javascripts/lib/bootstrap.min.js"></script>
-<script src="./javascripts/lib/angular-ui-router.js"></script>
-<script src="./javascripts/lib/angular-breadcrumb.js"></script>
+<script src="./javascripts/lib/ng-breadcrumbs.min.js"></script>
 <!-- App -->
 <script src="./javascripts/app.js"></script>
 <!--Controllers-->
