@@ -11,6 +11,7 @@
  */
 function addressController($scope, $routeParams, $location, dbService, authenticationService, messageService, locationService) {
     "use strict";
+    $scope.address = [];
 
     // GET 1 address
     authenticationService.getUser(function (loggedIn, loggedInUser) {
@@ -54,7 +55,7 @@ function addressController($scope, $routeParams, $location, dbService, authentic
                         $scope.account.addresses[index] = $scope.address;
                     }
                 }
-                if ($scope.account && $scope.account._id !== undefined) {
+                if ($scope.account && $scope.address._id !== undefined) {
                     dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
                         if (res.err) {
                             console.log(res.err);
