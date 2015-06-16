@@ -296,30 +296,30 @@ cookieFactory.controller('cookieListController', function ($scope, $routeParams,
             var deletableCookie = null;
             event.preventDefault();
 
-            deletableCookie = getCookieById(id);
+            deletableCookie = $scope.getCookieById(id);
 
             if (deletableCookie === null) {
                 messageService.setMessage("U probeert een ongeldig koekje te verwijderen.", "danger");
                 return;
             }
 
-            if($scope.account === null || deletableCookie.creator !== $scope.account.username) {
+            if ($scope.account === null || deletableCookie.creator !== $scope.account.username) {
                 messageService.setMessage("Dit koekje kan alleen verwijderd worden door de eigenaar!", "danger");
                 return;
             }
 
             dbService.cookies.remove({_id: deletableCookie._id}, function (res) {
-                if(!res.err && res.doc.n === 1 && res.doc.ok === 1) {
+                if (!res.err && res.doc.n === 1 && res.doc.ok === 1) {
                     messageService.setMessage("Het koekje is verwijderd.", "success");
                 } else {
                     messageService.setMessage("Het koekje kon niet verwijderd worden.", "danger");
                     console.error(res.err);
                 }
-                $scope.cookies.splice(getCookieIndexById(id), 1);
+                $scope.cookies.splice($scope.getCookieIndexById(id), 1);
             });
         };
 
-        function getCookieById(id) {
+        $scope.getCookieById = function (id) {
             var cookieIdx = 0;
             for (cookieIdx = 0; cookieIdx < $scope.cookies.length; cookieIdx += 1) {
                 if ($scope.cookies[cookieIdx]._id === id) {
@@ -328,9 +328,9 @@ cookieFactory.controller('cookieListController', function ($scope, $routeParams,
             }
 
             return null;
-        }
+        };
 
-        function getCookieIndexById(id) {
+        $scope.getCookieIndexById = function (id) {
             var cookieIdx = 0;
             for (cookieIdx = 0; cookieIdx < $scope.cookies.length; cookieIdx += 1) {
                 if ($scope.cookies[cookieIdx]._id === id) {
@@ -339,6 +339,6 @@ cookieFactory.controller('cookieListController', function ($scope, $routeParams,
             }
 
             return -1;
-        }
+        };
     });
 });
