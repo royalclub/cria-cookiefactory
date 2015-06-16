@@ -352,3 +352,121 @@ input, textarea {
 	float: right;
 	color: #5eb299;
 }
+
+.mainContainer {
+	width:1024px;
+	height:100%;
+	margin:auto;
+	margin-top:0;
+	background:url(../img/bgfade.png) #FFF repeat-y center;}
+	
+	
+.header {
+	width:1024px;
+	height:196px;
+	background:url(../img/header.png);
+	float:left;
+	}
+
+.menu{
+	width:1024px;
+	height:44px;
+	background:url(../img/menu.png) #FFF no-repeat;
+	float:left;}
+	
+
+.content {
+	padding:10px 60px 0 60px;
+	width:1024px;
+	height:100%;
+	background:#FFF;
+	float:left;}
+
+.footer {
+	width:1024px;
+	height:144px;
+	background:url(../img/footer.png) #fcf5bf;
+	float:left;}
+	
+	
+
+/* top */
+
+.form-control{
+	height:25px !important;}
+
+.btn{
+	line-height:15px !important;
+	background:#5eb299;}
+
+.btn:hover{opacity:0.8;
+background:#5eb299;}
+
+.top {
+	float:left;
+	font-size:12px;
+	height:45px;
+	width:1024px;
+    background-color: white;
+    border-top: 5px solid #cfca4c;
+    padding: 0px 5px;
+}
+.top .img-btn {
+    margin-top: 5px;
+}
+.top .navbar-text {
+    margin: 7px 8px !important;
+}
+
+.top .navbar-right {
+    margin: 0;
+}
+
+.top .navbar-form {
+    padding: 0;
+    margin: 5px 0px;
+}
+
+.top a:hover{
+	opacity:0.8;}
+
+a img {
+	border:none;}
+	
+.menu a {
+	padding-top:-4px;
+text-transform: uppercase;
+padding-left:20px;
+ text-decoration:none;
+ font-family:VAGrounded;
+ color:#fff;}
+ 
+.menu a:hover {color:#745a33;}
+ 
+
+.ingredienten{
+	opacity:1;}
+	
+.ingredienten:hover {
+	width:300px;
+	height:300px;
+	background:#FFF;
+	opacity:0.8;
+	z-index:15;}
+	
+
+.overzichtCol {
+	width:285px;
+	height:221px;
+	float:left;
+	margin-bottom:25px;
+	padding:10px 0 0 10px;}
+
+
+
+.overlayOverzicht{background:url(../img/overzichtvlakjeHover.png) no-repeat;
+opacity:0;
+position:absolute;}
+
+.showOverlay:hover .overlayOverzicht{
+	opacity:1;}
