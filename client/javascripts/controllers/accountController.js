@@ -89,7 +89,7 @@ function accountDetailController($scope, $routeParams, $location, authentication
 /**
  * Controller responsible for handling the account edit.
  */
-function accountEditController($scope, $routeParams, $location, authenticationService, dbService, accountService) {
+function accountEditController($scope, $routeParams, $location, authenticationService, dbService, accountService, messageService) {
     "use strict";
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
@@ -97,12 +97,37 @@ function accountEditController($scope, $routeParams, $location, authenticationSe
             $location.path('/cookies/design');
         } else {
             $scope.account = loggedInUser;
-            $scope.update = function (account) {
-                if (account && account._id !== undefined) {
-                    dbService.users.update({_id: account._id}, account, function (res) {
-                        console.log(res);
-                        $location.path('/account');
-                    });
+
+            $scope.validateAccount = function () {
+                if (!$scope.account.username) {
+                    throw 'De gebruikersnaam is niet ingevuld';
+                }
+                if (!$scope.account.firstName) {
+                    throw 'De voornaam is niet ingevuld.';
+                }
+                if (!$scope.account.lastName) {
+                    throw 'De achternaam is niet ingevuld.';
+                }
+                if (!$scope.account.emailAddress) {
+                    throw 'De email adres is niet ingevuld.';
+                }
+            };
+
+            $scope.update = function () {
+                try {
+                    $scope.validateAccount();
+                    if ($scope.account && $scope.account._id !== undefined) {
+                        dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
+                            if (res.err) {
+                                console(res.err.errors);
+                            } else {
+                                $location.path('/account');
+                            }
+                        });
+                    }
+                } catch (ex) {
+                    messageService.setMessage(ex, 'danger');
+                    return;
                 }
             };
         }
