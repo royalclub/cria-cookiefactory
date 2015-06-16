@@ -2,11 +2,11 @@
 <div ng-controller="cookieListController" class="cookieList">
     <div class="item" data-ng-repeat="cookie in cookies">
         <img class="layers" ng-repeat="layer in cookie.layers" style="z-index:{{(layer.sequence===1) ? 999 : layer.sequence}};" ng-src="img/layeroption/cookie/{{layer.options[0].imageSrc}}" />
-        <a href="#" ng-click="deleteCookie(cookie._id)" class="delete">
+        <a href="#" ng-click="delete($event, cookie._id)" ng-show="cookie.creator === account.username" class="delete">
             <span class="glyphicon glyphicon-trash"></span>
         </a>
         <div class="name">
-            <a href="#" ng-click="editCookie(cookie._id)" class="edit">
+            <a href="#" ng-click="edit($event, cookie._id)" class="edit">
                 {{cookie.name}}
                 <span class="glyphicon glyphicon-pencil"></span>
             </a>

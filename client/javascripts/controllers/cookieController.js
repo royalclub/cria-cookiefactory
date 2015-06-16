@@ -286,13 +286,15 @@ cookieFactory.controller('cookieListController', function ($scope, $routeParams,
             $scope.cookies = cookies.doc;
         });
 
-        $scope.edit = function (id) {
+        $scope.edit = function (event, id) {
+            event.preventDefault();
             messageService.setMessage("Deze functionaliteit is nog in aanbouw.", "warning");
             console.warn("TODO!");
         };
 
-        $scope.delete = function (id) {
+        $scope.delete = function (event, id) {
             var deletableCookie = null;
+            event.preventDefault();
 
             deletableCookie = getCookieById(id);
 
@@ -306,13 +308,14 @@ cookieFactory.controller('cookieListController', function ($scope, $routeParams,
                 return;
             }
 
-            dbService.cookies.remove({_id: deletableCookie._id}, function (err) {
-                if(!err) {
+            dbService.cookies.remove({_id: deletableCookie._id}, function (res) {
+                if(!res.err && res.doc.n === 1 && res.doc.ok === 1) {
                     messageService.setMessage("Het koekje is verwijderd.", "success");
                 } else {
                     messageService.setMessage("Het koekje kon niet verwijderd worden.", "danger");
-                    console.error(err);
+                    console.error(res.err);
                 }
+                $scope.cookies.splice(getCookieIndexById(id), 1);
             });
         };
 
@@ -325,6 +328,17 @@ cookieFactory.controller('cookieListController', function ($scope, $routeParams,
             }
 
             return null;
+        }
+
+        function getCookieIndexById(id) {
+            var cookieIdx = 0;
+            for (cookieIdx = 0; cookieIdx < $scope.cookies.length; cookieIdx += 1) {
+                if ($scope.cookies[cookieIdx]._id === id) {
+                    return cookieIdx;
+                }
+            }
+
+            return -1;
         }
     });
 });

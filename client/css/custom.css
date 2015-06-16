@@ -536,7 +536,6 @@ position:absolute;}
     color: inherit;
 }
 
-
 .cookieList .item .name .glyphicon {
     float: right;
     display: none;
@@ -547,10 +546,4 @@ position:absolute;}
 
 .cookieList .item .name:hover .glyphicon {
     display: block;
-}
-
-.cookieList .item .edit {
-    z-index: 1000;
-    position: relative;
-    margin-top: 135px;
 }
