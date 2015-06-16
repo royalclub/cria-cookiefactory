@@ -96,7 +96,6 @@ function orderController($scope, $routeParams, $location, orderService, authenti
 
     // Proceed to payment
     $scope.ProceedToPayment = function () {
-        console.debug($scope.order);
         if ($scope.user === null) {
             alert("U bent niet ingelogd.");
         } else if (!$scope.shipment.shipmentType) {
@@ -119,7 +118,6 @@ function orderController($scope, $routeParams, $location, orderService, authenti
 
     // Proceed to confirmation
     $scope.ProceedToConfirmation = function () {
-        console.log(localStorage.getItem('myOrderRules'));
         if ($scope.user === null) {
             text = 'U bent niet ingelogd.';
             messageService.setMessage(text, 'danger');
