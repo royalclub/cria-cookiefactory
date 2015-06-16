@@ -108,7 +108,7 @@ cookieFactory.controller('cartController', function ($scope, $location, authenti
 
         authenticationService.getUser(function (loggedIn, loggedInUser) {
             if (loggedIn) {
-                $location.path("/orders/details");
+                $location.path("/cart/orders/details");
             } else {
                 text = 'U moet eerst inloggen voordat u verder kan gaan.';
                 messageService.setMessage(text, 'danger');

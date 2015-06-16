@@ -9,8 +9,9 @@
 //var cookieFactory = angular.module('cookieFactory', []);
 var activePage = 0;
 
-cookieFactory.controller('menuController', function ($scope, $routeParams) {
+cookieFactory.controller('menuController', function ($scope, $routeParams, breadcrumbs) {
     "use strict";
+    $scope.breadcrumbs = breadcrumbs;
     $scope.menuItems = [
         {name: "Ontwerp koekje", url: "/#/cookies/design", active: ""},
         {name: "Overzicht", url: "/#/cookies/list", active: ""},
