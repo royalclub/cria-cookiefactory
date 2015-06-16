@@ -97,7 +97,7 @@ function orderController($scope, $routeParams, $location, orderService, authenti
     // Proceed to payment
     $scope.ProceedToPayment = function () {
         console.debug($scope.order);
-        if (!$scope.userName) {
+        if ($scope.user === null) {
             alert("U bent niet ingelogd.");
         } else if (!$scope.shipment.shipmentType) {
             text = 'U heeft nog geen verzend wijze gekozen.';
@@ -120,7 +120,7 @@ function orderController($scope, $routeParams, $location, orderService, authenti
     // Proceed to confirmation
     $scope.ProceedToConfirmation = function () {
         console.log(localStorage.getItem('myOrderRules'));
-        if (!$scope.userName) {
+        if ($scope.user === null) {
             text = 'U bent niet ingelogd.';
             messageService.setMessage(text, 'danger');
         } else if (!$scope.payment.paymentOption) {
@@ -131,7 +131,7 @@ function orderController($scope, $routeParams, $location, orderService, authenti
             messageService.setMessage(text, 'danger');
         } else {
             $scope.initRestId = function () {
-                $scope.$broadcast("emptyCartEvent");
+                localStorage.removeItem(storageCookieName);
             };
             $location.path("/orders/confirmation/");
         }
