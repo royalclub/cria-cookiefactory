@@ -91,7 +91,6 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
                 localStorage.removeItem(storageEditCookieName);
             } else {
                 $scope.selectedLayers = [];
-                
             }
         }
         $scope.currentLayer = $scope.layers[0];
