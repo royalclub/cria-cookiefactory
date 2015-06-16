@@ -41,12 +41,10 @@ function userController($scope, $routeParams, $location, dbService) {
     $scope.save = function () {
 
         if ($scope.users.doc && $scope.users.doc._id !== undefined) {
-            console.log('Entering update');
             dbService.users.update({_id: $routeParams._id}, $scope.users.doc, function (res) {
                 console.log(res);
             });
         } else {
-            console.log('Entering save');
             dbService.users.save({}, $scope.users.doc, function (res) {
                 console.log(res);
             });
