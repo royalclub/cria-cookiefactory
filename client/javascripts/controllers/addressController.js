@@ -12,7 +12,7 @@
 function addressController($scope, $routeParams, $location, dbService, authenticationService, messageService, locationService) {
     "use strict";
 
-    // GET 1 user
+    // GET 1 address
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (!loggedIn) {
             $scope.showLoginForm = true;
@@ -28,42 +28,57 @@ function addressController($scope, $routeParams, $location, dbService, authentic
         }
     });
 
-    // UPDATE user
-    $scope.save = function (address) {
-        var index, text;
-        if (address && address._id !== undefined) {
-            for (index = 0; index < $scope.account.addresses.length; index++) {
-                if ($scope.account.addresses[index]._id === address._id) {
-                    $scope.account.addresses[index] = address;
+    $scope.validateAddress = function () {
+        if (!$scope.address.street) {
+            throw 'De straatnaam is niet ingevuld';
+        }
+        if (!$scope.address.streetNumber) {
+            throw 'De huisnummer is niet ingevuld.';
+        }
+        if (!$scope.address.zipCode) {
+            throw 'De postcode is niet ingevuld.';
+        }
+        if (!$scope.address.city) {
+            throw 'De plaatsnaam is niet ingevuld.';
+        }
+    };
+
+    // UPDATE address
+    $scope.save = function () {
+        var index;
+        try {
+            $scope.validateAddress();
+            if ($scope.address && $scope.address._id !== undefined) {
+                for (index = 0; index < $scope.account.addresses.length; index++) {
+                    if ($scope.account.addresses[index]._id === $scope.address._id) {
+                        $scope.account.addresses[index] = $scope.address;
+                    }
+                }
+                if ($scope.account && $scope.account._id !== undefined) {
+                    dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
+                        if (res.err) {
+                            console.log(res.err);
+                        } else {
+                            $location.path('/account');
+                        }
+                    });
+                }
+            } else if ($scope.address && $scope.address._id === undefined) {
+                $scope.account.addresses.push($scope.address);
+                if ($scope.account && $scope.account._id !== undefined) {
+                    dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
+                        if (res.err) {
+                            $scope.account.addresses.splice($scope.account.addresses.length - 1, 1);
+                            console.log(res.err);
+                        } else {
+                            $location.path(locationService.latestLocation);
+                        }
+                    });
                 }
             }
-            if ($scope.account && $scope.account._id !== undefined) {
-                dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
-                    if (res.err) {
-                        text = 'Niet alles is ingevuld of goed ingevuld!.';
-                        messageService.setMessage(text, 'danger');
-                        console.log(res.err);
-                    } else {
-                        $location.path(locationService.latestLocation);
-                    }
-                });
-            }
-        } else if (address && address._id === undefined) {
-            console.log($scope.account.addresses);
-            $scope.account.addresses.push(address);
-            console.log($scope.account.addresses);
-            if ($scope.account && $scope.account._id !== undefined) {
-                dbService.users.update({_id: $scope.account._id}, $scope.account, function (res) {
-                    if (res.err) {
-                        text = 'Niet alles is ingevuld of goed ingevuld!.';
-                        messageService.setMessage(text, 'danger');
-                        $scope.account.addresses.splice($scope.account.addresses.length - 1, 1);
-                        console.log(res.err);
-                    } else {
-                        $location.path(locationService.latestLocation);
-                    }
-                });
-            }
+        } catch (ex) {
+            messageService.setMessage(ex, 'danger');
+            return;
         }
     };
 }
