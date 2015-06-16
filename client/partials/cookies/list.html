@@ -1,8 +1,16 @@
 <h2>Cookies</h2>
-<div ng-controller="cookieListController">
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" data-ng-repeat="cookie in cookies">
-        <a href="#" class="thumbnail cookieDisplay" title="{{cookie.name}}">
-          <img data-ng-repeat="layer in cookie.layers" ng-src="images/{{layer.imageSrc}}" style="z-index:{{ (layer.sequence===1) ? 999 : layer.sequence }};">
+<div ng-controller="cookieListController" class="cookieList">
+    <div class="item" data-ng-repeat="cookie in cookies">
+        <img class="layers" ng-repeat="layer in cookie.layers" style="z-index:{{(layer.sequence===1) ? 999 : layer.sequence}};" ng-src="img/layeroption/cookie/{{layer.options[0].imageSrc}}" />
+        <a href="#" ng-click="deleteCookie(cookie._id)" class="delete">
+            <span class="glyphicon glyphicon-trash"></span>
         </a>
+        <div class="name">
+            <a href="#" ng-click="editCookie(cookie._id)" class="edit">
+                {{cookie.name}}
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+        </div>
+        
     </div>
 </div>
