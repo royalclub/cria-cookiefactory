@@ -252,10 +252,13 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
      */
     $scope.save = function (cookieName) {
         var cookie = getCookie(cookieName);
-        dbService.cookies.save(cookie, function (res) {
+        dbService.cookies.save(cookie.cookie[0], function (res) {
             if (res.err) {
                 console.log(res.err);
-                alert('Er is iets fout gegaan, koekje is niet opgeslagen!');
+                messageService.setMessage('Er is iets fout gegaan, koekje is niet opgeslagen!', 'danger');
+            } else {
+                messageService.setMessage('Het koekje is opgeslagen.', 'success');
+                $location.path("/cookies/list");
             }
         });
     };
@@ -269,16 +272,73 @@ cookieFactory.controller('cookieDesignController', function ($scope, $routeParam
  * @param dbService
  * @constructor
  */
-cookieFactory.controller('cookieListController', function ($scope, $routeParams, $location, authenticationService, dbService) {
+cookieFactory.controller('cookieListController', function ($scope, $routeParams, $location, authenticationService, dbService, messageService) {
     "use strict";
 
     authenticationService.getUser(function (loggedIn, loggedInUser) {
         if (loggedIn) {
-            dbService.cookies.get({ 'creator': loggedInUser.username }, function (cookies) {
-                $scope.cookies = cookies.doc;
-            });
+            $scope.account = loggedInUser;
         } else {
             $location.path("/cookies/design");
         }
+
+        dbService.cookies.get({}, function (cookies) {
+            $scope.cookies = cookies.doc;
+        });
+
+        $scope.edit = function (event, id) {
+            event.preventDefault();
+            messageService.setMessage("Deze functionaliteit is nog in aanbouw.", "warning");
+            console.warn("TODO!");
+        };
+
+        $scope.delete = function (event, id) {
+            var deletableCookie = null;
+            event.preventDefault();
+
+            deletableCookie = $scope.getCookieById(id);
+
+            if (deletableCookie === null) {
+                messageService.setMessage("U probeert een ongeldig koekje te verwijderen.", "danger");
+                return;
+            }
+
+            if ($scope.account === null || deletableCookie.creator !== $scope.account.username) {
+                messageService.setMessage("Dit koekje kan alleen verwijderd worden door de eigenaar!", "danger");
+                return;
+            }
+
+            dbService.cookies.remove({_id: deletableCookie._id}, function (res) {
+                if (!res.err && res.doc.n === 1 && res.doc.ok === 1) {
+                    messageService.setMessage("Het koekje is verwijderd.", "success");
+                } else {
+                    messageService.setMessage("Het koekje kon niet verwijderd worden.", "danger");
+                    console.error(res.err);
+                }
+                $scope.cookies.splice($scope.getCookieIndexById(id), 1);
+            });
+        };
+
+        $scope.getCookieById = function (id) {
+            var cookieIdx = 0;
+            for (cookieIdx = 0; cookieIdx < $scope.cookies.length; cookieIdx += 1) {
+                if ($scope.cookies[cookieIdx]._id === id) {
+                    return $scope.cookies[cookieIdx];
+                }
+            }
+
+            return null;
+        };
+
+        $scope.getCookieIndexById = function (id) {
+            var cookieIdx = 0;
+            for (cookieIdx = 0; cookieIdx < $scope.cookies.length; cookieIdx += 1) {
+                if ($scope.cookies[cookieIdx]._id === id) {
+                    return cookieIdx;
+                }
+            }
+
+            return -1;
+        };
     });
 });

@@ -392,7 +392,7 @@ input, textarea {
 
 /* top */
 
-.form-control{
+.top .form-control{
 	height:25px !important;}
 
 .top .btn{
@@ -473,3 +473,77 @@ position:absolute;}
 
 .showOverlay:hover .overlayOverzicht{
 	opacity:1;}
+
+.cookieList .item {
+    float: left;
+    width: 150px;
+    height: 154px;
+    margin: 15px;
+    padding: 0;
+    border: 2px solid #9fe5c2;
+}
+
+.cookieList .item .layers {
+    width: 146px;
+    height: 150px;
+    background-position: left bottom;
+    background-size: 150px 154px;
+}
+
+.cookieList .item .delete {
+    z-index: 1000;
+    position: relative;
+    float: right;
+    top: 2px;
+    right: 2px;
+}
+
+.cookieList .item .name {
+    z-index: 1000;
+    position: relative;
+    top: 126px;
+    width: 146px;
+    height: 25px;
+    padding: 2px;
+    background-color: #9fe5c2;
+    color: white;
+    font-size: 12px;
+}
+
+.cookieList .item .name:hover {
+    opacity: 0.8;
+    color: black;
+    cursor: pointer;
+}
+
+.cookieList .item .name a:link {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.cookieList .item .name a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.cookieList .item .name a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+.cookieList .item .name .glyphicon {
+    float: right;
+    display: none;
+    position: absolute;
+    left: 130px;
+    top: 4px;
+}
+
+.cookieList .item .name:hover .glyphicon {
+    display: block;
+}
