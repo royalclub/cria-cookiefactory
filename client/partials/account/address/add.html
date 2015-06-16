@@ -1,20 +1,20 @@
 <h2>Nieuw Adres</h2>
 <form name="creatAddress">
 	<div class="form-group row">
-		<label class="col-md-3" for="streetName">Straatnaam</label>
-		<input class="col-md-9" type="text" class="form-control" name="street" data-ng-model="address.street" placeholder="Voer uw naam in">
+		<label class="col-md-2" for="streetName">Straatnaam:</label>
+		<input class="col-md-5" type="text" class="form-control" data-ng-model="address.street" placeholder="Voer uw straatnaam in">
 	</div>
     <div class="form-group row">
-		<label class="col-md-3" for="streetName">Straatnummer</label>
-		<input class="col-md-9" type="text" class="form-control" name="streetNumber" data-ng-model="address.streetNumber" placeholder="Voer uw naam in">
+		<label class="col-md-2" for="streetName">Huisnummer:</label>
+		<input class="col-md-5" type="text" class="form-control" data-ng-model="address.streetNumber" placeholder="Voer uw huisnummer in">
 	</div>
     <div class="form-group row">
-		<label class="col-md-3" for="streetName">Postcode</label>
-		<input class="col-md-9" type="text" class="form-control" name="zipCode" data-ng-model="address.zipCode" placeholder="Voer uw naam in">
+		<label class="col-md-2" for="streetName">Postcode:</label>
+		<input class="col-md-5" type="text" class="form-control" data-ng-model="address.zipCode" placeholder="Voer uw postcode in">
 	</div>
     <div class="form-group row">
-		<label class="col-md-3" for="streetName">Plaatsnaam</label>
-		<input class="col-md-9" type="text" class="form-control" name="city" data-ng-model="address.city" placeholder="Voer uw naam in">
+		<label class="col-md-2" for="streetName">Plaatsnaam:</label>
+		<input class="col-md-5" type="text" class="form-control" data-ng-model="address.city" placeholder="Voer uw plaatsnaam in">
 	</div>
-    <button type="button" data-ng-click="save(address)" id="saveBtn">Save</button>
+    <button type="button" data-ng-click="save()" id="saveBtn" class="btn btn-success">Save</button>
 </form>
