@@ -395,11 +395,11 @@ input, textarea {
 .form-control{
 	height:25px !important;}
 
-.btn{
+.top .btn{
 	line-height:15px !important;
 	background:#5eb299;}
 
-.btn:hover{opacity:0.8;
+top .btn:hover{opacity:0.8;
 background:#5eb299;}
 
 .top {
@@ -413,6 +413,9 @@ background:#5eb299;}
 }
 .top .img-btn {
     margin-top: 5px;
+}
+.top .img-btn span .navbar-link {
+    cursor: pointer;
 }
 .top .navbar-text {
     margin: 7px 8px !important;
